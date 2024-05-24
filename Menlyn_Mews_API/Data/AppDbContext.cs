@@ -73,12 +73,12 @@ namespace Menlyn_Mews_API.Data
              .OnDelete(DeleteBehavior.NoAction);
 
 
-            //modelBuilder.Entity<Client>() // Employee to Employee Type
-            //.HasMany(c => c.Room_Bookings)
-            //.WithOne(c => c.Clients) // 1 E to M ET
-            //.HasForeignKey(fk => fk.Client_Id)
-            //.IsRequired()
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Client>() // Employee to Employee Type
+            .HasMany(c => c.Room_Bookings)
+            .WithOne(c => c.Clients) // 1 E to M ET
+            .HasForeignKey(fk => fk.Client_Id)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Room>() // Employee to Employee Type
            .HasMany(c => c.Room_Bookings)

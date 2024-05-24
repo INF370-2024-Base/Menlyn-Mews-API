@@ -11479,23 +11479,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hayne\\.nuget\\packages\\": {},
+    "C:\\Users\\hendr\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
+      "projectUniqueName": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
       "projectName": "Menlyn_Mews_API",
-      "projectPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
-      "packagesPath": "C:\\Users\\hayne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\obj\\",
+      "projectPath": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
+      "packagesPath": "C:\\Users\\hendr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\hayne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hendr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11517,6 +11517,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -11565,7 +11570,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
