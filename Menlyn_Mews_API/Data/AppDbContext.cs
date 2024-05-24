@@ -18,11 +18,11 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Employee_Type> Employee_Types { get; set; }
 
-        public DbSet<Inventory> Inventories { get; set; }
+        //public DbSet<Inventory> Inventories { get; set; }
 
-        public DbSet<Inventory_Category> Inventory_Categories { get; set; }
+        //public DbSet<Inventory_Category> Inventory_Categories { get; set; }
 
-        public DbSet<Inventory_Type> Inventory_Types { get; set; }
+        //public DbSet<Inventory_Type> Inventory_Types { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
 
@@ -50,19 +50,19 @@ namespace Menlyn_Mews_API.Data
 
 
 
-            modelBuilder.Entity<Inventory_Type>() // Employee to Employee Type
-               .HasMany(c => c.Inventories)
-               .WithOne(it => it.Inventory_Types) // 1 E to M ET
-               .HasForeignKey(fk => fk.Inventory_Type_Id)
-               .IsRequired()
-               .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<Inventory_Type>() // Employee to Employee Type
+            //   .HasMany(c => c.Inventories)
+            //   .WithOne(it => it.Inventory_Types) // 1 E to M ET
+            //   .HasForeignKey(fk => fk.Inventory_Type_Id)
+            //   .IsRequired()
+            //   .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Inventory_Category>() // Employee to Employee Type
-              .HasMany(c => c.Inventories)
-              .WithOne(ic => ic.Inventory_Categories) // 1 E to M ET
-              .HasForeignKey(fk => fk.Inventory_Category_Id)
-              .IsRequired()
-              .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<Inventory_Category>() // Employee to Employee Type
+            //  .HasMany(c => c.Inventories)
+            //  .WithOne(ic => ic.Inventory_Categories) // 1 E to M ET
+            //  .HasForeignKey(fk => fk.Inventory_Category_Id)
+            //  .IsRequired()
+            //  .OnDelete(DeleteBehavior.NoAction);
 
 
             modelBuilder.Entity<Room_Type>() // Employee to Employee Type
@@ -73,12 +73,12 @@ namespace Menlyn_Mews_API.Data
              .OnDelete(DeleteBehavior.NoAction);
 
 
-            modelBuilder.Entity<Client>() // Employee to Employee Type
-            .HasMany(c => c.Room_Bookings)
-            .WithOne(c => c.Clients) // 1 E to M ET
-            .HasForeignKey(fk => fk.Client_Id)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<Client>() // Employee to Employee Type
+            //.HasMany(c => c.Room_Bookings)
+            //.WithOne(c => c.Clients) // 1 E to M ET
+            //.HasForeignKey(fk => fk.Client_Id)
+            //.IsRequired()
+            //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Room>() // Employee to Employee Type
            .HasMany(c => c.Room_Bookings)
