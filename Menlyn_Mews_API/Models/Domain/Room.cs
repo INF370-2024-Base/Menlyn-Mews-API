@@ -1,0 +1,36 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace Menlyn_Mews_API.Models.Domain
+{
+    public class Room
+    {
+
+        [Key]
+        public int Room_Id { get; set; }
+
+        //menu dropdown
+        public int? Room_Number { get; set; }
+
+        //menu dropdown
+        public int? Room_Floor { get; set; }
+
+        public string? Room_Status { get; set; } = string.Empty;
+
+
+        public int? Room_Rate { get; set; }
+
+        public string? Room_Description { get; set; } = string.Empty;
+
+        //------------------------------------FK-----------------------------------//
+
+        public int Room_Type_Id { get; set; }
+        [JsonIgnore]
+        public Room_Type? Room_Types { get; set; }
+
+
+        [JsonIgnore] // getting from Room_Booking
+        public List<Room_Booking>? Room_Bookings { get; set; }
+    }
+}
+

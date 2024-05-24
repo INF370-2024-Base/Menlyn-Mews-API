@@ -32,7 +32,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public int Client_Id { get; set; }
         [JsonIgnore]
-        public Client? Clients { get; set; }
+        //public Client? Clients { get; set; }
 
 
         public int Room_Id { get; set; }
