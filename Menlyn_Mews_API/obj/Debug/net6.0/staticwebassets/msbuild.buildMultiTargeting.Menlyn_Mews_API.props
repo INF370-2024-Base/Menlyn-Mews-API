@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Menlyn_Mews_API.props" />
+</Project>
