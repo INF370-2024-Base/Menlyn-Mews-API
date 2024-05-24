@@ -9,21 +9,14 @@ namespace Menlyn_Mews_API.Models.Domain
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Check In Date & Time is Required")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? Check_In_DateTime { get; set; }
 
-        [Required(ErrorMessage = "Check Out Date & Time is Required")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? Check_Out_DateTime { get; set; }
 
-
-        [Required(ErrorMessage = "Booking Status Required")]
-        [MaxLength(15)]
         public string? Booking_Status { get; set; } = "Booked";
 
-
-        [Required(ErrorMessage = "Booking Price is required")]
         [Range(0, int.MaxValue, ErrorMessage = "Price must be a positive number")]
         public int? Booking_Price { get; set; }
 
@@ -32,7 +25,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public int Client_Id { get; set; }
         [JsonIgnore]
-        //public Client? Clients { get; set; }
+        public Client? Clients { get; set; }
 
 
         public int Room_Id { get; set; }
