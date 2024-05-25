@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore; // added 13 / 04 / 2024
-using Menlyn_Mews_API.Models.Domain; // added 13 / 04 / 2024
+using Menlyn_Mews_API.Models.Domain; //added 24 / 05 / 2024
+using Microsoft.AspNetCore.Identity; //added 24 / 05 / 2024
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore; // added 13 / 04 / 2024
 
 namespace Menlyn_Mews_API.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public AppDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
         {
 
         }
@@ -32,6 +34,9 @@ namespace Menlyn_Mews_API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            SeedRoles(modelBuilder);
+
             modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
                 .HasMany(e => e.Employees)
                 .WithOne(et => et.Employee_Types) // 1 E to M ET
@@ -89,9 +94,16 @@ namespace Menlyn_Mews_API.Data
 
 
 
+        }
 
-
-
+        private static void SeedRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData
+                (
+                    new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+                    new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" },
+                    new IdentityRole() { Name = "HR", ConcurrencyStamp = "3", NormalizedName = "HR" }
+                );
         }
 
     }
