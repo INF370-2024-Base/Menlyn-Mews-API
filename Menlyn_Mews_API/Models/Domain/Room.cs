@@ -7,7 +7,7 @@ namespace Menlyn_Mews_API.Models.Domain
     {
 
         [Key]
-        public int Room_Id { get; set; }
+        public int Id { get; set; }
 
         //menu dropdown
         public int? Room_Number { get; set; }
