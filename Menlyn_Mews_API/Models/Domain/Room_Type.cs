@@ -6,11 +6,11 @@ namespace Menlyn_Mews_API.Models.Domain
     public class Room_Type
     {
         [Key]
-        public int RoomType_Id { get; set; }
+        public int Id { get; set; }
 
-        public string? RoomType_Description { get; set; } = string.Empty;
+        public string? Room_Type_Description { get; set; } = string.Empty;
 
-        public int? RoomType_Capacity { get; set; } = 1;
+        public int? Room_Type_Capacity { get; set; } = 1;
 
         public string? Room_Size { get; set; } = string.Empty;
 
