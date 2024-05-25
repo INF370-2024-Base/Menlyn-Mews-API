@@ -34,8 +34,5 @@ namespace Menlyn_Mews_API.Models.Domain
 
         [JsonIgnore] // might delete later, it was not here before, just testing out the JSON ignore on APIs
         public List<Room_Booking>? Room_Bookings { get; set; }
-
-        [JsonIgnore] // might delete later, it was not here before, just testing out the JSON ignore on APIs
-        public List<Booking_Review>? Booking_Reviews { get; set; }
     }
 }

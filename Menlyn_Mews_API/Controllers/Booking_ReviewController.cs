@@ -84,12 +84,28 @@ namespace Menlyn_Mews_API.Controllers
         // POST: api/Booking_Review
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Booking_Review>> PostBooking_Review(Booking_Review booking_Review)
+        public async Task<ActionResult<Booking_Review>> PostBooking_Review([FromForm] Booking_Review booking_Review, IFormFile file)
         {
           if (_context.Booking_Reviews == null)
           {
               return Problem("Entity set 'AppDbContext.Booking_Reviews'  is null.");
           }
+            if (file != null && file.Length > 0)
+            {
+                // Generate a unique file name or use some identifier related to the review
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine("C:/Users/ghost/Desktop/Menlyn-Mews-Angular/Angular/src/assets", fileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Set the file path in the model
+                booking_Review.Review_ImageUrl = filePath;
+            }
+
             _context.Booking_Reviews.Add(booking_Review);
             await _context.SaveChangesAsync();
 

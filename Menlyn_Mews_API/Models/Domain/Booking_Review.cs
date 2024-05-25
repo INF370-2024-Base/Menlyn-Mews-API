@@ -15,8 +15,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Review_Description { get; set; } = string.Empty;
 
-        public int Client_Id { get; set; }
-        [JsonIgnore]
-        public Client? Clients { get; set; }
+        public string? Review_ImageUrl {  get; set; }
+
     }
 }

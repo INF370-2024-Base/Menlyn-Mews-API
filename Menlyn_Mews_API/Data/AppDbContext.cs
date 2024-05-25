@@ -45,16 +45,6 @@ namespace Menlyn_Mews_API.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
 
-            modelBuilder.Entity<Client>() // Employee to Employee Type
-               .HasMany(c => c.Booking_Reviews)
-               .WithOne(br => br.Clients) // 1 E to M ET
-               .HasForeignKey(fk => fk.Client_Id)
-               .IsRequired()
-               .OnDelete(DeleteBehavior.NoAction);
-
-
-
-
             modelBuilder.Entity<Inventory_Type>() // Employee to Employee Type
                .HasMany(c => c.Inventories)
                .WithOne(it => it.Inventory_Types) // 1 E to M ET
@@ -92,7 +82,7 @@ namespace Menlyn_Mews_API.Data
            .IsRequired()
            .OnDelete(DeleteBehavior.NoAction);
 
-
+            modelBuilder.Entity<Booking_Review>();
 
         }
 
