@@ -5,9 +5,10 @@ namespace Menlyn_Mews_API.Models.Domain
 {
     public class Booking_Review
     {
+        // PLEASE RENAME IDs WITH MODEL NAME
 
         [Key]
-        public int Id { get; set; }
+        public int BookingReviewId { get; set; }
 
         public string? Review_Status { get; set; } = "Completed";
 

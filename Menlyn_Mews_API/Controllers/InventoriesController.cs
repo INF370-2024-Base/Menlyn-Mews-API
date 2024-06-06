@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.ViewModels;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -23,13 +24,30 @@ namespace Menlyn_Mews_API.Controllers
 
         // GET: api/Inventories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Inventory>>> GetInventories()
+        public async Task<ActionResult<IEnumerable<InventoryViewModel>>> GetInventories()
         {
-          if (_context.Inventories == null)
+          if (_context.Inventories == null || _context.Inventory_Types == null || _context.Inventory_Categories == null)
           {
               return NotFound();
           }
-            return await _context.Inventories.ToListAsync();
+            var inventories = await _context.Inventories
+                .Include(i => i.InventoryCategory)
+                .Include(i => i.InventoryType)
+                .Select(i => new InventoryViewModel
+                {
+                    Inventory_Name = i.Inventory_Name,
+                    Minimum_Stock = (int)i.Minimum_Stock,
+                    Maximum_Stock = (int)i.Maximum_Stock,
+                    Condition = i.Inventory_Condition,
+                    Inventory_Status = i.Inventory_Status,
+                    InventoryCategoryId = i.InventoryCategory.InventoryCategoryId,
+                    InventoryTypeId = i.InventoryType.InventoryTypeId,
+                    InventoryCategoryName = i.InventoryCategory.Inventory_Category_Name,
+                    InventoryTypeName = i.InventoryType.Inventory_Type_Name
+                })
+                .ToListAsync();
+
+            return inventories;
         }
 
         // GET: api/Inventories/5
@@ -55,7 +73,7 @@ namespace Menlyn_Mews_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInventory(int id, Inventory inventory)
         {
-            if (id != inventory.Id)
+            if (id != inventory.InventoryId)
             {
                 return BadRequest();
             }
@@ -84,16 +102,25 @@ namespace Menlyn_Mews_API.Controllers
         // POST: api/Inventories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Inventory>> PostInventory(Inventory inventory)
+        public async Task<ActionResult<Inventory>> PostInventory(AddInventoryViewModel ivm)
         {
-          if (_context.Inventories == null)
-          {
-              return Problem("Entity set 'AppDbContext.Inventories'  is null.");
-          }
-            _context.Inventories.Add(inventory);
-            await _context.SaveChangesAsync();
+            var inventory = new Inventory { 
+                Inventory_Name = ivm.Inventory_Name, 
+                Minimum_Stock = ivm.Minimum_Stock, 
+                Maximum_Stock = ivm.Maximum_Stock, 
+                InventoryCategoryId = ivm.InventoryCategoryId, 
+                InventoryTypeId = ivm.InventoryTypeId };
 
-            return CreatedAtAction("GetInventory", new { id = inventory.Id }, inventory);
+            try
+            {
+                _context.Add(inventory);
+                await _context.SaveChangesAsync();  
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid Transaction");
+            }
+            return Ok(inventory);
         }
 
         // DELETE: api/Inventories/5
@@ -118,7 +145,7 @@ namespace Menlyn_Mews_API.Controllers
 
         private bool InventoryExists(int id)
         {
-            return (_context.Inventories?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Inventories?.Any(e => e.InventoryId == id)).GetValueOrDefault();
         }
     }
 }

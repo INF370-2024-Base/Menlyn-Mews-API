@@ -7,7 +7,7 @@ namespace Menlyn_Mews_API.Models.Domain
     {
 
         [Key]
-        public int Id { get; set; }
+        public int ClientId { get; set; }
 
         public string? Client_Name { get; set; } = string.Empty;
 

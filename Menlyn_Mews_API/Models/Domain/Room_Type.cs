@@ -6,7 +6,7 @@ namespace Menlyn_Mews_API.Models.Domain
     public class Room_Type
     {
         [Key]
-        public int Id { get; set; }
+        public int RoomTypeId { get; set; }
 
         public string? Room_Type_Description { get; set; } = string.Empty;
 
@@ -18,6 +18,9 @@ namespace Menlyn_Mews_API.Models.Domain
         //--------------------------------------------FK-----------------------------------------//
         [JsonIgnore]
         public List<Room>? Rooms { get; set; }
+
+        [JsonIgnore]
+        public List<Room_Booking>? Rooms_Booking { get; set; }
     }
 }
 

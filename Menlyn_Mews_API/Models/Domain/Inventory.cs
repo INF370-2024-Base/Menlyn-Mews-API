@@ -8,31 +8,21 @@ namespace Menlyn_Mews_API.Models.Domain
     public class Inventory
     {
         [Key]
-        public int Id { get; set; }
+        public int InventoryId { get; set; }
 
-        [Required(ErrorMessage = "Inventory Name is required")]
         public string? Inventory_Name { get; set; } = string.Empty;
-
-        [Required(ErrorMessage = "Minimum Stock Is Required")]
         public int? Minimum_Stock { get; set; } = int.MinValue;
-
-        [Required(ErrorMessage = "Maximum Stock Is Required")]
         public int? Maximum_Stock { get; set; } = int.MinValue;
-
-        [Required(ErrorMessage = "Inventory Condition is required")]
-        public string? Inventory_Condition { get; set; } = "Good";
-
-        [Required(ErrorMessage = "Inventory Status Required")]
-        public string? Inventory_Status { get; set; } = "Empty";
+        public string? Inventory_Condition { get; set; } = string.Empty;
+        public string? Inventory_Status { get; set; } = string.Empty;
 
         //------------------------------------FK-----------------------------------//
-        public int Inventory_Type_Id { get; set; }
-        [JsonIgnore]
-        public Inventory_Type? Inventory_Types { get; set; } // Navigation property
+        
+        public int InventoryTypeId { get; set; }
+        public int InventoryCategoryId { get; set; }
 
-        public int Inventory_Category_Id { get; set; }
-        [JsonIgnore]
-        public Inventory_Category? Inventory_Categories { get; set; } // Navigation property
+        public Inventory_Type InventoryType {  get; set; }  
+        public Inventory_Category InventoryCategory { get; set; }   
 
     }
 }

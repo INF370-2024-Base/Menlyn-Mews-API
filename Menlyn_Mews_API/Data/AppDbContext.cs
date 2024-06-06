@@ -32,57 +32,73 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Room_Booking> Room_Bookings { get; set; }
 
+        //Added 06/06/2024
+        public DbSet<Supplier_Order_Product> Supplier_Order_Products { get; set; }
+        
+        public DbSet<Supplier> Suppliers { get; set; }
+        
+        public DbSet<Supplier_Type> Supplier_Types { get; set; }   
+
+        public DbSet<Order> Orders { get; set; }
+        
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Price> Prices { get; set; }
+
+        public DbSet<Product_Type> Product_Types { get; set; }
+
+        public DbSet<Product_Category> Product_Categories { get; set; }
+        
+        public DbSet<Receive_Order> Receive_Orders { get; set; }
+
+        public DbSet<Receive_Supplier_Order> Receive_Supplier_Orders { get; set; }
+
+        public DbSet<Employee_Shift> Employee_Shifts { get; set; }  
+
+        public DbSet<Position> Positions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             SeedRoles(modelBuilder);
 
-            modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
-                .HasMany(e => e.Employees)
-                .WithOne(et => et.Employee_Types) // 1 E to M ET
-                .HasForeignKey(fk => fk.Employee_Type_Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
+           // modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
+           //     .HasMany(e => e.Employees)
+           //     .WithOne(et => et.Employee_Types) // 1 E to M ET
+           //     .HasForeignKey(fk => fk.Employee_Type_Id)
+           //     .IsRequired()
+           //     .OnDelete(DeleteBehavior.NoAction);
+
+           // modelBuilder.Entity<Room_Type>() // Employee to Employee Type
+           //  .HasMany(c => c.Rooms)
+           //  .WithOne(rt => rt.Room_Types) // 1 E to M ET
+           //  .HasForeignKey(fk => fk.Room_Type_Id)
+           //  .IsRequired()
+           //  .OnDelete(DeleteBehavior.NoAction);
 
 
-            modelBuilder.Entity<Inventory_Type>() // Employee to Employee Type
-               .HasMany(c => c.Inventories)
-               .WithOne(it => it.Inventory_Types) // 1 E to M ET
-               .HasForeignKey(fk => fk.Inventory_Type_Id)
-               .IsRequired()
-               .OnDelete(DeleteBehavior.NoAction);
+           // modelBuilder.Entity<Client>() // Employee to Employee Type
+           // .HasMany(c => c.Room_Bookings)
+           // .WithOne(c => c.Clients) // 1 E to M ET
+           // .HasForeignKey(fk => fk.Client_Id)
+           // .IsRequired()
+           // .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Inventory_Category>() // Employee to Employee Type
-              .HasMany(c => c.Inventories)
-              .WithOne(ic => ic.Inventory_Categories) // 1 E to M ET
-              .HasForeignKey(fk => fk.Inventory_Category_Id)
-              .IsRequired()
-              .OnDelete(DeleteBehavior.NoAction);
+           // modelBuilder.Entity<Room>() // Employee to Employee Type
+           //.HasMany(c => c.Room_Bookings)
+           //.WithOne(r => r.Rooms) // 1 E to M ET
+           //.HasForeignKey(fk => fk.Room_Id)
+           //.IsRequired()
+           //.OnDelete(DeleteBehavior.NoAction);
 
+           // modelBuilder.Entity<Room_Type>()
+           //     .HasMany(rb => rb.Rooms_Booking)
+           //     .WithOne(rt => rt.Rooms_Type)
+           //     .HasForeignKey(fk => fk.Room_Type_Id)
+           //     .IsRequired()
+           //     .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Room_Type>() // Employee to Employee Type
-             .HasMany(c => c.Rooms)
-             .WithOne(rt => rt.Room_Types) // 1 E to M ET
-             .HasForeignKey(fk => fk.Room_Type_Id)
-             .IsRequired()
-             .OnDelete(DeleteBehavior.NoAction);
-
-
-            modelBuilder.Entity<Client>() // Employee to Employee Type
-            .HasMany(c => c.Room_Bookings)
-            .WithOne(c => c.Clients) // 1 E to M ET
-            .HasForeignKey(fk => fk.Client_Id)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Room>() // Employee to Employee Type
-           .HasMany(c => c.Room_Bookings)
-           .WithOne(r => r.Rooms) // 1 E to M ET
-           .HasForeignKey(fk => fk.Room_Id)
-           .IsRequired()
-           .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Booking_Review>();
+           // modelBuilder.Entity<Booking_Review>();
 
         }
 
