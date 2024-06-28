@@ -1,4 +1,4 @@
-﻿namespace Menlyn_Mews_API.ViewModels
+﻿namespace Menlyn_Mews_API.ViewModels.Inventory
 {
     public class InventoryTypeViewModel
     {

@@ -1,7 +1,10 @@
-﻿namespace Menlyn_Mews_API.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Menlyn_Mews_API.Models.Domain
 {
     public class Supplier_Order_Product
     {
+        [Key]
         public int OrderId { get; set; }
         public Order Order { get; set; }
 

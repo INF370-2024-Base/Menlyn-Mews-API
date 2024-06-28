@@ -32,10 +32,5 @@ namespace Menlyn_Mews_API.Models.Domain
         [JsonIgnore]
         public Room_Type? Rooms_Type { get; set; }
 
-
-        //Bridge 
-        public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
-        public Employee_Shift? Employee_Shift { get; set; }
     }
 }

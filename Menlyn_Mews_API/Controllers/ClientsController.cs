@@ -55,7 +55,7 @@ namespace Menlyn_Mews_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutClient(int id, Client client)
         {
-            if (id != client.Id)
+            if (id != client.ClientId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace Menlyn_Mews_API.Controllers
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = client.Id }, client);
+            return CreatedAtAction("GetClient", new { id = client.ClientId }, client);
         }
 
         // DELETE: api/Clients/5
@@ -118,7 +118,7 @@ namespace Menlyn_Mews_API.Controllers
 
         private bool ClientExists(int id)
         {
-            return (_context.Clients?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Clients?.Any(e => e.ClientId == id)).GetValueOrDefault();
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
-using Menlyn_Mews_API.ViewModels;
+using Menlyn_Mews_API.ViewModels.Inventory;
 
 namespace Menlyn_Mews_API.Controllers
 {

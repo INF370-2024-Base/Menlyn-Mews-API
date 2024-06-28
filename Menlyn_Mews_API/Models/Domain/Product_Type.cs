@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -10,6 +11,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Product_Type_Description { get; set; } = string.Empty;
 
         //Related Taables
+        [JsonIgnore]
         public virtual ICollection<Product> Product { get; set; }
     }
 }

@@ -5,6 +5,7 @@ namespace Menlyn_Mews_API.Models.Domain
 {
     public class Employee
     {
+        //DONT CALL PRIMARY KEYS "ID" ONLY ADD A NAME
         [Key] // Specify the primary key
         public int EmployeeId { get; set; }
         public string? Employee_Name { get; set; } = string.Empty;
@@ -14,6 +15,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public string? Employee_Contact_Number { get; set; } = string.Empty;
         public string? Employee_Gender { get; set; } = string.Empty;
         public string? Employee_Address { get; set; } = string.Empty;
+        public string? Employee_Photo {  get; set; } = string.Empty;
 
 
         //------------------------------------FK-----------------------------------//

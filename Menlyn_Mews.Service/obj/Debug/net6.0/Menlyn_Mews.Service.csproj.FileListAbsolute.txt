@@ -24,3 +24,16 @@ C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.
 C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\refint\Menlyn_Mews.Service.dll
 C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.pdb
 C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\ref\Menlyn_Mews.Service.dll
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\bin\Debug\net6.0\Menlyn_Mews.Service.deps.json
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\bin\Debug\net6.0\Menlyn_Mews.Service.dll
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\bin\Debug\net6.0\Menlyn_Mews.Service.pdb
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.csproj.AssemblyReference.cache
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.AssemblyInfoInputs.cache
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.AssemblyInfo.cs
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.csproj.CoreCompileInputs.cache
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.sourcelink.json
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.dll
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\refint\Menlyn_Mews.Service.dll
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\Menlyn_Mews.Service.pdb
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn-Mews-API\Menlyn_Mews.Service\obj\Debug\net6.0\ref\Menlyn_Mews.Service.dll

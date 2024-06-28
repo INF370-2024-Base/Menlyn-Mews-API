@@ -55,7 +55,7 @@ namespace Menlyn_Mews_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
-            if (id != employee.Employee_Id)
+            if (id != employee.EmployeeId)
             {
                 return BadRequest();
             }
@@ -81,19 +81,53 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Employees
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> AddEmployee([FromForm] IFormCollection formData)
         {
-          if (_context.Employees == null)
-          {
-              return Problem("Entity set 'AppDbContext.Employees'  is null.");
-          }
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var formCollection = await Request.ReadFormAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Employee_Id }, employee);
+                var file = formCollection.Files.First();
+
+                if (file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        file.CopyTo(ms);
+                        var fileBytes = ms.ToArray();   
+                        string base64 = Convert.ToBase64String(fileBytes);
+
+                        var employee = new Employee
+                        {
+                            Employee_Name = formData["employee_name"],
+                            Employee_Surname = formData["employee_surname"],
+                            Employee_ID_Number = formData["employee_id_number"],
+                            Employee_Email_Address = formData["employee_email_address"],
+                            Employee_Contact_Number = formData["employee_contact_number"],
+                            Employee_Gender = formData["employee_gender"],
+                            Employee_Address = formData["employee_address"],
+                            Employee_Photo = base64,
+                            EmployeeTypeId = Convert.ToInt32(formData["employee_type"]),
+                            PositionId = Convert.ToInt32(formData["employee_type"]),
+
+                        };
+
+                        _context.Employees.Add(employee);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
         }
 
         // DELETE: api/Employees/5
@@ -118,7 +152,7 @@ namespace Menlyn_Mews_API.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return (_context.Employees?.Any(e => e.Employee_Id == id)).GetValueOrDefault();
+            return (_context.Employees?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
         }
     }
 }

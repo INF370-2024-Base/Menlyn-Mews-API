@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+using Menlyn_Mews_API.ViewModels.Booking;
+
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -15,13 +20,14 @@ namespace Menlyn_Mews_API.Controllers
     public class Room_BookingController : ControllerBase
     {
         private readonly AppDbContext _context;
+        string accountSid = "AC68ce8e5c11a913eb26d112a30b19aabb";
+        string authToken = "a88822c4277482823eef8666a52998c3";
 
         public Room_BookingController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Room_Booking
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Room_Booking>>> GetRoom_Bookings()
         {
@@ -32,7 +38,6 @@ namespace Menlyn_Mews_API.Controllers
             return await _context.Room_Bookings.ToListAsync();
         }
 
-        // GET: api/Room_Booking/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Room_Booking>> GetRoom_Booking(int id)
         {
@@ -50,12 +55,10 @@ namespace Menlyn_Mews_API.Controllers
             return room_Booking;
         }
 
-        // PUT: api/Room_Booking/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom_Booking(int id, Room_Booking room_Booking)
         {
-            if (id != room_Booking.Id)
+            if (id != room_Booking.RoomBookingId)
             {
                 return BadRequest();
             }
@@ -81,19 +84,37 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Room_Booking
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room_Booking>> PostRoom_Booking(Room_Booking room_Booking)
+        public async Task<ActionResult<Room_Booking>> PostRoom_Booking(BookingViewModel bvm)
         {
-          if (_context.Room_Bookings == null)
-          {
-              return Problem("Entity set 'AppDbContext.Room_Bookings'  is null.");
-          }
-            _context.Room_Bookings.Add(room_Booking);
-            await _context.SaveChangesAsync();
+            var booking = new Room_Booking
+            {
+                Check_In_Date =  bvm.Check_In_Date,
+                Check_Out_Date = bvm.Check_Out_Date,
+                Booking_Price  = bvm.Booking_Price,
+                ClientId = bvm.ClientId,
+                Room_Id = bvm.Room_Id,  
+                Room_Type_Id = bvm.Room_Type_Id
+            };
 
-            return CreatedAtAction("GetRoom_Booking", new { id = room_Booking.Id }, room_Booking);
+            try
+            {
+                _context.Add(booking);
+                await _context.SaveChangesAsync();
+                TwilioClient.Init(accountSid, authToken);
+
+                var message = MessageResource.Create(
+                    body: "Your Check In Date Is " + booking.Check_In_Date,
+                    from: new Twilio.Types.PhoneNumber("+13187034034"),
+                    to: new Twilio.Types.PhoneNumber("+27646028374")
+                );
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(booking);
         }
 
         // DELETE: api/Room_Booking/5
@@ -118,7 +139,7 @@ namespace Menlyn_Mews_API.Controllers
 
         private bool Room_BookingExists(int id)
         {
-            return (_context.Room_Bookings?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Room_Bookings?.Any(e => e.RoomBookingId == id)).GetValueOrDefault();
         }
     }
 }

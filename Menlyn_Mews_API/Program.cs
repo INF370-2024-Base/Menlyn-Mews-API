@@ -8,6 +8,7 @@ using Menlyn_Mews.Service.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Menlyn_Mews_API.Models.Repositories;
 
 
 // using Menlyn_Mews.Data; //
@@ -87,6 +88,8 @@ builder.Services.Configure<IdentityOptions>(
 
 //Timer For Forgot Email Link
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
+
+builder.Services.AddScoped<IRepositroy, Repository>();
 
 
 //Authentication

@@ -7,8 +7,8 @@ namespace Menlyn_Mews_API.Models.Domain
         [Key]
         public int ShiftId { get; set; }
         public DateTime Shift_Date { get; set; }
-        public TimeOnly Start_TIme { get; set; }
-        public TimeOnly End_TIme { get; set; }
+        public DateTime Start_TIme { get; set; }
+        public DateTime End_TIme { get; set; }
         public string IP_Address { get; set; } = string.Empty;
 
         //Related Tables

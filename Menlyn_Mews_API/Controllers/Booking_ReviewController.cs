@@ -55,7 +55,7 @@ namespace Menlyn_Mews_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBooking_Review(int id, Booking_Review booking_Review)
         {
-            if (id != booking_Review.Id)
+            if (id != booking_Review.BookingReviewId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace Menlyn_Mews_API.Controllers
             _context.Booking_Reviews.Add(booking_Review);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBooking_Review", new { id = booking_Review.Id }, booking_Review);
+            return CreatedAtAction("GetBooking_Review", new { id = booking_Review.BookingReviewId }, booking_Review);
         }
 
         // DELETE: api/Booking_Review/5
@@ -118,7 +118,7 @@ namespace Menlyn_Mews_API.Controllers
 
         private bool Booking_ReviewExists(int id)
         {
-            return (_context.Booking_Reviews?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Booking_Reviews?.Any(e => e.BookingReviewId == id)).GetValueOrDefault();
         }
     }
 }

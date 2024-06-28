@@ -55,7 +55,7 @@ namespace Menlyn_Mews_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
-            if (id != room.Id)
+            if (id != room.RoomId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace Menlyn_Mews_API.Controllers
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
+            return CreatedAtAction("GetRoom", new { id = room.RoomId }, room);
         }
 
         // DELETE: api/Rooms/5
@@ -118,7 +118,7 @@ namespace Menlyn_Mews_API.Controllers
 
         private bool RoomExists(int id)
         {
-            return (_context.Rooms?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Rooms?.Any(e => e.RoomId == id)).GetValueOrDefault();
         }
     }
 }
