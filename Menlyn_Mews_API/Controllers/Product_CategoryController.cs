@@ -84,6 +84,7 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpPost]
+        [Route("AddProductCategory")]
         public async Task<IActionResult> PostProduct_Category(ProductCategoryViewModel pcvm)
         {
             var productCategory = new Product_Category

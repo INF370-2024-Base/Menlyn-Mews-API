@@ -25,7 +25,14 @@ namespace Menlyn_Mews_API.Models.Domain
         public int PositionId { get; set; }
         public Position Position { get; set; }
 
+        //Related Tables
+        [JsonIgnore]
         public virtual ICollection<Employee_Shift> Employee_Shift { get; set; }
 
+        [JsonIgnore]    
+        public virtual ICollection<Audit_Log> Audit_Log { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Complaint> Complaint { get; set; }   
     }
 }

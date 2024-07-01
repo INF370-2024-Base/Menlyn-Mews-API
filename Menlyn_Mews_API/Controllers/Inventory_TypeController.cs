@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.ViewModels.Inventory;
+using Menlyn_Mews_API.Models.Repositories;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -16,40 +17,36 @@ namespace Menlyn_Mews_API.Controllers
     public class Inventory_TypeController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repository;
 
-        public Inventory_TypeController(AppDbContext context)
+        public Inventory_TypeController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;
         }
 
-        // GET: api/Inventory_Type
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InventoryTypeViewModel>>> GetInventory_Types()
+        [Route("GetInventoryTypes")]
+        public async Task<ActionResult> GetInventory_Types()
         {
-            if (_context.Inventory_Types == null || _context.Inventories == null)
+            try
             {
-                return NotFound();
+                var inventoryTypes = await _repository.GetInventoryTypesAsync();
+                return Ok(inventoryTypes);
             }
-
-            var inventory_types = await _context.Inventory_Types
-                  .Select(i => new InventoryTypeViewModel
-                  {
-                      Inventory_Type_Name = i.Inventory_Type_Name,
-                      Inventory_Type_Description = i.Inventory_Type_Description
-                  })
-                  .ToListAsync();
-
-            return inventory_types;
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET: api/Inventory_Type/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Inventory_Type>> GetInventory_Type(int id)
         {
-          if (_context.Inventory_Types == null)
-          {
-              return NotFound();
-          }
+            if (_context.Inventory_Types == null)
+            {
+                return NotFound();
+            }
             var inventory_Type = await _context.Inventory_Types.FindAsync(id);
 
             if (inventory_Type == null)
@@ -60,43 +57,40 @@ namespace Menlyn_Mews_API.Controllers
             return inventory_Type;
         }
 
-        // PUT: api/Inventory_Type/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutInventory_Type(int id, Inventory_Type inventory_Type)
+        [HttpPut]
+        [Route("UpdateInventoryType/{inventoryTypeId}")]
+        public async Task<ActionResult<InventoryTypeViewModel>> PutInventory_Type(int inventoryTypeId, InventoryTypeViewModel itvm)
         {
-            if (id != inventory_Type.InventoryTypeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(inventory_Type).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var inventoryTypes = await _repository.GetInventoryTypesByIdAsync(inventoryTypeId);
+                if (inventoryTypes == null) return NotFound("Inventory Type Does Not Exist");
+
+                inventoryTypes.Inventory_Type_Name = itvm.Inventory_Type_Name;
+                inventoryTypes.Inventory_Type_Description = itvm.Inventory_Type_Description;
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Ok(inventoryTypes);
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!Inventory_TypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
-        // POST: api/Inventory_Type
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Inventory_Type>> PostInventory_Type(InventoryTypeViewModel itvm)
+        [Route("AddInventoryType")]
+        public async Task<IActionResult> PostInventory_Type(InventoryTypeViewModel itvm)
         {
-            var inventory_type = new Inventory_Type { Inventory_Type_Name = itvm.Inventory_Type_Name, Inventory_Type_Description = itvm.Inventory_Type_Description };
+            var inventory_type = new Inventory_Type 
+                { 
+                    Inventory_Type_Name = itvm.Inventory_Type_Name, 
+                    Inventory_Type_Description = itvm.Inventory_Type_Description 
+                };
 
             try
             {
@@ -110,7 +104,6 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(inventory_type);
         }
 
-        // DELETE: api/Inventory_Type/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInventory_Type(int id)
         {

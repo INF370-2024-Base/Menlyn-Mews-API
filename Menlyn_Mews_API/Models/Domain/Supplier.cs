@@ -22,7 +22,8 @@ namespace Menlyn_Mews_API.Models.Domain
         //Related Tables
 
         public int SupplierTypeId { get; set; }
-
         public Supplier_Type Supplier_Type { get; set; }
+
+        public virtual ICollection<Order> Orders {  get; set; }  
     }
 }

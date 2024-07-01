@@ -13,14 +13,12 @@ namespace Menlyn_Mews_API.Models.Domain
 
         //Related Tables
         public int SupplierId { get; set; }
-        public virtual ICollection<Supplier> Suppliers { get; set; }
+        public virtual Supplier Suppliers { get; set; }
 
         //Employee_Shift Bridge
         public int EmployeeId { get; set; }
         public int ShiftId { get; set; }
         public Employee_Shift Employee_Shift { get; set; }  
-
-
 
         //Bridge
         public virtual ICollection<Supplier_Order_Product> Supplier_Order_Product { get; set; }

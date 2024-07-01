@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Menlyn_Mews_API.Models.Repositories;
+using Newtonsoft.Json;
 
 
 // using Menlyn_Mews.Data; //
@@ -19,6 +20,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
+                    //.AddJsonOptions(options =>
+                    // {
+                    //     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    // });  FOR EMERGENCIES WITH PUT FOR MULTIPLE IDs
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
@@ -49,6 +56,7 @@ builder.Services.AddSwaggerGen(option =>
     });
 
 });
+
 
 
 ///----------------------Copied and pasted so that migrations could work. It does not come precoded in---------------////
@@ -90,6 +98,7 @@ builder.Services.Configure<IdentityOptions>(
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
 
 builder.Services.AddScoped<IRepositroy, Repository>();
+
 
 
 //Authentication

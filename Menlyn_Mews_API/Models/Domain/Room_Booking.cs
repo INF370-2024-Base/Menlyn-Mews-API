@@ -19,18 +19,21 @@ namespace Menlyn_Mews_API.Models.Domain
 
 
         ///------------------------FK--------------------///
-        //Change These
         public int ClientId { get; set; }
+        [JsonIgnore]
         public Client? Clients { get; set; }
 
-
-        public int Room_Id { get; set; }
+        public int RoomId { get; set; }
         [JsonIgnore]
         public Room? Rooms { get; set; }
 
-        public int Room_Type_Id { get; set; }
+        public int BookingPackageId { get; set; }
         [JsonIgnore]
-        public Room_Type? Rooms_Type { get; set; }
+        public Booking_Package Booking_Package { get; set; }
+
+        public int DiscountId { get; set; } 
+        [JsonIgnore]
+        public Discount Discount {  get; set; } 
 
     }
 }

@@ -12,7 +12,6 @@
         //Related Data
         public int InventoryTypeId { get; set; }
         public int InventoryCategoryId { get; set; }
-        public string InventoryTypeName { get; set; }
-        public string InventoryCategoryName { get; set; }
+        public int RoomId { get; set; }
     }
 }

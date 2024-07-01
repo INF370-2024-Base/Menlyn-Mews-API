@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.ViewModels.Inventory;
+using Menlyn_Mews_API.Models.Repositories;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -16,39 +17,36 @@ namespace Menlyn_Mews_API.Controllers
     public class Inventory_CategoryController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repositroy;
 
-        public Inventory_CategoryController(AppDbContext context)
+        public Inventory_CategoryController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repositroy = repositroy;
         }
 
-        // GET: api/Inventory_Category
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InventoryCategoryViewModel>>> GetInventory_Categories()
+        [Route("GetInventoryCategories")]
+        public async Task<ActionResult> GetInventory_Categories()
         {
-          if (_context.Inventory_Categories == null || _context.Inventories == null)
-          {
-              return NotFound();
-          }
-           
-          var inventory_categories = await _context.Inventory_Categories
-                .Select(i => new InventoryCategoryViewModel {
-                    Inventory_Category_Name = i.Inventory_Category_Name,
-                    Inventory_Category_Description = i.Inventory_Category_Description
-                })
-                .ToListAsync();
-
-            return inventory_categories;
+            try
+            {
+                var inventoryCategories = await _repositroy.GetInventoryCategoriesAsync();
+                return Ok(inventoryCategories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET: api/Inventory_Category/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Inventory_Category>> GetInventory_Category(int id)
         {
-          if (_context.Inventory_Categories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Inventory_Categories == null)
+            {
+                return NotFound();
+            }
             var inventory_Category = await _context.Inventory_Categories.FindAsync(id);
 
             if (inventory_Category == null)
@@ -59,41 +57,41 @@ namespace Menlyn_Mews_API.Controllers
             return inventory_Category;
         }
 
-        // PUT: api/Inventory_Category/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutInventory_Category(int id, Inventory_Category inventory_Category)
+        [HttpPut]
+        [Route("UpdateInventoryCategory/{inventoryCategoryId}")]
+        public async Task<ActionResult<InventoryCategoryViewModel>> PutInventory_Category(int inventoryCategoryId, InventoryCategoryViewModel icvm)
         {
-            if (id != inventory_Category.InventoryCategoryId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(inventory_Category).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var inventoryCategory = await _repositroy.GetInventoryCategoriesByIdAsync(inventoryCategoryId);
+                if (inventoryCategory == null) return NotFound("Inventory Category Does Not Exist");
+
+                inventoryCategory.Inventory_Category_Name = icvm.Inventory_Category_Name;
+                inventoryCategory.Inventory_Category_Description = icvm.Inventory_Category_Description;
+
+                if (await _repositroy.SaveChangesAsync())
+                {
+                    return Ok(inventoryCategory);
+                }
+
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!Inventory_CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Inventory_Category>> PostInventory_Category(InventoryCategoryViewModel icvm)
+        [Route("AddInventoryCategory")]
+        public async Task<IActionResult> PostInventory_Category(InventoryCategoryViewModel icvm)
         {
-            var inventory_category = new Inventory_Category { Inventory_Category_Name = icvm.Inventory_Category_Name, Inventory_Category_Description = icvm.Inventory_Category_Description };
+            var inventory_category = new Inventory_Category 
+            { 
+                Inventory_Category_Name = icvm.Inventory_Category_Name, 
+                Inventory_Category_Description = icvm.Inventory_Category_Description 
+            };
 
             try
             {
@@ -107,7 +105,6 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(inventory_category);
         }
 
-        // DELETE: api/Inventory_Category/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInventory_Category(int id)
         {

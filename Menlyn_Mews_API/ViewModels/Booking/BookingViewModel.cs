@@ -15,6 +15,5 @@ namespace Menlyn_Mews_API.ViewModels.Booking
 
         public int Room_Id { get; set; }
 
-        public int Room_Type_Id { get; set; }
     }
 }

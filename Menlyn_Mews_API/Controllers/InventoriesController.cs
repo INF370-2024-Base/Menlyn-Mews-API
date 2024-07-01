@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.ViewModels.Inventory;
+using Menlyn_Mews_API.Models.Repositories;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -16,41 +17,43 @@ namespace Menlyn_Mews_API.Controllers
     public class InventoriesController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repositroy;
 
-        public InventoriesController(AppDbContext context)
+        public InventoriesController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repositroy = repositroy;
         }
 
-        // GET: api/Inventories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InventoryViewModel>>> GetInventories()
+        [Route("GetInventories")]
+        public async Task<ActionResult> GetInventories()
         {
-          if (_context.Inventories == null || _context.Inventory_Types == null || _context.Inventory_Categories == null)
-          {
-              return NotFound();
-          }
-            var inventories = await _context.Inventories
-                .Include(i => i.InventoryCategory)
-                .Include(i => i.InventoryType)
-                .Select(i => new InventoryViewModel
-                {
-                    Inventory_Name = i.Inventory_Name,
-                    Minimum_Stock = (int)i.Minimum_Stock,
-                    Maximum_Stock = (int)i.Maximum_Stock,
-                    Condition = i.Inventory_Condition,
-                    Inventory_Status = i.Inventory_Status,
-                    InventoryCategoryId = i.InventoryCategory.InventoryCategoryId,
-                    InventoryTypeId = i.InventoryType.InventoryTypeId,
-                    InventoryCategoryName = i.InventoryCategory.Inventory_Category_Name,
-                    InventoryTypeName = i.InventoryType.Inventory_Type_Name
-                })
-                .ToListAsync();
+            try
+            {
+                var results = await _repositroy.GetInventoriesAsync();
 
-            return inventories;
+                dynamic inventories = results.Select(i => new
+                {
+                    i.InventoryId,
+                    i.Inventory_Name,
+                    i.Maximum_Stock,
+                    i.Minimum_Stock,
+                    i.Inventory_Condition,
+                    i.Inventory_Status,
+                    Category_Name = i.InventoryCategory.Inventory_Category_Name,
+                    Type_Name = i.InventoryType.Inventory_Type_Name,
+                    Room = i.Room,
+                });
+
+                return Ok(inventories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET: api/Inventories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Inventory>> GetInventory(int id)
         {
@@ -68,52 +71,56 @@ namespace Menlyn_Mews_API.Controllers
             return inventory;
         }
 
-        // PUT: api/Inventories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutInventory(int id, Inventory inventory)
+        [HttpPut]
+        [Route("UpdateInventory/{inventoryId}")]
+        public async Task<ActionResult<InventoryViewModel>> PutInventory(int inventoryId, InventoryViewModel ivm)
         {
-            if (id != inventory.InventoryId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(inventory).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var inventory = await _repositroy.GetInventoryByIdAsync(inventoryId);
+                if (inventory == null) return NotFound("Inventory Does Not Exist");   
+
+                inventory.Inventory_Name = ivm.Inventory_Name;
+                inventory.Maximum_Stock = ivm.Maximum_Stock;
+                inventory.Minimum_Stock = ivm.Minimum_Stock;
+                inventory.Inventory_Status = ivm.Inventory_Status;
+                inventory.Inventory_Condition = ivm.Condition;
+                inventory.InventoryTypeId  = ivm.InventoryTypeId;
+                inventory.InventoryCategoryId = ivm.InventoryCategoryId;
+                inventory.RoomId = ivm.RoomId;
+
+                if (await _repositroy.SaveChangesAsync())
+                {
+                    return Ok(inventory);
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!InventoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(ex.Message);
             }
 
-            return NoContent();
+            return NoContent(); 
         }
 
-        // POST: api/Inventories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Inventory>> PostInventory(AddInventoryViewModel ivm)
+        [Route("AddInventory")]
+        public async Task<IActionResult> PostInventory(InventoryViewModel ivm)
         {
             var inventory = new Inventory { 
                 Inventory_Name = ivm.Inventory_Name, 
                 Minimum_Stock = ivm.Minimum_Stock, 
                 Maximum_Stock = ivm.Maximum_Stock, 
+                Inventory_Condition = ivm.Condition,
+                Inventory_Status = ivm.Inventory_Status,
                 InventoryCategoryId = ivm.InventoryCategoryId, 
-                InventoryTypeId = ivm.InventoryTypeId };
+                InventoryTypeId = ivm.InventoryTypeId,
+                RoomId = ivm.RoomId,
+            };
+
 
             try
             {
-                _context.Add(inventory);
+                _repositroy.Add(inventory);
                 await _context.SaveChangesAsync();  
             }
             catch (Exception)

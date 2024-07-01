@@ -47,7 +47,7 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         public async Task<Product> GetProductAsync(int productId)
         {
-            IQueryable<Product> query = _context.Products.Where(p => p.ProductId == productId).Include(p => p.ProductType).Include(p => p.ProductCategory).Include(p => p.Price);
+            IQueryable<Product> query = _context.Products.Where(p => p.ProductId == productId).Include(p => p.Inventory).Include(p => p.ProductType).Include(p => p.ProductCategory).Include(p => p.Price);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -79,6 +79,62 @@ namespace Menlyn_Mews_API.Models.Repositories
 
 
         ///////////////////////////////////////////////////////PRODUCT REPOSITORY END/////////////////////////////////////////////////////////////////////////////////////
+
+
+        ///////////////////////////////////////////////////////INVENTORY REPOSITORY///////////////////////////////////////////////////////////////////////////////////////
+        //Inventory
+        public async Task<Inventory[]> GetInventoriesAsync()
+        {
+            IQueryable<Inventory> query =  _context.Inventories.Include(i => i.InventoryCategory).Include(i => i.InventoryType).Include(i => i.Room);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Inventory> GetInventoryByIdAsync(int inventoryId)
+        {
+            IQueryable<Inventory> query = _context.Inventories.Where(i => i.InventoryId == inventoryId).Include(i => i.InventoryCategory).Include(i => i.InventoryType).Include(i => i.Room);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Inventory Type
+        public async Task<Inventory_Type[]> GetInventoryTypesAsync()
+        {
+            IQueryable<Inventory_Type> query = _context.Inventory_Types;
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Inventory_Type> GetInventoryTypesByIdAsync(int inventoryTypeId)
+        {
+            IQueryable<Inventory_Type> query = _context.Inventory_Types.Where(it => it.InventoryTypeId == inventoryTypeId);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Inventory Category
+        public async Task<Inventory_Category[]> GetInventoryCategoriesAsync()
+        {
+            IQueryable<Inventory_Category> query = _context.Inventory_Categories;
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Inventory_Category> GetInventoryCategoriesByIdAsync(int inventoryCategoryId)
+        {
+            IQueryable<Inventory_Category> query = _context.Inventory_Categories.Where(ic => ic.InventoryCategoryId == inventoryCategoryId);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Inspection Item
+        public async Task<Inspection_Item[]> GetInspectionItemsAsync()
+        {
+            IQueryable<Inspection_Item> query = _context.Inspection_Items.Include(ii => ii.Inventory);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Inspection_Item> GetInspectionItemsByIdAsync(int inspectionItemId)
+        {
+            IQueryable<Inspection_Item> query = _context.Inspection_Items.Where(ii => ii.InspectionItemId == inspectionItemId).Include(ii => ii.Inventory);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        ///////////////////////////////////////////////////////INVENTORY REPOSITORY END///////////////////////////////////////////////////////////////////////////////////
     }
 
 }

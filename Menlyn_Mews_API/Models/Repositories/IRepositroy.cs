@@ -25,5 +25,24 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         ///////////////////////////////////////////////////////PRODUCT REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
+
+        ///////////////////////////////////////////////////////INVENTORY REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
+        //Inventory
+        Task<Inventory[]> GetInventoriesAsync();
+        Task<Inventory> GetInventoryByIdAsync(int inventoryId);
+
+        //Inventory Type
+        Task<Inventory_Type[]> GetInventoryTypesAsync();
+        Task<Inventory_Type> GetInventoryTypesByIdAsync(int inventoryTypeId);
+
+        //Inventory Category
+        Task<Inventory_Category[]> GetInventoryCategoriesAsync();
+        Task<Inventory_Category> GetInventoryCategoriesByIdAsync(int inventoryCategoryId);
+
+        //Inspection Item
+        Task<Inspection_Item[]> GetInspectionItemsAsync();
+        Task<Inspection_Item> GetInspectionItemsByIdAsync(int inspectionItemId);
+
+        ///////////////////////////////////////////////////////INVENTORY REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
     }
 }

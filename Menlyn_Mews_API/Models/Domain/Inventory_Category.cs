@@ -1,7 +1,4 @@
-﻿
-
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
@@ -15,6 +12,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Inventory_Category_Description { get; set; } = string.Empty;
 
+        [JsonIgnore]
         public virtual ICollection<Inventory> Inventories { get; set; }
     }
 }

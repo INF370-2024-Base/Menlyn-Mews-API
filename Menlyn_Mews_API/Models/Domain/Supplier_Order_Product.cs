@@ -13,8 +13,8 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string Order_Product_Description { get; set; } = string.Empty;
 
-        //Bridge
-        public virtual ICollection<Receive_Supplier_Order> Receive_Supplier_Order { get; set; }
+        public int ReceiveOrderId { get; set; }
+        public Receive_Order Receive_Order { get; set; }
 
     }
 }

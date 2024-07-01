@@ -13,17 +13,13 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Client_Surname { get; set; } = string.Empty;
 
-        //menu dropdown
-        public int? Client_ID_Number { get; set; }
+        public string? Client_ID_Number { get; set; }
 
         public string? Client_Email_Address { get; set; } = string.Empty;
 
-        //menu dropdown
-        public int? Client_Contact_Number { get; set; }
+        public string? Client_Contact_Number { get; set; }
 
         public string? Client_Gender { get; set; } = string.Empty;
-
-        //Might be deleted since it is a dropdown as Client Gender is really important
 
         public string? Client_Address { get; set; } = string.Empty;
 
@@ -32,7 +28,25 @@ namespace Menlyn_Mews_API.Models.Domain
         ///------------------------FK--------------------///
 
 
-        [JsonIgnore] // might delete later, it was not here before, just testing out the JSON ignore on APIs
-        public List<Room_Booking>? Room_Bookings { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Room_Booking>? Room_Bookings { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Booking_Review>? Booking_Reviews { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Event_Review>? Event_Reviews { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Referrals>? Referrals { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Event_Booking>? Event_Booking { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Payment>? Payments { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Complaint>? Complaint { get; set; }  
     }
 }

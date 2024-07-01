@@ -17,20 +17,21 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Room_Status { get; set; } = string.Empty;
 
-
-        public int? Room_Rate { get; set; }
+        public Decimal Room_Rate { get; set; }
 
         public string? Room_Description { get; set; } = string.Empty;
 
         //------------------------------------FK-----------------------------------//
 
-        public int Room_Type_Id { get; set; }
+        public int RoomTypeId { get; set; }
+        public Room_Type Room_Type { get; set; }
+
+
+        [JsonIgnore] 
+        public virtual ICollection<Room_Booking> Room_Bookings { get; set; }
+
         [JsonIgnore]
-        public Room_Type? Room_Types { get; set; }
-
-
-        [JsonIgnore] // getting from Room_Booking
-        public List<Room_Booking>? Room_Bookings { get; set; }
+        public virtual ICollection<Inventory> Inventories { get; set; }
     }
 }
 

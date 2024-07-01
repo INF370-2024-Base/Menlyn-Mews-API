@@ -17,10 +17,8 @@ namespace Menlyn_Mews_API.Models.Domain
 
         //--------------------------------------------FK-----------------------------------------//
         [JsonIgnore]
-        public List<Room>? Rooms { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
 
-        [JsonIgnore]
-        public List<Room_Booking>? Rooms_Booking { get; set; }
     }
 }
 

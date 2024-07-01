@@ -93,8 +93,7 @@ namespace Menlyn_Mews_API.Controllers
                 Check_Out_Date = bvm.Check_Out_Date,
                 Booking_Price  = bvm.Booking_Price,
                 ClientId = bvm.ClientId,
-                Room_Id = bvm.Room_Id,  
-                Room_Type_Id = bvm.Room_Type_Id
+                RoomId = bvm.Room_Id,
             };
 
             try

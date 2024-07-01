@@ -12,7 +12,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Received_Status {  get; set; } = string.Empty;
 
         //Related Tables
-        public virtual ICollection<Receive_Supplier_Order> Receive_Supplier_Order { get; set; }
+        public virtual ICollection<Supplier_Order_Product> Supplier_Order_Product { get; set; }
 
     }
 }
