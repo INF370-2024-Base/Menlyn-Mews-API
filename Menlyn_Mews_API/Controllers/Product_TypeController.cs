@@ -40,21 +40,19 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product_Type>> GetProduct_Type(int id)
+        [HttpGet]
+        [Route("GetProductTypeById/{productTypeId}")]
+        public async Task<ActionResult<Product_Type>> GetProduct_Type(int productTypeId)
         {
-          if (_context.Product_Types == null)
-          {
-              return NotFound();
-          }
-            var product_Type = await _context.Product_Types.FindAsync(id);
-
-            if (product_Type == null)
+            try
             {
-                return NotFound();
+                var results = await _repository.GetProductTypeByIdAsync(productTypeId);
+                return Ok(results);
             }
-
-            return product_Type;
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]

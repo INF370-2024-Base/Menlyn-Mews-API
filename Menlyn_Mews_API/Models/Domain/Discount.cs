@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -13,6 +14,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public DateTime End_Date { get; set; }
         public bool Is_Active { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Room_Booking>? Room_Booking { get; set;}
     }
 }

@@ -40,21 +40,19 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Inventory_Type>> GetInventory_Type(int id)
+        [HttpGet]
+        [Route("GetInventoryTypeById/{inventoryTypeId}")]
+        public async Task<ActionResult<Inventory_Type>> GetInventory_Type(int inventoryTypeId)
         {
-            if (_context.Inventory_Types == null)
+            try
             {
-                return NotFound();
+                var inventoryTypes = await _repository.GetInventoryTypesByIdAsync(inventoryTypeId);
+                return Ok(inventoryTypes);
             }
-            var inventory_Type = await _context.Inventory_Types.FindAsync(id);
-
-            if (inventory_Type == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return inventory_Type;
         }
 
         [HttpPut]
@@ -94,8 +92,8 @@ namespace Menlyn_Mews_API.Controllers
 
             try
             {
-                _context.Add(inventory_type);
-                await _context.SaveChangesAsync();
+                _repository.Add(inventory_type);
+                await _repository.SaveChangesAsync();
             }
             catch (Exception)
             {

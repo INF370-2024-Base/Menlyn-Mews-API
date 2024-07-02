@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Employee;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -15,88 +17,90 @@ namespace Menlyn_Mews_API.Controllers
     public class PositionsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repository;
 
-        public PositionsController(AppDbContext context)
+        public PositionsController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;   
         }
 
-        // GET: api/Positions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Position>>> GetPositions()
+        [Route("GetPositions")]
+        public async Task<ActionResult> GetPositions()
         {
-          if (_context.Positions == null)
-          {
-              return NotFound();
-          }
-            return await _context.Positions.ToListAsync();
-        }
-
-        // GET: api/Positions/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Position>> GetPosition(int id)
-        {
-          if (_context.Positions == null)
-          {
-              return NotFound();
-          }
-            var position = await _context.Positions.FindAsync(id);
-
-            if (position == null)
-            {
-                return NotFound();
-            }
-
-            return position;
-        }
-
-        // PUT: api/Positions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPosition(int id, Position position)
-        {
-            if (id != position.PositionId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(position).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var positions = await _repository.GetPositionsAsync();
+                return Ok(positions);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!PositionExists(id))
+                return BadRequest(ex.Message);  
+            }
+        }
+
+        [HttpGet]
+        [Route("GetPositionById/{positionId}")]
+        public async Task<ActionResult> GetPosition(int positionId)
+        {
+            try
+            {
+                var positions = await _repository.GetPositionByIdAsync(positionId);
+                if (positions == null) return NotFound("Position Not Found");
+                return Ok(positions);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdatePosition/{positionId}")]
+        public async Task<ActionResult<PositionViewModel>> PutPosition(int positionId, PositionViewModel pvm)
+        {
+            try
+            {
+                var positions = await _repository.GetPositionByIdAsync(positionId);
+                if (positions == null) return NotFound("Position Not Found");
+
+                positions.Position_Description = pvm.Position_Description;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    return NotFound();
+                    return Ok(positions);
                 }
-                else
-                {
-                    throw;
-                }
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
             }
 
             return NoContent();
         }
 
-        // POST: api/Positions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Position>> PostPosition(Position position)
+        public async Task<IActionResult> PostPosition(PositionViewModel pvm)
         {
-          if (_context.Positions == null)
-          {
-              return Problem("Entity set 'AppDbContext.Positions'  is null.");
-          }
-            _context.Positions.Add(position);
-            await _context.SaveChangesAsync();
+            var positions = new Position
+            {
+                Position_Description = pvm.Position_Description,  
+            };
 
-            return CreatedAtAction("GetPosition", new { id = position.PositionId }, position);
+            try
+            {
+                _repository.Add(positions);
+                await _repository.SaveChangesAsync();   
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid Transaction");
+            }
+
+            return Ok(positions);   
         }
 
-        // DELETE: api/Positions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePosition(int id)
         {

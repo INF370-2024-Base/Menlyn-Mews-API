@@ -49,21 +49,28 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Inspection_Item>> GetInspection_Item(int id)
+        [HttpGet]
+        [Route("GetInspectionItemById/{inspectionItemId}")]
+        public async Task<ActionResult> GetInspection_Item(int inspectionItemId)
         {
-          if (_context.Inspection_Items == null)
-          {
-              return NotFound();
-          }
-            var inspection_Item = await _context.Inspection_Items.FindAsync(id);
-
-            if (inspection_Item == null)
+            try
             {
-                return NotFound();
-            }
+                var ii = await _repository.GetInspectionItemsByIdAsync(inspectionItemId);
 
-            return inspection_Item;
+                dynamic inspectionItems = new
+                {
+                    ii.InspectionItemId,
+                    ii.Inspection_Item_Name,
+                    ii.Inspection_Item_Condition,
+                    Inventory_Name = ii.Inventory.Inventory_Name,
+                };
+
+                return Ok(inspectionItems);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]

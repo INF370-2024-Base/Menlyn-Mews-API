@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Booking;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -15,88 +17,94 @@ namespace Menlyn_Mews_API.Controllers
     public class Room_TypeController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repository;
 
-        public Room_TypeController(AppDbContext context)
+        public Room_TypeController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;   
         }
 
-        // GET: api/Room_Type
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room_Type>>> GetRoom_Types()
+        [Route("GetRoomTypes")]
+        public async Task<ActionResult> GetRoom_Types()
         {
-          if (_context.Room_Types == null)
-          {
-              return NotFound();
-          }
-            return await _context.Room_Types.ToListAsync();
-        }
-
-        // GET: api/Room_Type/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Room_Type>> GetRoom_Type(int id)
-        {
-          if (_context.Room_Types == null)
-          {
-              return NotFound();
-          }
-            var room_Type = await _context.Room_Types.FindAsync(id);
-
-            if (room_Type == null)
-            {
-                return NotFound();
-            }
-
-            return room_Type;
-        }
-
-        // PUT: api/Room_Type/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom_Type(int id, Room_Type room_Type)
-        {
-            if (id != room_Type.RoomTypeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(room_Type).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var roomTypes = await _repository.GetRoomTypesAsync();
+                return Ok(roomTypes);   
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
+            { 
+                return BadRequest(ex.Message);  
+            }
+        }
+
+        [HttpGet]
+        [Route("GetRoomTypeById/{roomTypeId}")]
+        public async Task<ActionResult> GetRoom_Type(int roomTypeId)
+        {
+            try
             {
-                if (!Room_TypeExists(id))
+                var roomTypes = await _repository.GetRoomTypeByIdAsync(roomTypeId);
+                if (roomTypes == null) return NotFound("Room Type Does Not Exist");
+                return Ok(roomTypes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateRoomType/{roomTypeId}")]
+        public async Task<ActionResult<RoomTypeViewModel>> PutRoom_Type(int roomTypeId, RoomTypeViewModel rvm)
+        {
+            try
+            {
+                var roomTypes = await _repository.GetRoomTypeByIdAsync(roomTypeId);
+                if (roomTypes == null) return NotFound("Room Type Does Not Exist");
+
+                roomTypes.Room_Type_Description = rvm.Room_Type_Description;
+                roomTypes.Room_Type_Capacity = rvm.Room_Type_Capacity;  
+                roomTypes.Room_Size = rvm.Room_Size;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    return NotFound();
+                    return Ok(roomTypes);
                 }
-                else
-                {
-                    throw;
-                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
-        // POST: api/Room_Type
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room_Type>> PostRoom_Type(Room_Type room_Type)
+        [Route("AddRoomType")]
+        public async Task<IActionResult> PostRoom_Type(RoomTypeViewModel rvm)
         {
-          if (_context.Room_Types == null)
-          {
-              return Problem("Entity set 'AppDbContext.Room_Types'  is null.");
-          }
-            _context.Room_Types.Add(room_Type);
-            await _context.SaveChangesAsync();
+            var roomType = new Room_Type
+            {
+                Room_Type_Description = rvm.Room_Type_Description,
+                Room_Type_Capacity = rvm.Room_Type_Capacity,
+                Room_Size = rvm.Room_Size,
+            };
 
-            return CreatedAtAction("GetRoom_Type", new { id = room_Type.RoomTypeId }, room_Type);
+            try
+            {
+                _repository.Add(roomType);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(roomType);
         }
 
-        // DELETE: api/Room_Type/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom_Type(int id)
         {
@@ -116,9 +124,5 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        private bool Room_TypeExists(int id)
-        {
-            return (_context.Room_Types?.Any(e => e.RoomTypeId == id)).GetValueOrDefault();
-        }
     }
 }

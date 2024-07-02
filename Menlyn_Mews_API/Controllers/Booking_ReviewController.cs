@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Client;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -15,88 +17,116 @@ namespace Menlyn_Mews_API.Controllers
     public class Booking_ReviewController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repository;
 
-        public Booking_ReviewController(AppDbContext context)
+        public Booking_ReviewController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;   
         }
 
-        // GET: api/Booking_Review
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Booking_Review>>> GetBooking_Reviews()
+        [Route("GetBookingReviews")]
+        public async Task<ActionResult> GetBooking_Reviews()
         {
-          if (_context.Booking_Reviews == null)
-          {
-              return NotFound();
-          }
-            return await _context.Booking_Reviews.ToListAsync();
-        }
-
-        // GET: api/Booking_Review/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Booking_Review>> GetBooking_Review(int id)
-        {
-          if (_context.Booking_Reviews == null)
-          {
-              return NotFound();
-          }
-            var booking_Review = await _context.Booking_Reviews.FindAsync(id);
-
-            if (booking_Review == null)
-            {
-                return NotFound();
-            }
-
-            return booking_Review;
-        }
-
-        // PUT: api/Booking_Review/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBooking_Review(int id, Booking_Review booking_Review)
-        {
-            if (id != booking_Review.BookingReviewId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(booking_Review).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var results = await _repository.GetBookingReviewsAsync();
+
+                dynamic bookingReviews = results.Select(br => new
+                {
+                    br.BookingReviewId,
+                    br.Review_Status,
+                    br.Review_Rating,
+                    br.Review_Description,
+                    Client = br.Client.Client_Name + " " + br.Client.Client_Surname,
+                });
+
+                return Ok(bookingReviews);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!Booking_ReviewExists(id))
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetBookingReviewById/{bookingReviewId}")]
+        public async Task<ActionResult> GetBooking_Review(int bookingReviewId)
+        {
+            try
+            {
+                var br = await _repository.GetBookingReviewByIdAsync(bookingReviewId);
+                if (br == null) return NotFound("Booking Review Does Not Exist");
+
+
+                dynamic bookingReviews = new
                 {
-                    return NotFound();
-                }
-                else
+                    br.BookingReviewId,
+                    br.Review_Status,
+                    br.Review_Rating,
+                    br.Review_Description,
+                    Client = br.Client.Client_Name + " " + br.Client.Client_Surname,
+                };
+
+                return Ok(bookingReviews);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateBookingReview/{bookingReviewId}")]
+        public async Task<ActionResult<BookingReviewViewModel>> PutBooking_Review(int bookingReviewId, BookingReviewViewModel bvm)
+        {
+            try
+            {
+                var br = await _repository.GetBookingReviewByIdAsync(bookingReviewId);
+                if (br == null) return NotFound("Booking Review Does Not Exist");
+
+                br.Review_Status = bvm.Review_Status;   
+                br.Review_Rating = bvm.Review_Rating;   
+                br.Review_Description = bvm.Review_Description; 
+                br.ClientId = bvm.ClientId;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    throw;
+                    return Ok(br);
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
-        // POST: api/Booking_Review
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Booking_Review>> PostBooking_Review(Booking_Review booking_Review)
+        public async Task<IActionResult> PostBooking_Review(BookingReviewViewModel bvm)
         {
-          if (_context.Booking_Reviews == null)
-          {
-              return Problem("Entity set 'AppDbContext.Booking_Reviews'  is null.");
-          }
-            _context.Booking_Reviews.Add(booking_Review);
-            await _context.SaveChangesAsync();
+            var bookingReview = new Booking_Review
+            {
+                Review_Status = bvm.Review_Status,
+                Review_Rating = bvm.Review_Rating,
+                Review_Description = bvm.Review_Description,
+                ClientId = bvm.ClientId 
+            };
 
-            return CreatedAtAction("GetBooking_Review", new { id = booking_Review.BookingReviewId }, booking_Review);
+            try
+            {
+                _repository.Add(bookingReview);
+                await _repository.SaveChangesAsync();   
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(bookingReview);
         }
 
-        // DELETE: api/Booking_Review/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking_Review(int id)
         {

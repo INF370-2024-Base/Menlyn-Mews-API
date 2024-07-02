@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -9,6 +10,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public Decimal Product_Price {  get; set; } = int.MinValue;
         public DateTime Price_Date { get; set; } = DateTime.MinValue;
 
+        [JsonIgnore]
         public virtual ICollection<Product> Product { get; set; }
 
     }

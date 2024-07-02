@@ -43,7 +43,7 @@ namespace Menlyn_Mews_API.Controllers
                     i.Inventory_Status,
                     Category_Name = i.InventoryCategory.Inventory_Category_Name,
                     Type_Name = i.InventoryType.Inventory_Type_Name,
-                    Room = i.Room,
+                    Room = i.Room.Room_Number,
                 });
 
                 return Ok(inventories);
@@ -54,21 +54,33 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Inventory>> GetInventory(int id)
+        [HttpGet]
+        [Route("GetInventoryById/{inventoryId}")]
+        public async Task<ActionResult> GetInventory(int inventoryId)
         {
-          if (_context.Inventories == null)
-          {
-              return NotFound();
-          }
-            var inventory = await _context.Inventories.FindAsync(id);
-
-            if (inventory == null)
+            try
             {
-                return NotFound();
-            }
+                var i = await _repositroy.GetInventoryByIdAsync(inventoryId);
 
-            return inventory;
+                dynamic inventories =  new
+                {
+                    i.InventoryId,
+                    i.Inventory_Name,
+                    i.Maximum_Stock,
+                    i.Minimum_Stock,
+                    i.Inventory_Condition,
+                    i.Inventory_Status,
+                    Category_Name = i.InventoryCategory.Inventory_Category_Name,
+                    Type_Name = i.InventoryType.Inventory_Type_Name,
+                    Room = i.Room.Room_Number,
+                };
+
+                return Ok(inventories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
@@ -121,7 +133,7 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 _repositroy.Add(inventory);
-                await _context.SaveChangesAsync();  
+                await _repositroy.SaveChangesAsync();  
             }
             catch (Exception)
             {

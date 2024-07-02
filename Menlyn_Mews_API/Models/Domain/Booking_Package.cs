@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -11,6 +12,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public Decimal Booking_Package_Price { get; set; }
 
         //Related Tables
+        [JsonIgnore]
         public virtual ICollection<Room_Booking>? Room_Booking { get; set; }
     }
 }

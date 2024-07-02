@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -14,6 +15,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public string? Event_Review_Description { get; set; } = string.Empty;
 
         public int ClientId { get; set; }
+        [JsonIgnore]
         public Client Client { get; set; }
     }
 }

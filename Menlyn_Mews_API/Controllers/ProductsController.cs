@@ -54,22 +54,32 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        // GET: api/Products/id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        [HttpGet]
+        [Route("GetProductById/{productId}")]
+        public async Task<ActionResult> GetProduct(int productId)
         {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            var product = await _context.Products.FindAsync(id);
-
-            if (product == null)
+            try
             {
-                return NotFound();
-            }
+                var p = await _repository.GetProductAsync(productId);
+                if (p == null) return NotFound("Product Does Not Exist");
+                
+                dynamic products = new
+                {
+                    p.ProductId,
+                    p.Product_Name,
+                    p.Quantity_On_Hand,
+                    Category_Name = p.ProductCategory.Product_Category_Name,
+                    Type_Name = p.ProductType.Product_Type_Name,
+                    Inventory = p.Inventory.Inventory_Name,
+                    Price = p.Price.Product_Price
+                };
 
-            return product;
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]

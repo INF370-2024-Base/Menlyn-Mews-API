@@ -10,6 +10,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Type_Description { get; set; } = string.Empty;
 
+        [JsonIgnore]
         public virtual ICollection<Employee> Employee { get; set; }
     }
 }
