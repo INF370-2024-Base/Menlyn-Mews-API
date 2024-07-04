@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -10,6 +11,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Event_Capacity_Status { get; set; }
 
         //Related Tables
+        [JsonIgnore]
         public virtual ICollection<Event_Booking> Event_Booking { get; set; }  
     }
 }

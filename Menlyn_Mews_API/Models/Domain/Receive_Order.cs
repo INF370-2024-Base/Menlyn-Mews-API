@@ -1,5 +1,6 @@
 ﻿using Humanizer.Localisation.TimeToClockNotation;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -12,6 +13,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Received_Status {  get; set; } = string.Empty;
 
         //Related Tables
+        [JsonIgnore] 
         public virtual ICollection<Supplier_Order_Product> Supplier_Order_Product { get; set; }
 
     }

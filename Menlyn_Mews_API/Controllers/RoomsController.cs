@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Booking;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -15,85 +17,124 @@ namespace Menlyn_Mews_API.Controllers
     public class RoomsController : ControllerBase
     {
         private readonly AppDbContext _context;
-
-        public RoomsController(AppDbContext context)
+        private readonly IRepositroy _repository;
+        
+        public RoomsController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;   
         }
 
-        // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        [Route("GetRooms")]
+        public async Task<ActionResult> GetRooms()
         {
-          if (_context.Rooms == null)
-          {
-              return NotFound();
-          }
-            return await _context.Rooms.ToListAsync();
-        }
-
-        // GET: api/Rooms/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
-        {
-          if (_context.Rooms == null)
-          {
-              return NotFound();
-          }
-            var room = await _context.Rooms.FindAsync(id);
-
-            if (room == null)
-            {
-                return NotFound();
-            }
-
-            return room;
-        }
-
-        // PUT: api/Rooms/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
-        {
-            if (id != room.RoomId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(room).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var results = await _repository.GetRoomsAsync();
+
+                dynamic rooms = results.Select(r => new
+                {
+                    r.RoomId,
+                    r.Room_Number,
+                    r.Room_Floor,
+                    r.Room_Status,
+                    r.Room_Rate,
+                    r.Room_Description,
+                    Room_Type = r.Room_Type.Room_Type_Description,
+                });
+
+                return Ok(rooms);   
+
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!RoomExists(id))
+                return BadRequest(ex.Message);  
+            }
+        }
+
+        [HttpGet]
+        [Route("GetRoomById/{roomId}")]
+        public async Task<ActionResult> GetRoom(int roomId)
+        {
+            try
+            {
+                var r = await _repository.GetRoomByIdAsync(roomId);
+                if (r == null) return NotFound("Room Does Not Exist");
+
+                dynamic rooms = new
                 {
-                    return NotFound();
-                }
-                else
+                    r.RoomId,
+                    r.Room_Number,
+                    r.Room_Floor,
+                    r.Room_Status,
+                    r.Room_Rate,
+                    r.Room_Description,
+                    Room_Type = r.Room_Type.Room_Type_Description,
+                };
+
+                return Ok(rooms);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateRoom/{roomId}")]
+        public async Task<ActionResult<RoomViewModel>> PutRoom(int roomId, RoomViewModel rvm)
+        {
+            try
+            {
+                var r = await _repository.GetRoomByIdAsync(roomId);
+                if (r == null) return NotFound("Room Does Not Exist");
+
+                r.Room_Number = rvm.Room_Number;
+                r.Room_Floor = rvm.Room_Floor;
+                r.Room_Status = rvm.Room_Status;
+                r.Room_Rate = rvm.Room_Rate;
+                r.Room_Description = rvm.Room_Description;
+                r.RoomTypeId = rvm.RoomTypeId;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    throw;
+                    return Ok(r);
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
-        // POST: api/Rooms
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        [Route("AddRoom")]
+        public async Task<IActionResult> PostRoom(RoomViewModel rvm)
         {
-          if (_context.Rooms == null)
-          {
-              return Problem("Entity set 'AppDbContext.Rooms'  is null.");
-          }
-            _context.Rooms.Add(room);
-            await _context.SaveChangesAsync();
+            var room = new Room
+            {
+                Room_Number = rvm.Room_Number,  
+                Room_Floor = rvm.Room_Floor,
+                Room_Status = rvm.Room_Status,
+                Room_Rate = rvm.Room_Rate,
+                Room_Description = rvm.Room_Description,
+                RoomTypeId = rvm.RoomTypeId,
+            };
 
-            return CreatedAtAction("GetRoom", new { id = room.RoomId }, room);
+            try
+            {
+                _repository.Add(room);
+                await _repository.SaveChangesAsync();   
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(room);
         }
 
         // DELETE: api/Rooms/5

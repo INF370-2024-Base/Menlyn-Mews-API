@@ -11,6 +11,7 @@ using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 using Menlyn_Mews_API.ViewModels.Booking;
+using Menlyn_Mews_API.Models.Repositories;
 
 
 namespace Menlyn_Mews_API.Controllers
@@ -20,93 +21,134 @@ namespace Menlyn_Mews_API.Controllers
     public class Room_BookingController : ControllerBase
     {
         private readonly AppDbContext _context;
-        string accountSid = "AC68ce8e5c11a913eb26d112a30b19aabb";
-        string authToken = "a88822c4277482823eef8666a52998c3";
+        private readonly IRepositroy _repository;
+        private string accountSid = "AC68ce8e5c11a913eb26d112a30b19aabb";
+        private string authToken = "a88822c4277482823eef8666a52998c3";
 
-        public Room_BookingController(AppDbContext context)
+        public Room_BookingController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room_Booking>>> GetRoom_Bookings()
+        public async Task<ActionResult> GetRoom_Bookings()
         {
-          if (_context.Room_Bookings == null)
-          {
-              return NotFound();
-          }
-            return await _context.Room_Bookings.ToListAsync();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Room_Booking>> GetRoom_Booking(int id)
-        {
-          if (_context.Room_Bookings == null)
-          {
-              return NotFound();
-          }
-            var room_Booking = await _context.Room_Bookings.FindAsync(id);
-
-            if (room_Booking == null)
-            {
-                return NotFound();
-            }
-
-            return room_Booking;
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom_Booking(int id, Room_Booking room_Booking)
-        {
-            if (id != room_Booking.RoomBookingId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(room_Booking).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var results = await _repository.GetRoomBookingsAsync();
+
+                dynamic roomBookings = results.Select(rb => new
+                {
+                    rb.RoomBookingId,
+                    rb.Check_In_Date,
+                    rb.Check_Out_Date,
+                    rb.Booking_Status,
+                    rb.Booking_Price,
+                    Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
+                    Room_Desc = rb.Rooms?.Room_Description,
+                    Room_Floor = rb.Rooms?.Room_Floor,
+                    Booking_Package = rb.Booking_Package?.Booking_Package_Description,
+                    Discount = rb.Discount?.Discount_Name,
+                });
+
+                return Ok(roomBookings);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!Room_BookingExists(id))
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetRoomBookingById/{roomBookingId}")]
+        public async Task<ActionResult> GetRoom_Booking(int roomBookingId)
+        {
+            try
+            {
+                var rb = await _repository.GetRoomBookingByIdAsync(roomBookingId);
+                if (rb == null) return NotFound("Room Booking Does Not Exist");
+
+                dynamic roomBookings = new
                 {
-                    return NotFound();
-                }
-                else
+                    rb.RoomBookingId,
+                    rb.Check_In_Date,
+                    rb.Check_Out_Date,
+                    rb.Booking_Status,
+                    rb.Booking_Price,
+                    Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
+                    Room_Desc = rb.Rooms?.Room_Description,
+                    Room_Floor = rb.Rooms?.Room_Floor,
+                    Booking_Package = rb.Booking_Package?.Booking_Package_Description,
+                    Discount = rb.Discount?.Discount_Name,
+                };
+
+                return Ok(roomBookings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateRoomBooking/{roomBookingId}")]
+        public async Task<ActionResult<BookingViewModel>> PutRoom_Booking(int roomBookingId, BookingViewModel bvm)
+        {
+            try
+            {
+                var rb = await _repository.GetRoomBookingByIdAsync(roomBookingId);
+                if (rb == null) return NotFound("Room Booking Does Not Exist");
+
+                rb.Check_In_Date = bvm.Check_In_Date;
+                rb.Check_Out_Date = bvm.Check_Out_Date;
+                rb.Booking_Status = bvm.Booking_Status;
+                rb.Booking_Price = bvm.Booking_Price;
+                rb.ClientId = bvm.ClientId;
+                rb.RoomId = bvm.RoomId;
+                rb.BookingPackageId = bvm.BookingPackageId;
+                rb.DiscountId = bvm.DiscountId;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    throw;
+                    return Ok(rb);
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
         [HttpPost]
+        [Route("CreateRoomBooking")]
         public async Task<ActionResult<Room_Booking>> PostRoom_Booking(BookingViewModel bvm)
         {
             var booking = new Room_Booking
             {
-                Check_In_Date =  bvm.Check_In_Date,
+                Check_In_Date = bvm.Check_In_Date,
                 Check_Out_Date = bvm.Check_Out_Date,
-                Booking_Price  = bvm.Booking_Price,
+                Booking_Price = bvm.Booking_Price,
+                Booking_Status = bvm.Booking_Status,
                 ClientId = bvm.ClientId,
-                RoomId = bvm.Room_Id,
+                RoomId = bvm.RoomId,
+                BookingPackageId = bvm.BookingPackageId,
+                DiscountId = bvm.DiscountId,    
             };
 
             try
             {
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
-                TwilioClient.Init(accountSid, authToken);
+                //TwilioClient.Init(accountSid, authToken); ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE
 
-                var message = MessageResource.Create(
-                    body: "Your Check In Date Is " + booking.Check_In_Date,
-                    from: new Twilio.Types.PhoneNumber("+13187034034"),
-                    to: new Twilio.Types.PhoneNumber("+27646028374")
-                );
+                //var message = MessageResource.Create(
+                //    body: "Your Check In Date Is " + booking.Check_In_Date,
+                //    from: new Twilio.Types.PhoneNumber("+13187034034"),
+                //    to: new Twilio.Types.PhoneNumber("+27646028374")
+                //);
             }
             catch (Exception ex)
             {
@@ -116,7 +158,6 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(booking);
         }
 
-        // DELETE: api/Room_Booking/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom_Booking(int id)
         {

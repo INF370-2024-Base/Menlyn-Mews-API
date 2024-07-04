@@ -9,11 +9,11 @@ namespace Menlyn_Mews_API.Models.Domain
         [Key]
         public int RoomBookingId { get; set; }
 
-        public string? Check_In_Date { get; set; }
+        public DateTime? Check_In_Date { get; set; }
 
-        public string? Check_Out_Date { get; set; }
+        public DateTime? Check_Out_Date { get; set; }
 
-        public string? Booking_Status { get; set; } = string.Empty;
+        public string? Booking_Status { get; set; } 
 
         public int? Booking_Price { get; set; }
 
@@ -27,13 +27,13 @@ namespace Menlyn_Mews_API.Models.Domain
         [JsonIgnore]
         public Room? Rooms { get; set; }
 
-        public int BookingPackageId { get; set; }
+        public int? BookingPackageId { get; set; }
         [JsonIgnore]
-        public Booking_Package Booking_Package { get; set; }
+        public Booking_Package? Booking_Package { get; set; }
 
-        public int DiscountId { get; set; } 
+        public int? DiscountId { get; set; } 
         [JsonIgnore]
-        public Discount Discount {  get; set; } 
+        public Discount? Discount {  get; set; } 
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -13,14 +14,17 @@ namespace Menlyn_Mews_API.Models.Domain
 
         //Related Tables
         public int SupplierId { get; set; }
+        [JsonIgnore]
         public virtual Supplier Suppliers { get; set; }
 
         //Employee_Shift Bridge
         public int EmployeeId { get; set; }
         public int ShiftId { get; set; }
-        public Employee_Shift Employee_Shift { get; set; }  
+        [JsonIgnore]
+        public Employee_Shift Employee_Shift { get; set; }
 
         //Bridge
+        [JsonIgnore]
         public virtual ICollection<Supplier_Order_Product> Supplier_Order_Product { get; set; }
     }
 }

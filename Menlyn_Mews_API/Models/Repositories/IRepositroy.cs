@@ -71,6 +71,14 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Employee_Type[]> GetEmployeeTypesAsync();   
         public Task<Employee_Type> GetEmployeeTypeByIdAsync(int employeeTypeId);
 
+        //Shift
+        public Task<Shift[]> GetShiftsAsync();  
+        public Task<Shift> GetShiftByIdAsync(int shiftId);
+
+        //Employee
+        public Task<Employee[]> GetEmployeesAsync();
+        public Task<Employee> GetEmployeeByIdAsync(int employeeId);
+
         ///////////////////////////////////////////////////////EMPLOYEE REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -88,6 +96,14 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Room_Type[]> GetRoomTypesAsync();
         public Task<Room_Type> GetRoomTypeByIdAsync(int roomTypeId);
 
+        //Room
+        public Task<Room[]> GetRoomsAsync();
+        public Task<Room> GetRoomByIdAsync(int roomId);
+
+        //Room Booking
+        public Task<Room_Booking[]> GetRoomBookingsAsync();
+        public Task<Room_Booking> GetRoomBookingByIdAsync(int bookingId);
+
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -101,6 +117,52 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Booking_Review[]> GetBookingReviewsAsync();
         public Task<Booking_Review> GetBookingReviewByIdAsync(int bookingReviewId);
 
+        //Client
+        public Task<Client[]> GetClientsAsync();
+        public Task<Client> GetClientByIdAsync(int clientId);
+
+        //Complaint Type
+        public Task<Complaint_Type[]> GetComplaintTypesAsync();
+        public Task<Complaint_Type> GetComplaintTypeByIdAsync(int complaintTypeId);
+
+        //Complaint
+        public Task<Complaint[]> GetComplaintsAsync();
+        public Task<Complaint> GetComplaintByIdAsync(int complaintId);
+
         ///////////////////////////////////////////////////////CLIENT REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
+
+
+        ///////////////////////////////////////////////////////SUPPLIER REPOSITORY///////////////////////////////////////////////////////////////////////////////////////
+
+        //Supplier Type
+        public Task<Supplier_Type[]> GetSupplierTypesAsync();
+        public Task<Supplier_Type> GetSupplierTypeByIdAsync(int supplierTypeId);
+
+        //Supplier
+        public Task<Supplier[]> GetSuppliersAsync();    
+        public Task<Supplier> GetSupplierByIdAsync(int supplierId);
+
+        //Order
+        public Task<Order[]> GetOrdersAsync();
+        public Task<Order> GetOrderByIdAsync(int orderId);
+
+        //Receive Order
+        public Task<Receive_Order[]> GetReceivedOrdersAsync();
+        public Task<Receive_Order> GetReceivedOrdersByIdAsync(int receiveOrderId);
+
+        ///////////////////////////////////////////////////////SUPPLIER REPOSITORY END///////////////////////////////////////////////////////////////////////////////////     
+
+
+        ///////////////////////////////////////////////////////EVENT REPOSITORY///////////////////////////////////////////////////////////////////////////////////////////
+
+        //Event Type
+        public Task<Event_Types[]> GetEventTypesAsync();    
+        public Task<Event_Types> GetEventTypesByIdAsync(int eventTypesId);
+
+        //Event 
+        public Task<Event_Booking[]> GetEventBookingsAsync();
+        public Task<Event_Booking> GetEventBookingByIdAsync(int eventBookingId);
+
+        ///////////////////////////////////////////////////////EVENT REPOSITORY END///////////////////////////////////////////////////////////////////////////////////////
     }
 }

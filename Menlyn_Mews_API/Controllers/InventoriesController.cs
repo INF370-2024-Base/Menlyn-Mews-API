@@ -61,6 +61,7 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 var i = await _repositroy.GetInventoryByIdAsync(inventoryId);
+                if (i == null) return NotFound("Inventory Does Not Exist");
 
                 dynamic inventories =  new
                 {

@@ -2,6 +2,7 @@
 using Menlyn_Mews_API.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Menlyn_Mews_API.Models.Repositories
@@ -217,11 +218,35 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        //Shift
+        public async Task<Shift[]> GetShiftsAsync()
+        {
+            IQueryable<Shift> query = _context.Shifts;
+            return await query.ToArrayAsync();
+        }
+        public async Task<Shift> GetShiftByIdAsync(int shiftId)
+        {
+            IQueryable<Shift> query = _context.Shifts.Where(s => s.ShiftId == shiftId);
+            return await query.FirstOrDefaultAsync();
+        } 
+
+        //Employee
+        public async Task<Employee[]> GetEmployeesAsync()
+        {
+            IQueryable<Employee> query = _context.Employees.Include(e => e.Employee_Type).Include(e => e.Position);
+            return await query.ToArrayAsync();
+        }
+        public async Task<Employee> GetEmployeeByIdAsync(int employeeId)
+        {
+            IQueryable<Employee> query = _context.Employees.Where(e => e.EmployeeId == employeeId).Include(e => e.Employee_Type).Include(e => e.Position);
+            return await query.FirstOrDefaultAsync();
+        }
+
         ///////////////////////////////////////////////////////EMPLOYEE REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 
         ///////////////////////////////////////////////////////BOOKING REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
-        
+
         //Booking Package
         public async Task<Booking_Package[]> GetBookingPackagesAsync()
         {
@@ -261,6 +286,30 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        //Rooms
+        public async Task<Room[]> GetRoomsAsync()
+        {
+            IQueryable<Room> query = _context.Rooms.Include(r => r.Room_Type);
+            return await query.ToArrayAsync();
+        }
+        public async Task<Room> GetRoomByIdAsync(int roomId)
+        {
+            IQueryable<Room> query = _context.Rooms.Where(r => r.RoomId == roomId).Include(r => r.Room_Type);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Room Booking
+        public async Task<Room_Booking[]> GetRoomBookingsAsync()
+        {
+            IQueryable<Room_Booking> query = _context.Room_Bookings.Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount);
+            return await query.ToArrayAsync();
+        }
+        public async Task<Room_Booking> GetRoomBookingByIdAsync(int bookingId)
+        {
+            IQueryable<Room_Booking> query = _context.Room_Bookings.Where(rb => rb.RoomBookingId == bookingId).Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount);
+            return await query.FirstOrDefaultAsync();
+        }
+
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -290,8 +339,126 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        //Client
+        public async Task<Client[]> GetClientsAsync()
+        {
+            IQueryable<Client> query = _context.Clients;
+            return await query.ToArrayAsync();  
+        }
+        public async Task<Client> GetClientByIdAsync(int clientId)
+        {
+            IQueryable<Client> query = _context.Clients.Where(C => C.ClientId == clientId);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Complaint Type
+        public async Task<Complaint_Type[]> GetComplaintTypesAsync()
+        {
+            IQueryable<Complaint_Type> query = _context.Complaint_Types;
+            return await query.ToArrayAsync();
+        }
+        public async Task<Complaint_Type> GetComplaintTypeByIdAsync(int complaintTypeId)
+        {
+            IQueryable<Complaint_Type> query = _context.Complaint_Types.Where(ct => ct.ComplaintTypeId == complaintTypeId);
+            return await query.FirstOrDefaultAsync();
+        }        
+
+        //Complaint
+        public async Task<Complaint[]> GetComplaintsAsync()
+        {
+            IQueryable<Complaint> query = _context.Complaints.Include(c => c.Employee).Include(c => c.Client).Include(c => c.Complaint_Type);
+            return await query.ToArrayAsync();  
+        }
+        public async Task<Complaint> GetComplaintByIdAsync(int complaintId)
+        {
+            IQueryable<Complaint> query = _context.Complaints.Where(c => c.ComplaintId == complaintId).Include(c => c.Employee).Include(c => c.Client).Include(c => c.Complaint_Type);
+            return await query.FirstOrDefaultAsync();
+        }
 
         ///////////////////////////////////////////////////////CLIENT REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////SUPPLIER REPOSITORY///////////////////////////////////////////////////////////////////////////////////////
+
+        //Supplier Type
+        public async Task<Supplier_Type[]> GetSupplierTypesAsync()
+        {
+            IQueryable<Supplier_Type> query = _context.Supplier_Types;
+            return await query.ToArrayAsync();  
+        }
+        public async Task<Supplier_Type> GetSupplierTypeByIdAsync(int supplierTypeId)
+        {
+            IQueryable<Supplier_Type> query = _context.Supplier_Types.Where(st => st.SupplierTypeId == supplierTypeId);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Supplier
+        public async Task<Supplier[]> GetSuppliersAsync()
+        {
+            IQueryable<Supplier> query = _context.Suppliers.Include(s => s.Supplier_Type);
+            return await query.ToArrayAsync();
+        }
+        public async Task<Supplier> GetSupplierByIdAsync(int supplierId)
+        {
+            IQueryable<Supplier> query = _context.Suppliers.Where(s => s.SupplierId == supplierId).Include(s => s.Supplier_Type);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Order
+        public async Task<Order[]> GetOrdersAsync()
+        {
+            IQueryable<Order> query = _context.Orders.Include(o => o.Suppliers).Include(o => o.Employee_Shift.Employee).Include(o => o.Employee_Shift.Shift);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Order> GetOrderByIdAsync(int orderId)
+        {
+            IQueryable<Order> query = _context.Orders.Where(o => o.OrderId == orderId).Include(o => o.Suppliers).Include(o => o.Employee_Shift.Employee).Include(o => o.Employee_Shift.Shift);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Receive Order
+        public async Task<Receive_Order[]> GetReceivedOrdersAsync()
+        {
+            IQueryable<Receive_Order> query = _context.Receive_Orders;
+            return await query.ToArrayAsync();  
+        }
+        public async Task<Receive_Order> GetReceivedOrdersByIdAsync(int receiveOrderId)
+        {
+            IQueryable<Receive_Order> query = _context.Receive_Orders.Where(ro => ro.ReceieveOrderId == receiveOrderId);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        ///////////////////////////////////////////////////////SUPPLIER REPOSITORY END///////////////////////////////////////////////////////////////////////////////////    
+
+
+        ///////////////////////////////////////////////////////EVENT REPOSITORY///////////////////////////////////////////////////////////////////////////////////////////
+
+        //Event Type
+        public async Task<Event_Types[]> GetEventTypesAsync()
+        {
+            IQueryable<Event_Types> query = _context.Event_Types;
+            return await query.ToArrayAsync();
+        }
+        public async Task<Event_Types> GetEventTypesByIdAsync(int eventTypesId)
+        {
+            IQueryable<Event_Types> query = _context.Event_Types.Where(et => et.EventTypeId == eventTypesId);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Event 
+        public async Task<Event_Booking[]> GetEventBookingsAsync()
+        {
+            IQueryable<Event_Booking> query = _context.Event_Bookings.Include(eb => eb.Event_Types).Include(eb => eb.Client).Include(eb => eb.Employee_Shift.Employee).Include(eb => eb.Employee_Shift.Shift);
+            return await query.ToArrayAsync();  
+        }
+        public async Task<Event_Booking> GetEventBookingByIdAsync(int eventBookingId)
+        {
+            IQueryable<Event_Booking> query = _context.Event_Bookings.Where(eb => eb.EventId == eventBookingId).Include(eb => eb.Event_Types).Include(eb => eb.Client).Include(eb => eb.Employee_Shift.Employee).Include(eb => eb.Employee_Shift.Shift);
+            return await query.FirstOrDefaultAsync();
+        }
+
+
+        ///////////////////////////////////////////////////////EVENT REPOSITORY END///////////////////////////////////////////////////////////////////////////////////////
     }
 
 }

@@ -24,6 +24,7 @@ namespace Menlyn_Mews_API.Models.Domain
         //------------------------------------FK-----------------------------------//
 
         public int RoomTypeId { get; set; }
+        [JsonIgnore]
         public Room_Type Room_Type { get; set; }
 
 

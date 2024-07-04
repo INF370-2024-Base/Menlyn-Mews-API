@@ -86,6 +86,8 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Complaint_Type> Complaint_Types { get; set; }
 
+        public DbSet<Shift> Shifts { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

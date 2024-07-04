@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Client;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -15,88 +17,104 @@ namespace Menlyn_Mews_API.Controllers
     public class ClientsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repository;
 
-        public ClientsController(AppDbContext context)
+        public ClientsController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repository = repositroy;
         }
 
-        // GET: api/Clients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Client>>> GetClients()
+        [Route("GetClients")]
+        public async Task<ActionResult> GetClients()
         {
-          if (_context.Clients == null)
-          {
-              return NotFound();
-          }
-            return await _context.Clients.ToListAsync();
-        }
-
-        // GET: api/Clients/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Client>> GetClient(int id)
-        {
-          if (_context.Clients == null)
-          {
-              return NotFound();
-          }
-            var client = await _context.Clients.FindAsync(id);
-
-            if (client == null)
-            {
-                return NotFound();
-            }
-
-            return client;
-        }
-
-        // PUT: api/Clients/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient(int id, Client client)
-        {
-            if (id != client.ClientId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(client).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var clients = await _repository.GetClientsAsync();
+                return Ok(clients);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!ClientExists(id))
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetClientById/{clientId}")]
+        public async Task<ActionResult<Client>> GetClient(int clientId)
+        {
+            try
+            {
+                var clients = await _repository.GetClientByIdAsync(clientId);
+                if (clients == null) return NotFound("Client Does Not Exist");
+                return Ok(clients);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateClient/{clientId}")]
+        public async Task<ActionResult<ClientViewModel>> PutClient(int clientId, ClientViewModel cvm)
+        {
+            try
+            {
+                var clients = await _repository.GetClientByIdAsync(clientId);
+                if (clients == null) return NotFound("Client Does Not Exist");
+
+                clients.Client_Name = cvm.Client_Name;
+                clients.Client_Surname = cvm.Client_Surname;
+                clients.Client_ID_Number = cvm.Client_ID_Number;
+                clients.Client_Email_Address = cvm.Client_Email_Address;
+                clients.Client_Contact_Number = cvm.Client_Contact_Number;
+                clients.Client_Gender = cvm.Client_Gender;
+                clients.Client_Address = cvm.Client_Address;
+                clients.Title = cvm.Title;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    return NotFound();
+                    return Ok(clients);
                 }
-                else
-                {
-                    throw;
-                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
         }
 
-        // POST: api/Clients
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(Client client)
+        [Route("AddClient")]
+        public async Task<IActionResult> PostClient(ClientViewModel cvm)
         {
-          if (_context.Clients == null)
-          {
-              return Problem("Entity set 'AppDbContext.Clients'  is null.");
-          }
-            _context.Clients.Add(client);
-            await _context.SaveChangesAsync();
+            var client = new Client
+            {
+                Client_Name = cvm.Client_Name,
+                Client_Surname = cvm.Client_Surname,
+                Client_ID_Number = cvm.Client_ID_Number,
+                Client_Email_Address = cvm.Client_Email_Address,
+                Client_Contact_Number = cvm.Client_Contact_Number,
+                Client_Gender = cvm.Client_Gender,  
+                Client_Address = cvm.Client_Address,
+                Title = cvm.Title,
+            };
 
-            return CreatedAtAction("GetClient", new { id = client.ClientId }, client);
+            try
+            {
+                _repository.Add(client);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(client);
         }
 
-        // DELETE: api/Clients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient(int id)
         {
@@ -116,9 +134,5 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        private bool ClientExists(int id)
-        {
-            return (_context.Clients?.Any(e => e.ClientId == id)).GetValueOrDefault();
-        }
     }
 }
