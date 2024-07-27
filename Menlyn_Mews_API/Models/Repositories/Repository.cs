@@ -242,6 +242,25 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        //Employee_Shift
+        public async Task<Employee_Shift[]> GetEmployeeShiftsAsync()
+        {
+            IQueryable<Employee_Shift> query = _context.Employee_Shifts.Include(es => es.Employee).Include(es => es.Shift);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Employee_Shift> GetEmployeeShiftByIdAsync(int employeeId, int shiftId)
+        {
+            IQueryable<Employee_Shift> query = _context.Employee_Shifts.Where(es => es.Employee.EmployeeId == employeeId && es.Shift.ShiftId == shiftId).Include(es => es.Employee).Include(es => es.Shift);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Employee_Shift> GetEmployeeShiftByIdEmployeeAsync(int employeeId)
+        {
+            IQueryable<Employee_Shift> query = _context.Employee_Shifts.Where(es => es.Employee.EmployeeId == employeeId).Include(es => es.Employee).Include(es => es.Shift);
+            return await query.FirstOrDefaultAsync();
+        }
+
         ///////////////////////////////////////////////////////EMPLOYEE REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 

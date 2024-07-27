@@ -11,9 +11,14 @@ namespace Menlyn_Mews_API.Models.Repositories
         Task<VAT[]> GetVATAsync();
         Task<VAT> GetVATByIdAsync(int vatId);
 
+        ///////////////////////////////////////////////////////REPORT REPOSITORY/////////////////////////////////////////////////////////////////////////////////////////
+        Task<Product[]> GetProductsReportAsync();
+
+        ///////////////////////////////////////////////////////REPORT REPOSITORY END/////////////////////////////////////////////////////////////////////////////////////
+
         ///////////////////////////////////////////////////////PRODUCT REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
         //Product
-        Task<Product[]> GetProductsReportAsync();
+
 
         Task<Product[]> GetProductsAsync();
         Task<Product> GetProductAsync(int productId);
@@ -79,11 +84,16 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Employee[]> GetEmployeesAsync();
         public Task<Employee> GetEmployeeByIdAsync(int employeeId);
 
+        //Employee_Shift
+        public Task<Employee_Shift[]> GetEmployeeShiftsAsync();
+        public Task<Employee_Shift> GetEmployeeShiftByIdAsync(int employeeId, int shiftId);
+        public Task<Employee_Shift> GetEmployeeShiftByIdEmployeeAsync(int employeeId);
+
         ///////////////////////////////////////////////////////EMPLOYEE REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 
         ///////////////////////////////////////////////////////BOOKING REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
-        
+
         //Booking Package
         public Task<Booking_Package[]> GetBookingPackagesAsync();
         public Task<Booking_Package> GetBookingPackageByIdAsync(int bookingPackageId);

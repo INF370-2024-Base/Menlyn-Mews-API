@@ -26,7 +26,6 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("GetEmployees")]
         public async Task<ActionResult> GetEmployees()
         {
             try
@@ -56,8 +55,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("GetEmployeeById/{employeeId}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int employeeId)
         {
             try
@@ -88,8 +86,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpPost, DisableRequestSizeLimit]
-        [Route("UpdateEmployee")]
+        [HttpPost("{id}"), DisableRequestSizeLimit]
         public async Task<IActionResult> UpdateEmployee([FromForm] IFormCollection formData)
         {
             try
@@ -151,7 +148,6 @@ namespace Menlyn_Mews_API.Controllers
 
 
         [HttpPost, DisableRequestSizeLimit]
-        [Route("AddEmployee")]
         public async Task<IActionResult> AddEmployee([FromForm] IFormCollection formData)
         {
             try

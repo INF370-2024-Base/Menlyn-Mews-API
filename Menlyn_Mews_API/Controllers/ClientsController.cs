@@ -26,7 +26,7 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("GetClients")]
+
         public async Task<ActionResult> GetClients()
         {
             try
@@ -40,8 +40,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("GetClientById/{clientId}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Client>> GetClient(int clientId)
         {
             try
@@ -56,8 +55,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("UpdateClient/{clientId}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ClientViewModel>> PutClient(int clientId, ClientViewModel cvm)
         {
             try
@@ -88,7 +86,6 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpPost]
-        [Route("AddClient")]
         public async Task<IActionResult> PostClient(ClientViewModel cvm)
         {
             var client = new Client
