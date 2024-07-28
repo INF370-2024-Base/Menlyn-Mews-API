@@ -97,7 +97,7 @@ namespace Menlyn_Mews_API.Controllers
                 inventory.Maximum_Stock = ivm.Maximum_Stock;
                 inventory.Minimum_Stock = ivm.Minimum_Stock;
                 inventory.Inventory_Status = ivm.Inventory_Status;
-                inventory.Inventory_Condition = ivm.Condition;
+                inventory.Inventory_Condition = ivm.inventory_Condition;
                 inventory.InventoryTypeId  = ivm.InventoryTypeId;
                 inventory.InventoryCategoryId = ivm.InventoryCategoryId;
                 inventory.RoomId = ivm.RoomId;
@@ -123,7 +123,7 @@ namespace Menlyn_Mews_API.Controllers
                 Inventory_Name = ivm.Inventory_Name, 
                 Minimum_Stock = ivm.Minimum_Stock, 
                 Maximum_Stock = ivm.Maximum_Stock, 
-                Inventory_Condition = ivm.Condition,
+                Inventory_Condition = ivm.inventory_Condition,
                 Inventory_Status = ivm.Inventory_Status,
                 InventoryCategoryId = ivm.InventoryCategoryId, 
                 InventoryTypeId = ivm.InventoryTypeId,
