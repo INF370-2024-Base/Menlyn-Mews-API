@@ -142,10 +142,10 @@ namespace Menlyn_Mews_API.Controllers
             {
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
-                //TwilioClient.Init(accountSid, authToken); ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE
+                //TwilioClient.Init(accountSid, authToken); /*ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE*/
 
                 //var message = MessageResource.Create(
-                //    body: "Your Check In Date Is " + booking.Check_In_Date,
+                //    body: "Your Check In Date Is: " + booking.Check_In_Date + " Your Check Out Date Is: " + booking.Check_Out_Date + " The Cost Of Your Booking Is: " + booking.Booking_Price,
                 //    from: new Twilio.Types.PhoneNumber("+13187034034"),
                 //    to: new Twilio.Types.PhoneNumber("+27646028374")
                 //);

@@ -15,7 +15,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Booking_Status { get; set; } 
 
-        public int? Booking_Price { get; set; }
+        public Decimal? Booking_Price { get; set; }
 
 
         ///------------------------FK--------------------///

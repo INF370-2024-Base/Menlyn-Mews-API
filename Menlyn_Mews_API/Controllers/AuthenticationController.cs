@@ -75,6 +75,8 @@ namespace Menlyn_Mews_API.Controllers
                 var message = new Message(new string[] { user.Email! }, "Confirmation Email Link", confirmationLink!);
                 _emailService.SendEmail(message);
 
+
+
                 return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = $"User Created & Email Sent to {user.Email} Succcessfully" });
 
             }
@@ -200,7 +202,8 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
-                expiration = jwtToken.ValidTo
+                expiration = jwtToken.ValidTo,
+                roles = userRoles.FirstOrDefault()
             });
         }
 
