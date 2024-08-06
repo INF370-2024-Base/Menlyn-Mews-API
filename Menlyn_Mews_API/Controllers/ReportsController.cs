@@ -195,6 +195,22 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
+        [Route("StockTakeReport")]
+        public async Task<ActionResult<dynamic>> StockTakeReport()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return NoContent();
+        }
+
+        [HttpGet]
         [Route("ProductQuantityReport")]
         public async Task<ActionResult<dynamic>> ProductQuantityReport()
         {

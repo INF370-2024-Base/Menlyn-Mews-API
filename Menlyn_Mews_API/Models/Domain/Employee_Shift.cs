@@ -21,7 +21,6 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Shift_Description { get; set; } = string.Empty;
 
         //FK
-
         //Related Tables
 
         public virtual ICollection<Order> Order { get; set; }   

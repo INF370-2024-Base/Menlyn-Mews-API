@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Employee;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -53,48 +54,55 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("UpdateEmployeeShift/{employeeId}")]
-        public async Task<ActionResult<Employee_Shift>> GetEmployee_Shift(int id)
+        [Route("GetEmployeeShiftById/{employeeId}")]
+        public async Task<ActionResult> GetEmployee_Shift(int employeeId, int shiftId)
         {
-          if (_context.Employee_Shifts == null)
-          {
-              return NotFound();
-          }
-            var employee_Shift = await _context.Employee_Shifts.FindAsync(id);
-
-            if (employee_Shift == null)
+            try
             {
-                return NotFound();
-            }
+                var es = await _repository.GetEmployeeShiftByIdAsync(employeeId, shiftId);
+                if (es == null) return NotFound("Employee Shift Does Not Exist");
 
-            return employee_Shift;
+                dynamic employeeshifts = new
+                {
+                    es.Employee.EmployeeId,
+                    es.Shift.ShiftId,
+                    Employee_Name = es.Employee.Employee_Name,
+                    Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
+                    Shift_Date = es.Shift.Shift_Date,
+                    es.Clock_In_Time,
+                    es.Clock_Out_Time,
+                    es.Shift_Description,
+                };
+
+                return Ok(employeeshifts);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
-        [Route("")]
-        public async Task<IActionResult> PutEmployee_Shift(int id, Employee_Shift employee_Shift)
+        [Route("UpdateEmployeeShift/{employeeId}")]
+        public async Task<ActionResult<EmployeeShiftViewModel>> PutEmployee_Shift(int employeeId, int shiftId, EmployeeShiftViewModel esvm)
         {
-            if (id != employee_Shift.EmployeeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(employee_Shift).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var employeeShift = await _repository.GetEmployeeShiftByIdAsync(employeeId, shiftId);
+                if (employeeShift == null) return NotFound("Employee Shift Not Found");
+
+                employeeShift.Clock_In_Time = esvm.Clock_In_Time;
+                employeeShift.Clock_Out_Time = esvm.Clock_Out_Time;
+                employeeShift.Shift_Description = esvm.Shift_Description;
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Ok(employeeShift);
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!Employee_ShiftExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
