@@ -108,44 +108,39 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Employee_Shift
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Employee_Shift>> PostEmployee_Shift(Employee_Shift employee_Shift)
+        [Route("BookEmployeeShift")]
+        public async Task<IActionResult> PostEmployee_Shift(AddEmployeeShiftViewModel esvm)
         {
-          if (_context.Employee_Shifts == null)
-          {
-              return Problem("Entity set 'AppDbContext.Employee_Shifts'  is null.");
-          }
-            _context.Employee_Shifts.Add(employee_Shift);
+            var employeeShift = new Employee_Shift
+            {
+                EmployeeId = esvm.EmployeeId,
+                ShiftId = esvm.ShiftId,
+                Clock_In_Time = esvm.Clock_In_Time,
+                Clock_Out_Time = esvm.Clock_Out_Time,
+                Shift_Description = esvm.Shift_Description
+            };
+
             try
             {
-                await _context.SaveChangesAsync();
+                _repository.Add(employeeShift);
+                await _repository.SaveChangesAsync();   
             }
-            catch (DbUpdateException)
+            catch (Exception)
             {
-                if (Employee_ShiftExists(employee_Shift.EmployeeId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Invalid Transaction");
             }
-
-            return CreatedAtAction("GetEmployee_Shift", new { id = employee_Shift.EmployeeId }, employee_Shift);
+            return Ok(employeeShift);
         }
 
-        // DELETE: api/Employee_Shift/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee_Shift(int id)
+        public async Task<IActionResult> DeleteEmployee_Shift(int id, int id2)
         {
             if (_context.Employee_Shifts == null)
             {
                 return NotFound();
             }
-            var employee_Shift = await _context.Employee_Shifts.FindAsync(id);
+            var employee_Shift = await _context.Employee_Shifts.FindAsync(id, id2);
             if (employee_Shift == null)
             {
                 return NotFound();
