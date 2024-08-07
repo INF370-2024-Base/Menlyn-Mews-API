@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Microsoft.Reporting.WebForms;
+using System.IO;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -14,7 +18,7 @@ namespace Menlyn_Mews_API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IRepositroy _productRepositroy;
-
+       
         public ReportsController(AppDbContext context, IRepositroy productRepositroy)
         {
             _context = context;
@@ -56,8 +60,35 @@ namespace Menlyn_Mews_API.Controllers
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error. Please contact support.");
-            }           
+            }
         }
+
+        [HttpGet]
+        [Route("ProductCountReport")]
+        public async Task<ActionResult<dynamic>> ProductCountReport()
+        {
+            try
+            {
+
+                var results = await _productRepositroy.GetProductsAsync();
+
+                dynamic products = results.Select(p => new
+                {
+                    p.Product_Name,
+                    p.Quantity_On_Hand,
+                    Category_Name = p.ProductCategory.Product_Category_Name,
+                    Type_Name = p.ProductType.Product_Type_Name,
+                })
+                .OrderBy(p => p.Quantity_On_Hand);
+
+                return products;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error. Please contact support.");
+            }
+        }
+
 
         [HttpGet]
         [Route("SupplierReport")]
@@ -195,19 +226,95 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("StockTakeReport")]
-        public async Task<ActionResult<dynamic>> StockTakeReport()
+        [Route("RoomsBookedReport")]
+        public async Task<ActionResult<dynamic>> RoomsBookedReport()
         {
             try
             {
+                List<dynamic> bookings = new List<dynamic>();
 
+                var bookingData = await _productRepositroy.GetRoomBookingsAsync();
+                var roomData = await _productRepositroy.GetRoomsAsync();
+
+                var data = bookingData
+                    .GroupBy(b => b.Rooms.Room_Number)
+                    .Select(b => new
+                    {
+                        Room_Number = b.Key,
+                        Number_Of_Times_Booked = b.Count(),
+                    });
+
+                var bookedRoomIds = bookingData.Select(b => b.RoomId).Distinct();
+                var unbookedRooms = roomData
+                    .Where(r => !bookedRoomIds.Contains(r.RoomId))
+                    .Select(r => new
+                    {
+                        Room_Number = r.Room_Number,
+                        Room_Floor = r.Room_Floor,
+                        Room_Rate = r.Room_Rate,
+                        Room_Description = r.Room_Description
+                    });
+
+                bookings.Add(data);
+                bookings.Add(unbookedRooms);
+
+
+                return bookings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error. Please contact support.");
             }
-            return NoContent();
+        }
+
+        [HttpGet]
+        [Route("BookingReviewChart")]
+        public async Task<ActionResult<dynamic>> BookingReviewChartController()
+        {
+            try
+            {
+                List<dynamic> reviews = new List<dynamic>();
+                var reviewData = await _productRepositroy.GetBookingReviewsAsync();
+
+                var graphData = reviewData
+                    .GroupBy(br => br.Review_Rating)
+                    .Select(br => new
+                    {
+                        Key = br.Key + " Star Rating",
+                        Rating_Count = br.Count(),
+                    })
+                    .OrderByDescending(br => br.Rating_Count);
+
+                reviews.Add(graphData);
+                return reviews;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error. Please contact support.");
+            }
+        }
+
+        [HttpGet]
+        [Route("BookingReviewReport")]
+        public async Task<ActionResult<dynamic>> BookingReviewController()
+        {
+            try
+            {
+                var reviewData = await _productRepositroy.GetBookingReviewsAsync();
+
+                dynamic reviews = reviewData.Select(r => new
+                {
+                    r.Review_Rating,
+                    r.Review_Description,
+                })
+                .OrderByDescending(r => r.Review_Rating);
+
+                return reviews;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error. Please contact support.");
+            }
         }
 
         [HttpGet]

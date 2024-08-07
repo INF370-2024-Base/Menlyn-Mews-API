@@ -11,4 +11,9 @@
     <WebStackScaffolding_DbContextTypeFullName>Menlyn_Mews_API.Data.AppDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
   </PropertyGroup>
+  <ItemGroup>
+    <None Update="Menlyn_MewsDataSet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
 </Project>

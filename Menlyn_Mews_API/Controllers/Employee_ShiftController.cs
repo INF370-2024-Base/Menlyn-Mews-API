@@ -54,7 +54,7 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("GetEmployeeShiftById/{employeeId}")]
+        [Route("GetEmployeeShiftById/{employeeId}/{shiftId}")]
         public async Task<ActionResult> GetEmployee_Shift(int employeeId, int shiftId)
         {
             try
@@ -83,7 +83,7 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateEmployeeShift/{employeeId}")]
+        [Route("UpdateEmployeeShift/{employeeId}/{shiftId}")]
         public async Task<ActionResult<EmployeeShiftViewModel>> PutEmployee_Shift(int employeeId, int shiftId, EmployeeShiftViewModel esvm)
         {
             try
@@ -133,7 +133,7 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(employeeShift);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{employeeId}d/{shiftId}")]
         public async Task<IActionResult> DeleteEmployee_Shift(int id, int id2)
         {
             if (_context.Employee_Shifts == null)
