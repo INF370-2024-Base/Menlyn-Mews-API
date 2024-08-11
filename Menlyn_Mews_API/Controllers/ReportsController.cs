@@ -64,30 +64,61 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("GetSalaryReport")]
-        public async Task<ActionResult<dynamic>> GetSalaryReport()
+        [Route("GetSalaryReport/{startDate}/{endDate}")]
+        public async Task<ActionResult<dynamic>> GetSalaryReport(DateTime startDate, DateTime endDate)
         {
             try
             {
                 var results = await _productRepositroy.GetEmployeeShiftWithRateAsync();
-                dynamic employeeShift = results.Select(e => new
-                {
-                    Employee_Full_Name = e.Employee.Employee_Name + " " + e.Employee.Employee_Surname,
-                    Hours_Worked = e.Clock_Out_Time.Hour - e.Clock_In_Time.Hour,
-                    Rate = e.Employee.Rates.Rate,
-                    Total_Renumeration = (e.Clock_Out_Time.Hour - e.Clock_In_Time.Hour) * e.Employee.Rates.Rate
-                })
-                .GroupBy(e => e.Employee_Full_Name);
 
-                return employeeShift;
+                var employeeShift = results
+                    .Where(e => e.Shift.Shift_Date >= startDate && e.Shift.Shift_Date <= endDate)
+                    .GroupBy(e => new
+                    {
+                        e.EmployeeId,
+                        Employee_Full_Name = e.Employee.Employee_Name + " " + e.Employee.Employee_Surname,
+                        Rate = e.Employee.Rates.Rate,
+                        Employee_Type = e.Employee.Employee_Type.Type_Description
+                    })
+                    .Select(g => new
+                    {
+                        g.Key.EmployeeId,
+                        g.Key.Employee_Full_Name,
+                        g.Key.Employee_Type,
+                        Total_Hours_Worked = CheckNegative(g.Sum(e => (e.Clock_Out_Time - e.Clock_In_Time).TotalHours)),
+                        Shift_Hours = g.Sum(e => e.Shift.End_TIme.HasValue && e.Shift.Start_TIme.HasValue
+                            ? (e.Shift.End_TIme.Value - e.Shift.Start_TIme.Value).TotalHours
+                            : 0),
+                        g.Key.Rate,
+                        Total_Renumeration = (decimal)CheckNegative(g.Sum(e => (e.Clock_Out_Time - e.Clock_In_Time).TotalHours) * (double)g.Key.Rate)
+                    });
+
+                return Ok(employeeShift);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(500, "Internal server error");
             }
-            return NoContent();
         }
+
+        private double CheckNegative(double number)
+        {
+            double nonNegative = 0;
+
+            if (number < 0)
+            {
+                nonNegative = number * -1;
+            }
+            else
+            {
+                return number;
+            }
+               
+            return nonNegative;
+        }
+
+
+
 
         [HttpGet]
         [Route("ProductCountReport")]

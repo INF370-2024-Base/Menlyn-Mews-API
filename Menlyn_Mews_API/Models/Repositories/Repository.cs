@@ -251,7 +251,7 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         public async Task<Employee_Shift[]> GetEmployeeShiftWithRateAsync()
         {
-            IQueryable<Employee_Shift> query = _context.Employee_Shifts.Include(es => es.Employee).Include(es => es.Employee.Rates).Include(es => es.Shift);
+            IQueryable<Employee_Shift> query = _context.Employee_Shifts.Include(es => es.Employee).Include(es => es.Employee.Rates).Include(es => es.Shift).Include(es => es.Employee.Employee_Type);
             return await query.ToArrayAsync();
         }
 
