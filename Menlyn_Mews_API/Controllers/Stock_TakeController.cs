@@ -40,7 +40,7 @@ namespace Menlyn_Mews_API.Controllers
                     st.Total_Items,
                     st.Total_Value,
                     Employee = st.Employee_Shift.Employee.Employee_Name + " " + st.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date = st.Employee_Shift.Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
+                    Shift_Date = st.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
                     Shift_Time = (st.Employee_Shift.Shift.Start_TIme.HasValue && st.Employee_Shift.Shift.End_TIme.HasValue)
                           ? st.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + st.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
                           : string.Empty,
@@ -71,7 +71,7 @@ namespace Menlyn_Mews_API.Controllers
                     st.Total_Items,
                     st.Total_Value,
                     Employee = st.Employee_Shift.Employee.Employee_Name + " " + st.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date = st.Employee_Shift.Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
+                    Shift_Date = st.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
                     Shift_Time = (st.Employee_Shift.Shift.Start_TIme.HasValue && st.Employee_Shift.Shift.End_TIme.HasValue)
                           ? st.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + st.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
                           : string.Empty,

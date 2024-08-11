@@ -19,7 +19,6 @@ namespace Menlyn_Mews_API.Models.Repositories
         ///////////////////////////////////////////////////////PRODUCT REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
         //Product
 
-
         Task<Product[]> GetProductsAsync();
         Task<Product> GetProductAsync(int productId);
 
@@ -86,8 +85,13 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         //Employee_Shift
         public Task<Employee_Shift[]> GetEmployeeShiftsAsync();
+        public Task<Employee_Shift[]> GetEmployeeShiftWithRateAsync();
         public Task<Employee_Shift> GetEmployeeShiftByIdAsync(int employeeId, int shiftId);
         public Task<Employee_Shift> GetEmployeeShiftByIdEmployeeAsync(int employeeId);
+
+        //Rate
+        public Task<Rates[]> GetRatesAsync();
+        public Task<Rates> GetRatesByIdAsync(int ratesId);
 
         ///////////////////////////////////////////////////////EMPLOYEE REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 

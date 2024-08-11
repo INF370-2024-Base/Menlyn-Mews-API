@@ -25,6 +25,9 @@ namespace Menlyn_Mews_API.Models.Domain
         public int PositionId { get; set; }
         public Position Position { get; set; }
 
+        public int RateId { get; set; }
+        public Rates Rates {  get; set; }
+
         //Related Tables
         [JsonIgnore]
         public virtual ICollection<Employee_Shift> Employee_Shift { get; set; }

@@ -39,7 +39,7 @@ namespace Menlyn_Mews_API.Controllers
                     es.Shift.ShiftId,
                     Employee_Name = es.Employee.Employee_Name,
                     Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
-                    Shift_Date = es.Shift.Shift_Date,
+                    es.Shift_Date,
                     es.Clock_In_Time,
                     es.Clock_Out_Time,
                     es.Shift_Description,
@@ -68,7 +68,7 @@ namespace Menlyn_Mews_API.Controllers
                     es.Shift.ShiftId,
                     Employee_Name = es.Employee.Employee_Name,
                     Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
-                    Shift_Date = es.Shift.Shift_Date,
+                    es.Shift_Date,
                     es.Clock_In_Time,
                     es.Clock_Out_Time,
                     es.Shift_Description,
@@ -91,6 +91,7 @@ namespace Menlyn_Mews_API.Controllers
                 var employeeShift = await _repository.GetEmployeeShiftByIdAsync(employeeId, shiftId);
                 if (employeeShift == null) return NotFound("Employee Shift Not Found");
 
+                employeeShift.Shift_Date = esvm.Shift_Date;
                 employeeShift.Clock_In_Time = esvm.Clock_In_Time;
                 employeeShift.Clock_Out_Time = esvm.Clock_Out_Time;
                 employeeShift.Shift_Description = esvm.Shift_Description;
@@ -116,6 +117,7 @@ namespace Menlyn_Mews_API.Controllers
             {
                 EmployeeId = esvm.EmployeeId,
                 ShiftId = esvm.ShiftId,
+                Shift_Date = esvm.Shift_Date,
                 Clock_In_Time = esvm.Clock_In_Time,
                 Clock_Out_Time = esvm.Clock_Out_Time,
                 Shift_Description = esvm.Shift_Description

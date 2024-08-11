@@ -39,6 +39,7 @@ namespace Menlyn_Mews_API.Controllers
                     br.Review_Status,
                     br.Review_Rating,
                     br.Review_Description,
+                    br.Date_Created,
                     Client = br.Client.Client_Name + " " + br.Client.Client_Surname,
                 });
 
@@ -66,6 +67,7 @@ namespace Menlyn_Mews_API.Controllers
                     br.Review_Status,
                     br.Review_Rating,
                     br.Review_Description,
+                    br.Date_Created,
                     Client = br.Client.Client_Name + " " + br.Client.Client_Surname,
                 };
 
@@ -90,6 +92,7 @@ namespace Menlyn_Mews_API.Controllers
                 br.Review_Rating = bvm.Review_Rating;   
                 br.Review_Description = bvm.Review_Description; 
                 br.ClientId = bvm.ClientId;
+                br.Date_Created = DateTime.Now;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -112,7 +115,8 @@ namespace Menlyn_Mews_API.Controllers
                 Review_Status = bvm.Review_Status,
                 Review_Rating = bvm.Review_Rating,
                 Review_Description = bvm.Review_Description,
-                ClientId = bvm.ClientId 
+                Date_Created = DateTime.Now,
+                ClientId = bvm.ClientId
             };
 
             try

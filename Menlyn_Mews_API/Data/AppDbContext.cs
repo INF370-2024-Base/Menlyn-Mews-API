@@ -88,10 +88,17 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Shift> Shifts { get; set; }
         
+        public DbSet<Rates> Rates { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             SeedRoles(modelBuilder);
+
+            modelBuilder.Entity<Employee>()
+                .HasOne(r => r.Rates)
+                .WithMany(e => e.Employee)
+                .HasForeignKey(r => r.RateId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Room>()
                 .HasOne(r => r.Room_Type)

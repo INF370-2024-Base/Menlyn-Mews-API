@@ -16,7 +16,10 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Review_Description { get; set; } = string.Empty;
 
+        public DateTime Date_Created { get; set; }
+
         public int ClientId { get; set; }
+
         [JsonIgnore]
         public Client Client { get; set; }  
 

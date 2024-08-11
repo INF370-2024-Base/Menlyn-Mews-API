@@ -37,7 +37,7 @@ namespace Menlyn_Mews_API.Controllers
                 dynamic shifts = resutls.Select(s => new
                 {
                     s.ShiftId,
-                    Shift_Date = s.Shift_Date.Date.ToString("yyyy-MM-dd"),
+                    Shift_Date = s.Shift_Date,
                     Start_Time = s.Start_TIme!.Value.ToString("hh:mm tt"),
                     End_Time = s.End_TIme!.Value.ToString("hh:mm tt"),
                     s.IP_Address,
@@ -63,7 +63,7 @@ namespace Menlyn_Mews_API.Controllers
                 dynamic shifts = new
                 {
                     s.ShiftId,
-                    Shift_Date = s.Shift_Date.Date.ToString("yyyy-MM-dd"),
+                    Shift_Date = s.Shift_Date,
                     Start_Time = s.Start_TIme!.Value.ToString("hh:mm tt"),
                     End_Time = s.End_TIme!.Value.ToString("hh:mm tt"),
                     s.IP_Address,

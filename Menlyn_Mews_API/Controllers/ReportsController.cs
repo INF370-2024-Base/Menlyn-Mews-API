@@ -64,6 +64,32 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
+        [Route("GetSalaryReport")]
+        public async Task<ActionResult<dynamic>> GetSalaryReport()
+        {
+            try
+            {
+                var results = await _productRepositroy.GetEmployeeShiftWithRateAsync();
+                dynamic employeeShift = results.Select(e => new
+                {
+                    Employee_Full_Name = e.Employee.Employee_Name + " " + e.Employee.Employee_Surname,
+                    Hours_Worked = e.Clock_Out_Time.Hour - e.Clock_In_Time.Hour,
+                    Rate = e.Employee.Rates.Rate,
+                    Total_Renumeration = (e.Clock_Out_Time.Hour - e.Clock_In_Time.Hour) * e.Employee.Rates.Rate
+                })
+                .GroupBy(e => e.Employee_Full_Name);
+
+                return employeeShift;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return NoContent();
+        }
+
+        [HttpGet]
         [Route("ProductCountReport")]
         public async Task<ActionResult<dynamic>> ProductCountReport()
         {
@@ -171,7 +197,7 @@ namespace Menlyn_Mews_API.Controllers
                 var bookings = await _productRepositroy.GetRoomBookingsAsync();
 
                 var salesByBookingType = bookings
-                    .GroupBy(eb => new { eb.Check_In_Date.Value.Year, eb.Check_In_Date.Value.Month })
+                    .GroupBy(eb => new { eb.Check_In_Date.Year, eb.Check_In_Date.Month })
                     .Select(g => new
                     {
                         Year = g.Key.Year,
@@ -226,46 +252,53 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("RoomsBookedReport")]
-        public async Task<ActionResult<dynamic>> RoomsBookedReport()
+        [Route("RoomsBookedReport/{year}/{month}")]
+        public async Task<ActionResult<dynamic>> RoomsBookedReport(int year, int month)
         {
             try
             {
-                List<dynamic> bookings = new List<dynamic>();
-
                 var bookingData = await _productRepositroy.GetRoomBookingsAsync();
                 var roomData = await _productRepositroy.GetRoomsAsync();
 
-                var data = bookingData
+                // Filter booking data by the specified year and month
+                var filteredBookingData = bookingData
+                    .Where(b => b.Check_In_Date.Year == year && b.Check_In_Date.Month == month)
+                    .ToList();
+
+                // Group by room number and calculate the number of times booked
+                var data = filteredBookingData
                     .GroupBy(b => b.Rooms.Room_Number)
                     .Select(b => new
                     {
                         Room_Number = b.Key,
+                        Room_Rate = b.First().Rooms.Room_Rate,
                         Number_Of_Times_Booked = b.Count(),
-                    });
+                    })
+                    .OrderByDescending(b => b.Number_Of_Times_Booked);
 
-                var bookedRoomIds = bookingData.Select(b => b.RoomId).Distinct();
+                // Find rooms that were not booked in the specified period
+                var bookedRoomIds = filteredBookingData.Select(b => b.RoomId).Distinct();
                 var unbookedRooms = roomData
                     .Where(r => !bookedRoomIds.Contains(r.RoomId))
                     .Select(r => new
                     {
                         Room_Number = r.Room_Number,
-                        Room_Floor = r.Room_Floor,
                         Room_Rate = r.Room_Rate,
-                        Room_Description = r.Room_Description
+                        Number_Of_Times_Booked = 0,
                     });
 
-                bookings.Add(data);
-                bookings.Add(unbookedRooms);
+                // Combine the booked and unbooked room data
+                var combinedData = data.Concat(unbookedRooms);
 
-
-                return bookings;
+                return combinedData.ToList();
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error. Please contact support.");
             }
         }
+
+
 
         [HttpGet]
         [Route("BookingReviewChart")]
@@ -295,8 +328,8 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
-        [Route("BookingReviewReport")]
-        public async Task<ActionResult<dynamic>> BookingReviewController()
+        [Route("BookingReviewReport/{year}/{month}")]
+        public async Task<ActionResult<dynamic>> BookingReviewController(int year, int month)
         {
             try
             {
@@ -306,8 +339,11 @@ namespace Menlyn_Mews_API.Controllers
                 {
                     r.Review_Rating,
                     r.Review_Description,
+                    r.Date_Created
                 })
+                .Where(r => r.Date_Created.Year == year && r.Date_Created.Month == month)
                 .OrderByDescending(r => r.Review_Rating);
+
 
                 return reviews;
             }

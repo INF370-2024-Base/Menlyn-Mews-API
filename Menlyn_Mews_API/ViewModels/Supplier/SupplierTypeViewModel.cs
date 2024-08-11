@@ -3,5 +3,6 @@
     public class SupplierTypeViewModel
     {
         public string Supplier_Type_Description { get; set; }
+
     }
 }

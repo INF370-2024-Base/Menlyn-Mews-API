@@ -41,7 +41,7 @@ namespace Menlyn_Mews_API.Controllers
                     wo.Write_Off_Stock_Type_Description,
                     Inventory = wo.Inventory.Inventory_Name,
                     Employee = wo.Employee_Shift.Employee.Employee_Name + " " + wo.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date =  wo.Employee_Shift.Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
+                    Shift_Date =  wo.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
                     Shift_Time = (wo.Employee_Shift.Shift.Start_TIme.HasValue && wo.Employee_Shift.Shift.End_TIme.HasValue)
                           ? wo.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + wo.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
                           : string.Empty,
@@ -73,7 +73,7 @@ namespace Menlyn_Mews_API.Controllers
                     wo.Write_Off_Stock_Type_Description,
                     Inventory = wo.Inventory.Inventory_Name,
                     Employee = wo.Employee_Shift.Employee.Employee_Name + " " + wo.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date = wo.Employee_Shift.Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
+                    Shift_Date = wo.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
                     Shift_Time = (wo.Employee_Shift.Shift.Start_TIme.HasValue && wo.Employee_Shift.Shift.End_TIme.HasValue)
                           ? wo.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + wo.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
                           : string.Empty,

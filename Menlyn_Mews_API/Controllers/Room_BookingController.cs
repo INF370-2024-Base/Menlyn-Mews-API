@@ -100,8 +100,8 @@ namespace Menlyn_Mews_API.Controllers
                 var rb = await _repository.GetRoomBookingByIdAsync(roomBookingId);
                 if (rb == null) return NotFound("Room Booking Does Not Exist");
 
-                rb.Check_In_Date = bvm.Check_In_Date;
-                rb.Check_Out_Date = bvm.Check_Out_Date;
+                rb.Check_In_Date = bvm.Check_In_Date.GetValueOrDefault();
+                rb.Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault();
                 rb.Booking_Status = bvm.Booking_Status;
                 rb.Booking_Price = bvm.Booking_Price;
                 rb.ClientId = bvm.ClientId;
@@ -128,8 +128,8 @@ namespace Menlyn_Mews_API.Controllers
         {
             var booking = new Room_Booking
             {
-                Check_In_Date = bvm.Check_In_Date,
-                Check_Out_Date = bvm.Check_Out_Date,
+                Check_In_Date = bvm.Check_In_Date.GetValueOrDefault(),
+                Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault(),
                 Booking_Price = bvm.Booking_Price,
                 Booking_Status = bvm.Booking_Status,
                 ClientId = bvm.ClientId,

@@ -233,12 +233,12 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Employee
         public async Task<Employee[]> GetEmployeesAsync()
         {
-            IQueryable<Employee> query = _context.Employees.Include(e => e.Employee_Type).Include(e => e.Position);
+            IQueryable<Employee> query = _context.Employees.Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates);
             return await query.ToArrayAsync();
         }
         public async Task<Employee> GetEmployeeByIdAsync(int employeeId)
         {
-            IQueryable<Employee> query = _context.Employees.Where(e => e.EmployeeId == employeeId).Include(e => e.Employee_Type).Include(e => e.Position);
+            IQueryable<Employee> query = _context.Employees.Where(e => e.EmployeeId == employeeId).Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -246,6 +246,12 @@ namespace Menlyn_Mews_API.Models.Repositories
         public async Task<Employee_Shift[]> GetEmployeeShiftsAsync()
         {
             IQueryable<Employee_Shift> query = _context.Employee_Shifts.Include(es => es.Employee).Include(es => es.Shift);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Employee_Shift[]> GetEmployeeShiftWithRateAsync()
+        {
+            IQueryable<Employee_Shift> query = _context.Employee_Shifts.Include(es => es.Employee).Include(es => es.Employee.Rates).Include(es => es.Shift);
             return await query.ToArrayAsync();
         }
 
@@ -258,6 +264,18 @@ namespace Menlyn_Mews_API.Models.Repositories
         public async Task<Employee_Shift> GetEmployeeShiftByIdEmployeeAsync(int employeeId)
         {
             IQueryable<Employee_Shift> query = _context.Employee_Shifts.Where(es => es.Employee.EmployeeId == employeeId).Include(es => es.Employee).Include(es => es.Shift);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Rates
+        public async Task<Rates[]> GetRatesAsync()
+        {
+            IQueryable<Rates> query = _context.Rates;
+            return await query.ToArrayAsync(); 
+        }
+        public async Task<Rates> GetRatesByIdAsync(int ratesId)
+        {
+            IQueryable<Rates> query = _context.Rates.Where(r => r.RateId == ratesId);
             return await query.FirstOrDefaultAsync();
         }
 

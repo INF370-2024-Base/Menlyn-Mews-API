@@ -9,9 +9,9 @@ namespace Menlyn_Mews_API.Models.Domain
         [Key]
         public int RoomBookingId { get; set; }
 
-        public DateTime? Check_In_Date { get; set; }
+        public DateTime Check_In_Date { get; set; }
 
-        public DateTime? Check_Out_Date { get; set; }
+        public DateTime Check_Out_Date { get; set; }
 
         public string? Booking_Status { get; set; } 
 
