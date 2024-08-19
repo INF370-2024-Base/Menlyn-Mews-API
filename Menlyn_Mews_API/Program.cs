@@ -24,7 +24,7 @@ builder.Services.AddControllers();
                     //.AddJsonOptions(options =>
                     // {
                     //     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-                    // });  FOR EMERGENCIES WITH PUT FOR MULTIPLE IDs
+                    // });  
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

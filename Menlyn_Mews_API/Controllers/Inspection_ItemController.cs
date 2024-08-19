@@ -36,9 +36,14 @@ namespace Menlyn_Mews_API.Controllers
                 dynamic inspectionItems = results.Select(ii => new
                 {
                     ii.InspectionItemId,
-                    ii.Inspection_Item_Name,
-                    ii.Inspection_Item_Condition,
-                    Inventory_Name = ii.Inventory.Inventory_Name,
+                    ii.Inspection_Date,
+                    ii.Inspection_Status,
+                    Room_Inspection = ii.Room.Room_Number,
+                    Inspector = ii.Employee_Shift.Employee.Employee_Name + " " + ii.Employee_Shift.Employee.Employee_Surname,
+                    Shift = ii.Employee_Shift.Clock_In_Time.TimeOfDay + "-" + ii.Employee_Shift.Clock_Out_Time.TimeOfDay,
+                    ii.RoomId,
+                    ii.EmployeeId,
+                    ii.ShiftId,
                 });
                 
                 return Ok(inspectionItems);
@@ -60,9 +65,11 @@ namespace Menlyn_Mews_API.Controllers
                 dynamic inspectionItems = new
                 {
                     ii.InspectionItemId,
-                    ii.Inspection_Item_Name,
-                    ii.Inspection_Item_Condition,
-                    Inventory_Name = ii.Inventory.Inventory_Name,
+                    ii.Inspection_Date,
+                    ii.Inspection_Status,
+                    ii.RoomId,
+                    ii.EmployeeId,
+                    ii.ShiftId,
                 };
 
                 return Ok(inspectionItems);
@@ -82,9 +89,11 @@ namespace Menlyn_Mews_API.Controllers
                 var inspectionItem = await _repository.GetInspectionItemsByIdAsync(inspectionItemId);
                 if (inspectionItem == null) return NotFound("Inspection Item Does Not Exist");
 
-                inspectionItem.Inspection_Item_Name = iivm.Inspection_Item_Name;
-                inspectionItem.Inspection_Item_Condition = iivm.Inspection_Item_Condition;
-                inspectionItem.InventoryId = iivm.InventoryId;
+                inspectionItem.Inspection_Date = iivm.Inspection_Date;
+                inspectionItem.Inspection_Status = iivm.Inspection_Status;
+                inspectionItem.RoomId = iivm.RoomId;
+                inspectionItem.EmployeeId = iivm.Employeeid;
+                inspectionItem.ShiftId = iivm.ShiftId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -107,9 +116,11 @@ namespace Menlyn_Mews_API.Controllers
 
             var inspectionItem = new Inspection_Item
             {
-                Inspection_Item_Name = iivm.Inspection_Item_Name,
-                Inspection_Item_Condition = iivm.Inspection_Item_Condition,
-                InventoryId = iivm.InventoryId,
+                Inspection_Date = iivm.Inspection_Date,
+                Inspection_Status = iivm.Inspection_Status,
+                RoomId = iivm.RoomId,
+                EmployeeId = iivm.Employeeid,
+                ShiftId = iivm.ShiftId,
             };
 
             try

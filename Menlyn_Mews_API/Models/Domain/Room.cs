@@ -33,6 +33,9 @@ namespace Menlyn_Mews_API.Models.Domain
 
         [JsonIgnore]
         public virtual ICollection<Inventory> Inventories { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Room_Inventory> Room_Inventory { get; set; }
     }
 }
 

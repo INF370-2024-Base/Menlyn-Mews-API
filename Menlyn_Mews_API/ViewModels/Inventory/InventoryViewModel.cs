@@ -4,14 +4,12 @@
     {
 
         public string Inventory_Name { get; set; }
-        public int Minimum_Stock { get; set; }
         public int Maximum_Stock { get; set; }
-        public string inventory_Condition { get; set; }
-        public string Inventory_Status { get; set; }
+        public int Quantity_Available { get; set; }
+        public decimal Price_Per_Unit { get; set; }
 
         //Related Data
         public int InventoryTypeId { get; set; }
         public int InventoryCategoryId { get; set; }
-        public int RoomId { get; set; }
     }
 }

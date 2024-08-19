@@ -135,7 +135,7 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(employeeShift);
         }
 
-        [HttpDelete("{employeeId}d/{shiftId}")]
+        [HttpDelete("{employeeId}/{shiftId}")]
         public async Task<IActionResult> DeleteEmployee_Shift(int id, int id2)
         {
             if (_context.Employee_Shifts == null)

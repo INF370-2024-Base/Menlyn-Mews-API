@@ -58,6 +58,10 @@ namespace Menlyn_Mews_API.Models.Repositories
         Task<Write_Off[]> GetWrite_OffsAsync(); 
         Task<Write_Off> GetWrite_OffByIdAsync(int writeOffId);
 
+        //Room Inventory
+        Task<Room_Inventory[]> GetRoomInventoriesAsync();
+        Task<Room_Inventory> GetRoomInventoryByIdAsync(int roomId, int inventoryId);
+
         //Stock Take
         Task<Stock_Take[]> GetStockTakesAsync();
         Task<Stock_Take> GetStockTakeByIdAsync(int stockTakeId);

@@ -36,15 +36,16 @@ namespace Menlyn_Mews_API.Controllers
                 {
                     wo.WriteOffId,
                     wo.Write_Off_Description,
-                    wo.Write_Off_Date,
-                    wo.Write_Off_Stock_Type_Name,
-                    wo.Write_Off_Stock_Type_Description,
-                    Inventory = wo.Inventory.Inventory_Name,
+                    wo.Quantity_Of_Items_Written_Off,
+                    Inventory = wo.Room_Inventory.Inventory.Inventory_Name,
+                    Room_Number = wo.Room_Inventory.Room.Room_Number,
+                    Inspection_Date = wo.Inspection_Item.Inspection_Date,
                     Employee = wo.Employee_Shift.Employee.Employee_Name + " " + wo.Employee_Shift.Employee.Employee_Surname,
                     Shift_Date =  wo.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
                     Shift_Time = (wo.Employee_Shift.Shift.Start_TIme.HasValue && wo.Employee_Shift.Shift.End_TIme.HasValue)
                           ? wo.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + wo.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
                           : string.Empty,
+                    Client_Name = wo.Client.Client_Name + " " + wo.Client.Client_Surname
                 });
 
                 return Ok(writeoffs);
@@ -68,15 +69,13 @@ namespace Menlyn_Mews_API.Controllers
                 {
                     wo.WriteOffId,
                     wo.Write_Off_Description,
-                    wo.Write_Off_Date,
-                    wo.Write_Off_Stock_Type_Name,
-                    wo.Write_Off_Stock_Type_Description,
-                    Inventory = wo.Inventory.Inventory_Name,
-                    Employee = wo.Employee_Shift.Employee.Employee_Name + " " + wo.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date = wo.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
-                    Shift_Time = (wo.Employee_Shift.Shift.Start_TIme.HasValue && wo.Employee_Shift.Shift.End_TIme.HasValue)
-                          ? wo.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + wo.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
-                          : string.Empty,
+                    wo.Quantity_Of_Items_Written_Off,
+                    wo.RoomId,
+                    wo.InspectionItemId,   
+                    wo.InventoryId,
+                    wo.EmployeeId,
+                    wo.ShiftId,
+                    wo.ClientId
                 };
 
                 return Ok(writeoffs);
@@ -97,12 +96,12 @@ namespace Menlyn_Mews_API.Controllers
                 if (writeoff == null) return NotFound("Write-Off Does Not Exist");
                 
                 writeoff.Write_Off_Description = wvm.Write_Off_Description;
-                writeoff.Write_Off_Date = wvm.Write_Off_Date;
-                writeoff.Write_Off_Stock_Type_Name = wvm.Write_Off_Stock_Type_Name;
-                writeoff.Write_Off_Stock_Type_Description = wvm.Write_Off_Stock_Type_Description;
+                writeoff.RoomId = wvm.RoomId;   
+                writeoff.InspectionItemId = wvm.InspectionItemId;   
                 writeoff.InventoryId = wvm.InventoryId;
                 writeoff.EmployeeId = wvm.EmployeeId;
                 writeoff.ShiftId = wvm.ShiftId;
+                writeoff.ClientId = wvm.ClientId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -124,36 +123,34 @@ namespace Menlyn_Mews_API.Controllers
             var writeoff = new Write_Off
             {
                 Write_Off_Description = wvm.Write_Off_Description,
-                Write_Off_Date = wvm.Write_Off_Date,
-                Write_Off_Stock_Type_Name = wvm.Write_Off_Stock_Type_Name,
-                Write_Off_Stock_Type_Description = wvm.Write_Off_Stock_Type_Description,
-                InventoryId = wvm.InventoryId,  
-                EmployeeId = wvm.EmployeeId,    
-                ShiftId = wvm.ShiftId,  
+                RoomId = wvm.RoomId,
+                InspectionItemId = wvm.InspectionItemId,
+                InventoryId = wvm.InventoryId,
+                EmployeeId = wvm.EmployeeId,
+                ShiftId = wvm.ShiftId,
+                Quantity_Of_Items_Written_Off = wvm.Quantity_Of_Items_Written_Off,
+                ClientId = wvm.ClientId,
             };
 
-            if (await _context.Employee_Shifts.AnyAsync(es => es.EmployeeId == writeoff.EmployeeId && es.ShiftId == writeoff.ShiftId))
+            try
             {
-                try
-                {
-                    _repository.Add(writeoff);
-                    await _repository.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-                return Ok(writeoff);
-            }
-            else
-            {
-                return NotFound("The Employee Shift Does Not Exist");
-            }
+                var test = await _repository.GetInventoryByIdAsync(writeoff.InventoryId);
+                test.Quantity_Available -= writeoff.Quantity_Of_Items_Written_Off;
+                _repository.Add(writeoff);
 
+                var updateStatus = await _repository.GetInspectionItemsByIdAsync(writeoff.InspectionItemId);
+                updateStatus.Inspection_Status = "Complete";
+
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(writeoff);
 
         }
 
-        // DELETE: api/Write_Off/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWrite_Off(int id)
         {

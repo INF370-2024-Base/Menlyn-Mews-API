@@ -38,12 +38,10 @@ namespace Menlyn_Mews_API.Controllers
                     i.InventoryId,
                     i.Inventory_Name,
                     i.Maximum_Stock,
-                    i.Minimum_Stock,
-                    i.Inventory_Condition,
-                    i.Inventory_Status,
+                    i.Quantity_Available,
+                    i.Price_Per_Unit,
                     Category_Name = i.InventoryCategory.Inventory_Category_Name,
                     Type_Name = i.InventoryType.Inventory_Type_Name,
-                    Room = i.Room.Room_Number,
                 });
 
                 return Ok(inventories);
@@ -68,12 +66,10 @@ namespace Menlyn_Mews_API.Controllers
                     i.InventoryId,
                     i.Inventory_Name,
                     i.Maximum_Stock,
-                    i.Minimum_Stock,
-                    i.Inventory_Condition,
-                    i.Inventory_Status,
-                    Category_Name = i.InventoryCategory.Inventory_Category_Name,
-                    Type_Name = i.InventoryType.Inventory_Type_Name,
-                    Room = i.Room.Room_Number,
+                    i.Quantity_Available,
+                    i.Price_Per_Unit,
+                    i.InventoryCategoryId,
+                    i.InventoryTypeId,
                 };
 
                 return Ok(inventories);
@@ -95,12 +91,10 @@ namespace Menlyn_Mews_API.Controllers
 
                 inventory.Inventory_Name = ivm.Inventory_Name;
                 inventory.Maximum_Stock = ivm.Maximum_Stock;
-                inventory.Minimum_Stock = ivm.Minimum_Stock;
-                inventory.Inventory_Status = ivm.Inventory_Status;
-                inventory.Inventory_Condition = ivm.inventory_Condition;
+                inventory.Quantity_Available = ivm.Quantity_Available;
+                inventory.Price_Per_Unit = ivm.Price_Per_Unit;
                 inventory.InventoryTypeId  = ivm.InventoryTypeId;
                 inventory.InventoryCategoryId = ivm.InventoryCategoryId;
-                inventory.RoomId = ivm.RoomId;
 
                 if (await _repositroy.SaveChangesAsync())
                 {
@@ -121,13 +115,11 @@ namespace Menlyn_Mews_API.Controllers
         {
             var inventory = new Inventory { 
                 Inventory_Name = ivm.Inventory_Name, 
-                Minimum_Stock = ivm.Minimum_Stock, 
+                Price_Per_Unit = ivm.Price_Per_Unit, 
                 Maximum_Stock = ivm.Maximum_Stock, 
-                Inventory_Condition = ivm.inventory_Condition,
-                Inventory_Status = ivm.Inventory_Status,
+                Quantity_Available = ivm.Quantity_Available,
                 InventoryCategoryId = ivm.InventoryCategoryId, 
                 InventoryTypeId = ivm.InventoryTypeId,
-                RoomId = ivm.RoomId,
             };
 
 

@@ -89,6 +89,8 @@ namespace Menlyn_Mews_API.Data
         public DbSet<Shift> Shifts { get; set; }
         
         public DbSet<Rates> Rates { get; set; }
+
+        public DbSet<Room_Inventory> Room_Inventory { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -98,6 +100,12 @@ namespace Menlyn_Mews_API.Data
                 .HasOne(r => r.Rates)
                 .WithMany(e => e.Employee)
                 .HasForeignKey(r => r.RateId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Write_Off>()
+                .HasOne(wo => wo.Client)
+                .WithMany(c => c.Write_Off)
+                .HasForeignKey(wo => wo.ClientId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Room>()
@@ -124,6 +132,27 @@ namespace Menlyn_Mews_API.Data
                     es.EmployeeId,
                     es.ShiftId,
                 });
+
+            modelBuilder.Entity<Room_Inventory>()
+                .HasKey(ri => new
+                {
+                    ri.RoomId,  
+                    ri.InventoryId,
+                });
+
+
+
+            modelBuilder.Entity<Room_Inventory>()
+                .HasOne(ri => ri.Room)
+                .WithMany(ri => ri.Room_Inventory)
+                .HasForeignKey(ri => ri.RoomId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Room_Inventory>()
+                .HasOne(ri => ri.Inventory)
+                .WithMany(ri => ri.Room_Inventory)
+                .HasForeignKey(ri => ri.InventoryId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Supplier_Order_Product>()
                 .HasKey(sop => new
@@ -160,10 +189,24 @@ namespace Menlyn_Mews_API.Data
                 })
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Write_Off>()
-                .HasOne(i => i.Inventory)
-                .WithMany(wo => wo.Write_Offs)
-                .HasForeignKey(i => i.InventoryId)
+            modelBuilder.Entity<Employee_Shift>()
+                .HasMany(es => es.Inspection_Item)
+                .WithOne(ii => ii.Employee_Shift)
+                .HasForeignKey(es => new
+                {
+                    es.EmployeeId,
+                    es.ShiftId  
+                })
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Room_Inventory>()
+                .HasMany(wo => wo.Write_Off)
+                .WithOne(ri => ri.Room_Inventory)
+                .HasForeignKey(ri => new
+                {
+                    ri.RoomId,
+                    ri.InventoryId
+                })
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Employee_Shift>()
@@ -191,6 +234,12 @@ namespace Menlyn_Mews_API.Data
                 .WithOne(s => s.Supplier_Type)
                 .HasForeignKey(st => st.SupplierTypeId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Inspection_Item>()
+                .HasMany(ii => ii.Write_Off)
+                .WithOne(wo => wo.Inspection_Item)
+                .HasForeignKey(ii => ii.InspectionItemId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Supplier>()
                 .HasMany(s => s.Orders)
