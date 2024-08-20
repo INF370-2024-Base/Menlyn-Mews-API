@@ -109,6 +109,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Discount
         public Task<Discount[]> GetDiscountsAsync();
         public Task<Discount> GetDiscountByIdAsync(int discountId);
+        public Task<Discount> FindDiscountCodeAsync(string code);  
 
         //Room Type
         public Task<Room_Type[]> GetRoomTypesAsync();
@@ -126,6 +127,9 @@ namespace Menlyn_Mews_API.Models.Repositories
 
 
         ///////////////////////////////////////////////////////CLIENT REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
+
+        //Get Client By AppUserId
+        public Task<Client> GetClientByAppUserIdAsync(string appUserId);
 
         //Event Review
         public Task<Event_Review[]> GetEventReviewsAsync();

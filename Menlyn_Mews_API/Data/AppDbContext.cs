@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore; // added 13 / 04 / 2024
 
 namespace Menlyn_Mews_API.Data
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
         {
@@ -329,6 +329,18 @@ namespace Menlyn_Mews_API.Data
                 .WithOne(ct => ct.Client)
                 .HasForeignKey(fk => fk.ClientId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(a => a.Client)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey<Client>(c => c.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Room>()
+                .HasMany(br => br.Booking_Review)
+                .WithOne(r => r.Room)
+                .HasForeignKey(br => br.RoomId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             // modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
             //     .HasMany(e => e.Employees)

@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Menlyn_Mews_API.Models.Repositories;
 using Newtonsoft.Json;
 using Menlyn_Mews_API.ViewModels;
+using Menlyn_Mews_API.Models.Domain;
 
 
 // using Menlyn_Mews.Data; //
@@ -87,7 +88,7 @@ builder.Services.AddCors(options =>
 ////------------------------------------------------------------------------------------------------------------------////////
 
 //ID
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
 

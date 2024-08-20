@@ -41,6 +41,7 @@ namespace Menlyn_Mews_API.Controllers
                     br.Review_Description,
                     br.Date_Created,
                     Client = br.Client.Client_Name + " " + br.Client.Client_Surname,
+                    Room = br.Room.Room_Number, 
                 });
 
                 return Ok(bookingReviews);
@@ -68,7 +69,8 @@ namespace Menlyn_Mews_API.Controllers
                     br.Review_Rating,
                     br.Review_Description,
                     br.Date_Created,
-                    Client = br.Client.Client_Name + " " + br.Client.Client_Surname,
+                    br.ClientId,
+                    br.RoomId   
                 };
 
                 return Ok(bookingReviews);
@@ -92,6 +94,7 @@ namespace Menlyn_Mews_API.Controllers
                 br.Review_Rating = bvm.Review_Rating;   
                 br.Review_Description = bvm.Review_Description; 
                 br.ClientId = bvm.ClientId;
+                br.RoomId = bvm.RoomId;
                 br.Date_Created = DateTime.Now;
 
                 if (await _repository.SaveChangesAsync())
@@ -116,7 +119,8 @@ namespace Menlyn_Mews_API.Controllers
                 Review_Rating = bvm.Review_Rating,
                 Review_Description = bvm.Review_Description,
                 Date_Created = DateTime.Now,
-                ClientId = bvm.ClientId
+                ClientId = bvm.ClientId,
+                RoomId = bvm.RoomId,
             };
 
             try

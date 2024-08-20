@@ -11,6 +11,7 @@ using Menlyn_Mews_API.Models.Domain.SignUp;
 using Menlyn_Mews.Service.Models;
 using Menlyn_Mews.Service.Services;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -18,23 +19,26 @@ namespace Menlyn_Mews_API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
+        private readonly IRepositroy _repository;
 
-        public AuthenticationController(UserManager<IdentityUser> userManager,
+        public AuthenticationController(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
             IEmailService emailService,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IRepositroy repositroy)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _emailService = emailService;
             _signInManager = signInManager;
+            _repository = repositroy;
         }
 
         [HttpPost("Register")]
@@ -49,12 +53,12 @@ namespace Menlyn_Mews_API.Controllers
             }
 
             //Add To Db
-            IdentityUser user = new()
+            var user = new ApplicationUser
             {
                 Email = registerUser.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = registerUser.UserName,
-                TwoFactorEnabled = true
+                TwoFactorEnabled = true,
             };
 
             if (await _roleManager.RoleExistsAsync(role))
@@ -67,6 +71,22 @@ namespace Menlyn_Mews_API.Controllers
                 //Add Role To User
 
                 await _userManager.AddToRoleAsync(user, role);
+
+                //Client
+                var client = new Client
+                {
+                    Client_Name = registerUser.Client_Name,
+                    Client_Surname = registerUser.Client_Surname,
+                    Client_ID_Number = registerUser.Client_ID_Number,
+                    Client_Email_Address = registerUser.Client_Email_Address,
+                    Client_Contact_Number = registerUser.Client_Contact_Number,
+                    Client_Gender = registerUser.Client_Gender,
+                    Title = registerUser.Title,
+                    ApplicationUserId = user.Id,
+                };
+
+                _repository.Add(client);
+                await _repository.SaveChangesAsync();
 
                 //Add Token To Verify Email
 
@@ -198,12 +218,15 @@ namespace Menlyn_Mews_API.Controllers
             // Generate Token
             var jwtToken = GetToken(authClaims);
 
+            var clientInfo = await _repository.GetClientByAppUserIdAsync(user.Id);
+
             // Return Token
             return Ok(new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
                 expiration = jwtToken.ValidTo,
-                roles = userRoles.FirstOrDefault()
+                roles = userRoles.FirstOrDefault(),
+                clientId = clientInfo.ClientId,
             });
         }
 

@@ -31,7 +31,22 @@ namespace Menlyn_Mews_API.Controllers
         {
             try
             {
-                var clients = await _repository.GetClientsAsync();
+                var results = await _repository.GetClientsAsync();
+
+                dynamic clients = results.Select(c => new
+                {
+                    c.ClientId,
+                    c.Client_Name,
+                    c.Client_Surname,
+                    c.Client_ID_Number,
+                    c.Client_Email_Address,
+                    c.Client_Contact_Number,
+                    c.Client_Gender,
+                    c.Title,
+                    c.ApplicationUserId,
+                    Username = c.ApplicationUser.UserName,
+                });
+
                 return Ok(clients);
             }
             catch (Exception ex)
@@ -40,13 +55,27 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{clientId}")]
         public async Task<ActionResult<Client>> GetClient(int clientId)
         {
             try
             {
-                var clients = await _repository.GetClientByIdAsync(clientId);
-                if (clients == null) return NotFound("Client Does Not Exist");
+                var c = await _repository.GetClientByIdAsync(clientId);
+                if (c == null) return NotFound("Client Does Not Exist");
+
+                dynamic clients = new
+                {   
+                    c.ClientId,
+                    c.Client_Name,
+                    c.Client_Surname,
+                    c.Client_ID_Number,
+                    c.Client_Email_Address,
+                    c.Client_Contact_Number,
+                    c.Client_Gender,
+                    c.Title,
+                    c.ApplicationUserId,
+                };
+
                 return Ok(clients);
             }
             catch (Exception ex)
@@ -55,7 +84,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{clientId}")]
         public async Task<ActionResult<ClientViewModel>> PutClient(int clientId, ClientViewModel cvm)
         {
             try
@@ -69,7 +98,6 @@ namespace Menlyn_Mews_API.Controllers
                 clients.Client_Email_Address = cvm.Client_Email_Address;
                 clients.Client_Contact_Number = cvm.Client_Contact_Number;
                 clients.Client_Gender = cvm.Client_Gender;
-                clients.Client_Address = cvm.Client_Address;
                 clients.Title = cvm.Title;
 
                 if (await _repository.SaveChangesAsync())
@@ -85,32 +113,31 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostClient(ClientViewModel cvm)
-        {
-            var client = new Client
-            {
-                Client_Name = cvm.Client_Name,
-                Client_Surname = cvm.Client_Surname,
-                Client_ID_Number = cvm.Client_ID_Number,
-                Client_Email_Address = cvm.Client_Email_Address,
-                Client_Contact_Number = cvm.Client_Contact_Number,
-                Client_Gender = cvm.Client_Gender,  
-                Client_Address = cvm.Client_Address,
-                Title = cvm.Title,
-            };
+        //[HttpPost]
+        //public async Task<IActionResult> PostClient(ClientViewModel cvm)
+        //{
+        //    var client = new Client
+        //    {
+        //        Client_Name = cvm.Client_Name,
+        //        Client_Surname = cvm.Client_Surname,
+        //        Client_ID_Number = cvm.Client_ID_Number,
+        //        Client_Email_Address = cvm.Client_Email_Address,
+        //        Client_Contact_Number = cvm.Client_Contact_Number,
+        //        Client_Gender = cvm.Client_Gender,  
+        //        Title = cvm.Title,
+        //    };
 
-            try
-            {
-                _repository.Add(client);
-                await _repository.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            return Ok(client);
-        }
+        //    try
+        //    {
+        //        _repository.Add(client);
+        //        await _repository.SaveChangesAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //    return Ok(client);
+        //}
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient(int id)

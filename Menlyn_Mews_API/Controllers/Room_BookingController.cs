@@ -124,38 +124,77 @@ namespace Menlyn_Mews_API.Controllers
 
         [HttpPost]
         [Route("CreateRoomBooking")]
-        public async Task<ActionResult<Room_Booking>> PostRoom_Booking(BookingViewModel bvm)
+        public async Task<IActionResult> PostRoom_Booking(BookingViewModel bvm, int discountId)
         {
-            var booking = new Room_Booking
-            {
-                Check_In_Date = bvm.Check_In_Date.GetValueOrDefault(),
-                Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault(),
-                Booking_Price = bvm.Booking_Price,
-                Booking_Status = bvm.Booking_Status,
-                ClientId = bvm.ClientId,
-                RoomId = bvm.RoomId,
-                BookingPackageId = bvm.BookingPackageId,
-                DiscountId = bvm.DiscountId,    
-            };
+            var discountCode = await _repository.GetDiscountByIdAsync(discountId);
 
-            try
+            if (discountCode == null)
             {
-                _context.Add(booking);
-                await _context.SaveChangesAsync();
-                //TwilioClient.Init(accountSid, authToken); /*ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE*/
+                var booking = new Room_Booking
+                {
+                    Check_In_Date = bvm.Check_In_Date.GetValueOrDefault(),
+                    Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault(),
+                    Booking_Price = bvm.Booking_Price,
+                    Booking_Status = bvm.Booking_Status,
+                    ClientId = bvm.ClientId,
+                    RoomId = bvm.RoomId,
+                    BookingPackageId = bvm.BookingPackageId,
+                };
 
-                //var message = MessageResource.Create(
-                //    body: "Your Check In Date Is: " + booking.Check_In_Date + " Your Check Out Date Is: " + booking.Check_Out_Date + " The Cost Of Your Booking Is: " + booking.Booking_Price,
-                //    from: new Twilio.Types.PhoneNumber("+13187034034"),
-                //    to: new Twilio.Types.PhoneNumber("+27646028374")
-                //);
+                try
+                {
+                    _context.Add(booking);
+                    await _context.SaveChangesAsync();
+                    //TwilioClient.Init(accountSid, authToken); /*ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE*/
+
+                    //var message = MessageResource.Create(
+                    //    body: "Your Check In Date Is: " + booking.Check_In_Date + " Your Check Out Date Is: " + booking.Check_Out_Date + " The Cost Of Your Booking Is: " + booking.Booking_Price,
+                    //    from: new Twilio.Types.PhoneNumber("+13187034034"),
+                    //    to: new Twilio.Types.PhoneNumber("+27646028374")
+                    //);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                return Ok(booking);
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
-            }
 
-            return Ok(booking);
+
+                var booking = new Room_Booking
+                {
+                    Check_In_Date = bvm.Check_In_Date.GetValueOrDefault(),
+                    Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault(),
+                    Booking_Price = bvm.Booking_Price - (bvm.Booking_Price * discountCode.Discount_Percenatage/100),
+                    Booking_Status = bvm.Booking_Status,
+                    ClientId = bvm.ClientId,
+                    RoomId = bvm.RoomId,
+                    BookingPackageId = bvm.BookingPackageId,
+                    DiscountId = discountId,
+                };
+
+                try
+                {
+                    _context.Add(booking);
+                    await _context.SaveChangesAsync();
+                    //TwilioClient.Init(accountSid, authToken); /*ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE*/
+
+                    //var message = MessageResource.Create(
+                    //    body: "Your Check In Date Is: " + booking.Check_In_Date + " Your Check Out Date Is: " + booking.Check_Out_Date + " The Cost Of Your Booking Is: " + booking.Booking_Price,
+                    //    from: new Twilio.Types.PhoneNumber("+13187034034"),
+                    //    to: new Twilio.Types.PhoneNumber("+27646028374")
+                    //);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                return Ok(booking);
+            }
         }
 
         [HttpDelete("{id}")]

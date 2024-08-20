@@ -41,6 +41,7 @@ namespace Menlyn_Mews_API.Controllers
                     r.Room_Status,
                     r.Room_Rate,
                     r.Room_Description,
+                    r.Room_Photo_1,
                     Room_Type = r.Room_Type.Room_Type_Description,
                 });
 
@@ -70,7 +71,8 @@ namespace Menlyn_Mews_API.Controllers
                     r.Room_Status,
                     r.Room_Rate,
                     r.Room_Description,
-                    Room_Type = r.Room_Type.Room_Type_Description,
+                    r.Room_Photo_1,
+                    r.RoomTypeId,
                 };
 
                 return Ok(rooms);
@@ -96,6 +98,7 @@ namespace Menlyn_Mews_API.Controllers
                 r.Room_Status = rvm.Room_Status;
                 r.Room_Rate = rvm.Room_Rate;
                 r.Room_Description = rvm.Room_Description;
+                r.Room_Photo_1 = rvm.Room_Photo_1;
                 r.RoomTypeId = rvm.RoomTypeId;
 
                 if (await _repository.SaveChangesAsync())
@@ -122,6 +125,16 @@ namespace Menlyn_Mews_API.Controllers
                 Room_Status = rvm.Room_Status,
                 Room_Rate = rvm.Room_Rate,
                 Room_Description = rvm.Room_Description,
+                Room_Photo_1 = rvm.Room_Photo_1,    
+                Room_Photo_2 = rvm.Room_Photo_2,
+                Room_Photo_3 = rvm.Room_Photo_3,    
+                Room_Photo_4 = rvm.Room_Photo_4,    
+                Room_Photo_5 = rvm.Room_Photo_5,
+                Room_Photo_6 = rvm.Room_Photo_6,
+                Room_Photo_7 = rvm.Room_Photo_7,
+                Room_Photo_8 = rvm.Room_Photo_8,
+                Room_Photo_9 = rvm.Room_Photo_9,
+                Room_Photo_10 = rvm.Room_Photo_10,
                 RoomTypeId = rvm.RoomTypeId,
             };
 

@@ -18,10 +18,15 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public DateTime Date_Created { get; set; }
 
+        //---------------------------------------------FK---------------------------------------------//
+
         public int ClientId { get; set; }
 
         [JsonIgnore]
-        public Client Client { get; set; }  
+        public Client Client { get; set; }
+
+        public int RoomId { get; set; }
+        public Room? Room { get; set; }
 
     }
 }

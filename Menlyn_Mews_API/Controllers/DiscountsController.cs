@@ -27,6 +27,29 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
+        [Route("CheckCode")]
+        public async Task<ActionResult> FindDiscount(string code)
+        {
+            try
+            {
+                var discount = await _repository.FindDiscountCodeAsync(code);
+                if (discount == null) return NotFound("Code Does Not Exist!");
+
+                return Ok( new 
+                { 
+                    discountId = discount.DiscountId,
+                    amount = discount.Discount_Percenatage,
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        [HttpGet]
         [Route("GetDiscounts")]
         public async Task<ActionResult> GetDiscount()
         {

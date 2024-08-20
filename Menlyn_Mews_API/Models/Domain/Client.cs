@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Menlyn_Mews_API.Models.Domain
@@ -21,11 +22,12 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Client_Gender { get; set; } = string.Empty;
 
-        public string? Client_Address { get; set; } = string.Empty;
-
         public string? Title { get; set; } = string.Empty;
 
         ///------------------------FK--------------------///
+
+        public string? ApplicationUserId {  get; set; }
+        public virtual ApplicationUser? ApplicationUser { get; set; }
 
 
         [JsonIgnore]

@@ -323,6 +323,12 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Discount> FindDiscountCodeAsync(string code)
+        {
+            IQueryable<Discount> query = _context.Discount.Where(d => d.Discount_Code == code);
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Room Type
         public async Task<Room_Type[]> GetRoomTypesAsync()
         {
@@ -365,6 +371,13 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         ///////////////////////////////////////////////////////CLIENT REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
 
+        //Get Client By AppUserId
+        public async Task<Client> GetClientByAppUserIdAsync(string appUserId)
+        {
+            IQueryable<Client> query = _context.Clients.Where(c => c.ApplicationUserId == appUserId).Include(c => c.ApplicationUser);
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Event Review
         public async Task<Event_Review[]> GetEventReviewsAsync()
         {
@@ -392,7 +405,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Client
         public async Task<Client[]> GetClientsAsync()
         {
-            IQueryable<Client> query = _context.Clients;
+            IQueryable<Client> query = _context.Clients.Include(c => c.ApplicationUser);
             return await query.ToArrayAsync();  
         }
         public async Task<Client> GetClientByIdAsync(int clientId)

@@ -7,5 +7,6 @@
         public string? Review_Description { get; set; }
         public DateTime Date_Created { get; set; }
         public int ClientId { get; set; }
+        public int RoomId { get; set; }
     }
 }
