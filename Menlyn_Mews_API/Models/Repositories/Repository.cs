@@ -393,13 +393,19 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Booking Review
         public async Task<Booking_Review[]> GetBookingReviewsAsync()
         {
-            IQueryable<Booking_Review> query = _context.Booking_Reviews.Include(br => br.Client);
+            IQueryable<Booking_Review> query = _context.Booking_Reviews.Include(br => br.Client).Include(br => br.Room);
             return await query.ToArrayAsync();
         }
         public async Task<Booking_Review> GetBookingReviewByIdAsync(int bookingReviewId)
         {
             IQueryable<Booking_Review> query = _context.Booking_Reviews.Where(br => br.BookingReviewId == bookingReviewId).Include(er => er.Client);
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Booking_Review[]> GetReviewsByRoomIdAsync(int roomId)
+        {
+            IQueryable<Booking_Review> query = _context.Booking_Reviews.Where(br => br.RoomId == roomId).Include(br => br.Room).Include(br => br.Client).Include(br => br.Client.ApplicationUser);
+            return await query.ToArrayAsync();
         }
 
         //Client

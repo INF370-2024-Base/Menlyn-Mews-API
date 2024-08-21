@@ -138,6 +138,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Booking Review
         public Task<Booking_Review[]> GetBookingReviewsAsync();
         public Task<Booking_Review> GetBookingReviewByIdAsync(int bookingReviewId);
+        public Task<Booking_Review[]> GetReviewsByRoomIdAsync(int roomId);
 
         //Client
         public Task<Client[]> GetClientsAsync();

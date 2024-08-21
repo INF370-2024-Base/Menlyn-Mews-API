@@ -55,6 +55,39 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpGet]
+        [Route("GetRoomDataById/{roomId}")]
+        public async Task<ActionResult> GetRoomData(int roomId)
+        {
+            try
+            {
+                var r = await _repository.GetRoomByIdAsync(roomId);
+                if (r == null) return NotFound("Room Does Not Exist");
+
+                dynamic rooms = new
+                {
+                    r.RoomId,
+                    r.Room_Number,
+                    r.Room_Floor,
+                    r.Room_Status,
+                    r.Room_Rate,
+                    r.Room_Description,
+                    r.Room_Photo_1,
+                    r.Room_Type.Room_Type_Description,
+                    r.Room_Type.Room_Type_Capacity,
+                    r.Room_Type.Room_Size,
+                };
+
+                return Ok(rooms);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
         [Route("GetRoomById/{roomId}")]
         public async Task<ActionResult> GetRoom(int roomId)
         {

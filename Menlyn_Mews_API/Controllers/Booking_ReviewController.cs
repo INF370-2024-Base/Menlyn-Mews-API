@@ -81,6 +81,59 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetBookingReviewByRoomId/{roomId}")]
+        public async Task<ActionResult> GetBooking_ReviewRooms(int roomId)
+        {
+            try
+            {
+                var br = await _repository.GetReviewsByRoomIdAsync(roomId);
+                if (br == null) return NotFound("Booking Review Does Not Exist");
+
+
+                dynamic bookingReviews = br.Select(br => new
+                {
+                    br.BookingReviewId,
+                    br.Review_Status,
+                    br.Review_Rating,
+                    br.Review_Description,
+                    br.Date_Created,
+                    Username = br.Client.ApplicationUser.UserName,
+                });
+
+                return Ok(bookingReviews);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetRoomRatingAverage/{roomId}")]
+        public async Task<ActionResult> GetBooking_ReviewRoomsAverage(int roomId)
+        {
+            try
+            {
+                var br = await _repository.GetReviewsByRoomIdAsync(roomId);
+                if (br == null) return NotFound("Booking Review Does Not Exist");
+
+
+                var average = br
+                    .Average(bs => bs.Review_Rating);
+
+                return Ok( new 
+                {
+                    Average_Rating = Math.Round((decimal)average, 1)
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpPut]
         [Route("UpdateBookingReview/{bookingReviewId}")]
         public async Task<ActionResult<BookingReviewViewModel>> PutBooking_Review(int bookingReviewId, BookingReviewViewModel bvm)

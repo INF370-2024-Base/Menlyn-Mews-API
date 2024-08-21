@@ -32,7 +32,15 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 var bookingPackages = await _repository.GetBookingPackagesAsync();
-                return Ok(bookingPackages);
+                dynamic results = bookingPackages.Select(x => new
+                {
+                    x.BookingPackageId,
+                    x.Booking_Package_Name,
+                    x.Booking_Package_Description,
+                    x.Booking_Package_Price,
+                })
+                .OrderBy(x => x.Booking_Package_Name);
+                return Ok(results);
             }
             catch (Exception ex)
             {
