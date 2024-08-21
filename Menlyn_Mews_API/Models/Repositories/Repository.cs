@@ -325,9 +325,11 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         public async Task<Discount> FindDiscountCodeAsync(string code)
         {
-            IQueryable<Discount> query = _context.Discount.Where(d => d.Discount_Code == code);
+            IQueryable<Discount> query = _context.Discount
+                .Where(d => EF.Functions.Collate(d.Discount_Code, "SQL_Latin1_General_CP1_CS_AS") == code);
             return await query.FirstOrDefaultAsync();
         }
+
 
         //Room Type
         public async Task<Room_Type[]> GetRoomTypesAsync()
@@ -364,6 +366,12 @@ namespace Menlyn_Mews_API.Models.Repositories
         {
             IQueryable<Room_Booking> query = _context.Room_Bookings.Where(rb => rb.RoomBookingId == bookingId).Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount);
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Room_Booking[]> GetRoomBookingByClientIdAsync(int clientId)
+        {
+            IQueryable<Room_Booking> query = _context.Room_Bookings.Where(rb => rb.ClientId == clientId).Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount);
+            return await query.ToArrayAsync();
         }
 
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////

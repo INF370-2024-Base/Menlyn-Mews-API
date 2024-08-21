@@ -91,6 +91,38 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetRoomBookingByClientId/{clientId}")]
+        public async Task<ActionResult> GetRoom_BookingClient(int clientId)
+        {
+            try
+            {
+                var results = await _repository.GetRoomBookingByClientIdAsync(clientId);
+                if (results == null) return NotFound("You Do Not Have Any Bookings!");
+
+                dynamic roomBookings = results.Select(rb => new
+                {
+                    rb.RoomBookingId,
+                    rb.Check_In_Date,
+                    rb.Check_Out_Date,
+                    rb.Booking_Status,
+                    rb.Booking_Price,
+                    Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
+                    Room_Desc = rb.Rooms?.Room_Description,
+                    rb.Rooms.Room_Number,
+                    Booking_Package = rb.Booking_Package?.Booking_Package_Description,
+                    Discount = rb.Discount?.Discount_Name,
+                });
+
+                return Ok(roomBookings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpPut]
         [Route("UpdateRoomBooking/{roomBookingId}")]
         public async Task<ActionResult<BookingViewModel>> PutRoom_Booking(int roomBookingId, BookingViewModel bvm)
@@ -150,7 +182,7 @@ namespace Menlyn_Mews_API.Controllers
                 //TwilioClient.Init(accountSid, authToken); /*ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE*/
 
                 //var message = MessageResource.Create(
-                //    body: "Your Check In Date Is: " + booking.Check_In_Date + " Your Check Out Date Is: " + booking.Check_Out_Date + " The Cost Of Your Booking Is: " + booking.Booking_Price,
+                //    body: "Your Check In Date Is: " + booking.Check_In_Date + " Your Check Out Date Is: " + booking.Check_Out_Date + " The Cost Of Your Booking Is: R" + booking.Booking_Price + " . Menlyn Mews, Where Your Mews Is Our Menlyn",
                 //    from: new Twilio.Types.PhoneNumber("+13187034034"),
                 //    to: new Twilio.Types.PhoneNumber("+27646028374")
                 //);
