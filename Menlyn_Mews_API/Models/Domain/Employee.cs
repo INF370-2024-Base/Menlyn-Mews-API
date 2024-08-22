@@ -28,6 +28,9 @@ namespace Menlyn_Mews_API.Models.Domain
         public int RateId { get; set; }
         public Rates Rates {  get; set; }
 
+        public string? ApplicationUserId { get; set; }
+        public virtual ApplicationUser? ApplicationUser { get; set; }
+
         //Related Tables
         [JsonIgnore]
         public virtual ICollection<Employee_Shift> Employee_Shift { get; set; }
@@ -36,6 +39,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public virtual ICollection<Audit_Log> Audit_Log { get; set; }
 
         [JsonIgnore]    
-        public virtual ICollection<Complaint> Complaint { get; set; }   
+        public virtual ICollection<Complaint> Complaint { get; set; }
+
     }
 }

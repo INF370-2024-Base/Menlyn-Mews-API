@@ -82,9 +82,9 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Payment_Type> Payment_Types { get; set; }
 
-        public DbSet<Complaint> Complaints { get; set; }
-
         public DbSet<Complaint_Type> Complaint_Types { get; set; }
+
+        public DbSet<Complaint> Complaints { get; set; }
 
         public DbSet<Shift> Shifts { get; set; }
         
@@ -95,6 +95,13 @@ namespace Menlyn_Mews_API.Data
         {
             base.OnModelCreating(modelBuilder);
             SeedRoles(modelBuilder);
+
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(a => a.Employee)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey<Employee>(c => c.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Employee>()
                 .HasOne(r => r.Rates)
@@ -336,6 +343,7 @@ namespace Menlyn_Mews_API.Data
                 .HasForeignKey<Client>(c => c.ApplicationUserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
             modelBuilder.Entity<Room>()
                 .HasMany(br => br.Booking_Review)
                 .WithOne(r => r.Room)
@@ -388,7 +396,8 @@ namespace Menlyn_Mews_API.Data
                 (
                     new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
                     new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" },
-                    new IdentityRole() { Name = "Manager", ConcurrencyStamp = "3", NormalizedName = "Manager" }
+                    new IdentityRole() { Name = "Manager", ConcurrencyStamp = "3", NormalizedName = "Manager" },
+                    new IdentityRole() { Name = "Employee", ConcurrencyStamp = "4", NormalizedName = "Employee"}
                 );
         }
 

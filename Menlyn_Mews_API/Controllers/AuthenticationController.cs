@@ -12,6 +12,8 @@ using Menlyn_Mews.Service.Models;
 using Menlyn_Mews.Service.Services;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -19,6 +21,7 @@ namespace Menlyn_Mews_API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        private readonly AppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -31,7 +34,8 @@ namespace Menlyn_Mews_API.Controllers
             IConfiguration configuration,
             IEmailService emailService,
             SignInManager<ApplicationUser> signInManager,
-            IRepositroy repositroy)
+            IRepositroy repositroy,
+            AppDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -39,9 +43,133 @@ namespace Menlyn_Mews_API.Controllers
             _emailService = emailService;
             _signInManager = signInManager;
             _repository = repositroy;
+            _context = context;
         }
 
-        [HttpPost("Register")]
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET: api/Employee
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Employee>>> Get()
+        {
+            var employees = await _context.Employees
+                .Select(e => new
+                {
+                    e.EmployeeId,
+                    e.Employee_Name,
+                    e.Employee_Surname,
+                    e.Employee_ID_Number,
+                    e.Employee_Email_Address,
+                    e.Employee_Contact_Number,
+                    e.Employee_Gender,
+                    e.Employee_Address,
+                    e.EmployeeTypeId,
+                    e.PositionId,
+                    e.Employee_Photo 
+                })
+                .ToListAsync();
+
+            return Ok(employees);
+        }
+
+        // GET api/Employee/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Employee>> Get(int id)
+        {
+            var employee = await _context.Employees
+                .Where(e => e.EmployeeId == id)
+                .Select(e => new
+                {
+                    e.EmployeeId,
+                    e.Employee_Name,
+                    e.Employee_Surname,
+                    e.Employee_ID_Number,
+                    e.Employee_Email_Address,
+                    e.Employee_Contact_Number,
+                    e.Employee_Gender,
+                    e.Employee_Address,
+                    e.EmployeeTypeId,
+                    e.PositionId,
+                    e.Employee_Photo 
+                })
+                .FirstOrDefaultAsync();
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employee);
+        }
+
+        // POST api/Employee
+        [HttpPost]
+        public async Task<ActionResult<Employee>> Post([FromBody] Employee employee)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Get), new { id = employee.EmployeeId }, employee);
+        }
+
+        // PUT api/Employee/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] Employee updatedEmployee)
+        {
+            if (id != updatedEmployee.EmployeeId)
+            {
+                return BadRequest("Employee ID mismatch");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Entry(updatedEmployee).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Employees.Any(e => e.EmployeeId == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE api/Employee/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterUser registerUser, string role)
         {
             //Exist?
@@ -86,6 +214,75 @@ namespace Menlyn_Mews_API.Controllers
                 };
 
                 _repository.Add(client);
+                await _repository.SaveChangesAsync();
+
+                //Add Token To Verify Email
+
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = user.Email }, Request.Scheme);
+                var message = new Message(new string[] { user.Email! }, "Confirmation Email Link", confirmationLink!);
+                _emailService.SendEmail(message);
+
+
+
+                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = $"User Created & Email Sent to {user.Email} Succcessfully" });
+
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Role Doesnt Exist!" });
+            }
+
+        }
+
+        [HttpPost("RegisterEmployee")]
+        public async Task<IActionResult> RegisterEmployee([FromBody] RegisterEmployee registerUser, string role)
+        {
+            //Exist?
+            var userExist = await _userManager.FindByEmailAsync(registerUser.Email);
+
+            if (userExist != null)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new Response { Status = "Error", Message = "User Exists!" });
+            }
+
+            //Add To Db
+            var user = new ApplicationUser
+            {
+                Email = registerUser.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = registerUser.UserName,
+                TwoFactorEnabled = true,
+            };
+
+            if (await _roleManager.RoleExistsAsync(role))
+            {
+                var result = await _userManager.CreateAsync(user, registerUser.Password);
+                if (!result.Succeeded)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User Failed To Create!" });
+                }
+                //Add Role To User
+
+                await _userManager.AddToRoleAsync(user, role);
+
+                //Client
+                var employee = new Employee
+                {
+                    Employee_Name = registerUser.Employee_Name,
+                    Employee_Surname = registerUser.Employee_Surname,
+                    Employee_ID_Number = registerUser.Employee_ID_Number,
+                    Employee_Email_Address = registerUser.Employee_Email_Address,
+                    Employee_Contact_Number = registerUser.Employee_Contact_Number,
+                    Employee_Gender = registerUser.Employee_Gender,
+                    Employee_Address = registerUser.Employee_Address,
+                    EmployeeTypeId = registerUser.EmployeeTypeId,
+                    PositionId = registerUser.PositionId,
+                    RateId = registerUser.RateId,
+                    Employee_Photo = registerUser.Employee_Photo,   
+                };
+
+                _repository.Add(employee);
                 await _repository.SaveChangesAsync();
 
                 //Add Token To Verify Email
