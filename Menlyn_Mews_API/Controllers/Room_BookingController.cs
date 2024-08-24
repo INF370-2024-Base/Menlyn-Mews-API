@@ -45,11 +45,36 @@ namespace Menlyn_Mews_API.Controllers
                     rb.Check_Out_Date,
                     rb.Booking_Status,
                     rb.Booking_Price,
+                    rb.Is_Reviewed,
                     Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
                     Room_Desc = rb.Rooms?.Room_Description,
                     Room_Floor = rb.Rooms?.Room_Floor,
                     Booking_Package = rb.Booking_Package?.Booking_Package_Description,
                     Discount = rb.Discount?.Discount_Name,
+                });
+
+                return Ok(roomBookings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetBookedRooms/{roomId}")]
+        public async Task<ActionResult> GetBookedRooms(int roomId)
+        {
+            try
+            {
+                var results = await _repository.GetBookedRooms(roomId);
+
+                dynamic roomBookings = results.Select(rb => new
+                {
+                    Check_In_Date = rb.Check_In_Date.Date.ToString("yyyy-MM-dd"),
+                    Check_Out_Date = rb.Check_Out_Date.Date.ToString("yyyy-MM-dd"),
+                    rb.Booking_Status,
+                    rb.Is_Reviewed,
                 });
 
                 return Ok(roomBookings);
@@ -105,6 +130,7 @@ namespace Menlyn_Mews_API.Controllers
                     rb.RoomBookingId,
                     rb.Check_In_Date,
                     rb.Check_Out_Date,
+                    Check_Out_String = rb.Check_Out_Date.ToString("yyyy-MM-dd"),
                     rb.Booking_Status,
                     rb.Booking_Price,
                     Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
@@ -112,9 +138,46 @@ namespace Menlyn_Mews_API.Controllers
                     rb.Rooms.Room_Number,
                     Booking_Package = rb.Booking_Package?.Booking_Package_Description,
                     Discount = rb.Discount?.Discount_Name,
-                });
+                    rb.Is_Reviewed,
+                })
+                .OrderByDescending(rb => rb.Check_Out_Date);
 
                 return Ok(roomBookings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetLatestBooking/{clientId}")]
+        public async Task<ActionResult> GetLatestBooking(int clientId)
+        {
+            try
+            {
+                var results = await _repository.GetRoomBookingByClientIdAsync(clientId);
+                if (results == null) return NotFound("You Do Not Have Any Bookings!");
+
+                dynamic roomBookings = results.OrderByDescending(rb => rb.Check_Out_Date).Where(rb => rb.Is_Reviewed == false).Select(rb => new
+                {
+                    rb.RoomBookingId,
+                    rb.Check_Out_Date,
+                    Check_Out_String = rb.Check_Out_Date.ToString("yyyy-MM-dd"),
+                    rb.Booking_Price,
+                    Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
+                    Room_Desc = rb.Rooms?.Room_Description,
+                    rb.RoomId,
+                    rb.Rooms.Room_Number,
+                    rb.Is_Reviewed,
+                })
+                .FirstOrDefault();
+
+                if (roomBookings == null) return NotFound("No latest booking found!");
+
+                var respone = new[] { roomBookings };
+
+                return Ok(respone);
             }
             catch (Exception ex)
             {
@@ -166,6 +229,7 @@ namespace Menlyn_Mews_API.Controllers
                 Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault(),
                 Booking_Price = bvm.Booking_Price + (bvm.Booking_Price * vat.FirstOrDefault().VAT_Amount / 100),
                 Booking_Status = bvm.Booking_Status,
+                Is_Reviewed = false,
                 ClientId = bvm.ClientId,
                 RoomId = bvm.RoomId,
                 BookingPackageId = bvm.BookingPackageId,

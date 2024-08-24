@@ -374,6 +374,12 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.ToArrayAsync();
         }
 
+        public async Task<Room_Booking[]> GetBookedRooms(int roomId)
+        {
+            IQueryable<Room_Booking> query = _context.Room_Bookings.Where(rb => rb.RoomId == roomId && rb.Booking_Status == "Booked").Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount);
+            return await query.ToArrayAsync();
+        }
+
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 

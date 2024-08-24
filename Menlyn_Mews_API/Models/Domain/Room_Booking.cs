@@ -17,6 +17,7 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public Decimal? Booking_Price { get; set; }
 
+        public bool? Is_Reviewed { get; set; }
 
         ///------------------------FK--------------------///
         public int ClientId { get; set; }

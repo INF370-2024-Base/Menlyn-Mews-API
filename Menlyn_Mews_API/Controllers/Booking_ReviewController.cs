@@ -168,7 +168,7 @@ namespace Menlyn_Mews_API.Controllers
         {
             var bookingReview = new Booking_Review
             {
-                Review_Status = bvm.Review_Status,
+                Review_Status = "Posted",
                 Review_Rating = bvm.Review_Rating,
                 Review_Description = bvm.Review_Description,
                 Date_Created = DateTime.Now,

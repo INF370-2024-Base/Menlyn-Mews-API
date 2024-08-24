@@ -123,6 +123,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Room_Booking[]> GetRoomBookingsAsync();
         public Task<Room_Booking> GetRoomBookingByIdAsync(int bookingId);
         public Task<Room_Booking[]> GetRoomBookingByClientIdAsync(int clientId);
+        public Task<Room_Booking[]> GetBookedRooms(int roomId);
 
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
