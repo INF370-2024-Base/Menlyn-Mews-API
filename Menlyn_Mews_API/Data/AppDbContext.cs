@@ -93,6 +93,7 @@ namespace Menlyn_Mews_API.Data
         public DbSet<Audit_Log> AuditLogs { get; set; }
 
         public DbSet<Room_Inventory> Room_Inventory { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

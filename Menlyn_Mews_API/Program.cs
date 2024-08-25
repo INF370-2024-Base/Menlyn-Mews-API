@@ -1,40 +1,25 @@
 using Menlyn_Mews_API.Data;
-using Microsoft.EntityFrameworkCore; // added 13/04/2024
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using System;
+using Menlyn_Mews_API.Filters;
+using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.Services;
 using Menlyn_Mews.Service.Models;
 using Menlyn_Mews.Service.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
-using Menlyn_Mews_API.Models.Repositories;
-using Newtonsoft.Json;
-using Menlyn_Mews_API.ViewModels;
-using Menlyn_Mews_API.Models.Domain;
+using Quartz;
+using System.Text;
 using Menlyn_Mews_API.Models.Domain.Emails;
-using Menlyn_Mews_API.Filters;
-using Menlyn_Mews_API.Services;
 
-
-// using Menlyn_Mews.Data; //
-// still need to add data from DB Context-----------------//
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 
-builder.Services.AddControllers();
-                    //.AddJsonOptions(options =>
-                    // {
-                    //     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-                    // });  
-
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
@@ -62,64 +47,22 @@ builder.Services.AddSwaggerGen(option =>
             new string[] {}
         }
     });
-
 });
 
-
-
-///----------------------Copied and pasted so that migrations could work. It does not come precoded in---------------////
-
+// Add Database Context
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Menlyn_Mews"));
 });
-////------------------------------------------------------------------------------------------------------------------////////
-///
 
-
-///----------------------Copied and pasted so that migrations could work. It does not come precoded in---------------////
-
-
-// Register the AuditLogFilter
-builder.Services.AddScoped<AuditLogFilter>();
-
-// Register the IAuditLogService
-builder.Services.AddScoped<IAuditLogService, AuditLogService>(); // Ensure this matches your implementation
-
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngularDev",  //Policies define sets of origins, HTTP methods, headers, etc., that are allowed to access resources. In this case, we're configuring a policy that allows requests from the Angular application running on http://localhost:4200.
-        builder =>
-        {
-            builder.WithOrigins("http://localhost:4200") //Here, we're allowing requests from the Angular application running on
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-
-        });
-});
-
-////------------------------------------------------------------------------------------------------------------------////////
-
-//ID
+// Identity configuration
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<AppDbContext>()
-        .AddDefaultTokenProviders();
-
-//Adding Config For Required Email
-builder.Services.Configure<IdentityOptions>(
-    opts => opts.SignIn.RequireConfirmedEmail = true
-    );
-
-//Timer For Forgot Email Link
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+builder.Services.Configure<IdentityOptions>(opts => opts.SignIn.RequireConfirmedEmail = true);
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(10));
 
-builder.Services.AddScoped<IRepositroy, Repository>();
-
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-builder.Services.AddTransient<IGeneralEmailService, GeneralEmailService>();
-
-//Authentication
+// Authentication configuration
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -139,20 +82,45 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-//Add Email Config
-var emailConfig = builder.Configuration
-                .GetSection("EmailConfiguration")
-                .Get<EmailConfiguration>();
+// Email services
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IGeneralEmailService, GeneralEmailService>();
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IEmailService, EmailService>();
 
-
-// Register the AuditLogFilter
+// Register custom services and repositories
+builder.Services.AddScoped<IAuditLogService, AuditLogService>();
+builder.Services.AddScoped<IRepositroy, Repository>();
 builder.Services.AddScoped<AuditLogFilter>();
 
-// Register the IAuditLogService
-builder.Services.AddScoped<IAuditLogService, AuditLogService>(); // Ensure thi
+// CORS policy for Angular
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularDev", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
+// Configure Quartz.NET for scheduling
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    var jobKey = new JobKey("BackupJob");
+    q.AddJob<BackupJob>(opts => opts.WithIdentity(jobKey));
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("BackupJob-trigger")
+        .WithCronSchedule("0 0 2 * * ?")); // Default Cron expression for 2 AM daily
+});
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+// Register BackupService
+builder.Services.AddTransient<BackupService>();
 
 var app = builder.Build();
 
@@ -164,11 +132,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors("AllowAngularDev"); // to use cors // added 13/04/2024
-
+app.UseCors("AllowAngularDev");
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Menlyn_Mews_API.Models;
 using Menlyn_Mews_API.Models.Domain.Login;
 using Menlyn_Mews_API.Models.Domain.SignUp;
 using Menlyn_Mews.Service.Models;

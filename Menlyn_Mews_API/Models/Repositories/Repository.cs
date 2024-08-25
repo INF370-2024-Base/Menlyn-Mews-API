@@ -1,10 +1,6 @@
 ﻿using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.AccessControl;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace Menlyn_Mews_API.Models.Repositories
 {

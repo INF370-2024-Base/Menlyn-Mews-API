@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace Menlyn_Mews_API.Models.Domain
 {
     public class Audit_Log

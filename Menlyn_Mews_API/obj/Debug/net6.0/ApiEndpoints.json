@@ -433,6 +433,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Menlyn_Mews_API.Controllers.BackupController",
+    "Method": "RestoreDatabase",
+    "RelativePath": "api/Backup/restore",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Menlyn_Mews_API.Controllers.RestoreDatabaseRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.BackupController",
+    "Method": "ScheduleBackup",
+    "RelativePath": "api/Backup/schedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Menlyn_Mews_API.Controllers.BackupScheduleRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.BackupController",
+    "Method": "TriggerBackup",
+    "RelativePath": "api/Backup/trigger",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Menlyn_Mews_API.Controllers.Booking_PackageController",
     "Method": "DeleteBooking_Package",
     "RelativePath": "api/Booking_Package/{id}",
