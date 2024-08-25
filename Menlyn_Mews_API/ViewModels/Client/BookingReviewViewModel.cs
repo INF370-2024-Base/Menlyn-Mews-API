@@ -8,5 +8,6 @@
         public DateTime Date_Created { get; set; }
         public int ClientId { get; set; }
         public int RoomId { get; set; }
+        public int RoomBookingId { get; set; }
     }
 }

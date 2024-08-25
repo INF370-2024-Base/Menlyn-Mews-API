@@ -14,6 +14,7 @@ using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -279,7 +280,8 @@ namespace Menlyn_Mews_API.Controllers
                     EmployeeTypeId = registerUser.EmployeeTypeId,
                     PositionId = registerUser.PositionId,
                     RateId = registerUser.RateId,
-                    Employee_Photo = registerUser.Employee_Photo,   
+                    Employee_Photo = registerUser.Employee_Photo,
+                    ApplicationUserId = user.Id,
                 };
 
                 _repository.Add(employee);
@@ -302,6 +304,75 @@ namespace Menlyn_Mews_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Role Doesnt Exist!" });
             }
 
+        }
+
+        [HttpPost]
+        [Route("RemoveRoles")]
+        public async Task<IActionResult> RemoveRole(string userName, [FromBody] string[] roleToRemove)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.RemoveFromRolesAsync(user, roleToRemove);
+            if (result.Succeeded)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var role in roleToRemove)
+                {
+                    sb.Append(role.ToString());
+                }
+                return Ok("Roles " + sb.ToString() + " Successfully Removed");
+            }
+
+            return BadRequest(result.Errors);
+        }
+
+        [HttpPost]
+        [Route("AssignRole")]
+        public async Task<IActionResult> AssignRole(string userName, string role)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return NotFound(); //User Exists?
+            }
+
+
+            if (!await _roleManager.RoleExistsAsync(role))
+            {
+                return BadRequest("Role does not exist."); //Role Provided Exists
+            }
+
+
+            if (await _userManager.IsInRoleAsync(user, role))
+            {
+                return Ok($"User already has the '{role}' role."); //Check If The Provided Role Is Already Assigned
+            }
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+
+            if (currentRoles.Any())
+            {
+                var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                if (!removeResult.Succeeded)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to remove current role(s).");
+                }
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, role);
+
+            if (result.Succeeded)
+            {
+                return Ok("Role assigned successfully.");
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to assign role.");
+            }
         }
 
         [HttpGet("ConfirmEmail")]
@@ -416,14 +487,15 @@ namespace Menlyn_Mews_API.Controllers
             var jwtToken = GetToken(authClaims);
 
             var clientInfo = await _repository.GetClientByAppUserIdAsync(user.Id);
-
+            var employeeInfo = await _repository.GetEmployeeByAppUserIdAsync(user.Id);
             // Return Token
             return Ok(new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
                 expiration = jwtToken.ValidTo,
-                roles = userRoles.FirstOrDefault(),
-                clientId = clientInfo.ClientId,
+                roles = userRoles?.FirstOrDefault(),
+                clientId = clientInfo?.ClientId,
+                employeeId = employeeInfo?.EmployeeId
             });
         }
 

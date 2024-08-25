@@ -11,10 +11,10 @@ namespace Menlyn_Mews_API.Models.Domain
         public int ProductId { get; set; }  
         public Product Product { get; set; }
 
-        public string Order_Product_Description { get; set; } = string.Empty;
+        public int Quantity { get; set; }
 
-        public int ReceiveOrderId { get; set; }
-        public Receive_Order Receive_Order { get; set; }
+        public int? ReceiveOrderId { get; set; }
+        public Receive_Order? Receive_Order { get; set; }
 
     }
 }

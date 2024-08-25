@@ -165,7 +165,7 @@ namespace Menlyn_Mews_API.Controllers
 
         [HttpPost]
         public async Task<IActionResult> PostBooking_Review(BookingReviewViewModel bvm)
-        {
+        {   
             var bookingReview = new Booking_Review
             {
                 Review_Status = "Posted",
@@ -174,10 +174,13 @@ namespace Menlyn_Mews_API.Controllers
                 Date_Created = DateTime.Now,
                 ClientId = bvm.ClientId,
                 RoomId = bvm.RoomId,
+                RoomBookingId = bvm.RoomBookingId,
             };
 
             try
             {
+                var updateReviewStatus = await _repository.GetRoomBookingByIdAsync(bookingReview.RoomBookingId);
+                updateReviewStatus.Is_Reviewed = true;
                 _repository.Add(bookingReview);
                 await _repository.SaveChangesAsync();   
             }

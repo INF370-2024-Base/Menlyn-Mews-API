@@ -26,7 +26,12 @@ namespace Menlyn_Mews_API.Models.Domain
         public Client Client { get; set; }
 
         public int RoomId { get; set; }
+        [JsonIgnore]
         public Room? Room { get; set; }
+
+        public int RoomBookingId { get; set; }
+        [JsonIgnore]
+        public Room_Booking Room_Booking { get; set; }
 
     }
 }

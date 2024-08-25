@@ -9,6 +9,7 @@ using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.ViewModels.Inventory;
+using Menlyn_Mews_API.Models.Domain.Emails;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -18,11 +19,12 @@ namespace Menlyn_Mews_API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IRepositroy _repository;
-
-        public Write_OffController(AppDbContext context, IRepositroy repositroy)
+        private readonly IGeneralEmailService _generalEmailService;
+        public Write_OffController(AppDbContext context, IRepositroy repositroy, IGeneralEmailService generalEmailService)
         {
             _context = context;
             _repository = repositroy;
+            _generalEmailService = generalEmailService;
         }
 
         [HttpGet]
@@ -150,6 +152,82 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(writeoff);
 
         }
+
+        [HttpPost]
+        [Route("SendWriteOffInvoice/{writeOffId}")]
+        public async Task<IActionResult> SendWriteOffEmail(int writeOffId)
+        {
+        var wo = await _repository.GetWrite_OffByIdAsync(writeOffId);
+        if (wo == null) return NotFound("Write-Off Does Not Exist");
+
+        try
+        {
+            var mailrequest = new Mailrequest
+            {
+                ToEmail = "ammaruh786@gmail.com",
+                Subject = "Invoice for Damaged Items During Your Stay at Menlyn Mews",
+                Body = GenerateEmailBody(wo)
+            };
+
+            await _generalEmailService.SendEmailAsync(mailrequest);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+        }
+
+        private string GenerateEmailBody(Write_Off wo)
+        {
+            string body = $@"
+            <html>
+            <head>
+                <style>
+                    body {{
+                        font-family: Arial, sans-serif;
+                        color: #333;
+                        background-color: blue;
+                    }}
+                    .header {{
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }}
+                    .content {{
+                        margin: 0 15%;
+                    }}
+                    .footer {{
+                        text-align: center;
+                        margin-top: 20px;
+                        color: #888;
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class='header'>
+                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT89VWgW6STd_zdvJN2_Syu9YPCdnbGaPfKkw&s' alt='Menlyn Mews' width='150'>
+                    <h2>Invoice for Damaged Items</h2>
+                </div>
+                <div class='content'>
+                    <p>Dear {wo.Client.Title} {wo.Client.Client_Surname},</p>
+                    <p>We hope you enjoyed your stay at Menlyn Mews. Unfortunately, it has come to our attention that the following items were damaged during your stay:</p>
+                    <p><strong>Description:</strong> {wo.Write_Off_Description}</p>
+                    <p><strong>Quantity:</strong> {wo.Quantity_Of_Items_Written_Off}</p>
+                    <p>We kindly request that you cover the cost to replace these items. Please find the invoice attached.</p>
+                    <p>If you have any questions or need further assistance, feel free to contact us.</p>
+                    <p>Thank you for your understanding and cooperation.</p>
+                    <p>Best regards,</p>
+                    <p>The Menlyn Mews Team</p>
+                </div>
+                <div class='footer'>
+                    <p>Menlyn Mews | 226 Frikkie De Beer St, Menlyn, Pretoria, 0063 | +27 64 504 7520</p>
+                </div>
+            </body>
+            </html>";
+
+            return body;
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWrite_Off(int id)

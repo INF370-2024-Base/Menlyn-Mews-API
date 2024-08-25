@@ -17,8 +17,8 @@ namespace Menlyn_Mews_API.Models.Repositories
         ///////////////////////////////////////////////////////REPORT REPOSITORY END/////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////PRODUCT REPOSITORY////////////////////////////////////////////////////////////////////////////////////////
+        
         //Product
-
         Task<Product[]> GetProductsAsync();
         Task<Product> GetProductAsync(int productId);
 
@@ -86,6 +86,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Employee
         public Task<Employee[]> GetEmployeesAsync();
         public Task<Employee> GetEmployeeByIdAsync(int employeeId);
+        public Task<Employee> GetEmployeeByAppUserIdAsync(string appUserId);
 
         //Employee_Shift
         public Task<Employee_Shift[]> GetEmployeeShiftsAsync();
@@ -174,6 +175,11 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Receive Order
         public Task<Receive_Order[]> GetReceivedOrdersAsync();
         public Task<Receive_Order> GetReceivedOrdersByIdAsync(int receiveOrderId);
+
+        //Supplier Order Product
+        public Task<Supplier_Order_Product[]> GetSupplierOrderProductAsync();
+        public Task<Supplier_Order_Product> GetSupplierOrderProductByIdAsync(int orderId, int productId);
+        public Task<Supplier_Order_Product[]> FilterProductsByOrderIdAsync(int orderId);
 
         ///////////////////////////////////////////////////////SUPPLIER REPOSITORY END///////////////////////////////////////////////////////////////////////////////////     
 

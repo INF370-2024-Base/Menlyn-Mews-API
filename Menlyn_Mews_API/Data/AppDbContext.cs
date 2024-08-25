@@ -343,11 +343,16 @@ namespace Menlyn_Mews_API.Data
                 .HasForeignKey<Client>(c => c.ApplicationUserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-
             modelBuilder.Entity<Room>()
                 .HasMany(br => br.Booking_Review)
                 .WithOne(r => r.Room)
                 .HasForeignKey(br => br.RoomId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Room_Booking>()
+                .HasOne(rb => rb.Booking_Review)
+                .WithOne(br => br.Room_Booking)
+                .HasForeignKey<Booking_Review>(br => br.RoomBookingId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             // modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
@@ -397,7 +402,8 @@ namespace Menlyn_Mews_API.Data
                     new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
                     new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" },
                     new IdentityRole() { Name = "Manager", ConcurrencyStamp = "3", NormalizedName = "Manager" },
-                    new IdentityRole() { Name = "Employee", ConcurrencyStamp = "4", NormalizedName = "Employee"}
+                    new IdentityRole() { Name = "Employee", ConcurrencyStamp = "4", NormalizedName = "Employee" },
+                    new IdentityRole() { Name = "None", ConcurrencyStamp = "5", NormalizedName = "None" }
                 );
         }
 

@@ -101,11 +101,11 @@ namespace Menlyn_Mews_API.Controllers
                     rb.Check_Out_Date,
                     rb.Booking_Status,
                     rb.Booking_Price,
-                    Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
-                    Room_Desc = rb.Rooms?.Room_Description,
-                    Room_Floor = rb.Rooms?.Room_Floor,
-                    Booking_Package = rb.Booking_Package?.Booking_Package_Description,
-                    Discount = rb.Discount?.Discount_Name,
+                    rb.ClientId,
+                    rb.RoomId,
+                    rb.BookingPackageId,
+                    rb.DiscountId,
+                    rb.Is_Reviewed
                 };
 
                 return Ok(roomBookings);
@@ -116,7 +116,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet]//Booking History
         [Route("GetRoomBookingByClientId/{clientId}")]
         public async Task<ActionResult> GetRoom_BookingClient(int clientId)
         {
@@ -135,10 +135,14 @@ namespace Menlyn_Mews_API.Controllers
                     rb.Booking_Price,
                     Client = rb.Clients?.Client_Name + " " + rb.Clients?.Client_Surname,
                     Room_Desc = rb.Rooms?.Room_Description,
-                    rb.Rooms.Room_Number,
+                    rb.Rooms!.Room_Number,
                     Booking_Package = rb.Booking_Package?.Booking_Package_Description,
                     Discount = rb.Discount?.Discount_Name,
                     rb.Is_Reviewed,
+                    rb.ClientId,
+                    rb.RoomId,
+                    rb.Booking_Review?.Review_Rating,
+                    rb.Booking_Review?.Review_Description,
                 })
                 .OrderByDescending(rb => rb.Check_Out_Date);
 
@@ -195,6 +199,7 @@ namespace Menlyn_Mews_API.Controllers
                 var rb = await _repository.GetRoomBookingByIdAsync(roomBookingId);
                 if (rb == null) return NotFound("Room Booking Does Not Exist");
 
+
                 rb.Check_In_Date = bvm.Check_In_Date.GetValueOrDefault();
                 rb.Check_Out_Date = bvm.Check_Out_Date.GetValueOrDefault();
                 rb.Booking_Status = bvm.Booking_Status;
@@ -202,7 +207,14 @@ namespace Menlyn_Mews_API.Controllers
                 rb.ClientId = bvm.ClientId;
                 rb.RoomId = bvm.RoomId;
                 rb.BookingPackageId = bvm.BookingPackageId;
-                rb.DiscountId = bvm.DiscountId;
+                if (rb.DiscountId == -1)
+                {
+                    rb.DiscountId = null;
+                }
+                else
+                {
+                    rb.DiscountId = bvm.DiscountId;
+                }                
 
                 if (await _repository.SaveChangesAsync())
                 {

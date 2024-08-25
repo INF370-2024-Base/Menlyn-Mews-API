@@ -87,8 +87,8 @@ namespace Menlyn_Mews_API.Controllers
             var complaint = new Complaint
             {
                 Complaint_Description = cvm.Complaint_Description,
-                Complaint_Date = cvm.Complaint_Date,
-                Complaint_Status = cvm.Complaint_Status,
+                Complaint_Date = DateTime.Now,
+                Complaint_Status = "Not Resolved",
                 ClientId = cvm.ClientId,
                 EmployeeId = cvm.EmployeeId,
                 ComplaintTypeId = cvm.ComplaintTypeId,

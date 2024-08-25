@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace Menlyn_Mews_API.Models.Repositories
 {
@@ -255,6 +256,12 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Employee> GetEmployeeByAppUserIdAsync(string appUserId)
+        {
+            IQueryable<Employee> query = _context.Employees.Where(e => e.ApplicationUserId == appUserId).Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates);
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Employee_Shift
         public async Task<Employee_Shift[]> GetEmployeeShiftsAsync()
         {
@@ -370,7 +377,7 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         public async Task<Room_Booking[]> GetRoomBookingByClientIdAsync(int clientId)
         {
-            IQueryable<Room_Booking> query = _context.Room_Bookings.Where(rb => rb.ClientId == clientId).Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount);
+            IQueryable<Room_Booking> query = _context.Room_Bookings.Where(rb => rb.ClientId == clientId).Include(rb => rb.Clients).Include(rb => rb.Rooms).Include(rb => rb.Booking_Package).Include(rb => rb.Discount).Include(rb => rb.Booking_Review);
             return await query.ToArrayAsync();
         }
 
@@ -407,18 +414,18 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Booking Review
         public async Task<Booking_Review[]> GetBookingReviewsAsync()
         {
-            IQueryable<Booking_Review> query = _context.Booking_Reviews.Include(br => br.Client).Include(br => br.Room);
+            IQueryable<Booking_Review> query = _context.Booking_Reviews.Include(br => br.Client).Include(br => br.Room).Include(br => br.Room_Booking);
             return await query.ToArrayAsync();
         }
         public async Task<Booking_Review> GetBookingReviewByIdAsync(int bookingReviewId)
         {
-            IQueryable<Booking_Review> query = _context.Booking_Reviews.Where(br => br.BookingReviewId == bookingReviewId).Include(er => er.Client);
+            IQueryable<Booking_Review> query = _context.Booking_Reviews.Where(br => br.BookingReviewId == bookingReviewId).Include(er => er.Client).Include(br => br.Room_Booking);
             return await query.FirstOrDefaultAsync();
         }
 
         public async Task<Booking_Review[]> GetReviewsByRoomIdAsync(int roomId)
         {
-            IQueryable<Booking_Review> query = _context.Booking_Reviews.Where(br => br.RoomId == roomId).Include(br => br.Room).Include(br => br.Client).Include(br => br.Client.ApplicationUser);
+            IQueryable<Booking_Review> query = _context.Booking_Reviews.Where(br => br.RoomId == roomId).Include(br => br.Room).Include(br => br.Client).Include(br => br.Client.ApplicationUser).Include(br => br.Room_Booking);
             return await query.ToArrayAsync();
         }
 
@@ -509,6 +516,25 @@ namespace Menlyn_Mews_API.Models.Repositories
         {
             IQueryable<Receive_Order> query = _context.Receive_Orders.Where(ro => ro.ReceieveOrderId == receiveOrderId);
             return await query.FirstOrDefaultAsync();
+        }
+
+        //Supplier Order Product
+        public async Task<Supplier_Order_Product[]> GetSupplierOrderProductAsync()
+        {
+            IQueryable<Supplier_Order_Product> query = _context.Supplier_Order_Products.Include(op => op.Order).Include(op => op.Product).Include(op => op.Product.Price).Include(op => op.Receive_Order);
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Supplier_Order_Product> GetSupplierOrderProductByIdAsync(int orderId, int productId)
+        {
+            IQueryable<Supplier_Order_Product> query = _context.Supplier_Order_Products.Where(op => op.OrderId == orderId && op.ProductId == productId).Include(op => op.Order).Include(op => op.Order).Include(op => op.Product.Price).Include(op => op.Receive_Order);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Supplier_Order_Product[]> FilterProductsByOrderIdAsync(int orderId)
+        {
+            IQueryable<Supplier_Order_Product> query = _context.Supplier_Order_Products.Where(op => op.OrderId == orderId).Include(op => op.Product).Include(op => op.Order);
+            return await query.ToArrayAsync();
         }
 
         ///////////////////////////////////////////////////////SUPPLIER REPOSITORY END///////////////////////////////////////////////////////////////////////////////////    

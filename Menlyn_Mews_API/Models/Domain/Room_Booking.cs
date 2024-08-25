@@ -36,5 +36,7 @@ namespace Menlyn_Mews_API.Models.Domain
         [JsonIgnore]
         public Discount? Discount {  get; set; } 
 
+        public Booking_Review? Booking_Review { get; set; }
+
     }
 }

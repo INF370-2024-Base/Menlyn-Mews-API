@@ -12,6 +12,7 @@ using Menlyn_Mews_API.Models.Repositories;
 using Newtonsoft.Json;
 using Menlyn_Mews_API.ViewModels;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Domain.Emails;
 
 
 // using Menlyn_Mews.Data; //
@@ -102,7 +103,8 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.Toke
 
 builder.Services.AddScoped<IRepositroy, Repository>();
 
-
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IGeneralEmailService, GeneralEmailService>();
 
 //Authentication
 builder.Services.AddAuthentication(options =>
