@@ -90,9 +90,23 @@ namespace Menlyn_Mews_API.Data
         
         public DbSet<Rates> Rates { get; set; }
 
+        public DbSet<Audit_Log> AuditLogs { get; set; }
+
         public DbSet<Room_Inventory> Room_Inventory { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Audit_Log>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.User_Name).IsRequired().HasMaxLength(256);
+                entity.Property(e => e.Action).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Controller_Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Action_Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Timestamp).IsRequired();
+                entity.Property(e => e.Details).HasMaxLength(2000);
+            });
+
             base.OnModelCreating(modelBuilder);
             SeedRoles(modelBuilder);
 
@@ -395,6 +409,10 @@ namespace Menlyn_Mews_API.Data
 
         }
 
+
+
+
+
         private static void SeedRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityRole>().HasData
@@ -407,7 +425,9 @@ namespace Menlyn_Mews_API.Data
                 );
         }
 
-      //  public DbSet<Menlyn_Mews_API.Models.Domain.Inspection_Item>? Inspection_Item { get; set; }
+
+
 
     }
+
 }

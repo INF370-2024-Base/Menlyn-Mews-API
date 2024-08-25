@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using Menlyn_Mews_API.ViewModels;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Domain.Emails;
+using Menlyn_Mews_API.Filters;
+using Menlyn_Mews_API.Services;
 
 
 // using Menlyn_Mews.Data; //
@@ -20,7 +22,10 @@ using Menlyn_Mews_API.Models.Domain.Emails;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 
 builder.Services.AddControllers();
                     //.AddJsonOptions(options =>
@@ -73,6 +78,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 ///----------------------Copied and pasted so that migrations could work. It does not come precoded in---------------////
+
+
+// Register the AuditLogFilter
+builder.Services.AddScoped<AuditLogFilter>();
+
+// Register the IAuditLogService
+builder.Services.AddScoped<IAuditLogService, AuditLogService>(); // Ensure this matches your implementation
+
 
 builder.Services.AddCors(options =>
 {
@@ -133,6 +146,12 @@ var emailConfig = builder.Configuration
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+
+// Register the AuditLogFilter
+builder.Services.AddScoped<AuditLogFilter>();
+
+// Register the IAuditLogService
+builder.Services.AddScoped<IAuditLogService, AuditLogService>(); // Ensure thi
 
 
 var app = builder.Build();
