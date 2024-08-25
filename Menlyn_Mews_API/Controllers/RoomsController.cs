@@ -72,6 +72,8 @@ namespace Menlyn_Mews_API.Controllers
                     r.Room_Rate,
                     r.Room_Description,
                     r.Room_Photo_1,
+                    r.Room_Photo_2,
+                    r.Room_Photo_3,
                     r.Room_Type.Room_Type_Description,
                     r.Room_Type.Room_Type_Capacity,
                     r.Room_Type.Room_Size,
