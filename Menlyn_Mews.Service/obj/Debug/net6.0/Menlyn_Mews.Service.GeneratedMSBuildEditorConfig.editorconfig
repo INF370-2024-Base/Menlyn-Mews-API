@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Menlyn_Mews.Service
-build_property.ProjectDir = C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews.Service\
+build_property.ProjectDir = C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn_Mews.Service\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

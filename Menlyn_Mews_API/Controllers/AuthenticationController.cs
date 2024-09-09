@@ -14,6 +14,7 @@ using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using Menlyn_Mews_API.Models.Domain.Emails;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -28,6 +29,7 @@ namespace Menlyn_Mews_API.Controllers
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
         private readonly IRepositroy _repository;
+        private readonly IGeneralEmailService _generateEmailService;
 
         public AuthenticationController(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
@@ -35,7 +37,7 @@ namespace Menlyn_Mews_API.Controllers
             IEmailService emailService,
             SignInManager<ApplicationUser> signInManager,
             IRepositroy repositroy,
-            AppDbContext context)
+            AppDbContext context, IGeneralEmailService generalEmailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -44,6 +46,7 @@ namespace Menlyn_Mews_API.Controllers
             _signInManager = signInManager;
             _repository = repositroy;
             _context = context;
+            _generateEmailService = generalEmailService;
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -416,8 +419,17 @@ namespace Menlyn_Mews_API.Controllers
                 await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, true);
                 var token = await _userManager.GenerateTwoFactorTokenAsync(user, "Email");
 
-                var message = new Message(new string[] { user.Email! }, "OTP Confirmation", token);
-                _emailService.SendEmail(message);
+                //var message = new Message(new string[] { user.Email! }, "OTP Confirmation", token);
+                //_emailService.SendEmail(message);
+
+                var mailrequest = new Mailrequest
+                {
+                    ToEmail = user.Email,
+                    Subject = "Menlyn Mews Login OTP",
+                    Body = GenerateOTPEmailBody(token)
+                };
+
+                await _generateEmailService.SendEmailAsync(mailrequest);
 
                 return StatusCode(StatusCodes.Status200OK,
                     new Response { Status = "Success", Message = $"We have sent an OTP to your email {user.Email}" });
@@ -514,19 +526,182 @@ namespace Menlyn_Mews_API.Controllers
             if (user != null)
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var forgotPasswordlink = Url.Action(nameof(ResetPassword), "Authentication", new { token, email = user.Email }, Request.Scheme);
-                var message = new Message(new string[] { user.Email! }, "Forgot Password Email Link", forgotPasswordlink!);
-                _emailService.SendEmail(message);
+                var userEmail = Uri.EscapeDataString(user.Email);
+                var encodedToken = Uri.EscapeDataString(token);
+                var forgotPasswordlink = $"http://localhost:4200/reset/{userEmail}/{encodedToken}";
 
+
+                var mailrequest = new Mailrequest
+                {
+                    ToEmail = email,
+                    Subject = "Reset Password",
+                    Body = GenerateForgotEmailBody(forgotPasswordlink),
+                };
+
+                await _generateEmailService.SendEmailAsync(mailrequest);
 
                 return StatusCode(StatusCodes.Status200OK,
-                    new Response { Status = "Success", Message = $"We have sent Password Reset Link to your email {user.Email}. Please Copy The OTP/Token For Successful Password Reset" });
-
+                    new Response { Status = "Success", Message = $"We have sent Password Reset Link to your email {user.Email}. Please check your inbox." });
             }
 
             return StatusCode(StatusCodes.Status400BadRequest,
                 new Response { Status = "Error", Message = "Could Not Send Link To Email!" });
         }
+
+        private string GenerateForgotEmailBody( string link)
+        {
+            var htmlContent = $@"
+                <html>
+                <head>
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }}
+                        .container {{
+                            width: 100%;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            border-radius: 10px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            max-width: 600px;
+                            margin: 50px auto;
+                        }}
+                        .header {{
+                            background-color: #007bff;
+                            color: #ffffff;
+                            padding: 20px;
+                            text-align: center;
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                        }}
+                        .content {{
+                            padding: 20px;
+                            font-size: 16px;
+                            line-height: 1.6;
+                            text-align: center;
+                        }}
+                        .content p {{
+                            margin-bottom: 20px;
+                        }}
+                        .button {{
+                            display: inline-block;
+                            background-color: #007bff;
+                            color: #ffffff;
+                            padding: 10px 20px;
+                            text-decoration: none;
+                            border-radius: 5px;
+                            font-size: 16px;
+                        }}
+                        .footer {{
+                            padding: 20px;
+                            text-align: center;
+                            font-size: 14px;
+                            color: #888888;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    <div class='container'>
+                        <div class='header'>
+                            <h1>Password Reset Request</h1>
+                        </div>
+                        <div class='content'>
+                            <p>Dear Client,</p>
+                            <p>We received a request to reset your password. If you made this request, please click the button below to reset your password.</p>
+                            <p><a href='{link}' class='button'>Reset Password</a></p>
+                            <p>If you did not make this request, please ignore this email.</p>
+                        </div>
+                        <div class='footer'>
+                            <p>Thank you, <br/>Menlyn Mews Team</p>
+                        </div>
+                    </div>
+                </body>
+                </html>";
+
+            return htmlContent;
+
+        }
+
+        private string GenerateOTPEmailBody(string OTP)
+        {
+            var htmlContent = $@"
+                <html>
+                <head>
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }}
+                        .container {{
+                            width: 100%;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            border-radius: 10px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            max-width: 600px;
+                            margin: 50px auto;
+                        }}
+                        .header {{
+                            background-color: #007bff;
+                            color: #ffffff;
+                            padding: 20px;
+                            text-align: center;
+                            border-top-left-radius: 10px;
+                            border-top-right-radius: 10px;
+                        }}
+                        .content {{
+                            padding: 20px;
+                            font-size: 16px;
+                            line-height: 1.6;
+                            text-align: center;
+                        }}
+                        .content p {{
+                            margin-bottom: 20px;
+                        }}
+                        .button {{
+                            display: inline-block;
+                            background-color: #007bff;
+                            color: #ffffff;
+                            padding: 10px 20px;
+                            text-decoration: none;
+                            border-radius: 5px;
+                            font-size: 16px;
+                        }}
+                        .footer {{
+                            padding: 20px;
+                            text-align: center;
+                            font-size: 14px;
+                            color: #888888;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    <div class='container'>
+                        <div class='header'>
+                            <h1>OTP</h1>
+                        </div>
+                        <div class='content'>
+                            <p>Dear Client</p>
+                            <p>Your One-Time-Pin Code Is Below. Please Do Not Share This</p>
+                            <p><a class='button'>{OTP}</a></p>
+                            <p>If you did not make this request, please ignore this email.</p>
+                        </div>
+                        <div class='footer'>
+                            <p>Thank you, <br/>Menlyn Mews Team</p>
+                        </div>
+                    </div>
+                </body>
+                </html>";
+
+            return htmlContent;
+
+        }
+
 
         [HttpGet]
         [Route("IsLoggedIn")]
