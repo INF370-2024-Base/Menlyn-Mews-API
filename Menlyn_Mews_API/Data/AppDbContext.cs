@@ -94,6 +94,30 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Room_Inventory> Room_Inventory { get; set; }
 
+
+        // --------------Temporall Models----------//
+
+        public DbSet<Prod> Prods { get; set; }
+
+        public DbSet<Prod_Category> Prod_Categories { get; set; }
+
+        public DbSet<Prod_Type> Prod_Types { get; set; }
+
+        public DbSet<Prise> Prises { get; set; }
+
+        public DbSet<Emp> Emps { get; set; }
+
+        public DbSet<Emp_Type> Emp_Types { get; set; }
+
+        public DbSet<Pos> Poss { get; set; }
+
+        public DbSet<Emp_Sheeft> Emp_Sheefts { get; set; }
+
+        public DbSet<Sheeft> Sheefts { get; set; }
+
+
+        // --------------Temporall Models----------//
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
