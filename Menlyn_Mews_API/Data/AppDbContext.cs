@@ -352,11 +352,11 @@ namespace Menlyn_Mews_API.Data
                 .HasForeignKey(bp => bp.ClientId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Payment_Type>()
-                .HasMany(p => p.Payments)
-                .WithOne(pt => pt.Payment_Type)
-                .HasForeignKey(fk => fk.PaymentTypeId)
-                .OnDelete(DeleteBehavior.Cascade);  
+            //modelBuilder.Entity<Payment_Type>()
+            //    .HasMany(p => p.Payments)
+            //    .WithOne(pt => pt.Payment_Type)
+            //    .HasForeignKey(fk => fk.PaymentTypeId)
+            //    .OnDelete(DeleteBehavior.Cascade);  
 
             modelBuilder.Entity<Complaint_Type>()
                 .HasMany(c => c.Complaint)
