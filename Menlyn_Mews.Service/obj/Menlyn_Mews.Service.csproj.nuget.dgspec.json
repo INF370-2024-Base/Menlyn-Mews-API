@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {}
+    "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
+    "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
+        "projectUniqueName": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
         "projectName": "Menlyn_Mews.Service",
-        "projectPath": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
-        "packagesPath": "C:\\Users\\hendr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\obj\\",
+        "projectPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
+        "packagesPath": "C:\\Users\\hayne\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hendr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hayne\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -39,11 +39,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -91,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

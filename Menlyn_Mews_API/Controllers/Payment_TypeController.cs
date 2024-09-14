@@ -1,6 +1,4 @@
-﻿
-
-using Menlyn_Mews_API.Data;
+﻿using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
