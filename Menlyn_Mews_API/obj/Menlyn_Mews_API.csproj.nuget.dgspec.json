@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj": {}
+    "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
+    "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
+        "projectUniqueName": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
         "projectName": "Menlyn_Mews.Service",
-        "projectPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
-        "packagesPath": "C:\\Users\\hayne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\obj\\",
+        "projectPath": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
+        "packagesPath": "C:\\Users\\ghost\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hayne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ghost\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
+          "c:\\program files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -86,24 +91,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj": {
+    "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
+        "projectUniqueName": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
         "projectName": "Menlyn_Mews_API",
-        "projectPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
-        "packagesPath": "C:\\Users\\hayne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews_API\\obj\\",
+        "projectPath": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
+        "packagesPath": "C:\\Users\\ghost\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hayne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ghost\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -112,15 +117,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
+          "c:\\program files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
-                "projectPath": "C:\\Users\\hayne\\Documents\\GitHub\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj"
+              "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
+                "projectPath": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj"
               }
             }
           }
@@ -129,6 +134,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -225,7 +235,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
