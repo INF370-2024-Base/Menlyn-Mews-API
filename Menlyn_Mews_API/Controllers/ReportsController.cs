@@ -1,14 +1,7 @@
-﻿using Humanizer;
-using Menlyn_Mews_API.Data;
+﻿using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-using Microsoft.Reporting.WebForms;
-using System.IO;
-using System.Web;
-using Newtonsoft.Json;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -36,7 +29,7 @@ namespace Menlyn_Mews_API.Controllers
                 var results = await _productRepositroy.GetProductsAsync();
 
                 dynamic productCategory = results
-                                        .GroupBy(p => p.ProductCategory.Product_Category_Name)
+                                        .GroupBy(p => p.ProductType.ProductCategory.Product_Category_Name)
                                         .Select(c => new
                                         {
                                             Key = c.Key,
@@ -44,7 +37,7 @@ namespace Menlyn_Mews_API.Controllers
                                         });
 
                 dynamic productList = results
-                                    .GroupBy(p => new { CategoryName = p.ProductCategory.Product_Category_Name, ProductName = p.Product_Name })
+                                    .GroupBy(p => new { CategoryName = p.ProductType.ProductCategory.Product_Category_Name, ProductName = p.Product_Name })
                                     .Select(p => new
                                     {
                                         p.Key.CategoryName,
@@ -133,7 +126,7 @@ namespace Menlyn_Mews_API.Controllers
                 {
                     p.Product_Name,
                     p.Quantity_On_Hand,
-                    Category_Name = p.ProductCategory.Product_Category_Name,
+                    Category_Name = p.ProductType.ProductCategory.Product_Category_Name,
                     Type_Name = p.ProductType.Product_Type_Name,
                 })
                 .OrderBy(p => p.Quantity_On_Hand);

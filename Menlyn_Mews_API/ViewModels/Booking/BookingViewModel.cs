@@ -1,7 +1,4 @@
-﻿using Menlyn_Mews_API.Models.Domain;
-using System.Text.Json.Serialization;
-
-namespace Menlyn_Mews_API.ViewModels.Booking
+﻿namespace Menlyn_Mews_API.ViewModels.Booking
 {
     public class BookingViewModel
     {

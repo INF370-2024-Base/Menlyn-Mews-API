@@ -229,11 +229,45 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
+        [HttpGet]
+        [Route("CheckDiscountUsedByClientBooking/{clientId}/{discountId}")]
+        public async Task<ActionResult> GetClient_Discount(int clientId, int discountId)
+        {
+            //try
+            //{
+            //    var co = await _repository.GetClientDiscountByIdAsync(discountId, clientId);
+            //    if (co == null) return Ok("Redeemable");
+            //    if (co != null) return Ok("Redeemed");
+
+            //    return NoContent();
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex.Message);
+            //}
+             var co = await _repository.GetClientDiscountByIdAsync(discountId, clientId);
+            var isvalid = "";
+            if (co == null) 
+            {
+                 isvalid = "Redeemable";
+            }
+            else if (discountId == -1)
+            {
+                isvalid = "Invalid";
+            }
+            else
+            {
+                 isvalid = "Redeemed";
+            }
+            return Ok(co); 
+        }
+
         [HttpPost]
         [Route("CreateRoomBooking")]
         public async Task<IActionResult> PostRoom_Booking(BookingViewModel bvm)
         {
             var vat = await _repository.GetVATAsync();
+            var isvalid = "";
 
             var booking = new Room_Booking
             {
@@ -247,13 +281,38 @@ namespace Menlyn_Mews_API.Controllers
                 BookingPackageId = bvm.BookingPackageId,
                 DiscountId = bvm.DiscountId,
             };
-            if (booking.DiscountId == -1)
+
+            var co = await _repository.GetClientDiscountByIdAsync(booking.DiscountId!.Value, booking.ClientId);
+            if (co == null && booking.DiscountId != -1) 
+            {
+                 isvalid = "Redeemable";
+            }
+            else if (booking.DiscountId!.Value == -1)
+            {
+                isvalid = "Invalid";
+            }
+            else
+            {
+                 isvalid = "Redeemed";
+            }
+
+            if (booking.DiscountId == -1 || isvalid == "Redeemed")
             {
                 booking.DiscountId = null;
             }
+
             try
             {
                 _context.Add(booking);
+                if (isvalid == "Redeemable")
+                {
+                    var clientDiscount = new Client_Discount
+                    {
+                        DiscountId = booking.DiscountId!.Value,
+                        ClientId = booking.ClientId,
+                    };
+                    _context.Client_Discounts.Add(clientDiscount);
+                }
                 await _context.SaveChangesAsync();
                 //TwilioClient.Init(accountSid, authToken); /*ONLY UNCOMMENT FOR PRESENTATIONS, COSTS MONEY TO USE*/
 

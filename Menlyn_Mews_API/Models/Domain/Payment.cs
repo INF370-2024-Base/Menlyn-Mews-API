@@ -11,12 +11,11 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Payment_Status { get; set; }
 
         //FK
-        public int Payment_Type_Id { get; set; }
+        public int PaymentTypeId { get; set; }
+        public Payment_Type Payment_Type { get; set; }  
 
-        public int Client_Id { get; set; }
-
-        public int Employee_Id { get; set; }
-
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
 
     }
 }

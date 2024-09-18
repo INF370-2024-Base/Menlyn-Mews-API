@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
-using Newtonsoft.Json.Linq;
 using Menlyn_Mews_API.ViewModels.Products;
 
 namespace Menlyn_Mews_API.Controllers
@@ -40,7 +33,6 @@ namespace Menlyn_Mews_API.Controllers
                     p.ProductId,
                     p.Product_Name,
                     p.Quantity_On_Hand,
-                    Category_Name = p.ProductCategory.Product_Category_Name,
                     Type_Name = p.ProductType.Product_Type_Name,
                     Inventory = p.Inventory.Inventory_Name,
                     Price  = p.Price.Product_Price
@@ -68,7 +60,6 @@ namespace Menlyn_Mews_API.Controllers
                     p.ProductId,
                     p.Product_Name,
                     p.Quantity_On_Hand,
-                    Category_Name = p.ProductCategory.Product_Category_Name,
                     Type_Name = p.ProductType.Product_Type_Name,
                     Inventory = p.Inventory.Inventory_Name,
                     Price = p.Price.Product_Price
@@ -96,7 +87,6 @@ namespace Menlyn_Mews_API.Controllers
                 existingProduct.PriceId = pvm.Price_Id;
                 existingProduct.InventoryId = pvm.Inventory_Id;
                 existingProduct.ProductTypeId = pvm.Product_Type_Id;
-                existingProduct.ProductCategoryId = pvm.Product_Category_Id;
 
 
                 if (await _repository.SaveChangesAsync())
@@ -122,7 +112,6 @@ namespace Menlyn_Mews_API.Controllers
                 Product_Name = pvm.Product_Name,
                 Quantity_On_Hand = pvm.Quantity_On_Hand,
                 ProductTypeId = pvm.Product_Type_Id,
-                ProductCategoryId = pvm.Product_Category_Id,    
                 PriceId = pvm.Price_Id, 
                 InventoryId = pvm.Inventory_Id,
             };

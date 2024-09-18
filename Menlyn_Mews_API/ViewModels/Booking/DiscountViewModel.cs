@@ -8,5 +8,6 @@
         public DateTime Start_Date { get; set; }
         public DateTime End_Date { get; set; }
         public bool Is_Active { get; set; }
+        public bool email_Sent { get; set; }
     }
 }

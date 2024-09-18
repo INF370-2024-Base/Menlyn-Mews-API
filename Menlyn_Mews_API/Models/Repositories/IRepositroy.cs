@@ -155,6 +155,11 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Complaint[]> GetComplaintsAsync();
         public Task<Complaint> GetComplaintByIdAsync(int complaintId);
 
+        //Client Discount
+        public Task<Client_Discount[]> GetClientDiscountsAsync();
+        public Task<Client_Discount> GetClientDiscountByIdAsync(int discountId, int clientId);
+        public Task<Client_Discount[]> GetUsedClientDiscountsAsync(int clientId);
+
         ///////////////////////////////////////////////////////CLIENT REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -13,8 +13,12 @@ namespace Menlyn_Mews_API.Models.Domain
         public DateTime Start_Date { get; set; }    
         public DateTime End_Date { get; set; }
         public bool Is_Active { get; set; }
+        public bool? email_Sent { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Room_Booking>? Room_Booking { get; set;}
+
+        [JsonIgnore]
+        public virtual ICollection<Client_Discount>? Client_Discounts { get; set; }
     }
 }

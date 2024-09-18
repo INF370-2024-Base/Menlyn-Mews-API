@@ -18,10 +18,6 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public int ProductTypeId { get; set; }
         public Product_Type ProductType { get; set; }
-
-        public int ProductCategoryId { get; set; }  
-        public Product_Category ProductCategory { get; set; }
-
  
         //Bridge
         public virtual ICollection<Supplier_Order_Product> Supplier_Order_Product { get; set; }

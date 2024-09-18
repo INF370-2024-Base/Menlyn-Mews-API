@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
@@ -32,7 +26,16 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 var results = await _repository.GetProductTypesAsync();
-                return Ok(results);
+
+                dynamic products = results.Select(pt => new
+                {
+                    pt.ProductTypeId,
+                    pt.Product_Type_Description,
+                    pt.Product_Type_Name,
+                    pt.ProductCategory.Product_Category_Name
+                });
+
+                return Ok(products);
             }
             catch (Exception ex)
             {
@@ -47,6 +50,7 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 var results = await _repository.GetProductTypeByIdAsync(productTypeId);
+
                 return Ok(results);
             }
             catch (Exception ex)
@@ -66,6 +70,7 @@ namespace Menlyn_Mews_API.Controllers
 
                 productType.Product_Type_Name = ptvm.Product_Type_Name;
                 productType.Product_Type_Description = ptvm.Product_Type_Description;
+                productType.ProductCategoryId = ptvm.ProductCategoryId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -88,6 +93,7 @@ namespace Menlyn_Mews_API.Controllers
             {
                 Product_Type_Name = ptvm.Product_Type_Name,
                 Product_Type_Description = ptvm.Product_Type_Description,
+                ProductCategoryId = ptvm.ProductCategoryId,
             };
 
             try

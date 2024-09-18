@@ -77,6 +77,7 @@ namespace Menlyn_Mews_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
+
         [HttpGet]
         [Route("GetOrderWithProducts/{orderId}")]
         public async Task<IActionResult> GetOrder(int orderId)

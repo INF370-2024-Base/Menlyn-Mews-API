@@ -94,26 +94,11 @@ namespace Menlyn_Mews_API.Data
 
         public DbSet<Room_Inventory> Room_Inventory { get; set; }
 
+        public DbSet<Client_Discount> Client_Discounts { get; set; }
+
 
         // --------------Temporall Models----------//
 
-        public DbSet<Prod> Prods { get; set; }
-
-        public DbSet<Prod_Category> Prod_Categories { get; set; }
-
-        public DbSet<Prod_Type> Prod_Types { get; set; }
-
-        public DbSet<Prise> Prises { get; set; }
-
-        public DbSet<Emp> Emps { get; set; }
-
-        public DbSet<Emp_Type> Emp_Types { get; set; }
-
-        public DbSet<Pos> Poss { get; set; }
-
-        public DbSet<Emp_Sheeft> Emp_Sheefts { get; set; }
-
-        public DbSet<Sheeft> Sheefts { get; set; }
 
 
         // --------------Temporall Models----------//
@@ -186,7 +171,12 @@ namespace Menlyn_Mews_API.Data
                     ri.InventoryId,
                 });
 
-
+            modelBuilder.Entity<Client_Discount>()
+                .HasKey(cd => new
+                {
+                    cd.DiscountId,
+                    cd.ClientId,
+                });
 
             modelBuilder.Entity<Room_Inventory>()
                 .HasOne(ri => ri.Room)
@@ -218,6 +208,18 @@ namespace Menlyn_Mews_API.Data
                 .WithMany(s => s.Employee_Shift)
                 .HasForeignKey(es => es.ShiftId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Client_Discount>()
+                .HasOne(cd => cd.Discount)
+                .WithMany(d => d.Client_Discounts)
+                .HasForeignKey(cd => cd.DiscountId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Client_Discount>()
+                .HasOne(cd => cd.Client)
+                .WithMany(c => c.Client_Discounts)
+                .HasForeignKey(cd => cd.ClientId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Stock_Take>()
                 .HasOne(i => i.Inventory)
@@ -393,6 +395,12 @@ namespace Menlyn_Mews_API.Data
                 .WithOne(br => br.Room_Booking)
                 .HasForeignKey<Booking_Review>(br => br.RoomBookingId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Payment>() 
+                .HasOne(p => p.Payment_Type)
+                .WithMany(p => p.Payment)
+                .HasForeignKey(p => p.PaymentTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
             //     .HasMany(e => e.Employees)

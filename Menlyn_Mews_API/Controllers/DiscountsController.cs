@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.ViewModels.Booking;
-using System.Security.Cryptography;
+using Menlyn_Mews_API.Models.Domain.Emails;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -19,34 +14,55 @@ namespace Menlyn_Mews_API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IRepositroy _repository;
+        private readonly IGeneralEmailService _generalEmailService;
 
-        public DiscountsController(AppDbContext context, IRepositroy repositroy)
+        public DiscountsController(AppDbContext context, IRepositroy repositroy, IGeneralEmailService generalEmailService)
         {
             _context = context;
             _repository = repositroy;   
+            _generalEmailService = generalEmailService;
         }
+
 
         [HttpGet]
         [Route("CheckCode")]
-        public async Task<ActionResult> FindDiscount(string code)
+        public async Task<ActionResult> FindDiscount(string code, int clientId)
         {
             try
             {
                 var discount = await _repository.FindDiscountCodeAsync(code);
-                if (discount == null) return NotFound("Code Does Not Exist!");
 
-                return Ok( new 
-                { 
+                if (discount == null)
+                {
+                    return Ok(new { res = "Non-Existent" });
+                }
+
+                if (discount.End_Date < DateTime.Now)
+                {
+                    discount.Is_Active = false;
+                    await _repository.SaveChangesAsync();
+
+                    return Ok(new { res = "Expired" });
+                }
+
+                var clientDiscount = await _repository.GetClientDiscountByIdAsync(discount.DiscountId, clientId);
+                if (clientDiscount != null)
+                {
+                    return Ok(new { res = "Redeemed" });
+                }
+
+                return Ok(new
+                {
                     discountId = discount.DiscountId,
                     amount = discount.Discount_Percenatage,
                 });
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
 
 
         [HttpGet]
@@ -109,6 +125,78 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
+        [HttpPost("SendDiscountToAllClients")]
+        public async Task<IActionResult> SendDiscountToAllClients(int discountId)
+        {
+            try
+            {
+                var discount = await _repository.GetDiscountByIdAsync(discountId);
+                if (discount == null) return NotFound("Discount Code Does Not Exist");
+
+                if (discount.email_Sent == true)
+                {
+                    return BadRequest(new { res = "Sent" });
+                }
+
+                var clients = await _repository.GetClientsAsync();
+                var emailList = clients.Select(c => c.Client_Email_Address).ToList();
+
+                if (emailList.Count == 0)
+                {
+                    return BadRequest("No clients found in the system.");
+                }
+
+                string subject = $"Exclusive Discount: {discount.Discount_Name}";
+                string body = GenerateDiscountEmailBody(discount);
+
+                foreach (var email in emailList)
+                {
+                    var mailRequest = new Mailrequest
+                    {
+                        ToEmail = email,
+                        Subject = subject,
+                        Body = body
+                    };
+
+                    await _generalEmailService.SendEmailAsync(mailRequest);
+                }
+
+                discount.email_Sent = true;
+                _context.Update(discount);
+                await _repository.SaveChangesAsync();
+
+                return Ok(new { Message = "Discount emails sent to all clients." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+
+        private string GenerateDiscountEmailBody(Discount discount)
+        {
+                    return $@"
+            <div style='font-family: Arial, sans-serif; padding: 20px;'>
+                <h2 style='color: #4CAF50;'>Exclusive Discount Just for You!</h2>
+                <p>Dear Valued Client,</p>
+                <p>We are excited to offer you an exclusive discount on your next booking:</p>
+                <ul>
+                    <li><strong>Discount Code:</strong> {discount.Discount_Code}</li>
+                    <li><strong>Discount Percentage:</strong> {discount.Discount_Percenatage}%</li>
+                    <li><strong>Valid Until:</strong> {discount.End_Date.ToString("dd MMMM yyyy")}</li>
+                </ul>
+                <p>Don't miss out! Use this discount code at checkout before it expires.</p>
+                <p>Best Regards,</p>
+                <p><strong>Menlyn Mews</strong></p>
+                <div style='text-align: center; margin-top: 20px;'>
+                    <a href='http://localhost:4200/home' style='padding: 10px 20px; color: white; background-color: #4CAF50; text-decoration: none;'>Book Now</a>
+                </div>
+            </div>
+            ";
+        }
+
+
         [HttpPost]
         [Route("Add5DiscountCode/{discountAmount}")]
         public async Task<IActionResult> Post5Discount(decimal discountAmount, DiscountViewModel dvm)
@@ -130,6 +218,7 @@ namespace Menlyn_Mews_API.Controllers
                 Start_Date = dvm.Start_Date,
                 End_Date = dvm.End_Date,
                 Is_Active = dvm.Is_Active,
+                email_Sent = false,
             };
 
             try

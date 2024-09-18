@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Menlyn_Mews_API.Models.Domain.SignUp
+﻿namespace Menlyn_Mews_API.Models.Domain.SignUp
 {
     public class RegisterUser
     {
