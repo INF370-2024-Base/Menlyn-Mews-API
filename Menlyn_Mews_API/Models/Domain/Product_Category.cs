@@ -10,10 +10,8 @@ namespace Menlyn_Mews_API.Models.Domain
         public string Product_Category_Name { get; set; }    
         public string Product_Category_Description { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Product_Type>? Product_Type { get; set; } 
 
-        //Related Tables 
-        [JsonIgnore]
-        public virtual ICollection<Product> Product { get; set; }
     }
 }

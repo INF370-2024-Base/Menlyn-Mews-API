@@ -5,6 +5,7 @@ using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.ViewModels.Booking;
 using Menlyn_Mews_API.Models.Domain.Emails;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -125,7 +126,43 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        [HttpPost("SendDiscountToAllClients")]
+        [HttpPost]
+        [Route("SendDiscountToClient/{discountId}/{clientId}")]
+        public async Task<IActionResult> SendDiscountToClient(int discountId, int clientId)
+        {
+            try
+            {
+                var discount = await _repository.GetDiscountByIdAsync(discountId);
+                if (discount == null) return NotFound("Discount Code Does Not Exist");
+
+                var client = await _repository.GetClientByIdAsync(clientId);
+                if (client == null) return NotFound("Client Does Not Exist");
+
+                var clientEmail = client.Client_Email_Address;
+
+                string subject = $"Exclusive Discount: {discount.Discount_Name}";
+                string body = GenerateDiscountEmailBody(discount);
+
+                var mailRequest = new Mailrequest
+                {
+                    ToEmail = clientEmail,
+                    Subject = subject,
+                    Body = body
+                };
+
+                await _generalEmailService.SendEmailAsync(mailRequest);
+
+                return Ok(new { Message = "Discount Email Sent To Client." });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("SendDiscountToAllClients/{discountId}")]
         public async Task<IActionResult> SendDiscountToAllClients(int discountId)
         {
             try

@@ -34,7 +34,7 @@ namespace Menlyn_Mews_API.Controllers
                     op.Quantity,
                     op.Order.Order_Description,
                     op.Product.Product_Name,
-                    op.Product.Price.Product_Price,
+                    //op.Product.Price.Product_Price,
                     op.Receive_Order?.Received_By,
                     op.Receive_Order?.Received_Order_Date
                 });
@@ -127,7 +127,7 @@ namespace Menlyn_Mews_API.Controllers
                     op.Quantity,
                     op.Order.Order_Description,
                     op.Product.Product_Name,
-                    op.Product.Price.Product_Price,
+                   // op.Product.Price.Product_Price,
                     op.Receive_Order?.Received_By,
                     op.Receive_Order?.Received_Order_Date
                 };

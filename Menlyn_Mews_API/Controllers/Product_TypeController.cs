@@ -59,6 +59,30 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetProductTypeByCategoryId/{productCategoryId}")]
+        public async Task<ActionResult<Product_Type>> GetProductTypeByCategory(int productCategoryId)
+        {
+            try
+            {
+                var results = await _repository.GetProductTypesByCategoryAsync(productCategoryId);
+
+                dynamic products = results.Select(pt => new
+                {
+                    pt.ProductTypeId,
+                    pt.Product_Type_Description,
+                    pt.Product_Type_Name,
+                    pt.ProductCategory.Product_Category_Name
+                });
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPut]
         [Route("EditProductType/{productTypeId}")]
         public async Task<ActionResult<ProductTypeViewModel>> PutProduct_Type(int productTypeId, ProductTypeViewModel ptvm)

@@ -1,7 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Menlyn_Mews_API.Models.Domain
 {

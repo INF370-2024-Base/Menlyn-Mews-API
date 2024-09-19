@@ -46,7 +46,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Products
         public async Task<Product[]> GetProductsAsync()
         {
-            IQueryable<Product> query = _context.Products.Include(p => p.Inventory).Include(p => p.ProductType).Include(p => p.Price);
+            IQueryable<Product> query = _context.Products.Include(p => p.Inventory).Include(p => p.ProductType).Include(p => p.Price).Include(p => p.ProductType.ProductCategory);
 
             return await query.ToArrayAsync();
         }
@@ -60,7 +60,7 @@ namespace Menlyn_Mews_API.Models.Repositories
 
         public async Task<Product> GetProductAsync(int productId)
         {
-            IQueryable<Product> query = _context.Products.Where(p => p.ProductId == productId).Include(p => p.Inventory).Include(p => p.ProductType).Include(p => p.Price);
+            IQueryable<Product> query = _context.Products.Where(p => p.ProductId == productId).Include(p => p.Inventory).Include(p => p.ProductType).Include(p => p.Price).Include(p => p.ProductType.ProductCategory);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -75,6 +75,12 @@ namespace Menlyn_Mews_API.Models.Repositories
         {
             IQueryable<Product_Type> query = _context.Product_Types.Where(pt => pt.ProductTypeId == productTypeId).Include(p => p.ProductCategory);
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Product_Type[]> GetProductTypesByCategoryAsync(int productCategoryId)
+        {
+            IQueryable<Product_Type> query = _context.Product_Types.Where(p => p.ProductCategoryId == productCategoryId).Include(p => p.ProductCategory);
+            return await query.ToArrayAsync();
         }
 
         //Product Category

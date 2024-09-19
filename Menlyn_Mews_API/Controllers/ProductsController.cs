@@ -34,6 +34,7 @@ namespace Menlyn_Mews_API.Controllers
                     p.Product_Name,
                     p.Quantity_On_Hand,
                     Type_Name = p.ProductType.Product_Type_Name,
+                    Category_Name = p.ProductType.ProductCategory.Product_Category_Name,
                     Inventory = p.Inventory.Inventory_Name,
                     Price  = p.Price.Product_Price
                 });
@@ -60,9 +61,10 @@ namespace Menlyn_Mews_API.Controllers
                     p.ProductId,
                     p.Product_Name,
                     p.Quantity_On_Hand,
-                    Type_Name = p.ProductType.Product_Type_Name,
-                    Inventory = p.Inventory.Inventory_Name,
-                    Price = p.Price.Product_Price
+                    p.InventoryId,
+                    p.ProductTypeId,
+                    p.PriceId,
+                    p.Price.Product_Price
                 };
 
                 return Ok(products);
@@ -87,7 +89,8 @@ namespace Menlyn_Mews_API.Controllers
                 existingProduct.PriceId = pvm.Price_Id;
                 existingProduct.InventoryId = pvm.Inventory_Id;
                 existingProduct.ProductTypeId = pvm.Product_Type_Id;
-
+                existingProduct.PriceId = pvm.Price_Id;
+                existingProduct.Price.Product_Price = pvm.Product_Price;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -105,15 +108,31 @@ namespace Menlyn_Mews_API.Controllers
         // POST: api/Products
         [HttpPost]
         [Route("PostProduct")]
-        public async Task<IActionResult> PostProduct(ProductViewModel pvm)
+        public async Task<IActionResult> PostProduct(AddProductViewModel pvm)
         {
+            var price = new Price
+            {
+                Product_Price = pvm.Product_Price,
+                Price_Date = DateTime.Now,
+            };
+
+            try
+            {
+                _repository.Add(price);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid Price Transaction");
+            }
+
             var product = new Product
             {
                 Product_Name = pvm.Product_Name,
                 Quantity_On_Hand = pvm.Quantity_On_Hand,
                 ProductTypeId = pvm.Product_Type_Id,
-                PriceId = pvm.Price_Id, 
                 InventoryId = pvm.Inventory_Id,
+                PriceId = price.PriceId,
             };
 
             try

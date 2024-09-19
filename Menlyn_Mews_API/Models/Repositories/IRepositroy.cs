@@ -25,6 +25,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Product Type
         Task<Product_Type[]> GetProductTypesAsync();
         Task<Product_Type> GetProductTypeByIdAsync(int productTypeId);
+        Task<Product_Type[]> GetProductTypesByCategoryAsync(int productCategoryId);
 
         //Product Category
         Task<Product_Category[]> GetProductCategoriesAsync();
