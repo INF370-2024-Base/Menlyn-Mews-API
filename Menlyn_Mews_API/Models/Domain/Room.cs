@@ -25,20 +25,6 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public string? Room_Photo_3 { get; set; }
 
-        public string? Room_Photo_4 { get; set; }
-
-        public string? Room_Photo_5 { get; set; }
-
-        public string? Room_Photo_6 { get; set; }
-
-        public string? Room_Photo_7 { get; set; }
-
-        public string? Room_Photo_8 { get; set; }
-
-        public string? Room_Photo_9 { get; set; }
-
-        public string? Room_Photo_10 { get; set; }
-
         public string? Amenities { get; set; }
 
         //------------------------------------FK-----------------------------------//

@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Quartz;
 using System.Text;
 using Menlyn_Mews_API.Models.Domain.Emails;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -129,7 +130,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "roompics")),
+    RequestPath = "/roompics"
+});
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAngularDev");

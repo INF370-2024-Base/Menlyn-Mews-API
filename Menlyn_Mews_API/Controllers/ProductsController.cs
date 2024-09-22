@@ -61,9 +61,10 @@ namespace Menlyn_Mews_API.Controllers
                     p.ProductId,
                     p.Product_Name,
                     p.Quantity_On_Hand,
-                    p.InventoryId,
-                    p.ProductTypeId,
-                    p.PriceId,
+                    Inventory_Id = p.InventoryId,
+                    Product_Type_Id = p.ProductTypeId,
+                    Price_Id = p.PriceId,
+                    p.ProductType.ProductCategory.ProductCategoryId,
                     p.Price.Product_Price
                 };
 

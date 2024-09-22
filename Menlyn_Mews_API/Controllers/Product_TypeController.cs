@@ -50,8 +50,17 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 var results = await _repository.GetProductTypeByIdAsync(productTypeId);
+                if (results == null) return NotFound("Product Type Does Not Exist");
 
-                return Ok(results);
+                dynamic products =  new
+                {
+                    results.ProductTypeId,
+                    results.Product_Type_Description,
+                    results.Product_Type_Name,  
+                    results.ProductCategoryId,
+                };
+
+                return Ok(products);
             }
             catch (Exception ex)
             {
