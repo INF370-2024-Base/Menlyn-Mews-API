@@ -100,20 +100,20 @@ SELECT * FROM Rooms
 
 INSERT INTO Rooms (Room_Number, Room_Floor, Room_Status, Room_Rate, Room_Description, RoomTypeId, Room_Photo_1, Room_Photo_2, Room_Photo_3)
 VALUES
-(101, 1, 'Available', 250.00, 'A cozy single room perfect for solo travelers. The unit has 1 bed.', 1, './assets/roompics/Picture2.jpg','./assets/roompics/Picture1.jpg','./assets/roompics/Room Pic (1).jpg'),
-(102, 1, 'Booked', 1500.00, 'Deluxe King Room The double room offers a tea and coffee maker, a dining area, a terrace with garden views as well as a private bathroom boasting a bath. The unit has 1 bed. Balcony Garden view Bath Private bathroom Flat-screen TV Terrace ', 1, './assets/roompics/Room Pic (3).jpg', './assets/roompics/Room Pic (26).jpg', './assets/roompics/Room Pic (21).jpg'),
-(201, 1, 'Available', 700.00, 'A spacious double room with a comfortable bed. Deluxe King Room Private bathroom No smoking', 2, './assets/roompics/Room Pic (1).jpg', './assets/roompics/Room Pic (1).png', './assets/roompics/Room Pic (8).jpg' ),
-(202, 1, 'Booked', 700.00, 'A spacious double room with a comfortable bed. Private bathroom. The unit offers 1 bed. No smoking', 2, './assets/roompics/Room Pic (2).jpg', './assets/roompics/Room Pic (9).jpg', './assets/roompics/Room Pic (11).jpg' ),
-(301, 1, 'Booked', 600.00, 'Double Room with Shared Bathroom. A large family suite ideal for families or groups. The unit offers 1 bed. No Smoking', 3, './assets/roompics/Room Pic (3).jpg', './assets/roompics/Room Pic (4).jpg', './assets/roompics/Room Pic (5).jpg'),
-(302, 1, 'Booked', 700.00, 'Double Room with Shared Bathroom. A large family suite ideal for families or groups.', 3, './assets/roompics/Room Pic (6).jpg', './assets/roompics/Room Pic (8).jpg', './assets/roompics/Room Pic (9).jpg'),
-(401, 1, 'Available', 750.00, 'Double Room with Shared Bathroom A luxurious deluxe room with modern amenities.', 4, './assets/roompics/Room Pic (7).jpg', './assets/roompics/Room Pic (11).jpg', './assets/roompics/Room Pic (19).jpg'),
-(402, 2, 'Booked', 750.00, 'Double Room with Shared Bathroom. A luxurious deluxe room with modern amenities.', 4, './assets/roompics/Room Pic (12).jpg', './assets/roompics/Room Pic (21).jpg', './assets/roompics/Room Pic (23).jpg'),
-(501, 2, 'Available', 800.00, 'Double Room with Shared Bathroom. A presidential suite with exclusive features.', 5, './assets/roompics/Room Pic (14).jpg', './assets/roompics/Room Pic (26).jpg', './assets/roompics/Room Pic (24).jpg'),
-(502, 2, 'Booked', 1200.00, 'King Studio with Sofa Bed. A presidential suite with exclusive features.Entire studio. Comfy Beds', 5, './assets/roompics/Room Pic (16).jpg', './assets/roompics/Room Pic (19).jpg', './assets/roompics/Room Pic (21).jpg' ),
-(601, 2, 'Available', 1100.00, 'Queen Room with Spa Bath. An executive room with business facilities.', 6, './assets/roompics/Room Pic (17).jpg', './assets/roompics/Room Pic (21).jpg', './assets/roompics/Room Pic (19).jpg'),
-(602, 2, 'Booked', 1000.00, 'Standard Queen Room. An executive room with business facilities. Offering free toiletries and bathrobes, this double room includes a private bathroom with a bath and a hairdryer. The double room offers a tea and coffee maker, a dining area and a wardrobe. The unit has 1 bed.', 6, './assets/roompics/Room Pic (18).jpg', './assets/roompics/Room Pic (26).jpg', './assets/roompics/Room Pic (11).jpg'),
-(701, 2, 'Available', 900.00, 'Studio with Garden View. A honeymoon suite perfect for couples.', 7, './assets/roompics/Room Pic (22).jpg', './assets/roompics/Room Pic (26).jpg', './assets/roompics/Room Pic (23).jpg'),
-(702, 2, 'Booked', 17000.00, 'Superior King Room. A honeymoon suite perfect for couples.', 7, './assets/roompics/Room Pic (25).jpg', './assets/roompics/Room Pic (24).jpg', './assets/roompics/Room Pic (26).jpg');
+(101, 1, 'Available', 250.00, 'A cozy single room perfect for solo travelers. The unit has 1 bed.', 1, 'roompics/Picture2.jpg','roompics/Picture1.jpg','roompics/Room Pic (1).jpg'),
+(102, 1, 'Booked', 1500.00, 'Deluxe King Room The double room offers a tea and coffee maker, a dining area, a terrace with garden views as well as a private bathroom boasting a bath. The unit has 1 bed. Balcony Garden view Bath Private bathroom Flat-screen TV Terrace ', 1, 'roompics/Room Pic (3).jpg', 'roompics/Room Pic (26).jpg', 'roompics/Room Pic (21).jpg'),
+(201, 1, 'Available', 700.00, 'A spacious double room with a comfortable bed. Deluxe King Room Private bathroom No smoking', 2, 'roompics/Room Pic (1).jpg', 'roompics/Room Pic (1).png', 'roompics/Room Pic (8).jpg' ),
+(202, 1, 'Booked', 700.00, 'A spacious double room with a comfortable bed. Private bathroom. The unit offers 1 bed. No smoking', 2, 'roompics/Room Pic (2).jpg', 'roompics/Room Pic (9).jpg', 'roompics/Room Pic (11).jpg' ),
+(301, 1, 'Booked', 600.00, 'Double Room with Shared Bathroom. A large family suite ideal for families or groups. The unit offers 1 bed. No Smoking', 3, 'roompics/Room Pic (3).jpg', 'roompics/Room Pic (4).jpg', 'roompics/Room Pic (5).jpg'),
+(302, 1, 'Booked', 700.00, 'Double Room with Shared Bathroom. A large family suite ideal for families or groups.', 3, 'roompics/Room Pic (6).jpg', 'roompics/Room Pic (8).jpg', 'roompics/Room Pic (9).jpg'),
+(401, 1, 'Available', 750.00, 'Double Room with Shared Bathroom A luxurious deluxe room with modern amenities.', 4, 'roompics/Room Pic (7).jpg', 'roompics/Room Pic (11).jpg', 'roompics/Room Pic (19).jpg'),
+(402, 2, 'Booked', 750.00, 'Double Room with Shared Bathroom. A luxurious deluxe room with modern amenities.', 4, 'roompics/Room Pic (12).jpg', 'roompics/Room Pic (21).jpg', 'roompics/Room Pic (23).jpg'),
+(501, 2, 'Available', 800.00, 'Double Room with Shared Bathroom. A presidential suite with exclusive features.', 5, 'roompics/Room Pic (14).jpg', 'roompics/Room Pic (26).jpg', 'roompics/Room Pic (24).jpg'),
+(502, 2, 'Booked', 1200.00, 'King Studio with Sofa Bed. A presidential suite with exclusive features.Entire studio. Comfy Beds', 5, 'roompics/Room Pic (16).jpg', 'roompics/Room Pic (19).jpg', 'roompics/Room Pic (21).jpg' ),
+(601, 2, 'Available', 1100.00, 'Queen Room with Spa Bath. An executive room with business facilities.', 6, 'roompics/Room Pic (17).jpg', 'roompics/Room Pic (21).jpg', 'roompics/Room Pic (19).jpg'),
+(602, 2, 'Booked', 1000.00, 'Standard Queen Room. An executive room with business facilities. Offering free toiletries and bathrobes, this double room includes a private bathroom with a bath and a hairdryer. The double room offers a tea and coffee maker, a dining area and a wardrobe. The unit has 1 bed.', 6, 'roompics/Room Pic (18).jpg', 'roompics/Room Pic (26).jpg', 'roompics/Room Pic (11).jpg'),
+(701, 2, 'Available', 900.00, 'Studio with Garden View. A honeymoon suite perfect for couples.', 7, 'roompics/Room Pic (22).jpg', 'roompics/Room Pic (26).jpg', 'roompics/Room Pic (23).jpg'),
+(702, 2, 'Booked', 17000.00, 'Superior King Room. A honeymoon suite perfect for couples.', 7, 'roompics/Room Pic (25).jpg', 'roompics/Room Pic (24).jpg', 'roompics/Room Pic (26).jpg');
 
 SELECT * FROM Inventory_Types
 SELECT * FROM Inventory_Categories
@@ -1925,19 +1925,6 @@ VALUES
 ('2024-07-05', 20, 2000.00, 9, 4, 4),
 ('2024-07-06', 70, 7000.00, 10, 5, 5);
 
-
-INSERT INTO Product_Types (Product_Type_Name, Product_Type_Description) VALUES
-('Food and Beverage', 'Products related to food and drinks served to guests'),
-('Toiletries', 'Personal care items provided for guest use in bathrooms'),
-('Amenities', 'Additional items provided for guest convenience and comfort'),
-('Household Items', 'Items used for maintaining and organizing the household'),
-('Cleaning Supplies', 'Products used for cleaning and sanitation'),
-('Office Supplies', 'Stationery and other supplies used in the office'),
-('Health & Wellness', 'Products related to health and wellness such as vitamins and supplements'),
-('Electronics', 'Gadgets and electronic devices'),
-('Kitchen Appliances', 'Appliances used in the kitchen for cooking and food preparation'),
-('Furniture', 'Various types of furniture for home and office use');
-
 INSERT INTO Product_Categories (Product_Category_Name, Product_Category_Description) VALUES
 ('Beverages', 'Includes all types of drinks such as coffee, tea, juice, and water'),
 ('Bath Products', 'Includes soaps, shampoos, conditioners, and other bath-related products'),
@@ -1949,6 +1936,18 @@ INSERT INTO Product_Categories (Product_Category_Name, Product_Category_Descript
 ('Decor Items', 'Includes items used for decorating rooms and common areas'),
 ('Kitchen Essentials', 'Includes utensils, cookware, and kitchen gadgets'),
 ('Personal Care', 'Includes personal hygiene products such as lotions, deodorants, and razors');
+
+INSERT INTO Product_Types (Product_Type_Name, Product_Type_Description, ProductCategoryId) VALUES
+('Food and Beverage', 'Products related to food and drinks served to guests', 1),
+('Toiletries', 'Personal care items provided for guest use in bathrooms', 2),
+('Amenities', 'Additional items provided for guest convenience and comfort', 3),
+('Household Items', 'Items used for maintaining and organizing the household', 4),
+('Cleaning Supplies', 'Products used for cleaning and sanitation', 5),
+('Office Supplies', 'Stationery and other supplies used in the office', 6),
+('Health & Wellness', 'Products related to health and wellness such as vitamins and supplements', 7),
+('Electronics', 'Gadgets and electronic devices', 8),
+('Kitchen Appliances', 'Appliances used in the kitchen for cooking and food preparation', 9),
+('Furniture', 'Various types of furniture for home and office use', 6);
 
 INSERT INTO Prices (Product_Price, Price_Date) 
 VALUES
@@ -1974,35 +1973,35 @@ VALUES
 (12, '2024-07-09');
 
 
-INSERT INTO Products (Product_Name, Quantity_On_Hand, PriceId, InventoryId, ProductTypeId, ProductCategoryId) VALUES
-('Coffee', 100, 1, 1, 1, 1),
-('Shampoo', 50, 2, 2, 2, 2),
-('Pillow', 30, 3, 3, 3, 3),
-('Tea', 80, 4, 1, 1, 1),
-('Conditioner', 40, 5, 2, 2, 2),
-('Blanket', 20, 6, 3, 3, 3),
-('Juice', 60, 7, 1, 1, 1),     
-('Body Lotion', 45, 8, 2, 2, 2),    
-('Slippers', 25, 9, 3, 3, 3),        
-('Cookies', 70, 10, 1, 1, 1),       
-('Toothpaste', 55, 11, 2, 2, 2),   
-('Comforter', 15, 12, 3, 3, 3),    
-('Broom', 50, 1, 1, 4, 4),
-('Trash Can', 30, 2, 2, 4, 4),
-('Multi-Surface Cleaner', 100, 3, 3, 5, 5),
-('Glass Cleaner', 75, 4, 4, 5, 5),
-('Printer Paper', 200, 5, 5, 6, 6),
-('Stapler', 150, 6, 6, 6, 6),
-('Vitamin C Tablets', 60, 7, 7, 7, 7),
-('First Aid Kit', 40, 8, 8, 7, 7),
-('Wireless Mouse', 25, 9, 9, 8, 6),
-('Bluetooth Speaker', 15, 10, 10, 8, 6),
-('Blender', 20, 11, 9, 9, 9),
-('Toaster', 30, 12, 9, 9, 9),
-('Office Chair', 10, 13, 7, 10, 8),
-('Dining Table', 8, 14, 9, 10, 8),
-('Chips', 100, 15, 1, 4, 4),
-('Nuts', 80, 16, 1, 4, 4);
+INSERT INTO Products (Product_Name, Quantity_On_Hand, PriceId, InventoryId, ProductTypeId) VALUES
+('Coffee', 100, 1, 1, 1),
+('Shampoo', 50, 2, 2, 2),
+('Pillow', 30, 3, 3, 3),
+('Tea', 80, 4, 1, 1),
+('Conditioner', 40, 5, 2, 2),
+('Blanket', 20, 6, 3, 3),
+('Juice', 60, 7, 1, 1),     
+('Body Lotion', 45, 8, 2, 2),    
+('Slippers', 25, 9, 3, 3),        
+('Cookies', 70, 10, 1, 1),       
+('Toothpaste', 55, 11, 2, 2),   
+('Comforter', 15, 12, 3, 3),    
+('Broom', 50, 1, 1, 4),
+('Trash Can', 30, 2, 2, 4),
+('Multi-Surface Cleaner', 100, 3, 3, 5),
+('Glass Cleaner', 75, 4, 4, 5),
+('Printer Paper', 200, 5, 5, 6),
+('Stapler', 150, 6, 6, 6),
+('Vitamin C Tablets', 60, 7, 7, 7),
+('First Aid Kit', 40, 8, 8, 7),
+('Wireless Mouse', 25, 9, 9, 8),
+('Bluetooth Speaker', 15, 10, 10, 8),
+('Blender', 20, 11, 9, 9),
+('Toaster', 30, 12, 9, 9),
+('Office Chair', 10, 13, 7, 10),
+('Dining Table', 8, 14, 9, 10),
+('Chips', 100, 15, 1, 4),
+('Nuts', 80, 16, 1, 4);
 
 INSERT INTO Supplier_Types (Supplier_Type_Description) 
 VALUES
@@ -2138,17 +2137,19 @@ INSERT INTO Booking_Packages (Booking_Package_Name, Booking_Package_Description,
 ('Wellness Package', 'Focuses on relaxation and wellness services', 280.00),
 ('Event Package', 'Includes event planning and management services', 500.00);
 
-INSERT INTO Discount (Discount_Name, Discount_Code, Discount_Percenatage, Start_Date, End_Date, Is_Active) VALUES
-('Summer Sale', 'SUMMER2024', 15.00, '2024-06-01', '2024-08-31', 'true'),
-('Holiday Discount', 'HOLIDAY2024', 20.00, '2024-12-01', '2024-12-31', 'true'),
-('Early Bird Special', 'EARLYBIRD2024', 10.00, '2024-01-01', '2024-03-31', 'false'),
-('New Year Promo', 'NEWYEAR2024', 25.00, '2024-01-01', '2024-01-15', 'true'),
-('Valentine’s Day Offer', 'VALENTINE2024', 18.00, '2024-02-01', '2024-02-14', 'true'),
-('Spring Forward', 'SPRING2024', 12.00, '2024-03-01', '2024-05-31', 'true'),
-('Back to School', 'BACKTOSCHOOL2024', 10.00, '2024-08-01', '2024-09-30', 'false'),
-('Black Friday Deal', 'BLACKFRIDAY2024', 30.00, '2024-11-01', '2024-11-30', 'true'),
-('Cyber Monday Special', 'CYBERMONDAY2024', 20.00, '2024-11-25', '2024-11-30', 'true'),
-('Winter Warm Up', 'WINTER2024', 15.00, '2024-12-01', '2024-02-28', 'true');
+select * from Discount
+
+INSERT INTO Discount (Discount_Name, Discount_Code, Discount_Percenatage, Start_Date, End_Date, Is_Active, email_Sent) VALUES
+('Summer Sale', 'SUMMER2024', 15.00, '2024-06-01', '2024-08-31', 'true', 'false'),
+('Holiday Discount', 'HOLIDAY2024', 20.00, '2024-12-01', '2024-12-31', 'true', 'false'),
+('Early Bird Special', 'EARLYBIRD2024', 10.00, '2024-01-01', '2024-03-31', 'false', 'false'),
+('New Year Promo', 'NEWYEAR2024', 25.00, '2024-01-01', '2024-01-15', 'true', 'false'),
+('Valentine’s Day Offer', 'VALENTINE2024', 18.00, '2024-02-01', '2024-02-14', 'true', 'false'),
+('Spring Forward', 'SPRING2024', 12.00, '2024-03-01', '2024-05-31', 'true', 'false'),
+('Back to School', 'BACKTOSCHOOL2024', 10.00, '2024-08-01', '2024-09-30', 'false', 'false'),
+('Black Friday Deal', 'BLACKFRIDAY2024', 30.00, '2024-11-01', '2024-11-30', 'true', 'false'),
+('Cyber Monday Special', 'CYBERMONDAY2024', 20.00, '2024-11-25', '2024-11-30', 'true', 'false'),
+('Winter Warm Up', 'WINTER2024', 15.00, '2024-12-01', '2024-02-28', 'true', 'false');
 
 select * from room_bookings
 
@@ -2185,6 +2186,8 @@ INSERT INTO Payment_Types (Payment_Type_description) VALUES
 ('Credit Card'),
 ('Debit Card'),
 ('Cash');
+
+SELECT * FROM Payment
 
 INSERT INTO Payment (Payment_Date, Payment_Amount, Payment_Status, PaymentTypeId, ClientId) VALUES
 ('2024-07-01', 100.00, 'Completed', 1, 1),
@@ -2225,6 +2228,9 @@ INSERT INTO Complaints (Complaint_Description, Complaint_Date, Complaint_Status,
 ('Food quality issue', '2024-07-08', 'Pending', 2, 2, 8),
 ('Incorrect billing', '2024-07-09', 'Resolved', 3, 3, 3),
 ('Check-in process delay', '2024-07-10', 'Pending', 1, 1, 10);
+
+INSERT INTO Client_Discounts VALUES
+(1,1)
 
 INSERT INTO Room_Inventory VALUES
 (1, 1),
