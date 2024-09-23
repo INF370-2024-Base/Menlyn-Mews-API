@@ -50,8 +50,6 @@ namespace Menlyn_Mews_API.Controllers
             return client;
         }
 
-        // PUT: api/Clients1/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutClient(int id, Client client)
         {
@@ -81,8 +79,6 @@ namespace Menlyn_Mews_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Clients1
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Client>> PostClient(Client client)
         {
@@ -96,7 +92,6 @@ namespace Menlyn_Mews_API.Controllers
             return CreatedAtAction("GetClient", new { id = client.ClientId }, client);
         }
 
-        // DELETE: api/Clients1/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient(int id)
         {

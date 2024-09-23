@@ -68,7 +68,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         public async Task<Product_Type[]> GetProductTypesAsync()
         {
             IQueryable<Product_Type> query = _context.Product_Types.Include(p => p.ProductCategory);
-            return await query.ToArrayAsync();  
+            return await query.ToArrayAsync();
         }
 
         public async Task<Product_Type> GetProductTypeByIdAsync(int productTypeId)
@@ -86,7 +86,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Product Category
         public async Task<Product_Category[]> GetProductCategoriesAsync()
         {
-            IQueryable<Product_Category> query =  _context.Product_Categories;
+            IQueryable<Product_Category> query = _context.Product_Categories;
             return await query.ToArrayAsync();
         }
 
@@ -116,7 +116,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Inventory
         public async Task<Inventory[]> GetInventoriesAsync()
         {
-            IQueryable<Inventory> query =  _context.Inventories.Include(i => i.InventoryCategory).Include(i => i.InventoryType);
+            IQueryable<Inventory> query = _context.Inventories.Include(i => i.InventoryCategory).Include(i => i.InventoryType);
             return await query.ToArrayAsync();
         }
 
@@ -225,7 +225,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         public async Task<Employee_Type[]> GetEmployeeTypesAsync()
         {
             IQueryable<Employee_Type> query = _context.Employee_Types;
-            return await query.ToArrayAsync();  
+            return await query.ToArrayAsync();
         }
 
         public async Task<Employee_Type> GetEmployeeTypeByIdAsync(int employeeTypeId)
@@ -244,17 +244,17 @@ namespace Menlyn_Mews_API.Models.Repositories
         {
             IQueryable<Shift> query = _context.Shifts.Where(s => s.ShiftId == shiftId);
             return await query.FirstOrDefaultAsync();
-        } 
+        }
 
         //Employee
         public async Task<Employee[]> GetEmployeesAsync()
         {
-            IQueryable<Employee> query = _context.Employees.Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates);
+            IQueryable<Employee> query = _context.Employees.Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates).Include(a => a.ApplicationUser);
             return await query.ToArrayAsync();
         }
         public async Task<Employee> GetEmployeeByIdAsync(int employeeId)
         {
-            IQueryable<Employee> query = _context.Employees.Where(e => e.EmployeeId == employeeId).Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates);
+            IQueryable<Employee> query = _context.Employees.Where(e => e.EmployeeId == employeeId).Include(e => e.Employee_Type).Include(e => e.Position).Include(r => r.Rates).Include(a => a.ApplicationUser);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -293,7 +293,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         public async Task<Rates[]> GetRatesAsync()
         {
             IQueryable<Rates> query = _context.Rates;
-            return await query.ToArrayAsync(); 
+            return await query.ToArrayAsync();
         }
         public async Task<Rates> GetRatesByIdAsync(int ratesId)
         {
@@ -363,6 +363,12 @@ namespace Menlyn_Mews_API.Models.Repositories
         {
             IQueryable<Room> query = _context.Rooms.Where(r => r.RoomId == roomId).Include(r => r.Room_Type);
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Room_Inventory[]> FilterInventoriesByRoomIdAsync(int roomId)
+        {
+            IQueryable<Room_Inventory> query = _context.Room_Inventory.Where(ri => ri.RoomId == roomId).Include(ri => ri.Inventory).Include(ri => ri.Room);
+            return await query.ToArrayAsync();  
         }
 
         //Room Booking

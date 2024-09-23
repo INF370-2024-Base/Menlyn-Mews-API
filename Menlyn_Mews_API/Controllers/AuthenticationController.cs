@@ -238,7 +238,7 @@ namespace Menlyn_Mews_API.Controllers
 
         }
 
-        [HttpPost("RegisterEmployee")]
+        [HttpPost("RegisterEmployee/{role}")]
         public async Task<IActionResult> RegisterEmployee([FromBody] RegisterEmployee registerUser, string role)
         {
             //Exist?
@@ -609,7 +609,7 @@ namespace Menlyn_Mews_API.Controllers
                             <h1>Password Reset Request</h1>
                         </div>
                         <div class='content'>
-                            <p>Dear Client,</p>
+                            <p>Dear User,</p>
                             <p>We received a request to reset your password. If you made this request, please click the button below to reset your password.</p>
                             <p><a href='{link}' class='button'>Reset Password</a></p>
                             <p>If you did not make this request, please ignore this email.</p>
@@ -686,7 +686,7 @@ namespace Menlyn_Mews_API.Controllers
                             <h1>OTP</h1>
                         </div>
                         <div class='content'>
-                            <p>Dear Client</p>
+                            <p>Dear User</p>
                             <p>Your One-Time-Pin Code Is Below. Please Do Not Share This</p>
                             <p><a class='button'>{OTP}</a></p>
                             <p>If you did not make this request, please ignore this email.</p>

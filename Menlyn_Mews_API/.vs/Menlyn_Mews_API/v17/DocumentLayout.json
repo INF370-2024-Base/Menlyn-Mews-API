@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\models\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:models\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\models\\repositories\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:models\\repositories\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\auditlogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\auditlogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\models\\domain\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:models\\domain\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\viewmodels\\employee\\employeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:viewmodels\\employee\\employeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\clients1controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\clients1controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\room_inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\room_inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -59,16 +99,8 @@
       "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:viewmodels\\products\\addproductviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\supplier_order_productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\supplier_order_productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\models\\domain\\discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -150,10 +182,6 @@
       "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:models\\domain\\audit_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\auditlogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\auditlogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\desktop\\menlyn-mews-api\\menlyn_mews_api\\controllers\\vatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\vatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -209,7 +237,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -217,7 +245,97 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Clients1Controller.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Clients1Controller.cs",
+              "RelativeDocumentMoniker": "Controllers\\Clients1Controller.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Clients1Controller.cs",
+              "RelativeToolTip": "Controllers\\Clients1Controller.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T19:50:45.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EmployeesController.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "Controllers\\EmployeesController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAowBoAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T19:47:27.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthenticationController.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "Controllers\\AuthenticationController.cs",
+              "ViewState": "AQIAAAUBAAAAAAAAAAAWwCIBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T14:15:04.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Room_InventoryController.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Room_InventoryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Room_InventoryController.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Room_InventoryController.cs",
+              "RelativeToolTip": "Controllers\\Room_InventoryController.cs",
+              "ViewState": "AQIAAMQAAAAAAAAAAAD4v9YAAABaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T13:46:24.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Models\\Repositories\\Repository.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Repositories\\Repository.cs*",
+              "RelativeToolTip": "Models\\Repositories\\Repository.cs*",
+              "ViewState": "AQIAAOQAAAAAAAAAAAAawAABAADPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T13:42:50.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "OrderProductViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Supplier\\OrderProductViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Supplier\\OrderProductViewModel.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Supplier\\OrderProductViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Supplier\\OrderProductViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T18:25:43.458Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "IRepositroy.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Repositories\\IRepositroy.cs",
+              "RelativeDocumentMoniker": "Models\\Repositories\\IRepositroy.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Repositories\\IRepositroy.cs",
+              "RelativeToolTip": "Models\\Repositories\\IRepositroy.cs",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAewFcAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T13:41:48.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "20240922150759_initial.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20240922150759_initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20240922150759_initial.cs",
@@ -225,25 +343,50 @@
               "RelativeToolTip": "Migrations\\20240922150759_initial.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-22T15:08:00.403Z",
+              "WhenOpened": "2024-09-22T15:08:00.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuditLogController.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuditLogController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuditLogController.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuditLogController.cs",
+              "RelativeToolTip": "Controllers\\AuditLogController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T11:48:36.612Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
+              "Title": "EmployeeViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Employee\\EmployeeViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Employee\\EmployeeViewModel.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Employee\\EmployeeViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Employee\\EmployeeViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T19:54:29.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "RoomsController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\RoomsController.cs",
               "RelativeDocumentMoniker": "Controllers\\RoomsController.cs",
-              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\RoomsController.cs*",
-              "RelativeToolTip": "Controllers\\RoomsController.cs*",
-              "ViewState": "AQIAAMgAAAAAAAAAAAAcwNwAAAAfAAAA",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\RoomsController.cs",
+              "RelativeToolTip": "Controllers\\RoomsController.cs",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAIwHoAAABoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T20:40:31.175Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 16,
               "Title": "ReportsController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ReportsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReportsController.cs",
@@ -251,24 +394,11 @@
               "RelativeToolTip": "Controllers\\ReportsController.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAkwB8AAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T21:36:56.387Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-17T21:36:56.387Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Supplier_Order_ProductController.cs",
-              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Supplier_Order_ProductController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Supplier_Order_ProductController.cs",
-              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Supplier_Order_ProductController.cs",
-              "RelativeToolTip": "Controllers\\Supplier_Order_ProductController.cs",
-              "ViewState": "AQIAAGcAAAAAAAAAAADgv4EAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T19:01:39.53Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 28,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\ApplicationUser.cs",
@@ -280,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 20,
               "Title": "BackupService.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Services\\BackupService.cs",
               "RelativeDocumentMoniker": "Services\\BackupService.cs",
@@ -292,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 19,
               "Title": "Room_BookingController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Room_BookingController.cs",
               "RelativeDocumentMoniker": "Controllers\\Room_BookingController.cs",
@@ -304,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 17,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -312,12 +442,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAHQAAAAAAAAAAAD4v5AAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-25T11:38:03.97Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-25T11:38:03.97Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "RoomViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Booking\\RoomViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Booking\\RoomViewModel.cs",
@@ -325,12 +454,11 @@
               "RelativeToolTip": "ViewModels\\Booking\\RoomViewModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T21:07:36.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-20T21:07:36.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "AuditLogFilter.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Filters\\AuditLogFilter.cs",
               "RelativeDocumentMoniker": "Filters\\AuditLogFilter.cs",
@@ -338,12 +466,11 @@
               "RelativeToolTip": "Filters\\AuditLogFilter.cs",
               "ViewState": "AQIAAAIAAAAAAAAAAAAmwB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-25T11:39:10.875Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-25T11:39:10.875Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 13,
               "Title": "Room.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Room.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Room.cs",
@@ -351,12 +478,11 @@
               "RelativeToolTip": "Models\\Domain\\Room.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAqwBkAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-22T13:25:55.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-22T13:25:55.498Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 18,
               "Title": "Product_TypeController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Product_TypeController.cs",
               "RelativeDocumentMoniker": "Controllers\\Product_TypeController.cs",
@@ -368,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "Room_Booking.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Room_Booking.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Room_Booking.cs",
@@ -376,12 +502,11 @@
               "RelativeToolTip": "Models\\Domain\\Room_Booking.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAgwCQAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T17:17:40.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-18T17:17:40.019Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 21,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
@@ -393,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 24,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
@@ -405,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 25,
               "Title": "Discount.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Discount.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Discount.cs",
@@ -417,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 22,
               "Title": "ProductViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Products\\ProductViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Products\\ProductViewModel.cs",
@@ -429,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 23,
               "Title": "AddProductViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Products\\AddProductViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Products\\AddProductViewModel.cs",
@@ -441,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 27,
               "Title": "RegisterUser.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\SignUp\\RegisterUser.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\SignUp\\RegisterUser.cs",
@@ -453,19 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ClientsController.cs",
-              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ClientsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClientsController.cs",
-              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ClientsController.cs",
-              "RelativeToolTip": "Controllers\\ClientsController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAADkAAABIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-18T11:54:43.477Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "Client_DiscountController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\Client_DiscountController.cs",
               "RelativeDocumentMoniker": "Controllers\\Client_DiscountController.cs",
@@ -477,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 38,
               "Title": "Client_Discount.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Client_Discount.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Client_Discount.cs",
@@ -489,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 26,
               "Title": "Client.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Client.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Client.cs",
@@ -501,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 29,
               "Title": "DiscountViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Booking\\DiscountViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Booking\\DiscountViewModel.cs",
@@ -513,7 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 30,
               "Title": "BookingNoDisViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Booking\\BookingNoDisViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Booking\\BookingNoDisViewModel.cs",
@@ -525,7 +638,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 31,
               "Title": "BookingViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Booking\\BookingViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Booking\\BookingViewModel.cs",
@@ -537,7 +650,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 32,
               "Title": "ComplaintsController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ComplaintsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ComplaintsController.cs",
@@ -549,7 +662,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 34,
               "Title": "Payment.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Payment.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Payment.cs",
@@ -561,7 +674,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 35,
               "Title": "Payment_Type.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Payment_Type.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Payment_Type.cs",
@@ -573,7 +686,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 56,
               "Title": "Prod_Type.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Prod_Type.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Prod_Type.cs",
@@ -585,7 +698,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 37,
               "Title": "ProductTypeViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Products\\ProductTypeViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Products\\ProductTypeViewModel.cs",
@@ -597,7 +710,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 36,
               "Title": "ClientDiscountViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Client\\ClientDiscountViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\Client\\ClientDiscountViewModel.cs",
@@ -609,7 +722,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 57,
               "Title": "Prod_Category.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Prod_Category.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Prod_Category.cs",
@@ -621,7 +734,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 58,
               "Title": "Sheeft.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Sheeft.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Sheeft.cs",
@@ -633,7 +746,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 55,
               "Title": "Prise.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Prise.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Prise.cs",
@@ -645,7 +758,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 54,
               "Title": "Emp_Type.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Emp_Type.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Emp_Type.cs",
@@ -657,7 +770,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 53,
               "Title": "Pos.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Pos.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Pos.cs",
@@ -669,7 +782,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 52,
               "Title": "Emp.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Emp.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Emp.cs",
@@ -681,7 +794,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 39,
               "Title": "LoginModel.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Login\\LoginModel.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Login\\LoginModel.cs",
@@ -693,7 +806,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 40,
               "Title": "20240825144551_Initial.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20240825144551_Initial.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20240825144551_Initial.cs",
@@ -704,7 +817,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 43,
               "Title": "JobFactory.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\JobFactory.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\JobFactory.cs",
@@ -716,7 +829,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 42,
               "Title": "BackupJob.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\BackupJob.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\BackupJob.cs",
@@ -728,7 +841,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 41,
               "Title": "BackupController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\BackupController.cs",
               "RelativeDocumentMoniker": "Controllers\\BackupController.cs",
@@ -740,7 +853,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 44,
               "Title": "Audit_Log.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Audit_Log.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Audit_Log.cs",
@@ -752,7 +865,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 45,
               "Title": "VATsController.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\VATsController.cs",
               "RelativeDocumentMoniker": "Controllers\\VATsController.cs",
@@ -764,19 +877,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "AuditLogController.cs",
-              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuditLogController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuditLogController.cs",
-              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuditLogController.cs",
-              "RelativeToolTip": "Controllers\\AuditLogController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-25T11:48:36.612Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 46,
               "Title": "20240825123441_Initial.cs",
               "DocumentMoniker": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20240825123441_Initial.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20240825123441_Initial.cs",
@@ -788,7 +889,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 48,
               "Title": "IAuditLogService.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Services\\IAuditLogService.cs",
               "RelativeDocumentMoniker": "Services\\IAuditLogService.cs",
@@ -800,7 +901,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 47,
               "Title": "AuditLogService.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Services\\AuditLogService.cs",
               "RelativeDocumentMoniker": "Services\\AuditLogService.cs",
@@ -812,7 +913,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 49,
               "Title": "Complaint.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Complaint.cs",
               "RelativeDocumentMoniker": "Models\\Domain\\Complaint.cs",
@@ -824,7 +925,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 51,
               "Title": "20240824224417_initial.cs",
               "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20240824224417_initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20240824224417_initial.cs",
@@ -832,18 +933,53 @@
               "RelativeToolTip": "Migrations\\20240824224417_initial.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-24T22:44:18.004Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "b89be12d-0dc3-4f7a-9a66-925d7c91ed08",
+        "Display": 0,
+        "X": -5,
+        "Y": 81,
+        "Width": 1527,
+        "Height": 956,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClientsController.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ClientsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientsController.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\ClientsController.cs",
+              "RelativeToolTip": "Controllers\\ClientsController.cs",
+              "ViewState": "AQIAAGgAAAAAAAAAAAAIwIwAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T11:54:43.477Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "OrderProductViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Supplier\\OrderProductViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\Supplier\\OrderProductViewModel.cs",
-              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\ViewModels\\Supplier\\OrderProductViewModel.cs",
-              "RelativeToolTip": "ViewModels\\Supplier\\OrderProductViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "DocumentIndex": 6,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Employee.cs",
+              "RelativeDocumentMoniker": "Models\\Domain\\Employee.cs",
+              "ToolTip": "C:\\Users\\ghost\\Desktop\\Menlyn-Mews-API\\Menlyn_Mews_API\\Models\\Domain\\Employee.cs",
+              "RelativeToolTip": "Models\\Domain\\Employee.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwB8AAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T18:25:43.458Z"
+              "WhenOpened": "2024-09-23T19:56:26.964Z",
+              "EditorCaption": ""
             }
           ]
         }

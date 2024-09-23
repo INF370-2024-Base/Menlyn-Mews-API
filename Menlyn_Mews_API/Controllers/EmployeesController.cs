@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
@@ -45,6 +39,8 @@ namespace Menlyn_Mews_API.Controllers
                     e.Employee_Photo,
                     Employee_Type = e.Employee_Type.Type_Description,
                     Position = e.Position.Position_Description,
+                    UserEmail = e.ApplicationUser.Email,
+                    UserName = e.ApplicationUser.UserName,
                 });
 
                 return Ok(employees);
@@ -55,7 +51,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{employeeId}")]
         public async Task<ActionResult<Employee>> GetEmployee(int employeeId)
         {
             try
@@ -86,115 +82,88 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpPost("{id}"), DisableRequestSizeLimit]
-        public async Task<IActionResult> UpdateEmployee([FromForm] IFormCollection formData)
+        [HttpPut("{employeeId}")]
+        public async Task<IActionResult> UpdateEmployee(int employeeId, EmployeeViewModel evm)
         {
             try
             {
-                var formCollection = await Request.ReadFormAsync();
+                var employee = await _repository.GetEmployeeByIdAsync(employeeId);
+                if (employee == null) return NotFound("Employee Does Not Exist");
 
-                if (!formData.ContainsKey("employee_id"))
+                employee.Employee_Name = evm.Employee_Name;
+                employee.Employee_Surname = evm.Employee_Surname;
+                employee.Employee_ID_Number = evm.Employee_ID_Number;
+                employee.Employee_Email_Address = evm.Employee_Email_Address;
+                employee.Employee_Contact_Number = evm.Employee_Contact_Number;
+                employee.Employee_Gender = evm.Employee_Gender;
+                employee.Employee_Address = evm.Employee_Address;
+                employee.Employee_Photo = evm.Employee_Photo;
+                employee.EmployeeTypeId = evm.EmployeeTypeId;
+                employee.PositionId = evm.PositionId;
+                employee.RateId = evm.RateId;
+
+                if (await _repository.SaveChangesAsync())
                 {
-                    return BadRequest("Employee ID is required.");
-                }
-
-                int employeeId = Convert.ToInt32(formData["employee_id"]);
-                var employee = await _context.Employees.FindAsync(employeeId);
-
-                if (employee == null)
-                {
-                    return NotFound($"Employee with ID {employeeId} not found.");
-                }
-
-                // Check if a new file is uploaded
-                if (formCollection.Files.Count > 0)
-                {
-                    var file = formCollection.Files.First();
-                    if (file.Length > 0)
-                    {
-                        using (var ms = new MemoryStream())
-                        {
-                            file.CopyTo(ms);
-                            var fileBytes = ms.ToArray();
-                            string base64 = Convert.ToBase64String(fileBytes);
-
-                            employee.Employee_Photo = base64;
-                        }
-                    }
-                }
-
-                // Update other fields
-                employee.Employee_Name = formData["employee_name"];
-                employee.Employee_Surname = formData["employee_surname"];
-                employee.Employee_ID_Number = formData["employee_id_number"];
-                employee.Employee_Email_Address = formData["employee_email_address"];
-                employee.Employee_Contact_Number = formData["employee_contact_number"];
-                employee.Employee_Gender = formData["employee_gender"];
-                employee.Employee_Address = formData["employee_address"];
-                employee.EmployeeTypeId = Convert.ToInt32(formData["employee_type"]);
-                employee.PositionId = Convert.ToInt32(formData["employee_type"]);
-
-                // Save changes to the database
-                _context.Employees.Update(employee);
-                await _context.SaveChangesAsync();
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-            }
-        }
-
-
-        [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> AddEmployee([FromForm] IFormCollection formData)
-        {
-            try
-            {
-                var formCollection = await Request.ReadFormAsync();
-
-                var file = formCollection.Files.First();
-
-                if (file.Length > 0)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        file.CopyTo(ms);
-                        var fileBytes = ms.ToArray();   
-                        string base64 = Convert.ToBase64String(fileBytes);
-
-                        var employee = new Employee
-                        {
-                            Employee_Name = formData["employee_name"],
-                            Employee_Surname = formData["employee_surname"],
-                            Employee_ID_Number = formData["employee_id_number"],
-                            Employee_Email_Address = formData["employee_email_address"],
-                            Employee_Contact_Number = formData["employee_contact_number"],
-                            Employee_Gender = formData["employee_gender"],
-                            Employee_Address = formData["employee_address"],
-                            Employee_Photo = base64,
-                            EmployeeTypeId = Convert.ToInt32(formData["employee_type"]),
-                            PositionId = Convert.ToInt32(formData["employee_type"]),
-
-                        };
-
-                        _context.Employees.Add(employee);
-                        await _context.SaveChangesAsync();
-                    }
-
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
+                    return Ok(employee);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex}");
+                return BadRequest(ex.Message);
             }
+
+            return NoContent();
         }
+
+
+        //[HttpPost, DisableRequestSizeLimit]
+        //public async Task<IActionResult> AddEmployee([FromForm] IFormCollection formData)
+        //{
+        //    try
+        //    {
+        //        var formCollection = await Request.ReadFormAsync();
+
+        //        var file = formCollection.Files.First();
+
+        //        if (file.Length > 0)
+        //        {
+        //            using (var ms = new MemoryStream())
+        //            {
+        //                file.CopyTo(ms);
+        //                var fileBytes = ms.ToArray();   
+        //                string base64 = Convert.ToBase64String(fileBytes);
+
+        //                var employee = new Employee
+        //                {
+        //                    Employee_Name = formData["employee_name"],
+        //                    Employee_Surname = formData["employee_surname"],
+        //                    Employee_ID_Number = formData["employee_id_number"],
+        //                    Employee_Email_Address = formData["employee_email_address"],
+        //                    Employee_Contact_Number = formData["employee_contact_number"],
+        //                    Employee_Gender = formData["employee_gender"],
+        //                    Employee_Address = formData["employee_address"],
+        //                    Employee_Photo = base64,
+        //                    EmployeeTypeId = Convert.ToInt32(formData["employee_type"]),
+        //                    PositionId = Convert.ToInt32(formData["employee_type"]),
+
+        //                };
+
+        //                _context.Employees.Add(employee);
+        //                await _context.SaveChangesAsync();
+        //            }
+
+        //            return Ok();
+        //        }
+        //        else
+        //        {
+        //            return BadRequest();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }
+        //}
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)

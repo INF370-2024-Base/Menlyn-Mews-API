@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
-using Twilio.TwiML.Voice;
 using Menlyn_Mews_API.ViewModels.Inventory;
 
 namespace Menlyn_Mews_API.Controllers
@@ -120,15 +113,112 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(roomInventory);
         }
 
-        // DELETE: api/Room_Inventory/5
+        [HttpGet]
+        [Route("FilterInventories/{roomId}")]
+        public async Task<IActionResult> FilterInventories(int roomId)
+        {
+            try
+            {
+                var roomInventories = await _repository.FilterInventoriesByRoomIdAsync(roomId);
+
+                if (roomInventories == null)
+                {
+                    return NotFound("Room Does Not Have An Inventory Assigned");
+                }
+
+                var allInventories = await _repository.GetInventoriesAsync();
+
+                var roomInventoryIds = roomInventories.Select(i => i.InventoryId).ToHashSet();
+
+                var filteredInventories = allInventories.Where(i => roomInventoryIds.Contains(i.InventoryId));
+
+                dynamic results = filteredInventories.Select(i => new
+                {
+                    i.InventoryId,
+                    i.Inventory_Name
+                });
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet]
+        [Route("GetInventoriesNotAssignedToRoom/{roomId}")]
+        public async Task<IActionResult> GetInventoriesNotAssignedToRoom(int roomId)
+        {
+            try
+            {
+                var roomInventories = await _repository.FilterInventoriesByRoomIdAsync(roomId);
+
+                if (roomInventories == null)
+                {
+                    return NotFound("Room Does Not Have An Inventory Assigned");
+                }
+
+                var allInventories = await _repository.GetInventoriesAsync();
+
+                var roomInventoryIds = roomInventories.Select(i => i.InventoryId).ToHashSet();
+
+                var filteredInventories = allInventories.Where(i => !roomInventoryIds.Contains(i.InventoryId));
+
+                dynamic results = filteredInventories.Select(i => new
+                {
+                    i.InventoryId,
+                    i.Inventory_Name
+                });
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet]
+        [Route("ViewRoomInventory/{roomId}")]
+        public async Task<IActionResult> GetRoomsInventory(int roomId)
+        {
+            try
+            {
+                var results = await _repository.FilterInventoriesByRoomIdAsync(roomId);
+
+                if (results == null || !results.Any())
+                {
+                    return NotFound("Room Inventory Does Not Exist");
+                }
+
+                var roomInventory = results
+                    .Where(r => r.RoomId == roomId)
+                    .GroupBy(r => r.RoomId)
+                    .Select(g => new
+                    {
+                        RoomId = g.Key, 
+                        Inventories = string.Join(", ", g.Select(i => $"{i.Inventory.Inventory_Name}"))
+                    })
+                    .FirstOrDefault();
+
+                return Ok(roomInventory);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
+        }
+
+
         [HttpDelete("{roomId}/{inventoryId}")]
-        public async Task<IActionResult> DeleteRoom_Inventory(int id, int id2)
+        public async Task<IActionResult> DeleteRoom_Inventory(int roomId, int inventoryId)
         {
             if (_context.Room_Inventory == null)
             {
                 return NotFound();
             }
-            var room_Inventory = await _context.Room_Inventory.FindAsync(id, id2);
+            var room_Inventory = await _context.Room_Inventory.FindAsync(roomId, inventoryId);
             if (room_Inventory == null)
             {
                 return NotFound();

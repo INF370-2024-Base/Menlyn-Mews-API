@@ -120,6 +120,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Room
         public Task<Room[]> GetRoomsAsync();
         public Task<Room> GetRoomByIdAsync(int roomId);
+        public Task<Room_Inventory[]> FilterInventoriesByRoomIdAsync(int roomId);
 
         //Room Booking
         public Task<Room_Booking[]> GetRoomBookingsAsync();

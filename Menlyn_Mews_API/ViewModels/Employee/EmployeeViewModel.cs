@@ -1,8 +1,4 @@
-﻿using Menlyn_Mews_API.Models.Domain;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Menlyn_Mews_API.ViewModels.Employee
+﻿namespace Menlyn_Mews_API.ViewModels.Employee
 {
     public class EmployeeViewModel
     {
@@ -16,6 +12,7 @@ namespace Menlyn_Mews_API.ViewModels.Employee
         public string? Employee_Photo { get; set; } 
         public int EmployeeTypeId { get; set; }
         public int PositionId { get; set; }
+        public int RateId { get; set; }
     }
 
 }
