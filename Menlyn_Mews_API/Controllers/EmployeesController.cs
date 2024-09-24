@@ -70,8 +70,9 @@ namespace Menlyn_Mews_API.Controllers
                     e.Employee_Gender,
                     e.Employee_Address,
                     e.Employee_Photo,
-                    Employee_Type = e.Employee_Type.Type_Description,
-                    Position = e.Position.Position_Description,
+                    e.EmployeeTypeId,
+                    e.PositionId,
+                    e.RateId
                 };
 
                 return Ok(employees);
@@ -97,10 +98,14 @@ namespace Menlyn_Mews_API.Controllers
                 employee.Employee_Contact_Number = evm.Employee_Contact_Number;
                 employee.Employee_Gender = evm.Employee_Gender;
                 employee.Employee_Address = evm.Employee_Address;
-                employee.Employee_Photo = evm.Employee_Photo;
                 employee.EmployeeTypeId = evm.EmployeeTypeId;
                 employee.PositionId = evm.PositionId;
                 employee.RateId = evm.RateId;
+
+                if (!string.IsNullOrEmpty(evm.Employee_Photo))
+                {
+                    employee.Employee_Photo = evm.Employee_Photo;
+                }
 
                 if (await _repository.SaveChangesAsync())
                 {

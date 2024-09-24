@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
@@ -49,6 +43,32 @@ namespace Menlyn_Mews_API.Controllers
                 var rate = await _repository.GetRatesByIdAsync(rateId);
                 if (rate == null) return NotFound("Rate Does Not Exist");
                 return Ok(rate);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetFilteredRates")]
+        public async Task<ActionResult> GetFilteredRates()
+        {
+            try
+            {
+                var rates = await _repository.GetRatesAsync();
+                var employeeTypes = await _repository.GetEmployeeTypesAsync();
+
+                if (rates == null) return NotFound("Rate Does Not Exist");
+                if (employeeTypes == null) return NotFound("Employee Type Does Not Exist");
+
+                var employeeTypesWithoutRates = employeeTypes
+                    .Where(et => !rates.Any(r => r.Employee_Type == et.Type_Description))
+                    .ToList();
+
+                if (!employeeTypesWithoutRates.Any()) return NotFound("All Employee Types have a Rate");
+
+                return Ok(employeeTypesWithoutRates);
             }
             catch (Exception ex)
             {

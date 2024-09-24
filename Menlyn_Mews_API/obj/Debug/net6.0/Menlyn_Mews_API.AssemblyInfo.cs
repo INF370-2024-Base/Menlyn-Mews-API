@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Menlyn_Mews_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fe46df306a58eaeb8b8895a9badbce92fa603b64")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb6bacd7b4234693a27b99b03bb661e700999566")]
 [assembly: System.Reflection.AssemblyProductAttribute("Menlyn_Mews_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Menlyn_Mews_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

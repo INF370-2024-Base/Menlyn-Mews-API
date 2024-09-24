@@ -3115,3 +3115,5 @@ C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews_API\obj\Debug\net6.0\re
 C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews_API\obj\Debug\net6.0\Menlyn_Mews_API.pdb
 C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews_API\obj\Debug\net6.0\Menlyn_Mews_API.genruntimeconfig.cache
 C:\Users\hendr\OneDrive\Git_\Menlyn-Mews-API\Menlyn_Mews_API\obj\Debug\net6.0\ref\Menlyn_Mews_API.dll
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn_Mews_API\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ghost\Desktop\Menlyn-Mews-API\Menlyn_Mews_API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
