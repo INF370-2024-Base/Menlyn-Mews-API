@@ -246,6 +246,12 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Shift[]> GetShiftByDateAsync(DateTime date)
+        {
+            IQueryable<Shift> query = _context.Shifts.Where(s => s.Shift_Date == date);
+            return await query.ToArrayAsync();
+        }
+
         //Employee
         public async Task<Employee[]> GetEmployeesAsync()
         {

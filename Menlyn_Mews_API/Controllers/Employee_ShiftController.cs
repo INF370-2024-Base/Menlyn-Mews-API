@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
@@ -37,7 +31,41 @@ namespace Menlyn_Mews_API.Controllers
                 {
                     es.Employee.EmployeeId,
                     es.Shift.ShiftId,
-                    Employee_Name = es.Employee.Employee_Name,
+                    Employee_Name = es.Employee.Employee_Name + " " + es.Employee.Employee_Surname,
+                    Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
+                    Start_TIme = es.Shift.Start_TIme,
+                    End_TIme = es.Shift.End_TIme,
+                    Shift_Date = es.Shift.Shift_Date.Year + "-" + es.Shift.Shift_Date.Month + "-" + es.Shift.Shift_Date.Day,
+                    Shift_Date2 = es.Shift.Shift_Date,
+                    es.Clock_In_Time,
+                    es.Clock_Out_Time,
+                    es.Shift_Description,
+                })
+                .Where(es => es.Shift_Date2 == DateTime.Today);
+
+                return Ok(employeeshifts);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShiftHistory/{date}")]
+        public async Task<ActionResult> GetEmployeeShiftHistory(DateTime date)
+        {
+            try
+            {
+                var results = await _repository.GetEmployeeShiftsAsync();
+
+                dynamic employeeshifts = results
+                    .Where(es => es.Shift.Shift_Date == date)
+                    .Select(es => new
+                {
+                    es.Employee.EmployeeId,
+                    es.Shift.ShiftId,
+                    Employee_Name = es.Employee.Employee_Name + " " + es.Employee.Employee_Surname,
                     Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
                     Shift_Date = es.Shift.Shift_Date.Year + "-" + es.Shift.Shift_Date.Month + "-" + es.Shift.Shift_Date.Day,
                     es.Clock_In_Time,
@@ -59,6 +87,7 @@ namespace Menlyn_Mews_API.Controllers
         {
             try
             {
+
                 var es = await _repository.GetEmployeeShiftByIdAsync(employeeId, shiftId);
                 if (es == null) return NotFound("Employee Shift Does Not Exist");
 
@@ -113,15 +142,27 @@ namespace Menlyn_Mews_API.Controllers
         [Route("BookEmployeeShift")]
         public async Task<IActionResult> PostEmployee_Shift(AddEmployeeShiftViewModel esvm)
         {
+
+            var shift = await _repository.GetShiftByIdAsync(esvm.ShiftId);
+            if (shift == null) return NotFound("Shift not found");
+
             var employeeShift = new Employee_Shift
             {
                 EmployeeId = esvm.EmployeeId,
                 ShiftId = esvm.ShiftId,
-                Shift_Date = esvm.Shift_Date,
-                Clock_In_Time = esvm.Clock_In_Time,
-                Clock_Out_Time = esvm.Clock_Out_Time,
+                Shift_Date = DateTime.Today,
+                Clock_In_Time = DateTime.Now,
+                Clock_Out_Time = (DateTime)shift.End_TIme!,
                 Shift_Description = esvm.Shift_Description
             };
+
+            var alreadyBooked = await _repository.GetEmployeeShiftByIdAsync(employeeShift.EmployeeId, employeeShift.ShiftId);
+
+            if (alreadyBooked != null) 
+            {
+                return Ok(new { message = "You Have Already Booked A Shift Today!" });
+            }
+
 
             try
             {

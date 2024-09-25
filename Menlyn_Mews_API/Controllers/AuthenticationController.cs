@@ -209,7 +209,7 @@ namespace Menlyn_Mews_API.Controllers
                     Client_Name = registerUser.Client_Name,
                     Client_Surname = registerUser.Client_Surname,
                     Client_ID_Number = registerUser.Client_ID_Number,
-                    Client_Email_Address = registerUser.Client_Email_Address,
+                    Client_Email_Address = registerUser.Email,
                     Client_Contact_Number = registerUser.Client_Contact_Number,
                     Client_Gender = registerUser.Client_Gender,
                     Title = registerUser.Title,

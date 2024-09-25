@@ -129,6 +129,169 @@ namespace Menlyn_Mews_API.Controllers
             return Ok(shift);
         }
 
+        [HttpGet]
+        [Route("GetTodaysShifts")]
+        public async Task<ActionResult> GetTodaysShifts()
+        {
+            try
+            {
+                var today = DateTime.Today;
+
+                var todaysShifts = await _repository.GetShiftByDateAsync(today);
+
+                if (todaysShifts == null || !todaysShifts.Any())
+                {
+                    return Ok("Today's shifts have not yet been created.");
+                }
+
+                var shifts = todaysShifts.Select(s => new
+                {
+                    s.ShiftId,
+                    Shift_Date = s.Shift_Date,
+                    Start_Time = s.Start_TIme!.Value.ToString("hh:mm tt"),
+                    End_Time = s.End_TIme!.Value.ToString("hh:mm tt"),
+                    s.IP_Address
+                });
+
+                return Ok(shifts);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("CheckTodaysShifts")]
+        public async Task<IActionResult> CheckTodaysShifts()
+        {
+            try
+            {
+                var today = DateTime.Today;
+
+                var shifts = await _repository.GetShiftByDateAsync(today);
+
+                if (shifts != null && shifts.Any())
+                {
+                    return Ok(new { shiftsCreated = true });
+                }
+
+                return Ok(new { shiftsCreated = false });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "An error occurred while checking today's shifts.", error = ex.Message });
+            }
+        }
+
+
+
+
+        //[HttpPost]
+        //[Route("CreateTodaysShifts")]
+        //public async Task<IActionResult> CreateTodaysShifts()
+        //{
+        //    var today = DateTime.Today;
+
+        //    var existingShifts = await _repository.GetShiftByDateAsync(today);
+        //    if (existingShifts.Any())
+        //    {
+        //        return BadRequest( new { message = "Today's shifts have already been created." } );
+        //    }
+
+        //    var morningShift = new Shift
+        //    {
+        //        Shift_Date = today,
+        //        Start_TIme = today.AddHours(9),
+        //        End_TIme = today.AddHours(17),     
+        //        IP_Address = GetUserIpAddress(),
+        //    };
+
+        //    var afternoonShift = new Shift
+        //    {
+        //        Shift_Date = today,
+        //        Start_TIme = today.AddHours(17),
+        //        End_TIme = today.AddDays(1).AddHours(1),  
+        //        IP_Address = GetUserIpAddress(),
+        //    };
+
+        //    var nightShift = new Shift
+        //    {
+        //        Shift_Date = today,
+        //        Start_TIme = today.AddDays(1).AddHours(1),
+        //        End_TIme = today.AddDays(1).AddHours(9),   
+        //        IP_Address = GetUserIpAddress(),
+        //    };
+
+        //    try
+        //    {
+        //        _repository.Add(morningShift);
+        //        _repository.Add(afternoonShift);
+        //        _repository.Add(nightShift);
+        //        await _repository.SaveChangesAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //    return Ok(new { message = "Todays Shifts Have Been Created Successfully" });
+        //}
+
+        [HttpPost]
+        [Route("CreateTodaysShifts")]
+        public async Task<IActionResult> CreateTodaysShifts()
+        {
+            var today = DateTime.Today;
+
+            var existingShifts = await _repository.GetShiftByDateAsync(today);
+            if (existingShifts.Any())
+            {
+                return BadRequest(new { message = "Today's shifts have already been created." });
+            }
+
+            // Define the shifts with the specified times
+            var nightShift = new Shift
+            {
+                Shift_Date = today,
+                Start_TIme = today.AddHours(1),    // 01:00 AM
+                End_TIme = today.AddHours(9),      // 09:00 AM
+                IP_Address = GetUserIpAddress(),
+            };
+
+            var morningShift = new Shift
+            {
+                Shift_Date = today,
+                Start_TIme = today.AddHours(9),    // 09:00 AM
+                End_TIme = today.AddHours(17),     // 05:00 PM
+                IP_Address = GetUserIpAddress(),
+            };
+
+            var eveningShift = new Shift
+            {
+                Shift_Date = today,
+                Start_TIme = today.AddHours(15).AddMinutes(59),   // 03:59 PM
+                End_TIme = today.AddHours(23).AddMinutes(59),     // 11:59 PM
+                IP_Address = GetUserIpAddress(),
+            };
+
+            try
+            {
+                _repository.Add(nightShift);
+                _repository.Add(morningShift);
+                _repository.Add(eveningShift);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(new { message = "Today's shifts have been created successfully." });
+        }
+
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShift(int id)
         {

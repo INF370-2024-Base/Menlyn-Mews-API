@@ -3,6 +3,7 @@ using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.ViewModels.Client;
+using Menlyn_Mews_API.Models.Domain.Emails;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -19,8 +20,9 @@ namespace Menlyn_Mews_API.Controllers
             _repository = repositroy;
         }
 
-        [HttpGet]
 
+
+        [HttpGet]
         public async Task<ActionResult> GetClients()
         {
             try
@@ -48,6 +50,13 @@ namespace Menlyn_Mews_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //[HttpPost]
+        //[Route("ContactUs/{email}/{name}/{message}")]
+        //public async Task<IActionResult> ContactUsEmail(string email, string name, string message)
+        //{
+
+        //}
 
         [HttpGet("{clientId}")]
         public async Task<ActionResult<Client>> GetClient(int clientId)

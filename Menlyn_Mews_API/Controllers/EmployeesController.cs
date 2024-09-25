@@ -83,6 +83,41 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("EmployeeDetails/{employeeId}")]
+        public async Task<ActionResult<Employee>> GetEmployeeById(int employeeId)
+        {
+            try
+            {
+                var e = await _repository.GetEmployeeByIdAsync(employeeId);
+                if (e == null) return NotFound("Employee Does Not Exist");
+
+                dynamic employees = new
+                {
+                    e.EmployeeId,
+                    e.Employee_Name,
+                    e.Employee_Surname,
+                    e.Employee_ID_Number,
+                    e.Employee_Email_Address,
+                    e.Employee_Contact_Number,
+                    e.Employee_Gender,
+                    e.Employee_Address,
+                    e.Employee_Photo,
+                    e.Employee_Type.Type_Description,
+                    e.Position.Position_Description,
+                    e.Rates.Rate,
+                    e.ApplicationUser.UserName,
+                    e.ApplicationUser.Email,
+                };
+
+                return Ok(employees);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPut("{employeeId}")]
         public async Task<IActionResult> UpdateEmployee(int employeeId, EmployeeViewModel evm)
         {

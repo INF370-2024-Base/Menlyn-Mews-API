@@ -83,6 +83,8 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Shift
         public Task<Shift[]> GetShiftsAsync();  
         public Task<Shift> GetShiftByIdAsync(int shiftId);
+        public Task<Shift[]> GetShiftByDateAsync(DateTime date);
+
 
         //Employee
         public Task<Employee[]> GetEmployeesAsync();
