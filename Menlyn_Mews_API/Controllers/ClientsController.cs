@@ -4,6 +4,7 @@ using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.ViewModels.Client;
 using Menlyn_Mews_API.Models.Domain.Emails;
+using Menlyn_Mews.Service.Services;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -13,11 +14,13 @@ namespace Menlyn_Mews_API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IRepositroy _repository;
+        private readonly IGeneralEmailService _generateEmailService;
 
-        public ClientsController(AppDbContext context, IRepositroy repositroy)
+        public ClientsController(AppDbContext context, IRepositroy repositroy, IGeneralEmailService generalEmailService)
         {
             _context = context;
             _repository = repositroy;
+            _generateEmailService = generalEmailService;
         }
 
 
@@ -51,12 +54,31 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        //[HttpPost]
-        //[Route("ContactUs/{email}/{name}/{message}")]
-        //public async Task<IActionResult> ContactUsEmail(string email, string name, string message)
-        //{
+        [HttpPost]
+        [Route("ContactUs/{email}/{name}/{message}")]
+        public async Task<IActionResult> ContactUsEmail(string email, string name, string message)
+        {
+            var mailRequest = new Mailrequest
+            {
+                ToEmail = "menlynmews370@gmail.com",
+                Subject = "Contact Us Request",
+                Body = GenerateContactUsEmailBody(email, name, message)
+            };
 
-        //}
+            try
+            {
+                await _generateEmailService.SendEmailAsync(mailRequest);
+
+                return Ok(new { Message = "We Have Received Your Email! We Will Contact You When We Can!" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status400BadRequest,
+                               new Response { Message = "Could Not Send Email!" });
+            }
+
+        }
 
         [HttpGet("{clientId}")]
         public async Task<ActionResult<Client>> GetClient(int clientId)
@@ -160,6 +182,82 @@ namespace Menlyn_Mews_API.Controllers
 
             return NoContent();
         }
+
+        private string GenerateContactUsEmailBody(string name, string userEmail, string messageContent)
+        {
+            var htmlContent = $@"
+        <html>
+        <head>
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 0;
+                }}
+                .container {{
+                    width: 100%;
+                    padding: 20px;
+                    background-color: #ffffff;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    max-width: 600px;
+                    margin: 50px auto;
+                }}
+                .header {{
+                    background-color: #6a329f;
+                    color: #ffffff;
+                    padding: 20px;
+                    text-align: center;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                }}
+                .content {{
+                    padding: 20px;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: #333333;
+                }}
+                .content p {{
+                    margin-bottom: 20px;
+                }}
+                .message {{
+                    padding: 15px;
+                    background-color: #f9f9f9;
+                    border-left: 4px solid #6a329f;
+                    font-style: italic;
+                }}
+                .footer {{
+                    padding: 20px;
+                    text-align: center;
+                    font-size: 14px;
+                    color: #888888;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <div class='header'>
+                    <h1>New Contact Us Request</h1>
+                </div>
+                <div class='content'>
+                    <p><strong>Name:</strong> {name}</p>
+                    <p><strong>Email:</strong> {userEmail}</p>
+                    <p><strong>Message:</strong></p>
+                    <div class='message'>
+                        <p>{messageContent}</p>
+                    </div>
+                </div>
+                <div class='footer'>
+                    <p>This email was sent from the Menlyn Mews website.</p>
+                </div>
+            </div>
+        </body>
+        </html>";
+
+            return htmlContent;
+        }
+
 
     }
 }
