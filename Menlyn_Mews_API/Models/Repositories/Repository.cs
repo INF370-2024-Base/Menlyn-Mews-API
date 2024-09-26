@@ -401,6 +401,31 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.ToArrayAsync();
         }
 
+        //Payments
+
+        public async Task<Payment[]> GetPaymentsAsync()
+        {
+            IQueryable<Payment> query = _context.Payment.Include(p => p.Client).Include(p => p.Payment_Type);
+            return await query.ToArrayAsync();
+        }
+        public async Task<Payment> GetPaymentByIdAsync(int paymentId)
+        {
+            IQueryable<Payment> query = _context.Payment.Where(p => p.PaymentId == paymentId).Include(p => p.Client).Include(p => p.Payment_Type);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Paymemt Types 
+        public async Task<Payment_Type[]> GetPaymentTypesAsync()
+        {
+            IQueryable<Payment_Type> query = _context.Payment_Types;
+            return await query.ToArrayAsync();
+        }
+        public async Task<Payment_Type> GetPaymentTypeByIdAsync(int paymentTypeId)
+        {
+            IQueryable<Payment_Type> query = _context.Payment_Types.Where(pt => pt.PaymentTypeId == paymentTypeId);
+            return await query.FirstOrDefaultAsync();
+        }
+
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 

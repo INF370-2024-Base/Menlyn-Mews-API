@@ -130,6 +130,14 @@ namespace Menlyn_Mews_API.Models.Repositories
         public Task<Room_Booking[]> GetRoomBookingByClientIdAsync(int clientId);
         public Task<Room_Booking[]> GetBookedRooms(int roomId);
 
+        //Payments
+        public Task<Payment[]> GetPaymentsAsync();
+        public Task<Payment> GetPaymentByIdAsync(int paymentId);
+
+        //Paymemt Types 
+        public Task<Payment_Type[]> GetPaymentTypesAsync();
+        public Task<Payment_Type> GetPaymentTypeByIdAsync(int paymentTypeId);
+
         ///////////////////////////////////////////////////////BOOKING REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 
 

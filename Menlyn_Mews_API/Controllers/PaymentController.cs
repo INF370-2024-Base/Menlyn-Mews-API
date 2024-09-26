@@ -1,5 +1,7 @@
 ﻿using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
+using Menlyn_Mews_API.Models.Repositories;
+using Menlyn_Mews_API.ViewModels.Booking;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,19 +12,31 @@ namespace Menlyn_Mews_API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IRepositroy _repositroy;
 
-        public PaymentController(AppDbContext context)
+        public PaymentController(AppDbContext context, IRepositroy repositroy)
         {
             _context = context;
+            _repositroy = repositroy;
         }
 
-        // GET: api/Payment
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Payment>>> GetAllPayments()
+        [Route("GetPayments")]
+        public async Task<ActionResult> GetAllPayments()
         {
             try
             {
-                var payments = await _context.Payment.ToListAsync();
+                var results = await _repositroy.GetPaymentsAsync();
+
+                dynamic payments = results.Select(p => new
+                {
+                    p.PaymentId,
+                    p.Payment_Date.Date,
+                    p.Payment_Status,
+                    p.Payment_Amount,
+                    p.Payment_Type.Payment_Type_description,
+                });
+
                 return Ok(payments);
             }
             catch (Exception ex)
@@ -31,21 +45,26 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        // GET: api/Payment/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Payment>> GetPaymentById(int id)
+        [HttpGet]
+        [Route("GetPaymentById/{paymentId}")]
+        public async Task<ActionResult> GetPaymentById(int paymentId)
         {
             try
             {
-                var payment = await _context.Payment
-                    .FirstOrDefaultAsync(p => p.PaymentId == id);
+                var p = await _repositroy.GetPaymentByIdAsync(paymentId);
+                if (p == null) return NotFound("Payment Does Not Exist");
 
-                if (payment == null)
+
+                dynamic payments = new
                 {
-                    return NotFound();
-                }
+                    p.PaymentId,
+                    p.Payment_Date,
+                    p.Payment_Status,
+                    p.Payment_Amount,
+                    p.Payment_Type.Payment_Type_description,
+                };
 
-                return Ok(payment);
+                return Ok(payments);
             }
             catch (Exception ex)
             {
@@ -53,34 +72,31 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        // POST: api/Payment
         [HttpPost]
-        public async Task<ActionResult<Payment>> CreatePayment([FromBody] Payment payment)
+        [Route("RecordPayment")]
+        public async Task<IActionResult> CreatePayment(PaymentViewModel pvm)
         {
-            if (payment == null)
+            var payment = new Payment
             {
-                return BadRequest("Payment is null.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+                Payment_Date = DateTime.Now,
+                Payment_Amount = pvm.Payment_Amount,
+                Payment_Status = "Approved",
+                PaymentTypeId = 1,
+                ClientId = pvm.ClientId,
+            };
 
             try
             {
-                _context.Payment.Add(payment);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetPaymentById), new { id = payment.PaymentId }, payment);
+                _repositroy.Add(payment);
+                await _repositroy.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest("Invalid Transaction");
             }
+            return Ok(payment);
         }
 
-        // PUT: api/Payment/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePayment(int id, [FromBody] Payment payment)
         {
@@ -115,7 +131,6 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        // DELETE: api/Payment/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePayment(int id)
         {
