@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Menlyn_Mews_API.Models.Domain;
 
 namespace Menlyn_Mews_API.Models.Domain
 {
@@ -15,10 +14,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public Room Room { get; set; }
 
         public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
-
-        [JsonIgnore]
-        public Employee_Shift Employee_Shift { get; set; }
+        public Employee Employee { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Write_Off> Write_Off { get; set; }

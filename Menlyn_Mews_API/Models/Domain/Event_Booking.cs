@@ -13,6 +13,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public TimeSpan? End_Time { get; set; }
         public string Event_Status { get; set; } = string.Empty;    
         public string Allergy_Description {  get; set; } = string.Empty;
+        public DateTime? Date_Sent { get; set; }
 
         //FK
         public int EventTypeId { get; set; }
@@ -24,9 +25,7 @@ namespace Menlyn_Mews_API.Models.Domain
         public Client Client { get; set; }
 
         public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
-        [JsonIgnore]    
-        public Employee_Shift? Employee_Shift { get; set; }
+        public Employee Employee { get; set; }
 
     }
 }

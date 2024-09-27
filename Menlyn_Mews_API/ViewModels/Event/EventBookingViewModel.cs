@@ -1,7 +1,4 @@
-﻿using Menlyn_Mews_API.Models.Domain;
-using Menlyn_Mews_API.ViewModels;
-using System.Text.Json.Serialization;
-
+﻿
 namespace Menlyn_Mews_API.ViewModels.Event
 {
     public class EventBookingViewModel
@@ -15,6 +12,6 @@ namespace Menlyn_Mews_API.ViewModels.Event
         public int EventTypeId { get; set; }
         public int ClientId { get; set; }
         public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
+        public DateTime Date_Sent { get; set; }
     }
 }

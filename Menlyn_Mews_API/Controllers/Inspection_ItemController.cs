@@ -33,11 +33,9 @@ namespace Menlyn_Mews_API.Controllers
                     ii.Inspection_Date,
                     ii.Inspection_Status,
                     Room_Inspection = ii.Room.Room_Number,
-                    Inspector = ii.Employee_Shift.Employee.Employee_Name + " " + ii.Employee_Shift.Employee.Employee_Surname,
-                    Shift = ii.Employee_Shift.Clock_In_Time.TimeOfDay + "-" + ii.Employee_Shift.Clock_Out_Time.TimeOfDay,
+                    Inspector = ii.Employee.Employee_Name + " " + ii.Employee.Employee_Surname,
                     ii.RoomId,
                     ii.EmployeeId,
-                    ii.ShiftId,
                 });
                 
                 return Ok(inspectionItems);
@@ -63,7 +61,6 @@ namespace Menlyn_Mews_API.Controllers
                     ii.Inspection_Status,
                     ii.RoomId,
                     ii.EmployeeId,
-                    ii.ShiftId,
                 };
 
                 return Ok(inspectionItems);
@@ -83,11 +80,10 @@ namespace Menlyn_Mews_API.Controllers
                 var inspectionItem = await _repository.GetInspectionItemsByIdAsync(inspectionItemId);
                 if (inspectionItem == null) return NotFound("Inspection Item Does Not Exist");
 
-                inspectionItem.Inspection_Date = iivm.Inspection_Date;
+                inspectionItem.Inspection_Date = iivm.Inspection_Date.Value;
                 inspectionItem.Inspection_Status = iivm.Inspection_Status;
                 inspectionItem.RoomId = iivm.RoomId;
                 inspectionItem.EmployeeId = iivm.Employeeid;
-                inspectionItem.ShiftId = iivm.ShiftId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -110,11 +106,10 @@ namespace Menlyn_Mews_API.Controllers
 
             var inspectionItem = new Inspection_Item
             {
-                Inspection_Date = iivm.Inspection_Date,
+                Inspection_Date = DateTime.Now,
                 Inspection_Status = iivm.Inspection_Status,
                 RoomId = iivm.RoomId,
                 EmployeeId = iivm.Employeeid,
-                ShiftId = iivm.ShiftId,
             };
 
             try

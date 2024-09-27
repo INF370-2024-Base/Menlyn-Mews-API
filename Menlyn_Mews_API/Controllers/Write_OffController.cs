@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
@@ -42,11 +36,7 @@ namespace Menlyn_Mews_API.Controllers
                     Inventory = wo.Room_Inventory.Inventory.Inventory_Name,
                     Room_Number = wo.Room_Inventory.Room.Room_Number,
                     Inspection_Date = wo.Inspection_Item.Inspection_Date,
-                    Employee = wo.Employee_Shift.Employee.Employee_Name + " " + wo.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date =  wo.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
-                    Shift_Time = (wo.Employee_Shift.Shift.Start_TIme.HasValue && wo.Employee_Shift.Shift.End_TIme.HasValue)
-                          ? wo.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + wo.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
-                          : string.Empty,
+                    Employee = wo.Employee.Employee_Name + " " + wo.Employee.Employee_Surname,
                     Client_Name = wo.Client.Client_Name + " " + wo.Client.Client_Surname
                 });
 
@@ -76,7 +66,6 @@ namespace Menlyn_Mews_API.Controllers
                     wo.InspectionItemId,   
                     wo.InventoryId,
                     wo.EmployeeId,
-                    wo.ShiftId,
                     wo.ClientId
                 };
 
@@ -102,7 +91,6 @@ namespace Menlyn_Mews_API.Controllers
                 writeoff.InspectionItemId = wvm.InspectionItemId;   
                 writeoff.InventoryId = wvm.InventoryId;
                 writeoff.EmployeeId = wvm.EmployeeId;
-                writeoff.ShiftId = wvm.ShiftId;
                 writeoff.ClientId = wvm.ClientId;
 
                 if (await _repository.SaveChangesAsync())
@@ -129,7 +117,6 @@ namespace Menlyn_Mews_API.Controllers
                 InspectionItemId = wvm.InspectionItemId,
                 InventoryId = wvm.InventoryId,
                 EmployeeId = wvm.EmployeeId,
-                ShiftId = wvm.ShiftId,
                 Quantity_Of_Items_Written_Off = wvm.Quantity_Of_Items_Written_Off,
                 ClientId = wvm.ClientId,
             };

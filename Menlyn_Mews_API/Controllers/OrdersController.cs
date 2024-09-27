@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
@@ -40,12 +34,7 @@ namespace Menlyn_Mews_API.Controllers
                     o.Order_Date,
                     o.Order_Status,
                     Supplier = o.Suppliers.Supplier_Name,
-                    Employee = o.Employee_Shift.Employee.Employee_Name + " " + o.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date = o.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
-                    Shift_Time = (o.Employee_Shift.Shift.Start_TIme.HasValue && o.Employee_Shift.Shift.End_TIme.HasValue)
-                          ? o.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + o.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
-                          : string.Empty,
-
+                    Employee = o.Employee.Employee_Name + " " + o.Employee.Employee_Surname,
                 });
 
                 return Ok(orders);
@@ -72,12 +61,7 @@ namespace Menlyn_Mews_API.Controllers
                     o.Order_Date,
                     o.Order_Status,
                     Supplier = o.Suppliers.Supplier_Name,
-                    Employee = o.Employee_Shift.Employee.Employee_Name + " " + o.Employee_Shift.Employee.Employee_Surname,
-                    Shift_Date = o.Employee_Shift.Shift_Date.Date.ToString("yyyy-MM-dd"),
-                    Shift_Time = (o.Employee_Shift.Shift.Start_TIme.HasValue && o.Employee_Shift.Shift.End_TIme.HasValue)
-                          ? o.Employee_Shift.Shift.Start_TIme.Value.ToString("hh:mm tt") + " - " + o.Employee_Shift.Shift.End_TIme.Value.ToString("hh:mm tt")
-                          : string.Empty,
-
+                    Employee = o.Employee.Employee_Name + " " + o.Employee.Employee_Surname,
                 };
 
                 return Ok(orders);
@@ -102,7 +86,6 @@ namespace Menlyn_Mews_API.Controllers
                 o.Order_Status = ovm.Order_Status;
                 o.SupplierId = ovm.SupplierId;
                 o.EmployeeId = ovm.EmployeeId;
-                o.ShiftId = ovm.ShiftId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -128,7 +111,6 @@ namespace Menlyn_Mews_API.Controllers
                 Order_Status = ovm.Order_Status,
                 SupplierId = ovm.SupplierId,
                 EmployeeId = ovm.EmployeeId,
-                ShiftId = ovm.ShiftId
             };
 
             try

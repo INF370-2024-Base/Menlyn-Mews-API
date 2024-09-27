@@ -237,15 +237,11 @@ namespace Menlyn_Mews_API.Data
                 })
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Employee_Shift>()
+            modelBuilder.Entity<Employee>()
                 .HasMany(es => es.Inspection_Item)
-                .WithOne(ii => ii.Employee_Shift)
-                .HasForeignKey(es => new
-                {
-                    es.EmployeeId,
-                    es.ShiftId  
-                })
-                .OnDelete(DeleteBehavior.NoAction);
+                .WithOne(ii => ii.Employee)
+                .HasForeignKey(es => es.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Room_Inventory>()
                 .HasMany(wo => wo.Write_Off)
@@ -257,25 +253,17 @@ namespace Menlyn_Mews_API.Data
                 })
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Employee_Shift>()
+            modelBuilder.Entity<Employee>()
                 .HasMany(es => es.Write_Off)
-                .WithOne(wo => wo.Employee_Shift)
-                .HasForeignKey(wo => new
-                {
-                    wo.EmployeeId,
-                    wo.ShiftId
-                })
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne(wo => wo.Employee)
+                .HasForeignKey(wo => wo.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Employee_Shift>()
+            modelBuilder.Entity<Employee>()
                 .HasMany(es => es.Order)
-                .WithOne(o => o.Employee_Shift)
-                .HasForeignKey(o => new
-                {
-                    o.EmployeeId,
-                    o.ShiftId
-                })
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne(o => o.Employee)
+                .HasForeignKey(o => o.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Supplier_Type>()
                 .HasMany(st => st.Suppliers)
@@ -319,15 +307,11 @@ namespace Menlyn_Mews_API.Data
                 .HasForeignKey(eb => eb.EventTypeId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Employee_Shift>()
-                .HasMany(es => es.Event_Booking)
-                .WithOne(wo => wo.Employee_Shift)
-                .HasForeignKey(wo => new
-                {
-                    wo.EmployeeId,
-                    wo.ShiftId
-                })
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Employee>()
+                .HasMany(eb => eb.Event_Booking)
+                .WithOne(eb => eb.Employee)
+                .HasForeignKey(eb => eb.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             //ROOM BOOKING
             modelBuilder.Entity<Booking_Package>()

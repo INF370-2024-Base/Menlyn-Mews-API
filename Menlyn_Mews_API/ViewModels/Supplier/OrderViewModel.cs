@@ -7,6 +7,5 @@
         public string Order_Status { get; set; }
         public int SupplierId { get; set; }
         public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
     }
 }

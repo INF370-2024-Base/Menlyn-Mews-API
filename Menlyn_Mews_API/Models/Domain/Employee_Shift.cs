@@ -25,11 +25,8 @@ namespace Menlyn_Mews_API.Models.Domain
         //FK
         //Related Tables
 
-        public virtual ICollection<Order> Order { get; set; }   
-        public virtual ICollection<Write_Off> Write_Off { get; set; }
-        public virtual ICollection<Stock_Take> Stock_Take { get; set;}
-        public virtual ICollection<Event_Booking> Event_Booking { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Inspection_Item> Inspection_Item { get; set; }
+        public virtual ICollection<Stock_Take> Stock_Take { get; set; }
+
     }
 }

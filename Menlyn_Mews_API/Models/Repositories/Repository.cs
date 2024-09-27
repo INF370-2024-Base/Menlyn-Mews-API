@@ -155,26 +155,26 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Inspection Item
         public async Task<Inspection_Item[]> GetInspectionItemsAsync()
         {
-            IQueryable<Inspection_Item> query = _context.Inspection_Items.Include(ii => ii.Room).Include(ii => ii.Employee_Shift.Employee).Include(ii => ii.Employee_Shift.Shift);
+            IQueryable<Inspection_Item> query = _context.Inspection_Items.Include(ii => ii.Room).Include(ii => ii.Employee);
             return await query.ToArrayAsync();
         }
 
         public async Task<Inspection_Item> GetInspectionItemsByIdAsync(int inspectionItemId)
         {
-            IQueryable<Inspection_Item> query = _context.Inspection_Items.Where(ii => ii.InspectionItemId == inspectionItemId).Include(ii => ii.Room).Include(ii => ii.Employee_Shift.Employee).Include(ii => ii.Employee_Shift.Shift);
+            IQueryable<Inspection_Item> query = _context.Inspection_Items.Where(ii => ii.InspectionItemId == inspectionItemId).Include(ii => ii.Room).Include(ii => ii.Employee);
             return await query.FirstOrDefaultAsync();
         }
 
         //Write-Off
         public async Task<Write_Off[]> GetWrite_OffsAsync()
         {
-            IQueryable<Write_Off> query = _context.Write_Offs.Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee_Shift.Employee).Include(wo => wo.Employee_Shift.Shift).Include(wo => wo.Inspection_Item).Include(wo => wo.Client);
+            IQueryable<Write_Off> query = _context.Write_Offs.Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee).Include(wo => wo.Inspection_Item).Include(wo => wo.Client);
             return await query.ToArrayAsync();
         }
 
         public async Task<Write_Off> GetWrite_OffByIdAsync(int writeOffId)
         {
-            IQueryable<Write_Off> query = _context.Write_Offs.Where(wo => wo.WriteOffId == writeOffId).Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee_Shift.Employee).Include(wo => wo.Employee_Shift.Shift).Include(wo => wo.Inspection_Item).Include(wo => wo.Client);
+            IQueryable<Write_Off> query = _context.Write_Offs.Where(wo => wo.WriteOffId == writeOffId).Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee).Include(wo => wo.Inspection_Item).Include(wo => wo.Client);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -555,13 +555,13 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Order
         public async Task<Order[]> GetOrdersAsync()
         {
-            IQueryable<Order> query = _context.Orders.Include(o => o.Suppliers).Include(o => o.Employee_Shift.Employee).Include(o => o.Employee_Shift.Shift);
+            IQueryable<Order> query = _context.Orders.Include(o => o.Suppliers).Include(o => o.Employee);
             return await query.ToArrayAsync();
         }
 
         public async Task<Order> GetOrderByIdAsync(int orderId)
         {
-            IQueryable<Order> query = _context.Orders.Where(o => o.OrderId == orderId).Include(o => o.Suppliers).Include(o => o.Employee_Shift.Employee).Include(o => o.Employee_Shift.Shift);
+            IQueryable<Order> query = _context.Orders.Where(o => o.OrderId == orderId).Include(o => o.Suppliers).Include(o => o.Employee);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -616,12 +616,12 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Event 
         public async Task<Event_Booking[]> GetEventBookingsAsync()
         {
-            IQueryable<Event_Booking> query = _context.Event_Bookings.Include(eb => eb.Event_Types).Include(eb => eb.Client).Include(eb => eb.Employee_Shift.Employee).Include(eb => eb.Employee_Shift.Shift);
+            IQueryable<Event_Booking> query = _context.Event_Bookings.Include(eb => eb.Event_Types).Include(eb => eb.Client).Include(eb => eb.Employee);
             return await query.ToArrayAsync();  
         }
         public async Task<Event_Booking> GetEventBookingByIdAsync(int eventBookingId)
         {
-            IQueryable<Event_Booking> query = _context.Event_Bookings.Where(eb => eb.EventId == eventBookingId).Include(eb => eb.Event_Types).Include(eb => eb.Client).Include(eb => eb.Employee_Shift.Employee).Include(eb => eb.Employee_Shift.Shift);
+            IQueryable<Event_Booking> query = _context.Event_Bookings.Where(eb => eb.EventId == eventBookingId).Include(eb => eb.Event_Types).Include(eb => eb.Client).Include(eb => eb.Employee);
             return await query.FirstOrDefaultAsync();
         }
 

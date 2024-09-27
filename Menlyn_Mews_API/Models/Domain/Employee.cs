@@ -41,5 +41,17 @@ namespace Menlyn_Mews_API.Models.Domain
         [JsonIgnore]    
         public virtual ICollection<Complaint> Complaint { get; set; }
 
+        [JsonIgnore]
+        public virtual ICollection<Event_Booking> Event_Booking { get; set; }
+
+        [JsonIgnore]    
+        public virtual ICollection<Inspection_Item> Inspection_Item { get; set; }
+         
+        [JsonIgnore]
+        public virtual ICollection<Write_Off> Write_Off { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Order> Order { get; set; }
+
     }
 }

@@ -17,11 +17,9 @@ namespace Menlyn_Mews_API.Models.Domain
         [JsonIgnore]
         public virtual Supplier Suppliers { get; set; }
 
-        //Employee_Shift Bridge
+        //Employee
         public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
-        [JsonIgnore]
-        public Employee_Shift Employee_Shift { get; set; }
+        public Employee Employee { get; set; }
 
         //Bridge
         [JsonIgnore]

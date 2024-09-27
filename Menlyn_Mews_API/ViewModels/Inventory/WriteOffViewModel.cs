@@ -1,6 +1,4 @@
-﻿using Menlyn_Mews_API.Models.Domain;
-
-namespace Menlyn_Mews_API.ViewModels.Inventory
+﻿namespace Menlyn_Mews_API.ViewModels.Inventory
 {
     public class WriteOffViewModel
     {
@@ -12,7 +10,6 @@ namespace Menlyn_Mews_API.ViewModels.Inventory
         public int InventoryId { get; set; }
         public int InspectionItemId { get; set; }
         public int EmployeeId { get; set; }
-        public int ShiftId { get; set; }
         public int ClientId { get; set; }
     }
 }
