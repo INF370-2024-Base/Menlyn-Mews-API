@@ -126,6 +126,12 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Inventory> GetInventoryByProductNameAsync(string productName)
+        {
+            IQueryable<Inventory> query = _context.Inventories.Where(i => i.Inventory_Name == productName).Include(i => i.InventoryCategory).Include(i => i.InventoryType);
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Inventory Type
         public async Task<Inventory_Type[]> GetInventoryTypesAsync()
         {
@@ -155,26 +161,26 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Inspection Item
         public async Task<Inspection_Item[]> GetInspectionItemsAsync()
         {
-            IQueryable<Inspection_Item> query = _context.Inspection_Items.Include(ii => ii.Room).Include(ii => ii.Employee);
+            IQueryable<Inspection_Item> query = _context.Inspection_Items.Include(ii => ii.Room_Booking).Include(ii => ii.Employee).Include(ii => ii.Room_Booking.Rooms).Include(ii => ii.Room_Booking.Clients);
             return await query.ToArrayAsync();
         }
 
         public async Task<Inspection_Item> GetInspectionItemsByIdAsync(int inspectionItemId)
         {
-            IQueryable<Inspection_Item> query = _context.Inspection_Items.Where(ii => ii.InspectionItemId == inspectionItemId).Include(ii => ii.Room).Include(ii => ii.Employee);
+            IQueryable<Inspection_Item> query = _context.Inspection_Items.Where(ii => ii.InspectionItemId == inspectionItemId).Include(ii => ii.Room_Booking).Include(ii => ii.Employee).Include(ii => ii.Room_Booking.Rooms).Include(ii => ii.Room_Booking.Clients);;
             return await query.FirstOrDefaultAsync();
         }
 
         //Write-Off
         public async Task<Write_Off[]> GetWrite_OffsAsync()
         {
-            IQueryable<Write_Off> query = _context.Write_Offs.Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee).Include(wo => wo.Inspection_Item).Include(wo => wo.Client);
+            IQueryable<Write_Off> query = _context.Write_Offs.Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Employee).Include(wo => wo.Inspection_Item).Include(wo => wo.RoomBooking).Include(wo => wo.RoomBooking.Rooms).Include(wo => wo.RoomBooking.Clients);
             return await query.ToArrayAsync();
         }
 
         public async Task<Write_Off> GetWrite_OffByIdAsync(int writeOffId)
         {
-            IQueryable<Write_Off> query = _context.Write_Offs.Where(wo => wo.WriteOffId == writeOffId).Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee).Include(wo => wo.Inspection_Item).Include(wo => wo.Client);
+            IQueryable<Write_Off> query = _context.Write_Offs.Where(wo => wo.WriteOffId == writeOffId).Include(wo => wo.Room_Inventory.Inventory).Include(wo => wo.Room_Inventory.Room).Include(wo => wo.Employee).Include(wo => wo.Inspection_Item).Include(wo => wo.RoomBooking).Include(wo => wo.RoomBooking.Rooms).Include(wo => wo.RoomBooking.Clients);
             return await query.FirstOrDefaultAsync();
         }
 
@@ -202,6 +208,13 @@ namespace Menlyn_Mews_API.Models.Repositories
         {
             IQueryable<Stock_Take> query = _context.Stock_Takes.Where(st => st.StockTakeId == stockTakeId).Include(st => st.Employee_Shift.Employee).Include(st => st.Employee_Shift.Shift).Include(st => st.Inventory);
             return await query.FirstOrDefaultAsync();
+        }
+
+        //Filter Inventory Name
+        public async Task<Product[]> FilterInventoryNameAsync(string inventoryName)
+        {
+            IQueryable<Product> query = _context.Products.Where(i => i.Product_Name != inventoryName);
+            return await query.ToArrayAsync();
         }
 
         ///////////////////////////////////////////////////////INVENTORY REPOSITORY END///////////////////////////////////////////////////////////////////////////////////
@@ -504,7 +517,6 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        //Client Discount
         //Client Discount
         public async Task<Client_Discount[]> GetClientDiscountsAsync()
         {

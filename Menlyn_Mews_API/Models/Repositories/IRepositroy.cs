@@ -42,6 +42,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Inventory
         Task<Inventory[]> GetInventoriesAsync();
         Task<Inventory> GetInventoryByIdAsync(int inventoryId);
+        Task<Inventory> GetInventoryByProductNameAsync(string productName);
 
         //Inventory Type
         Task<Inventory_Type[]> GetInventoryTypesAsync();
@@ -66,6 +67,9 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Stock Take
         Task<Stock_Take[]> GetStockTakesAsync();
         Task<Stock_Take> GetStockTakeByIdAsync(int stockTakeId);
+
+        //Filter Inventory Name
+        Task<Product[]> FilterInventoryNameAsync(string inventoryName);
 
         ///////////////////////////////////////////////////////INVENTORY REPOSITORY END////////////////////////////////////////////////////////////////////////////////////
 

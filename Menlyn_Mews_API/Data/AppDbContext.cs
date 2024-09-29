@@ -133,17 +133,17 @@ namespace Menlyn_Mews_API.Data
                 .HasForeignKey(r => r.RateId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Write_Off>()
-                .HasOne(wo => wo.Client)
-                .WithMany(c => c.Write_Off)
-                .HasForeignKey(wo => wo.ClientId)
-                .OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.Entity<Room>()
                 .HasOne(r => r.Room_Type)
                 .WithMany(rt => rt.Rooms)
                 .HasForeignKey(r => r.RoomTypeId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Inspection_Item>()
+                .HasOne(rb => rb.Room_Booking)
+                .WithMany(ii => ii.Inspection_Item)
+                .HasForeignKey(rb => rb.RoomBookingId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Employee_Type)
@@ -384,6 +384,12 @@ namespace Menlyn_Mews_API.Data
                 .HasOne(p => p.Payment_Type)
                 .WithMany(p => p.Payment)
                 .HasForeignKey(p => p.PaymentTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Write_Off>()
+                .HasOne(wo => wo.RoomBooking)
+                .WithMany(rb => rb.Write_Off)
+                .HasForeignKey(wo => wo.RoomBookingId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // modelBuilder.Entity<Employee_Type>() // Employee to Employee Type

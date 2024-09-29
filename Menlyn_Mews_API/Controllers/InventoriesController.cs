@@ -74,6 +74,8 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
+
+
         [HttpPut]
         [Route("UpdateInventory/{inventoryId}")]
         public async Task<ActionResult<InventoryViewModel>> PutInventory(int inventoryId, InventoryViewModel ivm)
@@ -81,13 +83,13 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 var inventory = await _repositroy.GetInventoryByIdAsync(inventoryId);
-                if (inventory == null) return NotFound("Inventory Does Not Exist");   
+                if (inventory == null) return NotFound("Inventory Does Not Exist");
 
                 inventory.Inventory_Name = ivm.Inventory_Name;
                 inventory.Maximum_Stock = ivm.Maximum_Stock;
                 inventory.Quantity_Available = ivm.Quantity_Available;
                 inventory.Price_Per_Unit = ivm.Price_Per_Unit;
-                inventory.InventoryTypeId  = ivm.InventoryTypeId;
+                inventory.InventoryTypeId = ivm.InventoryTypeId;
                 inventory.InventoryCategoryId = ivm.InventoryCategoryId;
 
                 if (await _repositroy.SaveChangesAsync())
@@ -100,8 +102,64 @@ namespace Menlyn_Mews_API.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return NoContent(); 
+            return NoContent();
         }
+
+        //[HttpGet]
+        //[Route("GetInventories")]
+        //public async Task<ActionResult> GetInventories()
+        //{
+        //    try
+        //    {
+        //        var results = await _repositroy.GetInventoriesAsync();
+
+        //        dynamic inventories = results.Select(i => new
+        //        {
+        //            i.InventoryId,
+        //            i.Inventory_Name,
+        //            i.Maximum_Stock,
+        //            i.Quantity_Available,
+        //            i.Price_Per_Unit,
+        //            Category_Name = i.InventoryCategory.Inventory_Category_Name,
+        //            Type_Name = i.InventoryType.Inventory_Type_Name,
+        //        });
+
+        //        return Ok(inventories);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        [HttpGet]
+        [Route("GetFilteredProductNames")]
+        public async Task<ActionResult> GetFilteredNames()
+        {
+            try
+            {
+                var currentInventoryNames = await _repositroy.GetInventoriesAsync();
+                var products = await _repositroy.GetProductsAsync();
+
+                var inventoryNamesList = currentInventoryNames.Select(inv => inv.Inventory_Name).ToList();
+
+                var filteredProducts = products
+                    .Where(p => !inventoryNamesList.Contains(p.Product_Name))
+                    .Select(i => new
+                    {
+                        i.Product_Name,
+                        i.Price.Product_Price
+                    })
+                    .ToList();
+
+                return Ok(filteredProducts);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
 
         [HttpPost]
         [Route("AddInventory")]
@@ -111,7 +169,7 @@ namespace Menlyn_Mews_API.Controllers
                 Inventory_Name = ivm.Inventory_Name, 
                 Price_Per_Unit = ivm.Price_Per_Unit, 
                 Maximum_Stock = ivm.Maximum_Stock, 
-                Quantity_Available = ivm.Quantity_Available,
+                Quantity_Available = 0,
                 InventoryCategoryId = ivm.InventoryCategoryId, 
                 InventoryTypeId = ivm.InventoryTypeId,
             };

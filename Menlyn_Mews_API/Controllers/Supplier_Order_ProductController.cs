@@ -61,13 +61,48 @@ namespace Menlyn_Mews_API.Controllers
                 var allProducts = await _repository.GetProductsAsync();
 
                 var orderProductIds = orderProducts.Select(p => p.ProductId).ToHashSet();
-
+                
                 var filteredProducts = allProducts.Where(p => !orderProductIds.Contains(p.ProductId));
 
                 dynamic results = filteredProducts.Select(p => new
                 {
                     p.ProductId,
-                    p.Product_Name
+                    p.Product_Name,
+                });
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet]
+        [Route("FilterProductsWithQuantities/{orderId}")]
+        public async Task<IActionResult> FilterProductsWithQuantities(int orderId)
+        {
+            try
+            {
+                var orderProducts = await _repository.FilterProductsByOrderIdAsync(orderId);
+
+                if (orderProducts == null)
+                    return NotFound("Order Does Not Exist");
+
+                var allProducts = await _repository.GetProductsAsync();
+
+                var orderProductIds = orderProducts.Select(p => p.ProductId).ToHashSet();
+
+                var filteredProducts = allProducts.Where(p => orderProductIds.Contains(p.ProductId));
+
+                var results = filteredProducts.Select(product => new
+                {
+                    product.ProductId,
+                    product.Product_Name,
+                    Quantity = orderProducts
+                                .Where(op => op.ProductId == product.ProductId)
+                                .Select(op => op.Quantity)
+                                .FirstOrDefault()
                 });
 
                 return Ok(results);

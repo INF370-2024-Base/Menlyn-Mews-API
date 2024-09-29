@@ -51,6 +51,7 @@ namespace Menlyn_Mews_API.Controllers
                     Room_Floor = rb.Rooms?.Room_Floor,
                     Booking_Package = rb.Booking_Package?.Booking_Package_Description,
                     Discount = rb.Discount?.Discount_Name,
+                    rb.Is_Inspected,
                 });
 
                 return Ok(roomBookings);
@@ -105,7 +106,8 @@ namespace Menlyn_Mews_API.Controllers
                     rb.RoomId,
                     rb.BookingPackageId,
                     rb.DiscountId,
-                    rb.Is_Reviewed
+                    rb.Is_Reviewed,
+                    rb.Is_Inspected,
                 };
 
                 return Ok(roomBookings);
@@ -116,7 +118,7 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet]//Booking History
+        [HttpGet]//Booking History For Profile
         [Route("GetRoomBookingByClientId/{clientId}")]
         public async Task<ActionResult> GetRoom_BookingClient(int clientId)
         {
@@ -280,6 +282,7 @@ namespace Menlyn_Mews_API.Controllers
                 RoomId = bvm.RoomId,
                 BookingPackageId = bvm.BookingPackageId,
                 DiscountId = bvm.DiscountId,
+                Is_Inspected = false,
             };
 
             var co = await _repository.GetClientDiscountByIdAsync(booking.DiscountId!.Value, booking.ClientId);

@@ -65,7 +65,6 @@ namespace Menlyn_Mews_API.Controllers
                 var receievedOrders = await _repository.GetReceivedOrdersByIdAsync(receiveOrderId);
                 if (receievedOrders == null) return NotFound("Receivd Order Does Not Exist");
 
-                receievedOrders.Received_Order_Date = rvm.Received_Order_Date;
                 receievedOrders.Received_By = rvm.Received_By;
                 receievedOrders.Received_Status = rvm.Received_Status;
 
@@ -83,12 +82,12 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpPost]
-        [Route("AddReceievedOrder")]
-        public async Task<IActionResult> PostReceive_Order(ReceiveOrderViewModel rvm)
+        [Route("AddReceievedOrder/{orderId}")]
+        public async Task<IActionResult> PostReceive_Order(ReceiveOrderViewModel rvm, int orderId)
         {
             var receievedOrder = new Receive_Order
             {
-                Received_Order_Date = rvm.Received_Order_Date,
+                Received_Order_Date = DateTime.Now,
                 Received_By = rvm.Received_By,
                 Received_Status = rvm.Received_Status
             };
@@ -97,6 +96,27 @@ namespace Menlyn_Mews_API.Controllers
             {
                 _repository.Add(receievedOrder);
                 await _repository.SaveChangesAsync();   
+
+
+                foreach (var productReceived in rvm.ProductsReceived)
+                {
+                    var product = await _repository.GetProductAsync(productReceived.ProductId);
+                    if (product != null)
+                    {
+                        var inventory = await _repository.GetInventoryByProductNameAsync(product.Product_Name);
+                        if (inventory != null) 
+                        {
+                            inventory.Quantity_Available += productReceived.QuantityReceived;
+                        }
+                    }
+                    await _repository.SaveChangesAsync();
+                }
+
+                var orderStatus = await _repository.GetOrderByIdAsync(orderId);
+                orderStatus.Order_Status = rvm.Received_Status;
+
+                await _repository.SaveChangesAsync();
+
             }
             catch (Exception ex)
             {

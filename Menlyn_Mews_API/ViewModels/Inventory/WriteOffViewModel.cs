@@ -10,6 +10,6 @@
         public int InventoryId { get; set; }
         public int InspectionItemId { get; set; }
         public int EmployeeId { get; set; }
-        public int ClientId { get; set; }
+        public int RoomBookingId { get; set; }
     }
 }

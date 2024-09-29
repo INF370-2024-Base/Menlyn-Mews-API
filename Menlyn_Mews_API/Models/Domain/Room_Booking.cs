@@ -19,6 +19,8 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public bool? Is_Reviewed { get; set; }
 
+        public bool? Is_Inspected { get; set; }
+
         ///------------------------FK--------------------///
         public int ClientId { get; set; }
         [JsonIgnore]
@@ -34,9 +36,16 @@ namespace Menlyn_Mews_API.Models.Domain
 
         public int? DiscountId { get; set; } 
         [JsonIgnore]
-        public Discount? Discount {  get; set; } 
+        public Discount? Discount {  get; set; }
 
+        [JsonIgnore]
         public Booking_Review? Booking_Review { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Write_Off> Write_Off { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Inspection_Item> Inspection_Item { get; set; }
 
     }
 }

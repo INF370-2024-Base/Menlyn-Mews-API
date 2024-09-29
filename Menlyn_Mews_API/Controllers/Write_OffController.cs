@@ -34,10 +34,10 @@ namespace Menlyn_Mews_API.Controllers
                     wo.Write_Off_Description,
                     wo.Quantity_Of_Items_Written_Off,
                     Inventory = wo.Room_Inventory.Inventory.Inventory_Name,
-                    Room_Number = wo.Room_Inventory.Room.Room_Number,
                     Inspection_Date = wo.Inspection_Item.Inspection_Date,
                     Employee = wo.Employee.Employee_Name + " " + wo.Employee.Employee_Surname,
-                    Client_Name = wo.Client.Client_Name + " " + wo.Client.Client_Surname
+                    Client_Name = wo.RoomBooking?.Clients?.Client_Name + " " + wo.RoomBooking?.Clients?.Client_Surname,
+                    Room_Booked = wo.RoomBooking?.Rooms?.Room_Number
                 });
 
                 return Ok(writeoffs);
@@ -66,7 +66,8 @@ namespace Menlyn_Mews_API.Controllers
                     wo.InspectionItemId,   
                     wo.InventoryId,
                     wo.EmployeeId,
-                    wo.ClientId
+                    wo.RoomBooking.ClientId,
+                    wo.RoomBookingId
                 };
 
                 return Ok(writeoffs);
@@ -91,7 +92,7 @@ namespace Menlyn_Mews_API.Controllers
                 writeoff.InspectionItemId = wvm.InspectionItemId;   
                 writeoff.InventoryId = wvm.InventoryId;
                 writeoff.EmployeeId = wvm.EmployeeId;
-                writeoff.ClientId = wvm.ClientId;
+                //writeoff.ClientId = wvm.ClientId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -118,7 +119,7 @@ namespace Menlyn_Mews_API.Controllers
                 InventoryId = wvm.InventoryId,
                 EmployeeId = wvm.EmployeeId,
                 Quantity_Of_Items_Written_Off = wvm.Quantity_Of_Items_Written_Off,
-                ClientId = wvm.ClientId,
+                RoomBookingId = wvm.RoomBookingId,
             };
 
             try
@@ -196,7 +197,7 @@ namespace Menlyn_Mews_API.Controllers
                     <h2>Invoice for Damaged Items</h2>
                 </div>
                 <div class='content'>
-                    <p>Dear {wo.Client.Title} {wo.Client.Client_Surname},</p>
+                    <p>Dear ,</p>
                     <p>We hope you enjoyed your stay at Menlyn Mews. Unfortunately, it has come to our attention that the following items were damaged during your stay:</p>
                     <p><strong>Description:</strong> {wo.Write_Off_Description}</p>
                     <p><strong>Quantity:</strong> {wo.Quantity_Of_Items_Written_Off}</p>

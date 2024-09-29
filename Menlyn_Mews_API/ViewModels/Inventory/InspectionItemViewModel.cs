@@ -4,7 +4,7 @@
     {
         public DateTime? Inspection_Date { get; set; }
         public string Inspection_Status { get; set; }
-        public int RoomId { get; set; }
-        public int Employeeid { get; set; }
+        public int EmployeeId { get; set; }
+        public int RoomBookingId { get; set; }
     }
 }

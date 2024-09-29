@@ -32,10 +32,15 @@ namespace Menlyn_Mews_API.Controllers
                     ii.InspectionItemId,
                     ii.Inspection_Date,
                     ii.Inspection_Status,
-                    Room_Inspection = ii.Room.Room_Number,
+                    ii.Room_Booking.Rooms!.Room_Number,
+                    ii.Room_Booking.Clients!.Client_Name,
+                    ii.Room_Booking.Clients.Client_Surname,
                     Inspector = ii.Employee.Employee_Name + " " + ii.Employee.Employee_Surname,
-                    ii.RoomId,
+                    ii.Room_Booking.Rooms.RoomId,
                     ii.EmployeeId,
+                    ii.Room_Booking.Clients.ClientId,
+                    ii.Room_Booking.RoomBookingId,
+                    ii.Room_Booking.Is_Inspected,
                 });
                 
                 return Ok(inspectionItems);
@@ -59,8 +64,8 @@ namespace Menlyn_Mews_API.Controllers
                     ii.InspectionItemId,
                     ii.Inspection_Date,
                     ii.Inspection_Status,
-                    ii.RoomId,
                     ii.EmployeeId,
+                    ii.Room_Booking.RoomBookingId   
                 };
 
                 return Ok(inspectionItems);
@@ -82,8 +87,8 @@ namespace Menlyn_Mews_API.Controllers
 
                 inspectionItem.Inspection_Date = iivm.Inspection_Date.Value;
                 inspectionItem.Inspection_Status = iivm.Inspection_Status;
-                inspectionItem.RoomId = iivm.RoomId;
-                inspectionItem.EmployeeId = iivm.Employeeid;
+                inspectionItem.EmployeeId = iivm.EmployeeId;
+                inspectionItem.Room_Booking.RoomBookingId = iivm.RoomBookingId;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -108,13 +113,18 @@ namespace Menlyn_Mews_API.Controllers
             {
                 Inspection_Date = DateTime.Now,
                 Inspection_Status = iivm.Inspection_Status,
-                RoomId = iivm.RoomId,
-                EmployeeId = iivm.Employeeid,
+                RoomBookingId = iivm.RoomBookingId,
+                EmployeeId = iivm.EmployeeId,
             };
+    
 
             try
             {
                 _repository.Add(inspectionItem);
+
+                var updateStatus = await _repository.GetRoomBookingByIdAsync(inspectionItem.RoomBookingId);
+                updateStatus.Is_Inspected = true;
+
                 await _repository.SaveChangesAsync();
             }
             catch (Exception)

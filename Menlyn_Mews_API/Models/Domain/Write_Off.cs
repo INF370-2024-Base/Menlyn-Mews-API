@@ -13,16 +13,18 @@ namespace Menlyn_Mews_API.Models.Domain
         //----FK---//
         public int RoomId { get; set; }
         public int InventoryId { get; set; }
+        [JsonIgnore]
         public Room_Inventory Room_Inventory { get; set; }  
 
         public int InspectionItemId { get; set; }
         [JsonIgnore]
         public Inspection_Item Inspection_Item { get; set; }
         public int EmployeeId { get; set; }
+        [JsonIgnore]
         public Employee Employee { get; set; }
 
-        public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public int? RoomBookingId { get; set; }
+        public Room_Booking? RoomBooking { get; set; }
 
     }
 }

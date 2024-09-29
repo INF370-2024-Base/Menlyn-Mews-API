@@ -60,8 +60,8 @@ namespace Menlyn_Mews_API.Controllers
                     o.Order_Description,
                     o.Order_Date,
                     o.Order_Status,
-                    Supplier = o.Suppliers.Supplier_Name,
-                    Employee = o.Employee.Employee_Name + " " + o.Employee.Employee_Surname,
+                    o.SupplierId,
+                    o.EmployeeId
                 };
 
                 return Ok(orders);
@@ -84,6 +84,34 @@ namespace Menlyn_Mews_API.Controllers
                 o.Order_Description = ovm.Order_Description;
                 o.Order_Date = ovm.Order_Date;
                 o.Order_Status = ovm.Order_Status;
+                o.SupplierId = ovm.SupplierId;
+                o.EmployeeId = ovm.EmployeeId;
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Ok(o);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("CancelOrder/{orderId}")]
+        public async Task<ActionResult<OrderViewModel>> CancelOrder(int orderId, OrderViewModel ovm)
+        {
+            try
+            {
+                var o = await _repository.GetOrderByIdAsync(orderId);
+                if (o == null) return NotFound("Order Does Not Exist");
+
+                o.Order_Description = ovm.Order_Description;
+                o.Order_Date = ovm.Order_Date;
+                o.Order_Status = "Cancelled";
                 o.SupplierId = ovm.SupplierId;
                 o.EmployeeId = ovm.EmployeeId;
 
