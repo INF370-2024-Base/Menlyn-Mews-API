@@ -83,7 +83,7 @@ namespace Menlyn_Mews_API.Controllers
                     s.City,
                     s.Province,
                     s.Postal_Code,
-                    Supplier_Type = s.Supplier_Type.Supplier_Type_Description,
+                    s.SupplierTypeId
                 };
 
                 return Ok(suppliers);

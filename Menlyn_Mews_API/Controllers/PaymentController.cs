@@ -34,6 +34,8 @@ namespace Menlyn_Mews_API.Controllers
                     p.Payment_Date.Date,
                     p.Payment_Status,
                     p.Payment_Amount,
+                    p.Client.Client_Name,
+                    p.Client.Client_Surname,
                     p.Payment_Type.Payment_Type_description,
                 });
 

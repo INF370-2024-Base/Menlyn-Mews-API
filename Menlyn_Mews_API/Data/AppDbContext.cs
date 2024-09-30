@@ -120,12 +120,11 @@ namespace Menlyn_Mews_API.Data
             base.OnModelCreating(modelBuilder);
             SeedRoles(modelBuilder);
 
-
             modelBuilder.Entity<ApplicationUser>()
-                .HasOne(a => a.Employee)
-                .WithOne(c => c.ApplicationUser)
-                .HasForeignKey<Employee>(c => c.ApplicationUserId)
-                .OnDelete(DeleteBehavior.NoAction);
+              .HasOne(a => a.Employee)
+              .WithOne(c => c.ApplicationUser)
+              .HasForeignKey<Employee>(c => c.ApplicationUserId)
+              .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Employee>()
                 .HasOne(r => r.Rates)
@@ -153,7 +152,7 @@ namespace Menlyn_Mews_API.Data
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Position)
-                .WithMany(p => p.Employee) 
+                .WithMany(p => p.Employee)
                 .HasForeignKey(e => e.PositionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -167,7 +166,7 @@ namespace Menlyn_Mews_API.Data
             modelBuilder.Entity<Room_Inventory>()
                 .HasKey(ri => new
                 {
-                    ri.RoomId,  
+                    ri.RoomId,
                     ri.InventoryId,
                 });
 
@@ -380,7 +379,7 @@ namespace Menlyn_Mews_API.Data
                 .HasForeignKey<Booking_Review>(br => br.RoomBookingId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Payment>() 
+            modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Payment_Type)
                 .WithMany(p => p.Payment)
                 .HasForeignKey(p => p.PaymentTypeId)
@@ -391,6 +390,278 @@ namespace Menlyn_Mews_API.Data
                 .WithMany(rb => rb.Write_Off)
                 .HasForeignKey(wo => wo.RoomBookingId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .HasOne(a => a.Employee)
+            //    .WithOne(c => c.ApplicationUser)
+            //    .HasForeignKey<Employee>(c => c.ApplicationUserId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasOne(r => r.Rates)
+            //    .WithMany(e => e.Employee)
+            //    .HasForeignKey(r => r.RateId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Room>()
+            //    .HasOne(r => r.Room_Type)
+            //    .WithMany(rt => rt.Rooms)
+            //    .HasForeignKey(r => r.RoomTypeId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Inspection_Item>()
+            //    .HasOne(rb => rb.Room_Booking)
+            //    .WithMany(ii => ii.Inspection_Item)
+            //    .HasForeignKey(rb => rb.RoomBookingId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasOne(e => e.Employee_Type)
+            //    .WithMany(et => et.Employee)
+            //    .HasForeignKey(e => e.EmployeeTypeId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasOne(e => e.Position)
+            //    .WithMany(p => p.Employee) 
+            //    .HasForeignKey(e => e.PositionId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Employee_Shift>()
+            //    .HasKey(es => new
+            //    {
+            //        es.EmployeeId,
+            //        es.ShiftId,
+            //    });
+
+            //modelBuilder.Entity<Room_Inventory>()
+            //    .HasKey(ri => new
+            //    {
+            //        ri.RoomId,  
+            //        ri.InventoryId,
+            //    });
+
+            //modelBuilder.Entity<Client_Discount>()
+            //    .HasKey(cd => new
+            //    {
+            //        cd.DiscountId,
+            //        cd.ClientId,
+            //    });
+
+            //modelBuilder.Entity<Room_Inventory>()
+            //    .HasOne(ri => ri.Room)
+            //    .WithMany(ri => ri.Room_Inventory)
+            //    .HasForeignKey(ri => ri.RoomId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Room_Inventory>()
+            //    .HasOne(ri => ri.Inventory)
+            //    .WithMany(ri => ri.Room_Inventory)
+            //    .HasForeignKey(ri => ri.InventoryId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Supplier_Order_Product>()
+            //    .HasKey(sop => new
+            //    {
+            //        sop.OrderId,
+            //        sop.ProductId,
+            //    });
+
+            //modelBuilder.Entity<Employee_Shift>()
+            //    .HasOne(es => es.Employee)
+            //    .WithMany(e => e.Employee_Shift)
+            //    .HasForeignKey(es => es.EmployeeId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Employee_Shift>()
+            //    .HasOne(es => es.Shift)
+            //    .WithMany(s => s.Employee_Shift)
+            //    .HasForeignKey(es => es.ShiftId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Client_Discount>()
+            //    .HasOne(cd => cd.Discount)
+            //    .WithMany(d => d.Client_Discounts)
+            //    .HasForeignKey(cd => cd.DiscountId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Client_Discount>()
+            //    .HasOne(cd => cd.Client)
+            //    .WithMany(c => c.Client_Discounts)
+            //    .HasForeignKey(cd => cd.ClientId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Stock_Take>()
+            //    .HasOne(i => i.Inventory)
+            //    .WithMany(st => st.Stock_Take)
+            //    .HasForeignKey(i => i.InventoryId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Employee_Shift>()
+            //    .HasMany(es => es.Stock_Take)
+            //    .WithOne(st => st.Employee_Shift)
+            //    .HasForeignKey(st => new
+            //    {
+            //        st.EmployeeId,
+            //        st.ShiftId
+            //    })
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasMany(es => es.Inspection_Item)
+            //    .WithOne(ii => ii.Employee)
+            //    .HasForeignKey(es => es.EmployeeId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Room_Inventory>()
+            //    .HasMany(wo => wo.Write_Off)
+            //    .WithOne(ri => ri.Room_Inventory)
+            //    .HasForeignKey(ri => new
+            //    {
+            //        ri.RoomId,
+            //        ri.InventoryId
+            //    })
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasMany(es => es.Write_Off)
+            //    .WithOne(wo => wo.Employee)
+            //    .HasForeignKey(wo => wo.EmployeeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasMany(es => es.Order)
+            //    .WithOne(o => o.Employee)
+            //    .HasForeignKey(o => o.EmployeeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Supplier_Type>()
+            //    .HasMany(st => st.Suppliers)
+            //    .WithOne(s => s.Supplier_Type)
+            //    .HasForeignKey(st => st.SupplierTypeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Inspection_Item>()
+            //    .HasMany(ii => ii.Write_Off)
+            //    .WithOne(wo => wo.Inspection_Item)
+            //    .HasForeignKey(ii => ii.InspectionItemId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Supplier>()
+            //    .HasMany(s => s.Orders)
+            //    .WithOne(o => o.Suppliers)
+            //    .HasForeignKey(s => s.SupplierId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Supplier_Order_Product>()
+            //    .HasOne(sop => sop.Order)
+            //    .WithMany(o => o.Supplier_Order_Product)
+            //    .HasForeignKey(sop => sop.OrderId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Supplier_Order_Product>()
+            //    .HasOne(sop => sop.Product)
+            //    .WithMany(o => o.Supplier_Order_Product)
+            //    .HasForeignKey(sop => sop.ProductId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Receive_Order>()
+            //    .HasMany(ro => ro.Supplier_Order_Product)
+            //    .WithOne(sop => sop.Receive_Order)
+            //    .HasForeignKey(ro => ro.ReceiveOrderId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Event_Types>()
+            //    .HasMany(eb => eb.Event_Booking)
+            //    .WithOne(et => et.Event_Types)
+            //    .HasForeignKey(eb => eb.EventTypeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasMany(eb => eb.Event_Booking)
+            //    .WithOne(eb => eb.Employee)
+            //    .HasForeignKey(eb => eb.EmployeeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            ////ROOM BOOKING
+            //modelBuilder.Entity<Booking_Package>()
+            //    .HasMany(rb => rb.Room_Booking)
+            //    .WithOne(bp => bp.Booking_Package)
+            //    .HasForeignKey(bp => bp.BookingPackageId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Room>()
+            //    .HasMany(rb => rb.Room_Bookings)
+            //    .WithOne(bp => bp.Rooms)
+            //    .HasForeignKey(bp => bp.RoomId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Discount>()
+            //    .HasMany(rb => rb.Room_Booking)
+            //    .WithOne(bp => bp.Discount)
+            //    .HasForeignKey(bp => bp.DiscountId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Client>()
+            //    .HasMany(rb => rb.Room_Bookings)
+            //    .WithOne(bp => bp.Clients)
+            //    .HasForeignKey(bp => bp.ClientId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Payment_Type>()
+            //    .HasMany(p => p.Payments)
+            //    .WithOne(pt => pt.Payment_Type)
+            //    .HasForeignKey(fk => fk.PaymentTypeId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Complaint_Type>()
+            //    .HasMany(c => c.Complaint)
+            //    .WithOne(ct => ct.Complaint_Type)
+            //    .HasForeignKey(fk => fk.ComplaintTypeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Employee>()
+            //    .HasMany(c => c.Complaint)
+            //    .WithOne(ct => ct.Employee)
+            //    .HasForeignKey(fk => fk.EmployeeId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Client>()
+            //    .HasMany(c => c.Complaint)
+            //    .WithOne(ct => ct.Client)
+            //    .HasForeignKey(fk => fk.ClientId)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .HasOne(a => a.Client)
+            //    .WithOne(c => c.ApplicationUser)
+            //    .HasForeignKey<Client>(c => c.ApplicationUserId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Room>()
+            //    .HasMany(br => br.Booking_Review)
+            //    .WithOne(r => r.Room)
+            //    .HasForeignKey(br => br.RoomId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Room_Booking>()
+            //    .HasOne(rb => rb.Booking_Review)
+            //    .WithOne(br => br.Room_Booking)
+            //    .HasForeignKey<Booking_Review>(br => br.RoomBookingId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Payment>() 
+            //    .HasOne(p => p.Payment_Type)
+            //    .WithMany(p => p.Payment)
+            //    .HasForeignKey(p => p.PaymentTypeId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Write_Off>()
+            //    .HasOne(wo => wo.RoomBooking)
+            //    .WithMany(rb => rb.Write_Off)
+            //    .HasForeignKey(wo => wo.RoomBookingId)
+            //    .OnDelete(DeleteBehavior.SetNull);
 
             // modelBuilder.Entity<Employee_Type>() // Employee to Employee Type
             //     .HasMany(e => e.Employees)
