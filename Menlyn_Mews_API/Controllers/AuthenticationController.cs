@@ -205,8 +205,8 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         [HttpPost]
-        [Route("RemoveRoles")]
-        public async Task<IActionResult> RemoveRole(string userName, [FromBody] string[] roleToRemove)
+        [Route("RemoveRoles/{userName}/{roleToRemove}")]
+        public async Task<IActionResult> RemoveRole(string userName, string roleToRemove)
         {
             var user = await _userManager.FindByNameAsync(userName);
             if (user == null)
@@ -215,64 +215,61 @@ namespace Menlyn_Mews_API.Controllers
             }
 
 
-            var result = await _userManager.RemoveFromRolesAsync(user, roleToRemove);
+            var result = await _userManager.RemoveFromRoleAsync(user, roleToRemove);
             if (result.Succeeded)
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (var role in roleToRemove)
-                {
-                    sb.Append(role.ToString());
-                }
-                return Ok("Roles " + sb.ToString() + " Successfully Removed");
+
+                return Ok("Roles Successfully Removed");
             }
 
             return BadRequest(result.Errors);
         }
 
         [HttpPost]
-        [Route("AssignRole")]
+        [Route("AssignRole/{userName}/{role}")]
         public async Task<IActionResult> AssignRole(string userName, string role)
         {
             var user = await _userManager.FindByNameAsync(userName);
             if (user == null)
             {
-                return NotFound(); //User Exists?
+                return NotFound(); // User does not exist
             }
-
 
             if (!await _roleManager.RoleExistsAsync(role))
             {
-                return BadRequest("Role does not exist."); //Role Provided Exists
+                return BadRequest("Role does not exist."); // Role does not exist
             }
 
-
+            // Check if the user already has the role
             if (await _userManager.IsInRoleAsync(user, role))
             {
-                return Ok($"User already has the '{role}' role."); //Check If The Provided Role Is Already Assigned
+                return Ok($"User already has the '{role}' role."); // Already has the role
             }
 
+            // Get current roles
             var currentRoles = await _userManager.GetRolesAsync(user);
-
             if (currentRoles.Any())
             {
+                // Remove current roles
                 var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
                 if (!removeResult.Succeeded)
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to remove current role(s).");
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to remove current role(s)."); // Handle removal failure
                 }
             }
 
+            // Add new role
             var result = await _userManager.AddToRoleAsync(user, role);
-
             if (result.Succeeded)
             {
                 return Ok("Role assigned successfully.");
             }
-            else
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to assign role.");
-            }
+
+            // Handle the error more explicitly
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to assign role: {errors}"); // Return specific error messages
         }
+
 
         [HttpGet("ConfirmEmail")]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
