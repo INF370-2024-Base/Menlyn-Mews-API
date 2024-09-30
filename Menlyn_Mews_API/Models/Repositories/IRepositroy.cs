@@ -214,6 +214,7 @@ namespace Menlyn_Mews_API.Models.Repositories
         //Event 
         public Task<Event_Booking[]> GetEventBookingsAsync();
         public Task<Event_Booking> GetEventBookingByIdAsync(int eventBookingId);
+        public Task<Event_Booking[]> GetEventBookingByClientIdAsync(int clientId);
 
         ///////////////////////////////////////////////////////EVENT REPOSITORY END///////////////////////////////////////////////////////////////////////////////////////
     }

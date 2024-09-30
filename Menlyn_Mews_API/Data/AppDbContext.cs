@@ -119,6 +119,7 @@ namespace Menlyn_Mews_API.Data
 
             base.OnModelCreating(modelBuilder);
             SeedRoles(modelBuilder);
+            SeedUsers(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>()
               .HasOne(a => a.Employee)
@@ -304,7 +305,7 @@ namespace Menlyn_Mews_API.Data
                 .HasMany(eb => eb.Event_Booking)
                 .WithOne(et => et.Event_Types)
                 .HasForeignKey(eb => eb.EventTypeId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Employee>()
                 .HasMany(eb => eb.Event_Booking)
@@ -709,16 +710,46 @@ namespace Menlyn_Mews_API.Data
 
         private static void SeedRoles(ModelBuilder builder)
         {
-            builder.Entity<IdentityRole>().HasData
-                (
-                    new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
-                    new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" },
-                    new IdentityRole() { Name = "Manager", ConcurrencyStamp = "3", NormalizedName = "Manager" },
-                    new IdentityRole() { Name = "Employee", ConcurrencyStamp = "4", NormalizedName = "Employee" },
-                    new IdentityRole() { Name = "None", ConcurrencyStamp = "5", NormalizedName = "None" }
-                );
+            var roles = new List<IdentityRole>
+            {
+                new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "1" },
+                new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER", ConcurrencyStamp = "2" },
+                new IdentityRole { Id = "3", Name = "Manager", NormalizedName = "MANAGER", ConcurrencyStamp = "3" },
+                new IdentityRole { Id = "4", Name = "Employee", NormalizedName = "EMPLOYEE", ConcurrencyStamp = "4" },
+                new IdentityRole { Id = "5", Name = "None", NormalizedName = "NONE", ConcurrencyStamp = "5" }
+            };
+
+            builder.Entity<IdentityRole>().HasData(roles);
         }
 
+
+        private static void SeedUsers(ModelBuilder modelBuilder)
+        {
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            var user = new ApplicationUser
+            {
+                Id = "ammarManager",
+                UserName = "TheManager",
+                NormalizedUserName = "THEMANAGER",
+                Email = "u22555260@tuks.co.za",
+                NormalizedEmail = "U22555260@TUKS.CO.ZA",
+                EmailConfirmed = true,
+                TwoFactorEnabled = true
+            };
+
+            user.PasswordHash = hasher.HashPassword(user, "Password@123");
+
+            modelBuilder.Entity<ApplicationUser>().HasData(user);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    UserId = user.Id,
+                    RoleId = "3"
+                }
+            );
+        }
 
 
 

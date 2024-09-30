@@ -12,9 +12,8 @@ using Menlyn_Mews.Service.Services;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Data;
 using Menlyn_Mews_API.Models.Domain.Emails;
+using Microsoft.EntityFrameworkCore;
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -50,125 +49,8 @@ namespace Menlyn_Mews_API.Controllers
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // GET: api/Employee
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> Get()
-        {
-            var employees = await _context.Employees
-                .Select(e => new
-                {
-                    e.EmployeeId,
-                    e.Employee_Name,
-                    e.Employee_Surname,
-                    e.Employee_ID_Number,
-                    e.Employee_Email_Address,
-                    e.Employee_Contact_Number,
-                    e.Employee_Gender,
-                    e.Employee_Address,
-                    e.EmployeeTypeId,
-                    e.PositionId,
-                    e.Employee_Photo 
-                })
-                .ToListAsync();
+       
 
-            return Ok(employees);
-        }
-
-        // GET api/Employee/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> Get(int id)
-        {
-            var employee = await _context.Employees
-                .Where(e => e.EmployeeId == id)
-                .Select(e => new
-                {
-                    e.EmployeeId,
-                    e.Employee_Name,
-                    e.Employee_Surname,
-                    e.Employee_ID_Number,
-                    e.Employee_Email_Address,
-                    e.Employee_Contact_Number,
-                    e.Employee_Gender,
-                    e.Employee_Address,
-                    e.EmployeeTypeId,
-                    e.PositionId,
-                    e.Employee_Photo 
-                })
-                .FirstOrDefaultAsync();
-
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(employee);
-        }
-
-        // POST api/Employee
-        [HttpPost]
-        public async Task<ActionResult<Employee>> Post([FromBody] Employee employee)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(Get), new { id = employee.EmployeeId }, employee);
-        }
-
-        // PUT api/Employee/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Employee updatedEmployee)
-        {
-            if (id != updatedEmployee.EmployeeId)
-            {
-                return BadRequest("Employee ID mismatch");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Entry(updatedEmployee).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Employees.Any(e => e.EmployeeId == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // DELETE api/Employee/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -308,6 +190,20 @@ namespace Menlyn_Mews_API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetRoles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            List<IdentityRole> roles = new List<IdentityRole>();
+
+            foreach (var role in await _roleManager.Roles.ToListAsync())
+            {
+                roles.Add(role);
+            }
+
+            return Ok(roles);
+        }
+
         [HttpPost]
         [Route("RemoveRoles")]
         public async Task<IActionResult> RemoveRole(string userName, [FromBody] string[] roleToRemove)
@@ -317,6 +213,7 @@ namespace Menlyn_Mews_API.Controllers
             {
                 return NotFound();
             }
+
 
             var result = await _userManager.RemoveFromRolesAsync(user, roleToRemove);
             if (result.Succeeded)

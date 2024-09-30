@@ -637,6 +637,12 @@ namespace Menlyn_Mews_API.Models.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Event_Booking[]> GetEventBookingByClientIdAsync(int clientId)
+        {
+            IQueryable<Event_Booking> query = _context.Event_Bookings.Where(eb => eb.ClientId == clientId).Include(eb => eb.Event_Types);
+            return await query.ToArrayAsync();
+        }
+
 
         ///////////////////////////////////////////////////////EVENT REPOSITORY END///////////////////////////////////////////////////////////////////////////////////////
     }

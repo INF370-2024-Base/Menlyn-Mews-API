@@ -118,7 +118,36 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpGet]//Booking History For Profile
+        [HttpGet]//Event History For Profile MM
+        [Route("GetEventBookingByClientId/{clientId}")]
+        public async Task<ActionResult> GetEvent_BookingClient(int clientId)
+        {
+            try
+            {
+                var results = await _repository.GetEventBookingByClientIdAsync(clientId);
+                if (results == null) return NotFound("You Do Not Have Any Bookings!");
+
+                dynamic eventBookings = results.Select(rb => new
+                {
+                    rb.EventId,
+                    rb.Event_Date,
+                    rb.Event_Price,
+                    rb.Start_Time,
+                    rb.End_Time,
+                    rb.Allergy_Description,
+                    rb.Event_Types.Event_Description,
+                })
+                .OrderByDescending(rb => rb.Event_Date);
+
+                return Ok(eventBookings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]//Booking History For Profile MM
         [Route("GetRoomBookingByClientId/{clientId}")]
         public async Task<ActionResult> GetRoom_BookingClient(int clientId)
         {

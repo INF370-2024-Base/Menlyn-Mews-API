@@ -83,7 +83,7 @@ namespace Menlyn_Mews_API.Controllers
                 Payment_Date = DateTime.Now,
                 Payment_Amount = pvm.Payment_Amount,
                 Payment_Status = "Approved",
-                PaymentTypeId = 1,
+                PaymentTypeId = pvm.PaymentTypeId,
                 ClientId = pvm.ClientId,
             };
 

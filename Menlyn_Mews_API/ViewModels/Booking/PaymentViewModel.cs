@@ -3,7 +3,7 @@
     public class PaymentViewModel
     {
         public Decimal Payment_Amount { get; set; }
-
+        public int PaymentTypeId { get; set; }
         public int ClientId { get; set; }
     }
 }
