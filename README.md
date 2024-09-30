@@ -9,8 +9,7 @@ The following record has been seeded to grant Manager Access
      Id = "ammarManager",
      UserName = "TheManager", //USERNAME
      NormalizedUserName = "THEMANAGER",
-     Email = "u22555260@tuks.co.za",
-     NormalizedEmail = "U22555260@TUKS.CO.ZA",
+     Email = "########", //For Security Purposes, the email is my student number and the tuks domain email address
      EmailConfirmed = true,
      TwoFactorEnabled = true
  };
