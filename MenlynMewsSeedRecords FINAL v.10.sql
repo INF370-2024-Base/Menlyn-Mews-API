@@ -172,6 +172,7 @@ VALUES
 
 INSERT INTO Employees 
 VALUES
+('Ammar', 'Ulhaq', '02121212121212', 'email@gmail.com', '0211211212', 'Male', 'Street Road', 'photo.png', 1, 1, 1, 'ammarManager'),
 ('John', 'Doe', '0123323456789', 'email@gmail.com', '0123212343', 'Male', '12 Road Street', 'photo.png', 1, 1, 1, '11'),
 ('Jane', 'Doe', '0123383456789', 'test@gmail.com', '0123212343', 'Female', '24 Road Street', 'photo.png', 2, 2, 2, '12'),
 ('Rick', 'Smith', '0123323456789', 'gmail@gmail.com', '0123212343', 'Male', '36 Road Street', 'photo.png', 3, 3, 3, '13'),
