@@ -67,6 +67,9 @@ namespace Menlyn_Mews_API.Controllers
 
                 eventTypes.Event_Description = evm.Event_Description;
                 eventTypes.Event_Capacity_Status = evm.Event_Capacity_Status;
+                eventTypes.Event_Type_Name = evm.Event_Type_Name;
+                eventTypes.Event_Type_Price = evm.Event_Type_Price;
+                eventTypes.Event_Capacity = evm.Event_Capacity;
 
                 if (await _repository.SaveChangesAsync())
                 {
@@ -89,6 +92,10 @@ namespace Menlyn_Mews_API.Controllers
             {
                 Event_Description = evm.Event_Description,
                 Event_Capacity_Status= evm.Event_Capacity_Status,
+                Event_Type_Name= evm.Event_Type_Name,
+                Event_Type_Price= evm.Event_Type_Price,
+                Event_Capacity = evm.Event_Capacity
+
             };
 
             try
