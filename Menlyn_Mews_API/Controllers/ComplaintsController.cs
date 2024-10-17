@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore; // For DbContext
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
 using Menlyn_Mews_API.ViewModels.Client;
+using System.Data.SqlClient; // For SQL connection
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -12,11 +14,14 @@ namespace Menlyn_Mews_API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IRepositroy _repository;
+        private readonly string _connectionString;
 
-        public ComplaintsController(AppDbContext context, IRepositroy repositroy)
+        public ComplaintsController(AppDbContext context, IRepositroy repositroy, IConfiguration configuration)
         {
             _context = context;
             _repository = repositroy;
+            _connectionString = configuration.GetConnectionString("Menlyn_Mews"); // Access connection string from app settings
+
         }
 
         [HttpGet]
@@ -144,6 +149,85 @@ namespace Menlyn_Mews_API.Controllers
 
             return NoContent();
         }
+
+        // New endpoint for backing up the database
+        [HttpPost]
+        [Route("BackupDatabase")]
+        public IActionResult BackupDatabase()
+        {
+            // Automatically generate a backup file name based on the current timestamp
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string backupFileName = $"Menlyn_Mews_Backup_{timestamp}.bak";
+            string backupFilePath = Path.Combine("C:\\Backup", backupFileName); // Set your desired backup path
+
+            string query = $"BACKUP DATABASE [Menlyn_Mews] TO DISK = '{backupFilePath}' WITH NOFORMAT, NOINIT, NAME = 'Menlyn_Mews Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return Ok($"Backup successful! File: {backupFileName}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Backup failed: {ex.Message}");
+            }
+        }
+
+        // New endpoint for restoring the database
+        [HttpPost]
+        [Route("RestoreDatabase")]
+        public IActionResult RestoreDatabase()
+        {
+            try
+            {
+                // Automatically get the most recent backup file
+                var backupDirectory = new DirectoryInfo("C:\\Backup");
+                var latestBackupFile = backupDirectory.GetFiles("Menlyn_Mews_Backup_*.bak")
+                                        .OrderByDescending(f => f.LastWriteTime)
+                                        .FirstOrDefault();
+
+                if (latestBackupFile == null)
+                {
+                    return BadRequest("No backup file found.");
+                }
+
+                string backupFilePath = latestBackupFile.FullName;
+
+                string restoreQuery = $@"
+        USE master;
+        ALTER DATABASE Menlyn_Mews SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+        RESTORE DATABASE Menlyn_Mews FROM DISK = '{backupFilePath}' WITH REPLACE;
+        ALTER DATABASE Menlyn_Mews SET MULTI_USER;";
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(restoreQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return Ok($"Database restored successfully from {latestBackupFile.Name}!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Restore failed: {ex.Message}");
+            }
+        }
+
+
+        public class BackupViewModel
+        {
+            public string BackupFileName { get; set; }
+        }
+
 
         private bool ComplaintExists(int id)
         {
