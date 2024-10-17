@@ -222,6 +222,28 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListBackupFiles")]
+        public IActionResult ListBackupFiles()
+        {
+            string backupDirectory = "C:\\Backup";  // Path to your backup directory
+
+            try
+            {
+                // Get all files in the backup directory
+                var files = Directory.GetFiles(backupDirectory)
+                                     .Select(Path.GetFileName) // Only get file names, not full paths
+                                     .ToList();
+
+                return Ok(files);  // Return the list of files as JSON
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error retrieving backup files: {ex.Message}");
+            }
+        }
+
+
 
         public class BackupViewModel
         {
