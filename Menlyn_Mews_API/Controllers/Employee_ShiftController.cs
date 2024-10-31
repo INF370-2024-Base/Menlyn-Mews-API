@@ -27,7 +27,8 @@ namespace Menlyn_Mews_API.Controllers
             {
                 var results = await _repository.GetEmployeeShiftsAsync();
 
-                dynamic employeeshifts = results.Select(es => new
+                // If you want to see all shifts, remove the filtering for today's date
+                var employeeshifts = results.Select(es => new
                 {
                     es.Employee.EmployeeId,
                     es.Shift.ShiftId,
@@ -35,13 +36,11 @@ namespace Menlyn_Mews_API.Controllers
                     Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
                     Start_TIme = es.Shift.Start_TIme,
                     End_TIme = es.Shift.End_TIme,
-                    Shift_Date = es.Shift.Shift_Date.Year + "-" + es.Shift.Shift_Date.Month + "-" + es.Shift.Shift_Date.Day,
-                    Shift_Date2 = es.Shift.Shift_Date,
+                    Shift_Date = es.Shift.Shift_Date.ToString("yyyy-MM-dd"), // Format the date properly
                     es.Clock_In_Time,
                     es.Clock_Out_Time,
                     es.Shift_Description,
-                })
-                .Where(es => es.Shift_Date2 == DateTime.Today);
+                });
 
                 return Ok(employeeshifts);
             }
@@ -62,16 +61,16 @@ namespace Menlyn_Mews_API.Controllers
                 dynamic employeeshifts = results
                     .Where(es => es.Shift.Shift_Date == date)
                     .Select(es => new
-                {
-                    es.Employee.EmployeeId,
-                    es.Shift.ShiftId,
-                    Employee_Name = es.Employee.Employee_Name + " " + es.Employee.Employee_Surname,
-                    Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
-                    Shift_Date = es.Shift.Shift_Date.Year + "-" + es.Shift.Shift_Date.Month + "-" + es.Shift.Shift_Date.Day,
-                    es.Clock_In_Time,
-                    es.Clock_Out_Time,
-                    es.Shift_Description,
-                });
+                    {
+                        es.Employee.EmployeeId,
+                        es.Shift.ShiftId,
+                        Employee_Name = es.Employee.Employee_Name + " " + es.Employee.Employee_Surname,
+                        Shift_Time = es.Shift.Start_TIme + " - " + es.Shift.End_TIme,
+                        Shift_Date = es.Shift.Shift_Date.Year + "-" + es.Shift.Shift_Date.Month + "-" + es.Shift.Shift_Date.Day,
+                        es.Clock_In_Time,
+                        es.Clock_Out_Time,
+                        es.Shift_Description,
+                    });
 
                 return Ok(employeeshifts);
             }
@@ -158,7 +157,7 @@ namespace Menlyn_Mews_API.Controllers
 
             var alreadyBooked = await _repository.GetEmployeeShiftByIdAsync(employeeShift.EmployeeId, employeeShift.ShiftId);
 
-            if (alreadyBooked != null) 
+            if (alreadyBooked != null)
             {
                 return Ok(new { message = "You Have Already Booked A Shift Today!" });
             }
@@ -167,7 +166,7 @@ namespace Menlyn_Mews_API.Controllers
             try
             {
                 _repository.Add(employeeShift);
-                await _repository.SaveChangesAsync();   
+                await _repository.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -201,3 +200,4 @@ namespace Menlyn_Mews_API.Controllers
         }
     }
 }
+

@@ -20,17 +20,21 @@ namespace Menlyn_Mews_API.Services
         {
             // Get the logged-in user's claims
             var httpContext = _httpContextAccessor.HttpContext;
-            var userName = httpContext?.User?.Identity?.IsAuthenticated == true
-                            ? httpContext.User.Identity.Name
-                            : "Unknown User"; // Default for non-authenticated users
+            var isAuthenticated = httpContext?.User?.Identity?.IsAuthenticated == true;
 
-            // Extract Employee name and surname from claims
-            var employeeName = httpContext?.User?.FindFirst("EmployeeName")?.Value; // Ensure you set this in your sign-in logic
-            var employeeSurname = httpContext?.User?.FindFirst("EmployeeSurname")?.Value; // Ensure you set this in your sign-in logic
+            // If the user is authenticated, use their claims to log the user; otherwise, log as "John Smith"
+            var userName = isAuthenticated
+                           ? httpContext.User.Identity.Name
+                           : "Ammar Ulhaq"; // Log as John Smith if user is not authenticated
 
+            // Extract Employee name and surname from claims, if available
+            var employeeName = isAuthenticated ? httpContext?.User?.FindFirst("EmployeeName")?.Value : "John";
+            var employeeSurname = isAuthenticated ? httpContext?.User?.FindFirst("EmployeeSurname")?.Value : "Smith";
+
+            // Create a new audit log entry
             var auditLog = new Audit_Log
             {
-                User_Name = $"{employeeName} {employeeSurname}", // Combine name and surname
+                User_Name = $" {userName}", // Combine name and surname
                 Action = action,
                 Controller_Name = controllerName,
                 Action_Name = actionName,
@@ -38,6 +42,7 @@ namespace Menlyn_Mews_API.Services
                 Details = details
             };
 
+            // Save the audit log entry to the database
             _context.AuditLogs.Add(auditLog);
 
             try
@@ -50,6 +55,7 @@ namespace Menlyn_Mews_API.Services
                 throw new InvalidOperationException("Failed to log audit record", ex);
             }
         }
+
 
     }
 }

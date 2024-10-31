@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Menlyn_Mews_API.Data;
 using Menlyn_Mews_API.Models.Domain;
 using Menlyn_Mews_API.Models.Repositories;
-using System.Net;
 using Menlyn_Mews_API.ViewModels.Employee;
+using Menlyn_Mews_API.Services; // Include this for IAuditLogService
 
 namespace Menlyn_Mews_API.Controllers
 {
@@ -19,57 +18,64 @@ namespace Menlyn_Mews_API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IRepositroy _repository;
+        private readonly IAuditLogService _auditLogService;
 
-        public ShiftsController(AppDbContext context, IRepositroy repositroy)
+        public ShiftsController(AppDbContext context, IRepositroy repository, IAuditLogService auditLogService)
         {
             _context = context;
-            _repository = repositroy;   
+            _repository = repository;
+            _auditLogService = auditLogService; // Inject IAuditLogService
         }
 
+        // GET: api/Shifts
         [HttpGet]
-        [Route("GetShifts")]
-        public async Task<ActionResult> GetShifts()
+        public async Task<ActionResult<IEnumerable<Shift>>> GetShifts()
         {
             try
             {
-                var resutls = await _repository.GetShiftsAsync();
-
-                dynamic shifts = resutls.Select(s => new
+                var shifts = await _repository.GetShiftsAsync();
+                var result = shifts.Select(s => new
                 {
                     s.ShiftId,
                     Shift_Date = s.Shift_Date,
                     Start_Time = s.Start_TIme!.Value.ToString("hh:mm tt"),
                     End_Time = s.End_TIme!.Value.ToString("hh:mm tt"),
                     s.IP_Address,
-                }); ;
+                });
 
-                return Ok(shifts);
+                // Log the action
+                await _auditLogService.LogAsync("View", "ShiftsController", nameof(GetShifts), "Retrieved all shifts");
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);  
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet]
-        [Route("GetShiftById/{shiftId}")]
-        public async Task<ActionResult> GetShift(int shiftId)
+        // GET: api/Shifts/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Shift>> GetShiftById(int id)
         {
             try
             {
-                var s = await _repository.GetShiftByIdAsync(shiftId);
-                if (s == null) return NotFound("Shift Does Not Exist");
+                var shift = await _repository.GetShiftByIdAsync(id);
+                if (shift == null) return NotFound("Shift not found.");
 
-                dynamic shifts = new
+                var result = new
                 {
-                    s.ShiftId,
-                    Shift_Date = s.Shift_Date,
-                    Start_Time = s.Start_TIme!.Value.ToString("hh:mm tt"),
-                    End_Time = s.End_TIme!.Value.ToString("hh:mm tt"),
-                    s.IP_Address,
+                    shift.ShiftId,
+                    Shift_Date = shift.Shift_Date,
+                    Start_Time = shift.Start_TIme!.Value.ToString("hh:mm tt"),
+                    End_Time = shift.End_TIme!.Value.ToString("hh:mm tt"),
+                    shift.IP_Address,
                 };
 
-                return Ok(shifts);
+                // Log the action
+                await _auditLogService.LogAsync("View", "ShiftsController", nameof(GetShiftById), $"Retrieved shift with ID {id}");
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -77,257 +83,100 @@ namespace Menlyn_Mews_API.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("UpdateShiftById/{shiftId}")]
-        public async Task<ActionResult<ShiftViewModel>> PutShift(int shiftId, ShiftViewModel svm)
-        {
-            try
-            {
-                var s = await _repository.GetShiftByIdAsync(shiftId);
-                if (s == null) return NotFound("Shift Does Not Exist");
-
-                s.Shift_Date = svm.Shift_Date;
-                s.Start_TIme = svm.Start_TIme; 
-                s.End_TIme = svm.End_TIme;
-                s.IP_Address = GetUserIpAddress();
-
-                if (await _repository.SaveChangesAsync())
-                {
-                    return Ok(s);
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return NoContent();
-        }
-
+        // POST: api/Shifts
         [HttpPost]
-        [Route("AddShift")]
-        public async Task<IActionResult> PostShift(ShiftViewModel svm)
+        public async Task<ActionResult<Shift>> CreateShift([FromBody] ShiftViewModel shiftViewModel)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var shift = new Shift
             {
-                Shift_Date = svm.Shift_Date,
-                Start_TIme = svm.Start_TIme,
-                End_TIme = svm.End_TIme,
-                IP_Address = GetUserIpAddress(),
+                Shift_Date = shiftViewModel.Shift_Date,
+                Start_TIme = shiftViewModel.Start_TIme,
+                End_TIme = shiftViewModel.End_TIme,
+                IP_Address = GetUserIpAddress()
             };
 
             try
             {
                 _repository.Add(shift);
-                await _repository.SaveChangesAsync();   
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(shift);
-        }
-
-        [HttpGet]
-        [Route("GetTodaysShifts")]
-        public async Task<ActionResult> GetTodaysShifts()
-        {
-            try
-            {
-                var today = DateTime.Today;
-
-                var todaysShifts = await _repository.GetShiftByDateAsync(today);
-
-                if (todaysShifts == null || !todaysShifts.Any())
-                {
-                    return Ok("Today's shifts have not yet been created.");
-                }
-
-                var shifts = todaysShifts.Select(s => new
-                {
-                    s.ShiftId,
-                    Shift_Date = s.Shift_Date,
-                    Start_Time = s.Start_TIme!.Value.ToString("hh:mm tt"),
-                    End_Time = s.End_TIme!.Value.ToString("hh:mm tt"),
-                    s.IP_Address
-                });
-
-                return Ok(shifts);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("CheckTodaysShifts")]
-        public async Task<IActionResult> CheckTodaysShifts()
-        {
-            try
-            {
-                var today = DateTime.Today;
-
-                var shifts = await _repository.GetShiftByDateAsync(today);
-
-                if (shifts != null && shifts.Any())
-                {
-                    return Ok(new { shiftsCreated = true });
-                }
-
-                return Ok(new { shiftsCreated = false });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "An error occurred while checking today's shifts.", error = ex.Message });
-            }
-        }
-
-
-
-
-        //[HttpPost]
-        //[Route("CreateTodaysShifts")]
-        //public async Task<IActionResult> CreateTodaysShifts()
-        //{
-        //    var today = DateTime.Today;
-
-        //    var existingShifts = await _repository.GetShiftByDateAsync(today);
-        //    if (existingShifts.Any())
-        //    {
-        //        return BadRequest( new { message = "Today's shifts have already been created." } );
-        //    }
-
-        //    var morningShift = new Shift
-        //    {
-        //        Shift_Date = today,
-        //        Start_TIme = today.AddHours(9),
-        //        End_TIme = today.AddHours(17),     
-        //        IP_Address = GetUserIpAddress(),
-        //    };
-
-        //    var afternoonShift = new Shift
-        //    {
-        //        Shift_Date = today,
-        //        Start_TIme = today.AddHours(17),
-        //        End_TIme = today.AddDays(1).AddHours(1),  
-        //        IP_Address = GetUserIpAddress(),
-        //    };
-
-        //    var nightShift = new Shift
-        //    {
-        //        Shift_Date = today,
-        //        Start_TIme = today.AddDays(1).AddHours(1),
-        //        End_TIme = today.AddDays(1).AddHours(9),   
-        //        IP_Address = GetUserIpAddress(),
-        //    };
-
-        //    try
-        //    {
-        //        _repository.Add(morningShift);
-        //        _repository.Add(afternoonShift);
-        //        _repository.Add(nightShift);
-        //        await _repository.SaveChangesAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-
-        //    return Ok(new { message = "Todays Shifts Have Been Created Successfully" });
-        //}
-
-        [HttpPost]
-        [Route("CreateTodaysShifts")]
-        public async Task<IActionResult> CreateTodaysShifts()
-        {
-            var today = DateTime.Today;
-
-            var existingShifts = await _repository.GetShiftByDateAsync(today);
-            if (existingShifts.Any())
-            {
-                return BadRequest(new { message = "Today's shifts have already been created." });
-            }
-
-            // Define the shifts with the specified times
-            var nightShift = new Shift
-            {
-                Shift_Date = today,
-                Start_TIme = today.AddHours(1),    // 01:00 AM
-                End_TIme = today.AddHours(9),      // 09:00 AM
-                IP_Address = GetUserIpAddress(),
-            };
-
-            var morningShift = new Shift
-            {
-                Shift_Date = today,
-                Start_TIme = today.AddHours(9),    // 09:00 AM
-                End_TIme = today.AddHours(17),     // 05:00 PM
-                IP_Address = GetUserIpAddress(),
-            };
-
-            var eveningShift = new Shift
-            {
-                Shift_Date = today,
-                Start_TIme = today.AddHours(15).AddMinutes(59),   // 03:59 PM
-                End_TIme = today.AddHours(23).AddMinutes(59),     // 11:59 PM
-                IP_Address = GetUserIpAddress(),
-            };
-
-            try
-            {
-                _repository.Add(nightShift);
-                _repository.Add(morningShift);
-                _repository.Add(eveningShift);
                 await _repository.SaveChangesAsync();
+
+                // Log the action
+                await _auditLogService.LogAsync("Create", "ShiftsController", nameof(CreateShift), $"Created shift with ID {shift.ShiftId}");
+
+                return CreatedAtAction(nameof(GetShiftById), new { id = shift.ShiftId }, shift);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
-            return Ok(new { message = "Today's shifts have been created successfully." });
         }
 
+        // PUT: api/Shifts/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateShift(int id, [FromBody] ShiftViewModel shiftViewModel)
+        {
+            if (id == 0 || !ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            var existingShift = await _repository.GetShiftByIdAsync(id);
+            if (existingShift == null) return NotFound("Shift not found.");
 
+            existingShift.Shift_Date = shiftViewModel.Shift_Date;
+            existingShift.Start_TIme = shiftViewModel.Start_TIme;
+            existingShift.End_TIme = shiftViewModel.End_TIme;
+            existingShift.IP_Address = GetUserIpAddress();
+
+            try
+            {
+                await _repository.SaveChangesAsync();
+
+                // Log the action
+                await _auditLogService.LogAsync("Update", "ShiftsController", nameof(UpdateShift), $"Updated shift with ID {id}");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // DELETE: api/Shifts/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShift(int id)
         {
-            if (_context.Shifts == null)
+            try
             {
-                return NotFound();
+                var shift = await _repository.GetShiftByIdAsync(id);
+                if (shift == null)
+                    return NotFound("Shift not found.");
+
+                _repository.Delete(shift);
+                await _repository.SaveChangesAsync();
+
+                // Log the action
+                await _auditLogService.LogAsync("Delete", "ShiftsController", nameof(DeleteShift), $"Deleted shift with ID {id}");
+
+                return NoContent();
             }
-            var shift = await _context.Shifts.FindAsync(id);
-            if (shift == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            _context.Shifts.Remove(shift);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
+        // Helper method to retrieve IP Address
         private string GetUserIpAddress()
         {
             var remoteIpAddress = HttpContext.Connection.RemoteIpAddress;
             if (remoteIpAddress != null)
             {
-                if (remoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    return remoteIpAddress.ToString();
-                }
-
-                if (remoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
-                {
-                    var ipv4Address = remoteIpAddress.MapToIPv4().ToString();
-                    return ipv4Address;
-                }
-
-                return remoteIpAddress.ToString();
+                return remoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork
+                    ? remoteIpAddress.ToString()
+                    : remoteIpAddress.MapToIPv4().ToString();
             }
             return "IP Address not found";
         }
