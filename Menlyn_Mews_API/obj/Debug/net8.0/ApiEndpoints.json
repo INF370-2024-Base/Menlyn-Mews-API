@@ -1,0 +1,4795 @@
+[
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuditLogController",
+    "Method": "GetAuditLogs",
+    "RelativePath": "api/AuditLog",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Menlyn_Mews_API.Models.Domain.Audit_Log, Menlyn_Mews_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuditLogController",
+    "Method": "PostAuditLog",
+    "RelativePath": "api/AuditLog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "auditLog",
+        "Type": "Menlyn_Mews_API.Models.Domain.Audit_Log",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Audit_Log",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuditLogController",
+    "Method": "GetAuditLog",
+    "RelativePath": "api/AuditLog/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Audit_Log",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuditLogController",
+    "Method": "PutAuditLog",
+    "RelativePath": "api/AuditLog/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "auditLog",
+        "Type": "Menlyn_Mews_API.Models.Domain.Audit_Log",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuditLogController",
+    "Method": "DeleteAuditLog",
+    "RelativePath": "api/AuditLog/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "AssignRole",
+    "RelativePath": "api/Authentication/AssignRole/{userName}/{role}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "ConfirmEmail",
+    "RelativePath": "api/Authentication/ConfirmEmail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/Authentication/ForgetPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "GetRoles",
+    "RelativePath": "api/Authentication/GetRoles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "IsLoggedIn",
+    "RelativePath": "api/Authentication/IsLoggedIn",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "Login",
+    "RelativePath": "api/Authentication/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginModel",
+        "Type": "Menlyn_Mews_API.Models.Domain.Login.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "LoginWithOTP",
+    "RelativePath": "api/Authentication/Login-2FA",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "Logout",
+    "RelativePath": "api/Authentication/Logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "Register",
+    "RelativePath": "api/Authentication/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerUser",
+        "Type": "Menlyn_Mews_API.Models.Domain.SignUp.RegisterUser",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "RegisterEmployee",
+    "RelativePath": "api/Authentication/RegisterEmployee/{role}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerUser",
+        "Type": "Menlyn_Mews_API.Models.Domain.SignUp.RegisterEmployee",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "RemoveRole",
+    "RelativePath": "api/Authentication/RemoveRoles/{userName}/{roleToRemove}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleToRemove",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Authentication/ResetPassword",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.AuthenticationController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Authentication/ResetPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPassword",
+        "Type": "Menlyn_Mews_API.Models.Domain.SignUp.ResetPassword",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.BackupController",
+    "Method": "RestoreDatabase",
+    "RelativePath": "api/Backup/restore",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Menlyn_Mews_API.Controllers.RestoreDatabaseRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.BackupController",
+    "Method": "ScheduleBackup",
+    "RelativePath": "api/Backup/schedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Menlyn_Mews_API.Controllers.BackupScheduleRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.BackupController",
+    "Method": "TriggerBackup",
+    "RelativePath": "api/Backup/trigger",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_PackageController",
+    "Method": "DeleteBooking_Package",
+    "RelativePath": "api/Booking_Package/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_PackageController",
+    "Method": "PostBooking_Package",
+    "RelativePath": "api/Booking_Package/AddBookingPackage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.BookingPackageViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_PackageController",
+    "Method": "GetBooking_Package",
+    "RelativePath": "api/Booking_Package/GetBookingPackageById/{bookingPackageId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingPackageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_PackageController",
+    "Method": "GetBooking_Packages",
+    "RelativePath": "api/Booking_Package/GetBookingPackages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_PackageController",
+    "Method": "PutBooking_Package",
+    "RelativePath": "api/Booking_Package/UpdateBookingPackage/{bookingPackageId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingPackageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "bvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.BookingPackageViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.BookingPackageViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "PostBooking_Review",
+    "RelativePath": "api/Booking_Review",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.BookingReviewViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "DeleteBooking_Review",
+    "RelativePath": "api/Booking_Review/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "GetBooking_Review",
+    "RelativePath": "api/Booking_Review/GetBookingReviewById/{bookingReviewId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingReviewId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "GetBooking_ReviewRooms",
+    "RelativePath": "api/Booking_Review/GetBookingReviewByRoomId/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "GetBooking_Reviews",
+    "RelativePath": "api/Booking_Review/GetBookingReviews",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "GetBooking_ReviewRoomsAverage",
+    "RelativePath": "api/Booking_Review/GetRoomRatingAverage/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Booking_ReviewController",
+    "Method": "PutBooking_Review",
+    "RelativePath": "api/Booking_Review/UpdateBookingReview/{bookingReviewId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingReviewId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "bvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.BookingReviewViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Client.BookingReviewViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Client_DiscountController",
+    "Method": "PostClient_Discount",
+    "RelativePath": "api/Client_Discount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "client_Discount",
+        "Type": "Menlyn_Mews_API.Models.Domain.Client_Discount",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Client_Discount",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Client_DiscountController",
+    "Method": "PutClient_Discount",
+    "RelativePath": "api/Client_Discount/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "client_Discount",
+        "Type": "Menlyn_Mews_API.Models.Domain.Client_Discount",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Client_DiscountController",
+    "Method": "DeleteClient_Discount",
+    "RelativePath": "api/Client_Discount/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Client_DiscountController",
+    "Method": "GetClient_Discounts",
+    "RelativePath": "api/Client_Discount/GetClientDiscounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ClientsController",
+    "Method": "GetClients",
+    "RelativePath": "api/Clients",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ClientsController",
+    "Method": "GetClient",
+    "RelativePath": "api/Clients/{clientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Client",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ClientsController",
+    "Method": "PutClient",
+    "RelativePath": "api/Clients/{clientId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "cvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ClientViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ClientViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ClientsController",
+    "Method": "DeleteClient",
+    "RelativePath": "api/Clients/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ClientsController",
+    "Method": "ContactUsEmail",
+    "RelativePath": "api/Clients/ContactUs/{email}/{name}/{message}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "message",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Clients1Controller",
+    "Method": "GetClients",
+    "RelativePath": "api/Clients1",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Menlyn_Mews_API.Models.Domain.Client, Menlyn_Mews_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Clients1Controller",
+    "Method": "PostClient",
+    "RelativePath": "api/Clients1",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "client",
+        "Type": "Menlyn_Mews_API.Models.Domain.Client",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Client",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Clients1Controller",
+    "Method": "GetClient",
+    "RelativePath": "api/Clients1/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Client",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Clients1Controller",
+    "Method": "PutClient",
+    "RelativePath": "api/Clients1/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "client",
+        "Type": "Menlyn_Mews_API.Models.Domain.Client",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Clients1Controller",
+    "Method": "DeleteClient",
+    "RelativePath": "api/Clients1/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Complaint_TypeController",
+    "Method": "DeleteComplaint_Type",
+    "RelativePath": "api/Complaint_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Complaint_TypeController",
+    "Method": "PostComplaint_Type",
+    "RelativePath": "api/Complaint_Type/AddComplaintType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ComplaintTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Complaint_TypeController",
+    "Method": "GetComplaint_Type",
+    "RelativePath": "api/Complaint_Type/GetComplaintTypeById{complaintTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Complaint_TypeController",
+    "Method": "GetComplaint_Types",
+    "RelativePath": "api/Complaint_Type/GetComplaintTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Complaint_TypeController",
+    "Method": "PutComplaint_Type",
+    "RelativePath": "api/Complaint_Type/UpdateComplaintTypeId/{complaintTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "cvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ComplaintTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ComplaintTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "DeleteComplaint",
+    "RelativePath": "api/Complaints/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "PostComplaint",
+    "RelativePath": "api/Complaints/AddComplaint",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ComplaintViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "BackupDatabase",
+    "RelativePath": "api/Complaints/BackupDatabase",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "GetBackupFiles",
+    "RelativePath": "api/Complaints/GetBackupFiles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "GetComplaint",
+    "RelativePath": "api/Complaints/GetComplaintById/{complaintId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Complaint",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "GetComplaints",
+    "RelativePath": "api/Complaints/GetComplaints",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "ListBackupFiles",
+    "RelativePath": "api/Complaints/ListBackupFiles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "ResolveComplaint",
+    "RelativePath": "api/Complaints/ResolveComplaint/{complaintId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "cvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ComplaintViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Client.ComplaintViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ComplaintsController",
+    "Method": "RestoreDatabase",
+    "RelativePath": "api/Complaints/RestoreDatabase",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "DeleteDiscount",
+    "RelativePath": "api/Discounts/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "Post5Discount",
+    "RelativePath": "api/Discounts/Add5DiscountCode/{discountAmount}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "discountAmount",
+        "Type": "System.Decimal",
+        "IsRequired": true
+      },
+      {
+        "Name": "dvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.DiscountViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "FindDiscount",
+    "RelativePath": "api/Discounts/CheckCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "GetDiscount",
+    "RelativePath": "api/Discounts/GetDiscountById/{discountId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "discountId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Discount",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "GetDiscount",
+    "RelativePath": "api/Discounts/GetDiscounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "SendDiscountToAllClients",
+    "RelativePath": "api/Discounts/SendDiscountToAllClients/{discountId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "discountId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "SendDiscountToClient",
+    "RelativePath": "api/Discounts/SendDiscountToClient/{discountId}/{clientId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "discountId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.DiscountsController",
+    "Method": "PutDiscount",
+    "RelativePath": "api/Discounts/UpdateDiscount/{discountId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "discountId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.DiscountViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.DiscountViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_ShiftController",
+    "Method": "DeleteEmployee_Shift",
+    "RelativePath": "api/Employee_Shift/{employeeId}/{shiftId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id2",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeId",
+        "Type": "",
+        "IsRequired": true
+      },
+      {
+        "Name": "shiftId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_ShiftController",
+    "Method": "PostEmployee_Shift",
+    "RelativePath": "api/Employee_Shift/BookEmployeeShift",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "esvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.AddEmployeeShiftViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_ShiftController",
+    "Method": "GetEmployee_Shift",
+    "RelativePath": "api/Employee_Shift/GetEmployeeShiftById/{employeeId}/{shiftId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "shiftId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_ShiftController",
+    "Method": "GetEmployee_Shifts",
+    "RelativePath": "api/Employee_Shift/GetEmployeeShifts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_ShiftController",
+    "Method": "GetEmployeeShiftHistory",
+    "RelativePath": "api/Employee_Shift/ShiftHistory/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_ShiftController",
+    "Method": "PutEmployee_Shift",
+    "RelativePath": "api/Employee_Shift/UpdateEmployeeShift/{employeeId}/{shiftId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "shiftId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "esvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.EmployeeShiftViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.EmployeeShiftViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_TypeController",
+    "Method": "DeleteEmployee_Type",
+    "RelativePath": "api/Employee_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_TypeController",
+    "Method": "PostEmployee_Type",
+    "RelativePath": "api/Employee_Type/AddEmployeeType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.EmployeeTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_TypeController",
+    "Method": "GetEmployee_Types",
+    "RelativePath": "api/Employee_Type/GetEmployeeType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_TypeController",
+    "Method": "GetEmployee_Type",
+    "RelativePath": "api/Employee_Type/GetEmployeeTypeById/{employeeTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Employee_TypeController",
+    "Method": "PutEmployee_Type",
+    "RelativePath": "api/Employee_Type/UpdateEmployeeType/{employeeTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.EmployeeTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.EmployeeTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.EmployeesController",
+    "Method": "GetEmployees",
+    "RelativePath": "api/Employees",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.EmployeesController",
+    "Method": "GetEmployee",
+    "RelativePath": "api/Employees/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Employee",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.EmployeesController",
+    "Method": "UpdateEmployee",
+    "RelativePath": "api/Employees/{employeeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.EmployeeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.EmployeesController",
+    "Method": "DeleteEmployee",
+    "RelativePath": "api/Employees/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.EmployeesController",
+    "Method": "GetEmployeeById",
+    "RelativePath": "api/Employees/EmployeeDetails/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Employee",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_BookingController",
+    "Method": "DeleteEvent_Booking",
+    "RelativePath": "api/Event_Booking/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_BookingController",
+    "Method": "PostEvent_Booking",
+    "RelativePath": "api/Event_Booking/CreateEventBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventBookingViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_BookingController",
+    "Method": "GetEvent_Booking",
+    "RelativePath": "api/Event_Booking/GetEventBookingById/{eventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_BookingController",
+    "Method": "GetEvent_Bookings",
+    "RelativePath": "api/Event_Booking/GetEventBookings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_BookingController",
+    "Method": "PayEventBooking",
+    "RelativePath": "api/Event_Booking/PayEventBooking/{eventId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventBookingViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventBookingViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_BookingController",
+    "Method": "PutEvent_Booking",
+    "RelativePath": "api/Event_Booking/UpdateEventBooking/{eventId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventBookingViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventBookingViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_ReviewController",
+    "Method": "DeleteEvent_Review",
+    "RelativePath": "api/Event_Review/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_ReviewController",
+    "Method": "PostEvent_Review",
+    "RelativePath": "api/Event_Review/AddEventReview",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.EventReviewViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_ReviewController",
+    "Method": "GetEvent_Review",
+    "RelativePath": "api/Event_Review/GetEventRevieById/{eventReviewId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventReviewId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Event_Review",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_ReviewController",
+    "Method": "GetEvent_Reviews",
+    "RelativePath": "api/Event_Review/GetEventReviews",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_ReviewController",
+    "Method": "PutEvent_Review",
+    "RelativePath": "api/Event_Review/UpdateEventReview/{eventReviewId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventReviewId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Client.EventReviewViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Client.EventReviewViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_TypesController",
+    "Method": "DeleteEvent_Types",
+    "RelativePath": "api/Event_Types/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_TypesController",
+    "Method": "PostEvent_Types",
+    "RelativePath": "api/Event_Types/AddEventType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_TypesController",
+    "Method": "GetEvent_Types",
+    "RelativePath": "api/Event_Types/GetEventTypeById/{eventTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_TypesController",
+    "Method": "GetEvent_Types",
+    "RelativePath": "api/Event_Types/GetEventTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Event_TypesController",
+    "Method": "PutEvent_Types",
+    "RelativePath": "api/Event_Types/UpdateEventType",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventTypeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "evm",
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Event.EventTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inspection_ItemController",
+    "Method": "DeleteInspection_Item",
+    "RelativePath": "api/Inspection_Item/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inspection_ItemController",
+    "Method": "PostInspection_Item",
+    "RelativePath": "api/Inspection_Item/AddInspectionItem",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "iivm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InspectionItemViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inspection_ItemController",
+    "Method": "GetInspection_Item",
+    "RelativePath": "api/Inspection_Item/GetInspectionItemById/{inspectionItemId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inspectionItemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inspection_ItemController",
+    "Method": "GetInspection_Item",
+    "RelativePath": "api/Inspection_Item/GetInspectionItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inspection_ItemController",
+    "Method": "PutInspection_Item",
+    "RelativePath": "api/Inspection_Item/UpdateInspectionItem/{inspectionItemId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inspectionItemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "iivm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InspectionItemViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InspectionItemViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.InventoriesController",
+    "Method": "DeleteInventory",
+    "RelativePath": "api/Inventories/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.InventoriesController",
+    "Method": "PostInventory",
+    "RelativePath": "api/Inventories/AddInventory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ivm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.InventoriesController",
+    "Method": "GetFilteredNames",
+    "RelativePath": "api/Inventories/GetFilteredProductNames",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.InventoriesController",
+    "Method": "GetInventories",
+    "RelativePath": "api/Inventories/GetInventories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.InventoriesController",
+    "Method": "GetInventory",
+    "RelativePath": "api/Inventories/GetInventoryById/{inventoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.InventoriesController",
+    "Method": "PutInventory",
+    "RelativePath": "api/Inventories/UpdateInventory/{inventoryId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "ivm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_CategoryController",
+    "Method": "DeleteInventory_Category",
+    "RelativePath": "api/Inventory_Category/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_CategoryController",
+    "Method": "PostInventory_Category",
+    "RelativePath": "api/Inventory_Category/AddInventoryCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "icvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryCategoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_CategoryController",
+    "Method": "GetInventory_Categories",
+    "RelativePath": "api/Inventory_Category/GetInventoryCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_CategoryController",
+    "Method": "GetInventory_Category",
+    "RelativePath": "api/Inventory_Category/GetInventoryCategoryById/{inventoryCategoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventoryCategoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Inventory_Category",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_CategoryController",
+    "Method": "PutInventory_Category",
+    "RelativePath": "api/Inventory_Category/UpdateInventoryCategory/{inventoryCategoryId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventoryCategoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "icvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryCategoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryCategoryViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_TypeController",
+    "Method": "DeleteInventory_Type",
+    "RelativePath": "api/Inventory_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_TypeController",
+    "Method": "PostInventory_Type",
+    "RelativePath": "api/Inventory_Type/AddInventoryType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_TypeController",
+    "Method": "GetInventory_Type",
+    "RelativePath": "api/Inventory_Type/GetInventoryTypeById/{inventoryTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventoryTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Inventory_Type",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_TypeController",
+    "Method": "GetInventory_Types",
+    "RelativePath": "api/Inventory_Type/GetInventoryTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Inventory_TypeController",
+    "Method": "PutInventory_Type",
+    "RelativePath": "api/Inventory_Type/UpdateInventoryType/{inventoryTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inventoryTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "itvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.InventoryTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.OrdersController",
+    "Method": "DeleteOrder",
+    "RelativePath": "api/Orders/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.OrdersController",
+    "Method": "PostOrder",
+    "RelativePath": "api/Orders/AddOrder",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ovm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.OrdersController",
+    "Method": "CancelOrder",
+    "RelativePath": "api/Orders/CancelOrder/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "ovm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.OrdersController",
+    "Method": "GetOrder",
+    "RelativePath": "api/Orders/GetOrderById/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.OrdersController",
+    "Method": "GetOrders",
+    "RelativePath": "api/Orders/GetOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.OrdersController",
+    "Method": "PutOrder",
+    "RelativePath": "api/Orders/UpdateOrder/{orderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "ovm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Payment_TypeController",
+    "Method": "Get",
+    "RelativePath": "api/Payment_Type",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Menlyn_Mews_API.Models.Domain.Payment_Type, Menlyn_Mews_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Payment_TypeController",
+    "Method": "Post",
+    "RelativePath": "api/Payment_Type",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentType",
+        "Type": "Menlyn_Mews_API.Models.Domain.Payment_Type",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Payment_Type",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Payment_TypeController",
+    "Method": "Get",
+    "RelativePath": "api/Payment_Type/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Payment_Type",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Payment_TypeController",
+    "Method": "Put",
+    "RelativePath": "api/Payment_Type/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "paymentType",
+        "Type": "Menlyn_Mews_API.Models.Domain.Payment_Type",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Payment_TypeController",
+    "Method": "Delete",
+    "RelativePath": "api/Payment_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PaymentController",
+    "Method": "UpdatePayment",
+    "RelativePath": "api/Payment/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "payment",
+        "Type": "Menlyn_Mews_API.Models.Domain.Payment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PaymentController",
+    "Method": "DeletePayment",
+    "RelativePath": "api/Payment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PaymentController",
+    "Method": "GetPaymentById",
+    "RelativePath": "api/Payment/GetPaymentById/{paymentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PaymentController",
+    "Method": "GetAllPayments",
+    "RelativePath": "api/Payment/GetPayments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PaymentController",
+    "Method": "CreatePayment",
+    "RelativePath": "api/Payment/RecordPayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.PaymentViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PositionsController",
+    "Method": "PostPosition",
+    "RelativePath": "api/Positions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.PositionViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PositionsController",
+    "Method": "DeletePosition",
+    "RelativePath": "api/Positions/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PositionsController",
+    "Method": "GetPosition",
+    "RelativePath": "api/Positions/GetPositionById/{positionId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "positionId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PositionsController",
+    "Method": "GetPositions",
+    "RelativePath": "api/Positions/GetPositions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PositionsController",
+    "Method": "PutPosition",
+    "RelativePath": "api/Positions/UpdatePosition/{positionId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "positionId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.PositionViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.PositionViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PricesController",
+    "Method": "DeletePrice",
+    "RelativePath": "api/Prices/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PricesController",
+    "Method": "PostPrice",
+    "RelativePath": "api/Prices/AddPrice",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.PriceViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PricesController",
+    "Method": "GetPrice",
+    "RelativePath": "api/Prices/GetPriceById/{priceId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "priceId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PricesController",
+    "Method": "GetPrices",
+    "RelativePath": "api/Prices/GetPrices",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.PricesController",
+    "Method": "PutPrice",
+    "RelativePath": "api/Prices/UpdatePrice/{priceId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "priceId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.PriceViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Products.PriceViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_CategoryController",
+    "Method": "DeleteProduct_Category",
+    "RelativePath": "api/Product_Category/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_CategoryController",
+    "Method": "PostProduct_Category",
+    "RelativePath": "api/Product_Category/AddProductCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pcvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductCategoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_CategoryController",
+    "Method": "GetProduct_Categories",
+    "RelativePath": "api/Product_Category/GetProductCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_CategoryController",
+    "Method": "GetProduct_Category",
+    "RelativePath": "api/Product_Category/GetProductCategoryById/{productCategoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productCategoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Product_Category",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_CategoryController",
+    "Method": "PutProduct_Category",
+    "RelativePath": "api/Product_Category/UpdateProductCategory/{productCategoryId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productCategoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pcvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductCategoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductCategoryViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_TypeController",
+    "Method": "DeleteProduct_Type",
+    "RelativePath": "api/Product_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_TypeController",
+    "Method": "PostProduct_Type",
+    "RelativePath": "api/Product_Type/AddProductType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ptvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_TypeController",
+    "Method": "PutProduct_Type",
+    "RelativePath": "api/Product_Type/EditProductType/{productTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "ptvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_TypeController",
+    "Method": "GetProductTypeByCategory",
+    "RelativePath": "api/Product_Type/GetProductTypeByCategoryId/{productCategoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productCategoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Product_Type",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_TypeController",
+    "Method": "GetProduct_Type",
+    "RelativePath": "api/Product_Type/GetProductTypeById/{productTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Product_Type",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Product_TypeController",
+    "Method": "GetProduct_Types",
+    "RelativePath": "api/Product_Type/GetProductTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ProductsController",
+    "Method": "DeleteProduct",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ProductsController",
+    "Method": "PutProduct",
+    "RelativePath": "api/Products/EditProduct/{productId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Products.ProductViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ProductsController",
+    "Method": "GetProduct",
+    "RelativePath": "api/Products/GetProductById/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ProductsController",
+    "Method": "GetProducts",
+    "RelativePath": "api/Products/GetProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ProductsController",
+    "Method": "PostProduct",
+    "RelativePath": "api/Products/PostProduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Products.AddProductViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RatesController",
+    "Method": "DeleteRates",
+    "RelativePath": "api/Rates/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RatesController",
+    "Method": "PostRates",
+    "RelativePath": "api/Rates/CreateRate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.RateViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RatesController",
+    "Method": "GetFilteredRates",
+    "RelativePath": "api/Rates/GetFilteredRates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RatesController",
+    "Method": "GetRates",
+    "RelativePath": "api/Rates/GetRateById/{rateId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rateId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RatesController",
+    "Method": "GetRates",
+    "RelativePath": "api/Rates/GetRates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RatesController",
+    "Method": "PutRates",
+    "RelativePath": "api/Rates/UpdateRate/{rateId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rateId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "rvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.RateViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.RateViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Receive_OrderController",
+    "Method": "DeleteReceive_Order",
+    "RelativePath": "api/Receive_Order/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Receive_OrderController",
+    "Method": "PostReceive_Order",
+    "RelativePath": "api/Receive_Order/AddReceievedOrder/{orderId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.ReceiveOrderViewModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Receive_OrderController",
+    "Method": "GetReceive_Order",
+    "RelativePath": "api/Receive_Order/GetReceivedOrderById/{receiveOrderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiveOrderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Receive_OrderController",
+    "Method": "GetReceive_Orders",
+    "RelativePath": "api/Receive_Order/GetReceivedOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Receive_OrderController",
+    "Method": "PutReceive_Order",
+    "RelativePath": "api/Receive_Order/UpdateReceivedOrder/{receiveOrderId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiveOrderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "rvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.ReceiveOrderViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.ReceiveOrderViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReceiveSMSController",
+    "Method": "SendReply",
+    "RelativePath": "api/ReceiveSMS/SendReply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Menlyn_Mews_API.Models.Domain.TwilioSMS",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "BookingReviewChartController",
+    "RelativePath": "api/Reports/BookingReviewChart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "BookingReviewController",
+    "RelativePath": "api/Reports/BookingReviewReport/{year}/{month}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "BookingSalesReport",
+    "RelativePath": "api/Reports/BookingSalesReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "EmployeeReport",
+    "RelativePath": "api/Reports/EmployeeReport/{gender}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gender",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "EventSalesReport",
+    "RelativePath": "api/Reports/EventSalesReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "GetSalaryReport",
+    "RelativePath": "api/Reports/GetSalaryReport/{startDate}/{endDate}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startDate",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "ProductCountReport",
+    "RelativePath": "api/Reports/ProductCountReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "ProductQuantityReport",
+    "RelativePath": "api/Reports/ProductQuantityReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "ProductsReport",
+    "RelativePath": "api/Reports/ProductsReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "RoomsBookedReport",
+    "RelativePath": "api/Reports/RoomsBookedReport/{year}/{month}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "StockValueItemReport",
+    "RelativePath": "api/Reports/StockValueItem",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ReportsController",
+    "Method": "SupplierReport",
+    "RelativePath": "api/Reports/SupplierReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetRoom_Bookings",
+    "RelativePath": "api/Room_Booking",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "DeleteRoom_Booking",
+    "RelativePath": "api/Room_Booking/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetClient_Discount",
+    "RelativePath": "api/Room_Booking/CheckDiscountUsedByClientBooking/{clientId}/{discountId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "discountId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "PostRoom_Booking",
+    "RelativePath": "api/Room_Booking/CreateRoomBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.BookingViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetBookedRooms",
+    "RelativePath": "api/Room_Booking/GetBookedRooms/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetEvent_BookingClient",
+    "RelativePath": "api/Room_Booking/GetEventBookingByClientId/{clientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetLatestBooking",
+    "RelativePath": "api/Room_Booking/GetLatestBooking/{clientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetRoom_BookingClient",
+    "RelativePath": "api/Room_Booking/GetRoomBookingByClientId/{clientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "GetRoom_Booking",
+    "RelativePath": "api/Room_Booking/GetRoomBookingById/{roomBookingId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomBookingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_BookingController",
+    "Method": "PutRoom_Booking",
+    "RelativePath": "api/Room_Booking/UpdateRoomBooking/{roomBookingId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomBookingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "bvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.BookingViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.BookingViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "DeleteRoom_Inventory",
+    "RelativePath": "api/Room_Inventory/{roomId}/{inventoryId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "inventoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "PostRoom_Inventory",
+    "RelativePath": "api/Room_Inventory/AssignRoomInventory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rivm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.RoomInventoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "FilterInventories",
+    "RelativePath": "api/Room_Inventory/FilterInventories/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "GetInventoriesNotAssignedToRoom",
+    "RelativePath": "api/Room_Inventory/GetInventoriesNotAssignedToRoom/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "GetRoom_Inventory",
+    "RelativePath": "api/Room_Inventory/GetRoomInventories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "GetRoom_Inventory",
+    "RelativePath": "api/Room_Inventory/GetRoomInventoryById/{roomId}/{inventoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "inventoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "PutRoom_Inventory",
+    "RelativePath": "api/Room_Inventory/UpdateRoomInventory/{roomId}/{inventoryId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "inventoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "rivm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.RoomInventoryViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.RoomInventoryViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_InventoryController",
+    "Method": "GetRoomsInventory",
+    "RelativePath": "api/Room_Inventory/ViewRoomInventory/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_TypeController",
+    "Method": "DeleteRoom_Type",
+    "RelativePath": "api/Room_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_TypeController",
+    "Method": "PostRoom_Type",
+    "RelativePath": "api/Room_Type/AddRoomType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.RoomTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_TypeController",
+    "Method": "GetRoom_Type",
+    "RelativePath": "api/Room_Type/GetRoomTypeById/{roomTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_TypeController",
+    "Method": "GetRoom_Types",
+    "RelativePath": "api/Room_Type/GetRoomTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Room_TypeController",
+    "Method": "PutRoom_Type",
+    "RelativePath": "api/Room_Type/UpdateRoomType/{roomTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "rvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.RoomTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.RoomTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RoomsController",
+    "Method": "DeleteRoom",
+    "RelativePath": "api/Rooms/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RoomsController",
+    "Method": "PostRoom",
+    "RelativePath": "api/Rooms/AddRoom",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Room_Number",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Floor",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Rate",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Photo_1",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Photo_2",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Photo_3",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amenities",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoomTypeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RoomsController",
+    "Method": "GetRoom",
+    "RelativePath": "api/Rooms/GetRoomById/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RoomsController",
+    "Method": "GetRoomData",
+    "RelativePath": "api/Rooms/GetRoomDataById/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RoomsController",
+    "Method": "GetRooms",
+    "RelativePath": "api/Rooms/GetRooms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.RoomsController",
+    "Method": "PutRoom",
+    "RelativePath": "api/Rooms/UpdateRoom/{roomId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Room_Number",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Floor",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Rate",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Photo_1",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Photo_2",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Room_Photo_3",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amenities",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoomTypeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Booking.RoomViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.SendSMSController",
+    "Method": "SendText",
+    "RelativePath": "api/SendSMS/SendText",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ShiftsController",
+    "Method": "GetShifts",
+    "RelativePath": "api/Shifts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Menlyn_Mews_API.Models.Domain.Shift, Menlyn_Mews_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ShiftsController",
+    "Method": "CreateShift",
+    "RelativePath": "api/Shifts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shiftViewModel",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.ShiftViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Shift",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ShiftsController",
+    "Method": "GetShiftById",
+    "RelativePath": "api/Shifts/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.Models.Domain.Shift",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ShiftsController",
+    "Method": "UpdateShift",
+    "RelativePath": "api/Shifts/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "shiftViewModel",
+        "Type": "Menlyn_Mews_API.ViewModels.Employee.ShiftViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.ShiftsController",
+    "Method": "DeleteShift",
+    "RelativePath": "api/Shifts/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Stock_TakeController",
+    "Method": "DeleteStock_Take",
+    "RelativePath": "api/Stock_Take/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Stock_TakeController",
+    "Method": "PostStock_Take",
+    "RelativePath": "api/Stock_Take/AddStockTake",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "svm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.StockTakeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Stock_TakeController",
+    "Method": "GetStock_Take",
+    "RelativePath": "api/Stock_Take/GetStockTakeById/{stockTakeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "stockTakeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Stock_TakeController",
+    "Method": "GetStock_Takes",
+    "RelativePath": "api/Stock_Take/GetStockTakes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Stock_TakeController",
+    "Method": "PutStock_Take",
+    "RelativePath": "api/Stock_Take/UpdateStockTake/{stockTakeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "stockTakeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "svm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.StockTakeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.StockTakeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "DeleteSupplier_Order_Product",
+    "RelativePath": "api/Supplier_Order_Product/{orderId}/{productId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "PostSupplier_Order_Product",
+    "RelativePath": "api/Supplier_Order_Product/CreateOrderProduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "opvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderProductViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "FilterProducts",
+    "RelativePath": "api/Supplier_Order_Product/FilterProducts/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "FilterProductsWithQuantities",
+    "RelativePath": "api/Supplier_Order_Product/FilterProductsWithQuantities/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "GetSupplier_Order_Product",
+    "RelativePath": "api/Supplier_Order_Product/GetOrderProductById/{orderId}/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "GetSupplier_Order_Products",
+    "RelativePath": "api/Supplier_Order_Product/GetOrderProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "GetOrder",
+    "RelativePath": "api/Supplier_Order_Product/GetOrderWithProducts/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_Order_ProductController",
+    "Method": "PutSupplier_Order_Product",
+    "RelativePath": "api/Supplier_Order_Product/UpdateOrderProduct/{orderId}/{productId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "opvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderProductViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.OrderProductViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_TypeController",
+    "Method": "DeleteSupplier_Type",
+    "RelativePath": "api/Supplier_Type/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_TypeController",
+    "Method": "PostSupplier_Type",
+    "RelativePath": "api/Supplier_Type/AddSupplierType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "svm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.SupplierTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_TypeController",
+    "Method": "GetSupplier_Type",
+    "RelativePath": "api/Supplier_Type/GetSupplierTypeById/{supplierTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supplierTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_TypeController",
+    "Method": "GetSupplier_Types",
+    "RelativePath": "api/Supplier_Type/GetSupplierTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Supplier_TypeController",
+    "Method": "PutSupplier_Type",
+    "RelativePath": "api/Supplier_Type/UpdateSupplierType/{supplierTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supplierTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "svm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.SupplierTypeViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.SupplierTypeViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.SuppliersController",
+    "Method": "DeleteSupplier",
+    "RelativePath": "api/Suppliers/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.SuppliersController",
+    "Method": "PostSupplier",
+    "RelativePath": "api/Suppliers/AddSupplier",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "svm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.SupplierViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.SuppliersController",
+    "Method": "GetSupplier",
+    "RelativePath": "api/Suppliers/GetSupplierById/{supplierId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supplierId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.SuppliersController",
+    "Method": "GetSuppliers",
+    "RelativePath": "api/Suppliers/GetSuppliers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.SuppliersController",
+    "Method": "PutSupplier",
+    "RelativePath": "api/Suppliers/UpdateSupplier/{supplierId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supplierId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "svm",
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.SupplierViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Supplier.SupplierViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.VATsController",
+    "Method": "GetVAT",
+    "RelativePath": "api/VATs/GetVAT",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.VATsController",
+    "Method": "GetVAT",
+    "RelativePath": "api/VATs/GetVATById/{vatId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vatId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.VATsController",
+    "Method": "PutVAT",
+    "RelativePath": "api/VATs/UpdateVAT/{vatId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vatId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "vvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Floating_Tables.VATViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Floating_Tables.VATViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Write_OffController",
+    "Method": "DeleteWrite_Off",
+    "RelativePath": "api/Write_Off/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Write_OffController",
+    "Method": "PostWrite_Off",
+    "RelativePath": "api/Write_Off/AddWriteOff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.WriteOffViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Write_OffController",
+    "Method": "GetWrite_Off",
+    "RelativePath": "api/Write_Off/GetWriteOffById/{writeOffId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "writeOffId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Write_OffController",
+    "Method": "GetWrite_Offs",
+    "RelativePath": "api/Write_Off/GetWriteOffs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Write_OffController",
+    "Method": "SendWriteOffEmail",
+    "RelativePath": "api/Write_Off/SendWriteOffInvoice/{writeOffId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "writeOffId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.Write_OffController",
+    "Method": "PutWrite_Off",
+    "RelativePath": "api/Write_Off/UpdateWriteOff/{writeOffId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "writeOffId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "wvm",
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.WriteOffViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Menlyn_Mews_API.ViewModels.Inventory.WriteOffViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Menlyn_Mews_API.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Menlyn_Mews_API.WeatherForecast, Menlyn_Mews_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]

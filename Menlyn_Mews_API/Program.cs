@@ -130,6 +130,42 @@ builder.Services.AddTransient<BackupService>();
 
 var app = builder.Build();
 
+// Seed database from SQL file
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+
+        // Apply any pending migrations automatically
+        context.Database.Migrate();
+
+        // Run seed SQL only if, for example, the Clients table is empty
+        if (!context.Clients.Any())
+        {
+            var basePath = AppContext.BaseDirectory;
+            var path = Path.Combine(basePath, "Data", "SeedData.sql");
+
+            if (File.Exists(path))
+            {
+                var sql = File.ReadAllText(path);
+                context.Database.ExecuteSqlRaw(sql);
+                Console.WriteLine("Database seeded successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"Seed file not found at: {path}");
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

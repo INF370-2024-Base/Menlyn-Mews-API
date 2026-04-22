@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\migrations\\20260422120752_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:migrations\\20260422120752_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\menlyn_mews_api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:menlyn_mews_api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|c:\\users\\ghost\\source\\repos\\menlyn-mews-api\\menlyn_mews_api\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E455426-972A-455C-B122-E7DB51F58466}|Menlyn_Mews_API.csproj|solutionrelative:controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-22T16:15:38.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20260422120752_initial.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20260422120752_initial.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260422120752_initial.cs",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Migrations\\20260422120752_initial.cs",
+              "RelativeToolTip": "Migrations\\20260422120752_initial.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwA8AAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T12:07:53.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAmwKYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T12:05:15.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAHcBAAAAAAAAAAAswIgBAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T11:52:58.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAgwA8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-22T11:35:47.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Menlyn_Mews_API",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
+              "RelativeDocumentMoniker": "Menlyn_Mews_API.csproj",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Menlyn_Mews_API.csproj",
+              "RelativeToolTip": "Menlyn_Mews_API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-22T11:28:00.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthenticationController.cs",
+              "ToolTip": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews_API\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAlwNAAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T11:13:26.221Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

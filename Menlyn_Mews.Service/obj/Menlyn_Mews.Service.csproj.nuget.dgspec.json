@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {}
+    "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
+    "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
+        "projectUniqueName": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
         "projectName": "Menlyn_Mews.Service",
-        "projectPath": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
-        "packagesPath": "C:\\Users\\hendr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hendr\\OneDrive\\Git_\\Menlyn-Mews-API\\Menlyn_Mews.Service\\obj\\",
+        "projectPath": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews.Service\\Menlyn_Mews.Service.csproj",
+        "packagesPath": "C:\\Users\\ghost\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ghost\\source\\repos\\Menlyn-Mews-API\\Menlyn_Mews.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hendr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ghost\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -53,6 +53,16 @@
             "Google.Cloud.Storage.V1": {
               "target": "Package",
               "version": "[4.10.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.36, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.36, )"
             },
             "Microsoft.ReportingServices.ReportViewerControl.Winforms": {
               "target": "Package",
@@ -86,12 +96,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
